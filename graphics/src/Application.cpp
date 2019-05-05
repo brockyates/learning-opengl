@@ -2,7 +2,9 @@
 #include "Application.h"
 #include "Layer.h"
 
-#include "imgui/ImGuiLayer.h"
+#include "imgui/ImGuiRenderer.h"
+
+#include "layers/ImGuiLayer.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -134,7 +136,6 @@ namespace Graphics
         unsigned int shaderID = CreateShader(vertexShaderSource, fragmentShaderSource);
         glUseProgram(shaderID);
 
-        ImGuiLayer imGuiMain;
         Layer* imGuiLayer = new ImGuiLayer();
         imGuiLayer->OnAttach(window);
         std::vector<Layer*> layerStack = { imGuiLayer };
@@ -151,12 +152,12 @@ namespace Graphics
                 layer->OnUpdate();
             }
 
-            imGuiMain.Begin();
+            ImGuiRenderer::BeginFrame();
             for (Layer* layer : layerStack)
             {
                 layer->OnImGuiRender();
             }
-            imGuiMain.End(1920, 1080);
+            ImGuiRenderer::Render(1920, 1080);
 
             glfwSwapBuffers(window);
             glfwPollEvents();

@@ -48,15 +48,16 @@
     <ClInclude Include="src\events\MouseEvent.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="src\imgui\ImGuiLayer.h">
-      <Filter>src\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="src\logging\Log.h">
       <Filter>src\logging</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\layers\ImGuiLayer.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\ImGuiRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -77,15 +78,16 @@
     <ClCompile Include="src\imgui\ImGuiBuild.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\ImGuiLayer.cpp">
-      <Filter>src\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="src\logging\Log.cpp">
       <Filter>src\logging</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\layers\ImGuiLayer.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
