@@ -6,7 +6,6 @@
 #include <memory>
 #include <stdio.h>
 #include <utility>
-
 #include <fstream>
 #include <sstream>
 #include <string>

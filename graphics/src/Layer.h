@@ -1,7 +1,7 @@
 #pragma once
 #include "events/Event.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace Graphics {
 

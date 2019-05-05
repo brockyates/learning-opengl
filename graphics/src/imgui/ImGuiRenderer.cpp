@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "ImGuiRenderer.h"
 
-#include "imgui.h"
-#include "examples/imgui_impl_glfw.h"
-#include "examples/imgui_impl_opengl3.h"
-
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
 namespace Graphics {

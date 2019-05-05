@@ -1,6 +1,8 @@
 #pragma once
-
 #include "Event.h"
+
+#include <string>
+#include <sstream>
 
 namespace Graphics {
 
