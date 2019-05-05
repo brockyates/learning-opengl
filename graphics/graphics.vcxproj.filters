@@ -33,6 +33,7 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Application.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EntryPoint.cpp">
@@ -56,13 +57,14 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
-    <None Include="res\shaders\minimal_f.shader">
+    <None Include="res\shaders\Minimal_Vertex.shader">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\minimal_v.shader">
+    <None Include="res\shaders\Minimal_Fragment.shader">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>

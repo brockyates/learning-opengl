@@ -95,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Renderer.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
@@ -115,8 +117,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
-    <None Include="res\shaders\minimal_f.shader" />
-    <None Include="res\shaders\minimal_v.shader" />
+    <None Include="res\shaders\Minimal_Fragment.shader" />
+    <None Include="res\shaders\Minimal_Vertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vendor\GLFW\GLFW.vcxproj">
