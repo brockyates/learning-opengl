@@ -12,7 +12,6 @@
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
-
 namespace Graphics
 {
     std::string ParseShader(const std::string& filePath)
@@ -137,8 +136,12 @@ namespace Graphics
         glUseProgram(shaderID);
 
         Layer* imGuiLayer = new ImGuiLayer();
-        imGuiLayer->OnAttach(window);
         std::vector<Layer*> layerStack = { imGuiLayer };
+
+        for (auto layer : layerStack)
+        {
+            layer->OnAttach(window);
+        }
 
         LOG_INFO("Main application loop started");
         while (!glfwWindowShouldClose(window))
@@ -164,7 +167,11 @@ namespace Graphics
         }
         LOG_INFO("Main application loop stopped");
 
-        imGuiLayer->OnDetach();
+        for (auto layer : layerStack)
+        {
+            layer->OnDetach();
+            delete layer;
+        }
 
         glfwTerminate();
     }
