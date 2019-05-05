@@ -14,7 +14,7 @@
 
 namespace Graphics
 {
-    GLFWwindow* CreateAppWindow()
+    GLFWwindow* Application::CreateApplicationWindow()
     {
         /* Initialize the library */
         bool glfwInitStatus = glfwInit();
@@ -44,68 +44,64 @@ namespace Graphics
 
     void Application::Run()
     {
-        GLFWwindow* window = CreateAppWindow();
+        { //Application scope
+            GLFWwindow* window = CreateApplicationWindow();
 
-        glClearColor(0.2f, 0.3f, 0.7f, 1.0f);
-
-        float m_Vertexes[] =
-        {
-            0.0f,  1.0f,
-           -1.0f, -1.0f,
-            1.0f, -1.0f,
-        };
-
-        std::stringstream ss;
-        ss << std::size(m_Vertexes);
-        LOG_INFO(ss.str());
-
-        unsigned int myBufferID;
-        glGenBuffers(1, &myBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, myBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-        Shader minimalShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
-
-        Layer* imGuiLayer = new ImGuiLayer();
-        std::vector<Layer*> layerStack = { imGuiLayer };
-
-        for (auto layer : layerStack)
-        {
-            layer->OnAttach(window);
-        }
-
-        LOG_INFO("Main application loop started");
-        while (!glfwWindowShouldClose(window))
-        {
-            glClear(GL_COLOR_BUFFER_BIT);
-            minimalShader.Bind();
-            glDrawArrays(GL_TRIANGLES, 0, 3);
-
-            for (Layer* layer : layerStack)
+            float m_Vertexes[] =
             {
-                layer->OnUpdate();
+                0.0f,  1.0f,
+               -1.0f, -1.0f,
+                1.0f, -1.0f,
+            };
+
+            unsigned int myBufferID;
+            glGenBuffers(1, &myBufferID);
+            glBindBuffer(GL_ARRAY_BUFFER, myBufferID);
+            glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes, GL_STATIC_DRAW);
+            glEnableVertexAttribArray(0);
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+            Shader minimalShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+
+            ImGuiRenderer imGuiRenderer(window);
+
+            Layer* imGuiLayer = new ImGuiLayer();
+            std::vector<Layer*> layerStack = { imGuiLayer };
+
+            LOG_INFO("Main application loop started");
+            while (!glfwWindowShouldClose(window))
+            {
+                glClear(GL_COLOR_BUFFER_BIT);
+                glClearColor(0.2f, 0.3f, 0.7f, 1.0f);
+
+                minimalShader.Bind();
+                glDrawArrays(GL_TRIANGLES, 0, 3);
+
+                for (Layer* layer : layerStack)
+                {
+                    layer->OnUpdate();
+                }
+
+                ImGuiRenderer::BeginFrame();
+                for (Layer* layer : layerStack)
+                {
+                    layer->OnImGuiRender();
+                }
+                ImGuiRenderer::Render(1920, 1080);
+
+                glfwSwapBuffers(window);
+                glfwPollEvents();
+            }
+            LOG_INFO("Main application loop stopped");
+
+            for (auto layer : layerStack)
+            {
+                delete layer;
             }
 
-            ImGuiRenderer::BeginFrame();
-            for (Layer* layer : layerStack)
-            {
-                layer->OnImGuiRender();
-            }
-            ImGuiRenderer::Render(1920, 1080);
-
-            glfwSwapBuffers(window);
-            glfwPollEvents();
-        }
-        LOG_INFO("Main application loop stopped");
-
-        for (auto layer : layerStack)
-        {
-            layer->OnDetach();
-            delete layer;
-        }
+        } //Application scope
 
         glfwTerminate();
     }
+
 }

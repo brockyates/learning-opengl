@@ -8,8 +8,6 @@ namespace Graphics {
     class ImGuiLayer : public Layer
     {
     public:
-        virtual void OnAttach(GLFWwindow* window) override;
-        virtual void OnDetach() override;
         virtual void OnImGuiRender() override;
 
     private:

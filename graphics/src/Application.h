@@ -1,5 +1,5 @@
 #pragma once
-
+#include <GLFW/glfw3.h>
 namespace Graphics
 {
 
@@ -7,6 +7,9 @@ namespace Graphics
     {
     public:
         static void Run();
+
+    private:
+        static GLFWwindow* CreateApplicationWindow();
     };
 
 }
