@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{36EF08BC-22BC-63C7-4BD5-516F37019955}</ProjectGuid>
+    <ProjectGuid>{1653CE33-0220-293F-2B39-17E717655ECD}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>graphics</RootNamespace>
+    <RootNamespace>Graphics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,16 +42,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-windows-x86_64\graphics\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\graphics\</IntDir>
-    <TargetName>graphics</TargetName>
+    <OutDir>..\bin\Debug-windows-x86_64\Graphics\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\Graphics\</IntDir>
+    <TargetName>Graphics</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-windows-x86_64\graphics\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\graphics\</IntDir>
-    <TargetName>graphics</TargetName>
+    <OutDir>..\bin\Release-windows-x86_64\Graphics\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\Graphics\</IntDir>
+    <TargetName>Graphics</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,6 +99,7 @@
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -106,12 +107,16 @@
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\imgui\ImGuiBuild.cpp" />
+    <ClCompile Include="src\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
+    <None Include="res\shaders\minimal_f.shader" />
+    <None Include="res\shaders\minimal_v.shader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vendor\GLFW\GLFW.vcxproj">

@@ -1,6 +1,6 @@
-workspace "graphics"
+workspace "Graphics"
     architecture "x64"
-    startproject "graphics"
+    startproject "Graphics"
 
     configurations
     {
@@ -22,8 +22,8 @@ include "vendor/GLFW"
 include "vendor/Glad"
 include "vendor/imgui"
 
-project "graphics"
-    location "graphics"
+project "Graphics"
+    location "Graphics"
     kind "ConsoleApp"
     language "C++"
     staticruntime "on"
@@ -32,12 +32,12 @@ project "graphics"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "pch.h"
-    pchsource "graphics/src/pch.cpp"
+    pchsource "Graphics/src/pch.cpp"
 
     files
     {
-        "%{prj.name}/src/*",
-        "%{prj.name}/res/*",
+        "%{prj.name}/src/**",
+        "%{prj.name}/res/**",
         "%{prj.name}/imgui.ini",
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl",
