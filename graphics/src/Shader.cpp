@@ -89,6 +89,14 @@ namespace Graphics {
     std::string Shader::ParseShader(const std::string& filePath)
     {
         std::ifstream file(filePath);
+        if (file.fail()) {
+            LOG_ERROR([&]()
+            {
+                std::stringstream ss;
+                ss << "Can't open shader file: " << filePath << ". Does the file exist?";
+                return ss.str();
+            }());
+        }
         std::stringstream ss;
         ss << file.rdbuf();
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 #include "Layer.h"
+#include "Shader.h"
 
 #include "imgui/ImGuiRenderer.h"
 #include "layers/ImGuiLayer.h"
@@ -13,69 +14,6 @@
 
 namespace Graphics
 {
-    std::string ParseShader(const std::string& filePath)
-    {
-        std::ifstream file(filePath);
-        if (file.fail()) {
-            LOG_ERROR([&]()
-            {
-                std::stringstream ss;
-                ss << "Can't open shader file: " << filePath << ". Does the file exist?";
-                return ss.str();
-            }());
-        }
-        std::stringstream ss;
-        ss << file.rdbuf();
-
-        return ss.str();
-    }
-
-    unsigned int CompileShader(unsigned int type, const std::string& shaderSource)
-    {
-        unsigned int shaderId = glCreateShader(type);
-        const char* source = shaderSource.c_str();
-        glShaderSource(shaderId, 1, &source, nullptr);
-        glCompileShader(shaderId);
-
-        int result;
-        glGetShaderiv(shaderId, GL_COMPILE_STATUS, &result);
-        if (result == GL_FALSE)
-        {
-            int length;
-            glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &length);
-            char* message = (char*)alloca(length * sizeof(char));
-            glGetShaderInfoLog(shaderId, length, &length, message);
-
-            std::stringstream ss;
-            ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
-            LOG_ERROR(ss.str());
-            LOG_ERROR(message);
-
-            glDeleteShader(shaderId);
-            return 0;
-        }
-
-        return shaderId;
-    }
-
-    unsigned int CreateShader(const std::string& vertexShaderSource,
-        const std::string& fragmentShaderSource)
-    {
-        unsigned int program = glCreateProgram();
-        unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, vertexShaderSource);
-        unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
-
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, fragmentShader);
-        glLinkProgram(program);
-        glValidateProgram(program);
-
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-
-        return program;
-    }
-
     GLFWwindow* CreateAppWindow()
     {
         /* Initialize the library */
@@ -128,11 +66,7 @@ namespace Graphics
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-        std::string vertexShaderSource = ParseShader("res/shaders/Minimal_Vertex.shader");
-        std::string fragmentShaderSource = ParseShader("res/shaders/Minimal_Fragment.shader");
-
-        unsigned int shaderID = CreateShader(vertexShaderSource, fragmentShaderSource);
-        glUseProgram(shaderID);
+        Shader minimalShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
         Layer* imGuiLayer = new ImGuiLayer();
         std::vector<Layer*> layerStack = { imGuiLayer };
@@ -146,7 +80,7 @@ namespace Graphics
         while (!glfwWindowShouldClose(window))
         {
             glClear(GL_COLOR_BUFFER_BIT);
-            glUseProgram(shaderID);
+            minimalShader.Bind();
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
             for (Layer* layer : layerStack)
