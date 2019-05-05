@@ -10,38 +10,62 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\events">
+      <UniqueIdentifier>{91766759-7D2E-A9A6-E635-8202D20C4497}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\imgui">
       <UniqueIdentifier>{57A665B5-C310-1A2C-0C4F-CBD178F8F780}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\logging">
+      <UniqueIdentifier>{E300FA90-4FB6-7286-D8AA-6C5D445F698A}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalMacros.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layer.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Renderer.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\events\ApplicationEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\Event.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\KeyEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\MouseEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
     <ClInclude Include="src\imgui\ImGuiLayer.h">
       <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logging\Log.h">
+      <Filter>src\logging</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\logging\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Layer.h" />
-    <ClInclude Include="src\events\ApplicationEvent.h" />
-    <ClInclude Include="src\events\Event.h" />
-    <ClInclude Include="src\events\KeyEvent.h" />
-    <ClInclude Include="src\events\MouseEvent.h" />
-    <ClInclude Include="src\GlobalMacros.h">
-      <Filter>src</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Layer.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
@@ -56,21 +80,19 @@
     <ClCompile Include="src\imgui\ImGuiLayer.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\logging\Log.cpp">
+      <Filter>src\logging</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\logging\Log.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Layer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
-    <None Include="res\shaders\Minimal_Vertex.shader">
+    <None Include="res\shaders\Minimal_Fragment.shader">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\Minimal_Fragment.shader">
+    <None Include="res\shaders\Minimal_Vertex.shader">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>
