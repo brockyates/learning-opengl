@@ -1,5 +1,5 @@
 #pragma once
-#include "Core.h"
+#include "GlobalMacros.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

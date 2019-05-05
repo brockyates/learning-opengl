@@ -9,3 +9,5 @@
 #else
     #define APP_ASSERT(x, ...)
 #endif // APP_ENABLE_ASSERTS
+
+#define BIT(x) (1 << x)

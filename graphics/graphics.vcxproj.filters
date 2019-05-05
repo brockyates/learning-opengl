@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Renderer.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -32,6 +29,14 @@
     </ClInclude>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\logging\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layer.h" />
+    <ClInclude Include="src\events\ApplicationEvent.h" />
+    <ClInclude Include="src\events\Event.h" />
+    <ClInclude Include="src\events\KeyEvent.h" />
+    <ClInclude Include="src\events\MouseEvent.h" />
+    <ClInclude Include="src\GlobalMacros.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
@@ -58,6 +63,7 @@
     <ClCompile Include="src\logging\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Layer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

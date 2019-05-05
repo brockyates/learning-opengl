@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "Application.h"
+#include "Layer.h"
+
+#include "imgui/ImGuiLayer.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 #include "imgui.h"
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
-#include "imgui/ImGuiLayer.h"
 
 namespace Graphics
 {
@@ -75,46 +76,7 @@ namespace Graphics
         return program;
     }
 
-    void OnImGuiRender(Graphics::ImGuiLayer* imGuiLayer)
-    {
-        bool my_tool_active = true;
-        float my_color[] = { 0.0f, 1.0f, 0.0f, 1.0f };
-
-        imGuiLayer->Begin();
-
-        // Create a window called "My First Tool", with a menu bar.
-        ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
-        if (ImGui::BeginMenuBar())
-        {
-            if (ImGui::BeginMenu("File"))
-            {
-                if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-                if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
-                if (ImGui::MenuItem("Close", "Ctrl+W")) { my_tool_active = false; }
-                ImGui::EndMenu();
-            }
-            ImGui::EndMenuBar();
-        }
-
-        // Edit a color (stored as ~4 floats)
-        ImGui::ColorEdit4("Color", my_color);
-
-        // Plot some values
-        const float my_values[] = { 0.2f, 0.1f, 1.0f, 0.5f, 0.9f, 2.2f };
-        ImGui::PlotLines("Frame Times", my_values, IM_ARRAYSIZE(my_values));
-
-        // Display contents in a scrolling region
-        ImGui::TextColored(ImVec4(1, 1, 0, 1), "Important Stuff");
-        ImGui::BeginChild("Scrolling");
-        for (int n = 0; n < 50; n++)
-            ImGui::Text("%04d: Some text", n);
-        ImGui::EndChild();
-        ImGui::End();
-
-        imGuiLayer->End(1920, 1080);
-    }
-
-    void Application::Run()
+    GLFWwindow* CreateAppWindow()
     {
         /* Initialize the library */
         bool glfwInitStatus = glfwInit();
@@ -138,7 +100,13 @@ namespace Graphics
             APP_ASSERT(gladLoadStatus, "Failed to initialize Glad");
         }
 
-        LOG_INFO(glGetString(GL_VERSION));
+        LOG_GL_INFO(glGetString(GL_VERSION));
+        return window;
+    }
+
+    void Application::Run()
+    {
+        GLFWwindow* window = CreateAppWindow();
 
         glClearColor(0.2f, 0.3f, 0.7f, 1.0f);
 
@@ -166,22 +134,36 @@ namespace Graphics
         unsigned int shaderID = CreateShader(vertexShaderSource, fragmentShaderSource);
         glUseProgram(shaderID);
 
-        Graphics::ImGuiLayer imGuiLayer;
-        imGuiLayer.OnAttach(window);
+        ImGuiLayer imGuiMain;
+        Layer* imGuiLayer = new ImGuiLayer();
+        imGuiLayer->OnAttach(window);
+        std::vector<Layer*> layerStack = { imGuiLayer };
 
+        LOG_INFO("Main application loop started");
         while (!glfwWindowShouldClose(window))
         {
             glClear(GL_COLOR_BUFFER_BIT);
             glUseProgram(shaderID);
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
-            OnImGuiRender(&imGuiLayer);
+            for (Layer* layer : layerStack)
+            {
+                layer->OnUpdate();
+            }
+
+            imGuiMain.Begin();
+            for (Layer* layer : layerStack)
+            {
+                layer->OnImGuiRender();
+            }
+            imGuiMain.End(1920, 1080);
 
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
+        LOG_INFO("Main application loop stopped");
 
-        imGuiLayer.OnDetach();
+        imGuiLayer->OnDetach();
 
         glfwTerminate();
     }

@@ -1,14 +1,16 @@
 #pragma once
+#include "Layer.h"
 
 #include <GLFW/glfw3.h>
 
 namespace Graphics {
 
-    class ImGuiLayer
+    class ImGuiLayer : public Layer
     {
     public:
-        void OnAttach(GLFWwindow* window);
-        void OnDetach();
+        virtual void OnAttach(GLFWwindow* window) override;
+        virtual void OnDetach() override;
+        virtual void OnImGuiRender() override;
 
         void Begin();
         void End(unsigned int width, unsigned int height);

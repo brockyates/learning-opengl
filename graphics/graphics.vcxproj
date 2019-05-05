@@ -96,7 +96,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\GlobalMacros.h" />
+    <ClInclude Include="src\events\ApplicationEvent.h" />
+    <ClInclude Include="src\events\Event.h" />
+    <ClInclude Include="src\events\KeyEvent.h" />
+    <ClInclude Include="src\events\MouseEvent.h" />
+    <ClInclude Include="src\Layer.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Shader.h" />
@@ -106,6 +111,7 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
+    <ClCompile Include="src\Layer.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />

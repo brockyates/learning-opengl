@@ -16,5 +16,5 @@
 
 #include <Windows.h>
 
-#include "Core.h"
+#include "GlobalMacros.h"
 #include "logging/Log.h"
