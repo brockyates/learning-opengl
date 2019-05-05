@@ -15,6 +15,14 @@
 std::string ParseShader(const std::string& filePath)
 {
     std::ifstream file(filePath);
+    if (file.fail()) {
+        LOG_ERROR([&]()
+        {
+            std::stringstream ss;
+            ss << "Can't open shader file: " << filePath << ". Does the file exist?";
+            return ss.str();
+        }());
+    }
     std::stringstream ss;
     ss << file.rdbuf();
 
@@ -155,8 +163,8 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-    std::string vertexShaderSource = ParseShader("src/Vertex_Position.shader");
-    std::string fragmentShaderSource = ParseShader("src/Fragment_White.shader");
+    std::string vertexShaderSource = ParseShader("res/shaders/minimal_v.shader");
+    std::string fragmentShaderSource = ParseShader("res/shaders/minimal_f.shader");
 
     unsigned int shaderID = CreateShader(vertexShaderSource, fragmentShaderSource);
     glUseProgram(shaderID);

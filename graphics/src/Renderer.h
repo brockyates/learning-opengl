@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-namespace App {
+namespace Graphics {
 
     #define GLCall(x) GLClearError(); x; APP_ASSERT(GLLogCallError(#x, __FILE__, __LINE__), "OpenGL error");
     #define GLLoggedCall(x) GLClearError(); x; APP_ASSERT(GLLogCallError(#x, __FILE__, __LINE__), "OpenGL error"); GLLogCall(#x, __FILE__, __LINE__);

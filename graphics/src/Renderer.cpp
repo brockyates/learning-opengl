@@ -4,7 +4,7 @@
 #include "Log.h"
 #include <sstream>
 
-namespace App {
+namespace Graphics {
 
     void GLClearError()
     {
@@ -29,20 +29,6 @@ namespace App {
             std::stringstream ss;
             ss << function << " at " << file << ":" << line;
             LOG_GL_DEBUG(ss.str());
-    }
-
-    Renderer::Renderer()
-    {
-        LOG_TRACE("Entering Renderer()");
-        LOG_DEBUG("Renderer created");
-        LOG_TRACE("Exiting Renderer()");
-    }
-
-    Renderer::~Renderer()
-    {
-        LOG_TRACE("Entering ~Renderer()");
-        LOG_DEBUG("Renderer deleted");
-        LOG_TRACE("Exiting ~Renderer()");
     }
 
 }

@@ -27,10 +27,7 @@
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Fragment_Color.shader" />
-    <None Include="src\Fragment_Texture.shader" />
-    <None Include="src\Fragment_White.shader" />
-    <None Include="src\Vertex_Position.shader" />
-    <None Include="src\Vertex_Texture.shader" />
+    <None Include="res\shaders\minimal_f.shader" />
+    <None Include="res\shaders\minimal_v.shader" />
   </ItemGroup>
 </Project>

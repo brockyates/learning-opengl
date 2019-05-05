@@ -6,7 +6,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace App {
+namespace Graphics {
 
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
         : m_VertexShaderPath(vertexShaderPath), m_FragmentShaderPath(fragmentShaderPath)

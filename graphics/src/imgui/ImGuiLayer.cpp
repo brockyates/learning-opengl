@@ -11,14 +11,6 @@
 
 namespace Graphics {
 
-    ImGuiLayer::ImGuiLayer()
-    {
-    }
-
-    ImGuiLayer::~ImGuiLayer()
-    {
-    }
-
     void ImGuiLayer::OnAttach(GLFWwindow* window)
     {
         // Setup Dear ImGui context
@@ -81,10 +73,6 @@ namespace Graphics {
             ImGui::RenderPlatformWindowsDefault();
             glfwMakeContextCurrent(backup_current_context);
         }
-    }
-
-    void ImGuiLayer::OnRender()
-    {
     }
 
 }
