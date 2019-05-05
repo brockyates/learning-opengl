@@ -9,9 +9,6 @@
 
 #include "imgui/ImGuiLayer.h"
 
-#include <sstream>
-#include <fstream>
-
 std::string ParseShader(const std::string& filePath)
 {
     std::ifstream file(filePath);

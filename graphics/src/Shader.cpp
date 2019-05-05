@@ -3,8 +3,6 @@
 
 #include "Renderer.h"
 #include "Log.h"
-#include <sstream>
-#include <fstream>
 
 namespace Graphics {
 

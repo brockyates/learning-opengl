@@ -2,7 +2,6 @@
 #include "Renderer.h"
 
 #include "Log.h"
-#include <sstream>
 
 namespace Graphics {
 
