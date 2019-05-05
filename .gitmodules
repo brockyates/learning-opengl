@@ -1,0 +1,15 @@
+[submodule "vendor/glad"]
+	path = vendor/glad
+	url = git@github.com:brockyates/glad.git
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = git@github.com:brockyates/glfw.git
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = git@github.com:brockyates/glm.git
+[submodule "vendor/spdlog"]
+	path = vendor/spdlog
+	url = git@github.com:brockyates/spdlog.git
+[submodule "vendor/imgui"]
+	path = vendor/imgui
+	url = git@github.com:brockyates/imgui.git
