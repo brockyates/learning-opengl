@@ -6,7 +6,9 @@ namespace Graphics
     class Application
     {
     public:
-        static void Run();
+        Application();
+        ~Application();
+        void Run();
 
     private:
         static GLFWwindow* CreateApplicationWindow();

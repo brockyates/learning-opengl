@@ -18,6 +18,17 @@
 
 namespace Graphics
 {
+    Application::Application()
+    {
+        Graphics::Utils::Log::Init();
+        LOG_INFO("spdlog initialized");
+    }
+
+    Application::~Application()
+    {
+        LOG_TRACE("~Application()");
+    }
+
     GLFWwindow* Application::CreateApplicationWindow()
     {
         /* Initialize the library */
