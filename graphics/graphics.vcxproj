@@ -99,6 +99,7 @@
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +108,7 @@
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -121,6 +123,13 @@
     <ProjectReference Include="..\vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Fragment_Color.shader" />
+    <None Include="src\Fragment_Texture.shader" />
+    <None Include="src\Fragment_White.shader" />
+    <None Include="src\Vertex_Position.shader" />
+    <None Include="src\Vertex_Texture.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
