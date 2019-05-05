@@ -4,7 +4,11 @@
 #include "Shader.h"
 
 #include "imgui/ImGuiRenderer.h"
+
+//Layers
+#include "layers/BaseLayer.h"
 #include "layers/ImGuiLayer.h"
+#include "layers/MinimalTriangleDemo.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -46,37 +50,17 @@ namespace Graphics
     {
         { //Application scope
             GLFWwindow* window = CreateApplicationWindow();
-
-            float m_Vertexes[] =
-            {
-                0.0f,  1.0f,
-               -1.0f, -1.0f,
-                1.0f, -1.0f,
-            };
-
-            unsigned int myBufferID;
-            glGenBuffers(1, &myBufferID);
-            glBindBuffer(GL_ARRAY_BUFFER, myBufferID);
-            glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes, GL_STATIC_DRAW);
-            glEnableVertexAttribArray(0);
-            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-            Shader minimalShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
-
             ImGuiRenderer imGuiRenderer(window);
 
-            Layer* imGuiLayer = new ImGuiLayer();
-            std::vector<Layer*> layerStack = { imGuiLayer };
+            std::vector<Layer*> layerStack = {
+                new BaseLayer(),
+                new ImGuiLayer(),
+                new MinimalTriangleDemo(),
+            };
 
             LOG_INFO("Main application loop started");
             while (!glfwWindowShouldClose(window))
             {
-                glClear(GL_COLOR_BUFFER_BIT);
-                glClearColor(0.2f, 0.3f, 0.7f, 1.0f);
-
-                minimalShader.Bind();
-                glDrawArrays(GL_TRIANGLES, 0, 3);
-
                 for (Layer* layer : layerStack)
                 {
                     layer->OnUpdate();

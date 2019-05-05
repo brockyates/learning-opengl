@@ -1,0 +1,26 @@
+#pragma once
+#include "Layer.h"
+#include "Shader.h"
+
+namespace Graphics {
+
+    class MinimalTriangleDemo : public Layer
+    {
+    public:
+        MinimalTriangleDemo();
+
+        virtual void OnUpdate() override;
+
+    private:
+        Shader m_Shader;
+        unsigned int m_VertexBufferID;
+
+        float m_Vertexes[6] =
+        {
+            0.0f,  1.0f,
+           -1.0f, -1.0f,
+            1.0f, -1.0f,
+        };
+    };
+
+}

@@ -58,7 +58,8 @@
       <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
-    <ClInclude Include="MinimalTriangle.h" />
+    <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
+    <ClInclude Include="src\layers\BaseLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -89,7 +90,8 @@
       <Filter>src\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
-    <ClCompile Include="MinimalTriangle.cpp" />
+    <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
+    <ClCompile Include="src\layers\BaseLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
