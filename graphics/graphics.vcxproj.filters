@@ -18,9 +18,6 @@
     <ClInclude Include="src\Core.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Renderer.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -34,12 +31,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\logging\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EntryPoint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
@@ -58,6 +55,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\logging\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

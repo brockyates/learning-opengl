@@ -6,7 +6,7 @@ namespace Graphics
     class Application
     {
     public:
-        void Run();
+        static void Run();
     };
 
 }

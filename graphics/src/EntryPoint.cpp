@@ -3,12 +3,11 @@
 
 int main()
 {
-    Utils::Log::Init();
+    Graphics::Utils::Log::Init();
     LOG_INFO("spdlog initialized");
 
     {
-        Graphics::Application app;
-        app.Run();
+        Graphics::Application::Run();
     }
 
     return 0;

@@ -2,7 +2,6 @@
 #include "Shader.h"
 
 #include "Renderer.h"
-#include "Log.h"
 
 namespace Graphics {
 

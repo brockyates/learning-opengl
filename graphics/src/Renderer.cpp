@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Renderer.h"
 
-#include "Log.h"
-
 namespace Graphics {
 
     void GLClearError()
