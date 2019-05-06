@@ -1,6 +1,6 @@
 #pragma once
-#include "Layer.h"
-#include "Shader.h"
+#include "renderer/Layer.h"
+#include "renderer/Shader.h"
 
 namespace Graphics {
 

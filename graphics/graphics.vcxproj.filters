@@ -27,15 +27,6 @@
     <ClInclude Include="src\GlobalMacros.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Layer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Renderer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\events\ApplicationEvent.h">
       <Filter>src\events</Filter>
     </ClInclude>
@@ -60,24 +51,24 @@
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
-    <ClInclude Include="src\SmartGLFWWindow.h" />
-    <ClInclude Include="src\WindowProperties.h" />
-    <ClInclude Include="src\LayerManager.h" />
+    <ClInclude Include="src\renderer\Layer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\LayerManager.h" />
+    <ClInclude Include="src\renderer\Renderer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Shader.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\SmartGLFWWindow.h" />
+    <ClInclude Include="src\renderer\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiBuild.cpp">
@@ -95,9 +86,18 @@
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
-    <ClCompile Include="src\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\LayerManager.cpp" />
     <ClCompile Include="src\GlobalMacros.cpp" />
+    <ClCompile Include="src\renderer\Layer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\LayerManager.cpp" />
+    <ClCompile Include="src\renderer\Renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Shader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\SmartGLFWWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

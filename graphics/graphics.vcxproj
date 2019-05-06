@@ -95,15 +95,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\LayerManager.h" />
+    <ClInclude Include="src\renderer\LayerManager.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
-    <ClInclude Include="src\Layer.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\renderer\Layer.h" />
+    <ClInclude Include="src\renderer\Renderer.h" />
+    <ClInclude Include="src\renderer\Shader.h" />
     <ClInclude Include="src\events\ApplicationEvent.h" />
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\KeyEvent.h" />
@@ -111,27 +111,27 @@
     <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\SmartGLFWWindow.h" />
-    <ClInclude Include="src\WindowProperties.h" />
+    <ClInclude Include="src\renderer\SmartGLFWWindow.h" />
+    <ClInclude Include="src\renderer\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GlobalMacros.cpp" />
-    <ClCompile Include="src\LayerManager.cpp" />
+    <ClCompile Include="src\renderer\LayerManager.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
-    <ClCompile Include="src\Layer.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\renderer\Layer.cpp" />
+    <ClCompile Include="src\renderer\Renderer.cpp" />
+    <ClCompile Include="src\renderer\Shader.cpp" />
     <ClCompile Include="src\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\SmartGLFWWindow.cpp" />
+    <ClCompile Include="src\renderer\SmartGLFWWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
