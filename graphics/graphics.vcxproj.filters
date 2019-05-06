@@ -61,6 +61,7 @@
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
+    <ClInclude Include="src\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

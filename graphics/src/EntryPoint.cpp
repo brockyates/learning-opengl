@@ -3,6 +3,8 @@
 
 int main()
 {
+    Graphics::Utils::Log::Init();
+
     {
         Graphics::Application().Run();
     }

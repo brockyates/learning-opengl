@@ -3,8 +3,6 @@
 #include "Layer.h"
 #include "Shader.h"
 
-#include "imgui/ImGuiRenderer.h"
-
 //Layers
 #include "layers/BaseLayer.h"
 #include "layers/ImGuiLayer.h"
@@ -19,9 +17,10 @@
 namespace Graphics
 {
     Application::Application()
+        : m_WindowProperties("OpenGL Graphics Demo", 1920, 1080)
+        , m_Window(CreateGLFWWindow(m_WindowProperties))
+        , m_UIRenderer(ImGuiRenderer(m_Window.get()))
     {
-        Graphics::Utils::Log::Init();
-        m_Window = CreateGLFWWindow(); // Don't put in the initialization list: needs logging to be initialized.
     }
 
     Application::~Application()
@@ -33,8 +32,6 @@ namespace Graphics
     void Application::Run()
     {
         {
-            ImGuiRenderer imGuiRenderer(m_Window.get());
-
             std::vector<Layer*> layerStack = {
                 new BaseLayer(),
                 new ImGuiLayer(),
@@ -49,12 +46,12 @@ namespace Graphics
                     layer->OnUpdate();
                 }
 
-                ImGuiRenderer::BeginFrame();
+                m_UIRenderer.BeginFrame();
                 for (Layer* layer : layerStack)
                 {
                     layer->OnImGuiRender();
                 }
-                ImGuiRenderer::Render(1920, 1080);
+                m_UIRenderer.Render(m_WindowProperties);
 
                 glfwSwapBuffers(m_Window.get());
                 glfwPollEvents();

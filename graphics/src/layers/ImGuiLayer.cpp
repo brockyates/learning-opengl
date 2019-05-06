@@ -13,8 +13,6 @@ namespace Graphics {
         bool my_tool_active = true;
         float my_color[] = { 0.0f, 1.0f, 0.0f, 1.0f };
 
-        //imGuiLayer->Begin();
-
         // Create a window called "My First Tool", with a menu bar.
         ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
         if (ImGui::BeginMenuBar())
@@ -43,8 +41,6 @@ namespace Graphics {
             ImGui::Text("%04d: Some text", n);
         ImGui::EndChild();
         ImGui::End();
-
-        //imGuiLayer->End(1920, 1080);
     }
 
 }

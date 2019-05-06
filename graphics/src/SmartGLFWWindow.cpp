@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "SmartGLFWWindow.h"
+#include "WindowProperties.h"
 
 namespace Graphics {
 
-    SmartGLFWWindow CreateGLFWWindow()
+    SmartGLFWWindow CreateGLFWWindow(const WindowProperties& windowProperties)
     {
         bool glfwInitStatus = glfwInit();
         APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
 
-        auto window = SmartGLFWWindow(glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL));
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), NULL, NULL));
         if (!window)
         {
             glfwTerminate();

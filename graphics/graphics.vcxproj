@@ -111,6 +111,7 @@
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
+    <ClInclude Include="src\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\BaseLayer.cpp" />

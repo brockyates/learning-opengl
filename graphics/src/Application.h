@@ -1,5 +1,7 @@
 #pragma once
+#include "imgui/ImGuiRenderer.h"
 #include "SmartGLFWWindow.h"
+#include "WindowProperties.h"
 
 namespace Graphics
 {
@@ -15,7 +17,9 @@ namespace Graphics
         void Run();
 
     private:
+        WindowProperties m_WindowProperties;
         SmartGLFWWindow m_Window;
+        ImGuiRenderer m_UIRenderer;
     };
 
 }

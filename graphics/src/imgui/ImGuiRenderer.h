@@ -3,14 +3,16 @@
 
 namespace Graphics {
 
+    struct WindowProperties;
+
     class ImGuiRenderer
     {
     public:
         ImGuiRenderer(GLFWwindow* window);
         ~ImGuiRenderer();
 
-        static void BeginFrame();
-        static void Render(unsigned int height, unsigned int width);
+        void BeginFrame() const;
+        void Render(const WindowProperties& windowProperties) const;
     };
 
 }

@@ -5,6 +5,8 @@
 
 namespace Graphics {
 
+    struct WindowProperties;
+
     struct DestroyGLFWWin {
 
         void operator()(GLFWwindow* ptr) {
@@ -14,6 +16,6 @@ namespace Graphics {
 
     using SmartGLFWWindow = std::unique_ptr<GLFWwindow, DestroyGLFWWin>;
 
-    SmartGLFWWindow CreateGLFWWindow();
+    SmartGLFWWindow CreateGLFWWindow(const WindowProperties& windowProperties);
 
 }

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ImGuiRenderer.h"
+#include "WindowProperties.h"
 
 #include <imgui.h>
 #include <examples/imgui_impl_glfw.h>
@@ -48,17 +49,17 @@ namespace Graphics {
         LOG_TRACE("~ImGuiRenderer()");
     }
 
-    void ImGuiRenderer::BeginFrame()
+    void ImGuiRenderer::BeginFrame() const
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
-    void ImGuiRenderer::Render(unsigned int width, unsigned int height)
+    void ImGuiRenderer::Render(const WindowProperties& windowProperties) const
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
+        io.DisplaySize = ImVec2(static_cast<float>(windowProperties.Width), static_cast<float>(windowProperties.Height));
 
         // Rendering
         ImGui::Render();
