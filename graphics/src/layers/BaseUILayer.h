@@ -1,8 +1,6 @@
 #pragma once
 #include "renderer/Layer.h"
 
-#include <GLFW/glfw3.h>
-
 namespace Graphics {
 
     class BaseUILayer : public Layer
@@ -11,7 +9,7 @@ namespace Graphics {
         virtual void OnImGuiRender() override;
 
     private:
-        float m_Time = 0.0f;
+        bool m_Active = true;
     };
 
 }
