@@ -115,6 +115,7 @@
     <ClInclude Include="src\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GlobalMacros.cpp" />
     <ClCompile Include="src\LayerManager.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />

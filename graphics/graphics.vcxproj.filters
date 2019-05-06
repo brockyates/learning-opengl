@@ -97,6 +97,7 @@
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
     <ClCompile Include="src\LayerManager.cpp" />
+    <ClCompile Include="src\GlobalMacros.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

@@ -3,6 +3,8 @@
 
 #include "Renderer.h"
 
+#include <glad/glad.h>
+
 namespace Graphics {
 
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
