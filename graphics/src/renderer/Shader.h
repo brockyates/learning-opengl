@@ -33,10 +33,6 @@ namespace Graphics {
 
     private:
         unsigned int m_RendererID;
-
-        std::string m_VertexShaderPath;
-        std::string m_FragmentShaderPath;
-
         std::unordered_map<std::string, int> m_UniformLocationCache;
     };
 

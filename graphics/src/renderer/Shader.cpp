@@ -8,16 +8,11 @@
 namespace Graphics {
 
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
-        : m_VertexShaderPath(vertexShaderPath), m_FragmentShaderPath(fragmentShaderPath)
+        : m_RendererID(CreateShader(ParseShader(vertexShaderPath), ParseShader(fragmentShaderPath)))
     {
-        std::string vertexShaderSource = ParseShader(vertexShaderPath);
-        std::string fragmentShaderSource = ParseShader(fragmentShaderPath);
-
-        m_RendererID = CreateShader(vertexShaderSource, fragmentShaderSource);
-
         LOG_DEBUG([&]() {
             std::stringstream ss;
-            ss << "Shader(id=" << m_RendererID << ", vertexShaderPath=" << m_VertexShaderPath << ", fragmentShaderPath=" << m_FragmentShaderPath << ") created";
+            ss << "Shader(id=" << m_RendererID << ", vertexShaderPath=" << vertexShaderPath << ", fragmentShaderPath=" << fragmentShaderPath << ") created";
             return ss.str();
         }());
     }
@@ -28,7 +23,7 @@ namespace Graphics {
 
         LOG_DEBUG([&]() {
             std::stringstream ss;
-            ss << "Shader(id=" << m_RendererID << ", vertexShaderPath=" << m_VertexShaderPath << ", fragmentShaderPath=" << m_FragmentShaderPath << ") deleted";
+            ss << "Shader(id=" << m_RendererID << ") deleted";
             return ss.str();
         }());
     }
@@ -70,7 +65,7 @@ namespace Graphics {
             return m_UniformLocationCache[name];
         }
 
-        GLCall(unsigned int uniformLocation = glGetUniformLocation(m_RendererID, name.c_str()));
+        GLCall(int uniformLocation = glGetUniformLocation(m_RendererID, name.c_str()));
 
         if (uniformLocation == -1)
         {
@@ -115,10 +110,12 @@ namespace Graphics {
             char* message = (char*)alloca(length * sizeof(char));
             glGetShaderInfoLog(shaderId, length, &length, message);
 
-            std::stringstream ss;
-            ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
-            LOG_ERROR(ss.str());
-            LOG_ERROR(message);
+            LOG_ERROR([&]()
+            {
+                std::stringstream ss;
+                ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
+                return ss.str();
+            }());
 
             glDeleteShader(shaderId);
             return 0;
