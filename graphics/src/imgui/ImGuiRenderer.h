@@ -11,6 +11,9 @@ namespace Graphics {
         ImGuiRenderer(GLFWwindow * window);
         ~ImGuiRenderer();
 
+        ImGuiRenderer(ImGuiRenderer&) = delete;
+        ImGuiRenderer& operator=(ImGuiRenderer&) = delete;
+
         void BeginFrame() const;
         void Render(const WindowProperties& windowProperties) const;
     };

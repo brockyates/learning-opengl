@@ -9,7 +9,7 @@ namespace Graphics {
     {
     public:
         Layer(const std::string& name = "Layer");
-        virtual ~Layer();
+        virtual ~Layer() = default;
 
         virtual void OnRender() {}
         virtual void OnImGuiRender() {}

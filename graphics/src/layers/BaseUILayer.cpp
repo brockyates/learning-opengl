@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "ImGuiLayer.h"
+#include "BaseUILayer.h"
 
 #include <imgui.h>
 #include <examples/imgui_impl_glfw.h>
@@ -8,7 +8,7 @@
 
 namespace Graphics {
 
-    void ImGuiLayer::OnImGuiRender()
+    void BaseUILayer::OnImGuiRender()
     {
         bool my_tool_active = true;
         float my_color[] = { 0.0f, 1.0f, 0.0f, 1.0f };

@@ -5,7 +5,7 @@
 
 //Layers
 #include "layers/BaseLayer.h"
-#include "layers/ImGuiLayer.h"
+#include "layers/BaseUILayer.h"
 #include "layers/MinimalTriangleDemo.h"
 
 namespace Graphics {
@@ -13,7 +13,7 @@ namespace Graphics {
     LayerManager::LayerManager()
     {
         m_Layers.emplace_back(std::make_unique<BaseLayer>());
-        m_Layers.emplace_back(std::make_unique<ImGuiLayer>());
+        m_Layers.emplace_back(std::make_unique<BaseUILayer>());
         m_Layers.emplace_back(std::make_unique<MinimalTriangleDemo>());
     }
 

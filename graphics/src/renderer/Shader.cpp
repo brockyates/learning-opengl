@@ -10,7 +10,6 @@ namespace Graphics {
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
         : m_VertexShaderPath(vertexShaderPath), m_FragmentShaderPath(fragmentShaderPath)
     {
-        LOG_TRACE("Entering Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)");
         std::string vertexShaderSource = ParseShader(vertexShaderPath);
         std::string fragmentShaderSource = ParseShader(fragmentShaderPath);
 
@@ -21,13 +20,10 @@ namespace Graphics {
             ss << "Shader(id=" << m_RendererID << ", vertexShaderPath=" << m_VertexShaderPath << ", fragmentShaderPath=" << m_FragmentShaderPath << ") created";
             return ss.str();
         }());
-
-        LOG_TRACE("Exiting Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)");
     }
 
     Shader::~Shader()
     {
-        LOG_TRACE("Entering ~Shader()");
         GLLoggedCall(glDeleteProgram(m_RendererID));
 
         LOG_DEBUG([&]() {
@@ -35,8 +31,6 @@ namespace Graphics {
             ss << "Shader(id=" << m_RendererID << ", vertexShaderPath=" << m_VertexShaderPath << ", fragmentShaderPath=" << m_FragmentShaderPath << ") deleted";
             return ss.str();
         }());
-
-        LOG_TRACE("Exiting ~Shader()");
     }
 
     void Shader::Bind() const

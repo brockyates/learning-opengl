@@ -5,7 +5,7 @@
 
 namespace Graphics {
 
-    class ImGuiLayer : public Layer
+    class BaseUILayer : public Layer
     {
     public:
         virtual void OnImGuiRender() override;
