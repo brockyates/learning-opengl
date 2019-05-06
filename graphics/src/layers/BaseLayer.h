@@ -6,7 +6,7 @@ namespace Graphics {
     class BaseLayer : public Layer
     {
     public:
-        virtual void OnUpdate() override;
+        virtual void OnRender() override;
     };
 
 }

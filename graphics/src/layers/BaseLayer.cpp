@@ -6,7 +6,7 @@
 
 namespace Graphics {
 
-    void BaseLayer::OnUpdate()
+    void BaseLayer::OnRender()
     {
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(0.2f, 0.3f, 0.7f, 1.0f);

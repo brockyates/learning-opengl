@@ -11,7 +11,7 @@ namespace Graphics {
         Layer(const std::string& name = "Layer");
         virtual ~Layer();
 
-        virtual void OnUpdate() {}
+        virtual void OnRender() {}
         virtual void OnImGuiRender() {}
         virtual void OnEvent(Event& event) {}
 

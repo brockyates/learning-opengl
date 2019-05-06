@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Layer.h"
+
 namespace Graphics {
 
     class Layer;

@@ -16,7 +16,7 @@ namespace Graphics {
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
-    void MinimalTriangleDemo::OnUpdate()
+    void MinimalTriangleDemo::OnRender()
     {
         m_Shader.Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);

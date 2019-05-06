@@ -9,7 +9,7 @@ namespace Graphics {
     public:
         MinimalTriangleDemo();
 
-        virtual void OnUpdate() override;
+        virtual void OnRender() override;
 
     private:
         Shader m_Shader;

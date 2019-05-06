@@ -8,7 +8,7 @@ namespace Graphics {
     class ImGuiRenderer
     {
     public:
-        ImGuiRenderer(GLFWwindow* window);
+        ImGuiRenderer(GLFWwindow * window);
         ~ImGuiRenderer();
 
         void BeginFrame() const;
