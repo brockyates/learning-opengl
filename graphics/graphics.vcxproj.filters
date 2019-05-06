@@ -60,6 +60,7 @@
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
+    <ClInclude Include="src\SmartGLFWWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -92,6 +93,7 @@
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
+    <ClCompile Include="src\SmartGLFWWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

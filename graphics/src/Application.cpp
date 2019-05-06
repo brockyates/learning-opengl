@@ -21,47 +21,19 @@ namespace Graphics
     Application::Application()
     {
         Graphics::Utils::Log::Init();
-        LOG_INFO("spdlog initialized");
+        m_Window = CreateGLFWWindow(); // Don't put in the initialization list: needs logging to be initialized.
     }
 
     Application::~Application()
     {
+        glfwTerminate();
         LOG_TRACE("~Application()");
-    }
-
-    GLFWwindow* Application::CreateApplicationWindow()
-    {
-        /* Initialize the library */
-        bool glfwInitStatus = glfwInit();
-        APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
-
-        /* Create a windowed mode window and its OpenGL context */
-        GLFWwindow* window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
-        if (!window)
-        {
-            glfwTerminate();
-            APP_ASSERT(window, "Failed to create GLFW window");
-        }
-
-        /* Make the window's context current */
-        glfwMakeContextCurrent(window);
-        glfwSwapInterval(1);
-        int gladLoadStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        if (!gladLoadStatus)
-        {
-            glfwTerminate();
-            APP_ASSERT(gladLoadStatus, "Failed to initialize Glad");
-        }
-
-        LOG_GL_INFO(glGetString(GL_VERSION));
-        return window;
     }
 
     void Application::Run()
     {
-        { //Application scope
-            GLFWwindow* window = CreateApplicationWindow();
-            ImGuiRenderer imGuiRenderer(window);
+        {
+            ImGuiRenderer imGuiRenderer(m_Window.get());
 
             std::vector<Layer*> layerStack = {
                 new BaseLayer(),
@@ -70,7 +42,7 @@ namespace Graphics
             };
 
             LOG_INFO("Main application loop started");
-            while (!glfwWindowShouldClose(window))
+            while (!glfwWindowShouldClose(m_Window.get()))
             {
                 for (Layer* layer : layerStack)
                 {
@@ -84,7 +56,7 @@ namespace Graphics
                 }
                 ImGuiRenderer::Render(1920, 1080);
 
-                glfwSwapBuffers(window);
+                glfwSwapBuffers(m_Window.get());
                 glfwPollEvents();
             }
             LOG_INFO("Main application loop stopped");
@@ -95,8 +67,6 @@ namespace Graphics
             }
 
         } //Application scope
-
-        glfwTerminate();
     }
 
 }

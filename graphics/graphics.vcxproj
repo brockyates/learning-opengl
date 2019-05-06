@@ -110,6 +110,7 @@
     <ClInclude Include="src\layers\ImGuiLayer.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\SmartGLFWWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\BaseLayer.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\SmartGLFWWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

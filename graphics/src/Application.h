@@ -1,17 +1,21 @@
 #pragma once
-#include <GLFW/glfw3.h>
+#include "SmartGLFWWindow.h"
+
 namespace Graphics
 {
-
     class Application
     {
     public:
         Application();
         ~Application();
+
+        Application(Application&) = delete;
+        Application(Application&&) = delete;
+
         void Run();
 
     private:
-        static GLFWwindow* CreateApplicationWindow();
+        SmartGLFWWindow m_Window;
     };
 
 }

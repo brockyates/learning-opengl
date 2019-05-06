@@ -18,6 +18,8 @@ namespace Graphics { namespace Utils {
 
         s_OpenGLLogger = spdlog::stdout_color_mt("OpenGL");
         s_OpenGLLogger->set_level(spdlog::level::trace);
+
+        LOG_INFO("spdlog initialized");
     }
 
 }}
