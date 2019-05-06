@@ -95,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\LayerManager.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="src\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LayerManager.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />

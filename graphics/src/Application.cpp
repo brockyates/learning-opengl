@@ -18,8 +18,6 @@ namespace Graphics
 {
     Application::Application()
         : m_WindowProperties("OpenGL Graphics Demo", 1920, 1080)
-        , m_Window(CreateGLFWWindow(m_WindowProperties))
-        , m_UIRenderer(ImGuiRenderer(m_Window.get()))
     {
     }
 
@@ -29,9 +27,12 @@ namespace Graphics
         LOG_TRACE("~Application()");
     }
 
-    void Application::Run()
+    void Application::Start()
     {
         {
+            auto window = CreateGLFWWindow(m_WindowProperties);
+            auto uiRenderer = ImGuiRenderer(window.get());
+
             std::vector<Layer*> layerStack = {
                 new BaseLayer(),
                 new ImGuiLayer(),
@@ -39,21 +40,21 @@ namespace Graphics
             };
 
             LOG_INFO("Main application loop started");
-            while (!glfwWindowShouldClose(m_Window.get()))
+            while (!glfwWindowShouldClose(window.get()))
             {
                 for (Layer* layer : layerStack)
                 {
                     layer->OnUpdate();
                 }
 
-                m_UIRenderer.BeginFrame();
+                uiRenderer.BeginFrame();
                 for (Layer* layer : layerStack)
                 {
                     layer->OnImGuiRender();
                 }
-                m_UIRenderer.Render(m_WindowProperties);
+                uiRenderer.Render(m_WindowProperties);
 
-                glfwSwapBuffers(m_Window.get());
+                glfwSwapBuffers(window.get());
                 glfwPollEvents();
             }
             LOG_INFO("Main application loop stopped");

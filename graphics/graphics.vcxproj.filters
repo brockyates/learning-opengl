@@ -62,6 +62,7 @@
     <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\WindowProperties.h" />
+    <ClInclude Include="src\LayerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -95,6 +96,7 @@
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
+    <ClCompile Include="src\LayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

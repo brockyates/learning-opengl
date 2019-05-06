@@ -6,7 +6,7 @@ int main()
     Graphics::Utils::Log::Init();
 
     {
-        Graphics::Application().Run();
+        Graphics::Application().Start();
     }
 
     return 0;

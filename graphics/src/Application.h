@@ -14,12 +14,10 @@ namespace Graphics
         Application(Application&) = delete;
         Application& operator=(Application&) = delete;
 
-        void Run();
+        void Start();
 
     private:
         WindowProperties m_WindowProperties;
-        SmartGLFWWindow m_Window;
-        ImGuiRenderer m_UIRenderer;
     };
 
 }
