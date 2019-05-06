@@ -1,6 +1,4 @@
 #pragma once
-#include "imgui/ImGuiRenderer.h"
-#include "SmartGLFWWindow.h"
 #include "WindowProperties.h"
 
 namespace Graphics

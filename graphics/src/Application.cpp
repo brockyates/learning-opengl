@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "Application.h"
+
+#include "imgui/ImGuiRenderer.h"
+#include "LayerManager.h"
 #include "Layer.h"
 #include "Shader.h"
-
-//Layers
-#include "layers/BaseLayer.h"
-#include "layers/ImGuiLayer.h"
-#include "layers/MinimalTriangleDemo.h"
+#include "SmartGLFWWindow.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -32,23 +31,18 @@ namespace Graphics
         {
             auto window = CreateGLFWWindow(m_WindowProperties);
             auto uiRenderer = ImGuiRenderer(window.get());
-
-            std::vector<Layer*> layerStack = {
-                new BaseLayer(),
-                new ImGuiLayer(),
-                new MinimalTriangleDemo(),
-            };
+            auto layers = LayerManager();
 
             LOG_INFO("Main application loop started");
             while (!glfwWindowShouldClose(window.get()))
             {
-                for (Layer* layer : layerStack)
+                for (auto& layer : layers)
                 {
                     layer->OnUpdate();
                 }
 
                 uiRenderer.BeginFrame();
-                for (Layer* layer : layerStack)
+                for (auto& layer : layers)
                 {
                     layer->OnImGuiRender();
                 }
@@ -57,13 +51,8 @@ namespace Graphics
                 glfwSwapBuffers(window.get());
                 glfwPollEvents();
             }
+
             LOG_INFO("Main application loop stopped");
-
-            for (auto layer : layerStack)
-            {
-                delete layer;
-            }
-
         } //Application scope
     }
 
