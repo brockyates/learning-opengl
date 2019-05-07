@@ -10,10 +10,10 @@
 
 namespace Graphics {
 
-    LayerManager::LayerManager()
+    LayerManager::LayerManager(GLFWwindow* window)
     {
         m_Layers.emplace_back(std::make_unique<BaseLayer>());
-        m_Layers.emplace_back(std::make_unique<BaseUILayer>());
+        m_Layers.emplace_back(std::make_unique<BaseUILayer>(window));
         m_Layers.emplace_back(std::make_unique<MinimalTriangleDemo>());
     }
 

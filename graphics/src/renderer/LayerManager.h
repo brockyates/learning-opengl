@@ -9,7 +9,7 @@ namespace Graphics {
     class LayerManager
     {
     public:
-        LayerManager();
+        LayerManager(GLFWwindow* window);
 
         std::vector<std::unique_ptr<Layer>>::iterator begin() { return m_Layers.begin(); }
         std::vector<std::unique_ptr<Layer>>::iterator end() { return m_Layers.end(); }

@@ -8,6 +8,7 @@ namespace Graphics {
         : m_WindowProperties("OpenGL Graphics Demo", 1920, 1080)
         , m_Window(CreateGLFWWindow(m_WindowProperties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
+        , m_Layers(m_Window.get())
     {}
 
     void Renderer::OnRender()

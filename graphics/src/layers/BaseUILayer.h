@@ -6,10 +6,15 @@ namespace Graphics {
     class BaseUILayer : public Layer
     {
     public:
+        BaseUILayer(GLFWwindow* window);
         virtual void OnImGuiRender() override;
 
     private:
-        bool m_Active = true;
+        void CloseApplication() const;
+
+    private:
+        GLFWwindow* m_Window;
+        bool m_IsWindowOpen = true;
     };
 
 }
