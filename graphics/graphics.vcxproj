@@ -106,10 +106,6 @@
     <ClInclude Include="src\renderer\Layer.h" />
     <ClInclude Include="src\renderer\Renderer.h" />
     <ClInclude Include="src\renderer\Shader.h" />
-    <ClInclude Include="src\events\ApplicationEvent.h" />
-    <ClInclude Include="src\events\Event.h" />
-    <ClInclude Include="src\events\KeyEvent.h" />
-    <ClInclude Include="src\events\MouseEvent.h" />
     <ClInclude Include="src\layers\BaseUILayer.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />

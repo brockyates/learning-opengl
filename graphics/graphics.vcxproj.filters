@@ -27,18 +27,6 @@
     <ClInclude Include="src\GlobalMacros.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\events\ApplicationEvent.h">
-      <Filter>src\events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\events\Event.h">
-      <Filter>src\events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\events\KeyEvent.h">
-      <Filter>src\events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\events\MouseEvent.h">
-      <Filter>src\events</Filter>
-    </ClInclude>
     <ClInclude Include="src\logging\Log.h">
       <Filter>src\logging</Filter>
     </ClInclude>

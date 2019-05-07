@@ -1,6 +1,4 @@
 #pragma once
-#include "events/Event.h"
-
 #include <GLFW/glfw3.h>
 
 namespace Graphics {
@@ -13,7 +11,6 @@ namespace Graphics {
 
         virtual void OnRender() {}
         virtual void OnImGuiRender() {}
-        virtual void OnEvent(Event& event) {}
 
         inline const std::string& GetName() const { return m_DebugName; }
 
