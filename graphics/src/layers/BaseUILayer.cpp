@@ -20,6 +20,17 @@ namespace Graphics {
             CloseApplication();
         }
 
+        ShowMainWindow();
+        ShowLogWindow();
+    }
+
+    void BaseUILayer::CloseApplication() const
+    {
+        glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
+    }
+
+    void BaseUILayer::ShowMainWindow()
+    {
         ImGui::Begin("OpenGL Graphics Demo", &m_IsWindowOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
 
         if (ImGui::BeginMenuBar())
@@ -38,9 +49,17 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void BaseUILayer::CloseApplication() const
+    void BaseUILayer::ShowLogWindow()
     {
-        glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
+        bool isLogWindowOpen = true;
+
+        ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+        ImGui::Begin("Output", &isLogWindowOpen, ImGuiWindowFlags_HorizontalScrollbar);
+            
+            const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
+            ImGui::TextUnformatted(logString.c_str());
+
+        ImGui::End();
     }
 
 }

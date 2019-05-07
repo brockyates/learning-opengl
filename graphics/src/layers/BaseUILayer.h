@@ -11,6 +11,8 @@ namespace Graphics {
 
     private:
         void CloseApplication() const;
+        void ShowMainWindow();
+        void ShowLogWindow();
 
     private:
         GLFWwindow* m_Window;
