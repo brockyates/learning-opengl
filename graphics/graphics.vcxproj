@@ -95,6 +95,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\renderer\LayerManager.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
@@ -116,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GlobalMacros.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\renderer\LayerManager.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
@@ -125,7 +129,6 @@
     <ClCompile Include="src\renderer\Layer.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
     <ClCompile Include="src\renderer\Shader.cpp" />
-    <ClCompile Include="src\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\layers\BaseUILayer.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\pch.cpp">

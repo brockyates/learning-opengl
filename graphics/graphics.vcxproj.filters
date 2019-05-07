@@ -63,6 +63,8 @@
     <ClInclude Include="src\layers\BaseUILayer.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -70,9 +72,6 @@
     </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\ImGuiBuild.cpp">
-      <Filter>src\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\logging\Log.cpp">
       <Filter>src\logging</Filter>
@@ -98,6 +97,8 @@
     <ClCompile Include="src\layers\BaseUILayer.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
