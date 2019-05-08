@@ -17,9 +17,15 @@ namespace Graphics {
 
         LOG_INFO("Main application loop started");
 
-        while (renderer.IsRunning())
+        try {
+            while (renderer.IsRunning())
+            {
+                renderer.OnRender();
+            }
+        }
+        catch (...)
         {
-            renderer.OnRender();
+            std::cout << "TOP LEVEL ERROR HANDLER";
         }
 
         LOG_INFO("Main application loop stopped");

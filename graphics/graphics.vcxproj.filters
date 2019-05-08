@@ -69,7 +69,6 @@
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
-    <ClCompile Include="src\GlobalMacros.cpp" />
     <ClCompile Include="src\renderer\Layer.cpp">
       <Filter>src</Filter>
     </ClCompile>

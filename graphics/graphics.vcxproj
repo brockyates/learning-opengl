@@ -113,7 +113,6 @@
     <ClInclude Include="src\renderer\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GlobalMacros.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\renderer\LayerManager.cpp" />
