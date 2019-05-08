@@ -20,7 +20,7 @@ namespace Graphics {
     Shader::~Shader()
     {
         Unbind();
-        GLLoggedCall(glDeleteProgram(m_RendererID));
+        GLCall(glDeleteProgram(m_RendererID));
 
         LOG_DEBUG([&]() {
             std::stringstream ss;
@@ -99,8 +99,8 @@ namespace Graphics {
     {
         unsigned int shaderId = glCreateShader(type);
         const char* source = shaderSource.c_str();
-        glShaderSource(shaderId, 1, &source, nullptr);
-        glCompileShader(shaderId);
+        GLCall(glShaderSource(shaderId, 1, &source, nullptr));
+        GLCall(glCompileShader(shaderId));
 
         int result;
         glGetShaderiv(shaderId, GL_COMPILE_STATUS, &result);
@@ -132,13 +132,13 @@ namespace Graphics {
         unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, vertexShaderSource);
         unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
 
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, fragmentShader);
-        glLinkProgram(program);
-        glValidateProgram(program);
+        GLCall(glAttachShader(program, vertexShader));
+        GLCall(glAttachShader(program, fragmentShader));
+        GLCall(glLinkProgram(program));
+        GLCall(glValidateProgram(program));
 
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
+        GLCall(glDeleteShader(vertexShader));
+        GLCall(glDeleteShader(fragmentShader));
 
         return program;
     }
