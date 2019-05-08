@@ -99,7 +99,7 @@ namespace Graphics {
     {
         unsigned int shaderId = glCreateShader(type);
         const char* source = shaderSource.c_str();
-        glShaderSource(9999, 1, &source, nullptr);
+        glShaderSource(shaderId, 1, &source, nullptr);
         glCompileShader(shaderId);
 
         int result;
