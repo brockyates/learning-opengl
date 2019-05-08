@@ -53,6 +53,7 @@
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\layers\MinimalRenderDemo.h" />
+    <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -86,6 +87,7 @@
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\layers\MinimalRenderDemo.cpp" />
+    <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
