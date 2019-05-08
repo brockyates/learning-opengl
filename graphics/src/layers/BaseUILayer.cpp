@@ -22,6 +22,8 @@ namespace Graphics {
 
         ShowMainWindow();
         ShowLogWindow();
+        ShowGLWindow();
+        ShowDemoWidget();
     }
 
     void BaseUILayer::CloseApplication() const
@@ -59,6 +61,18 @@ namespace Graphics {
             const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());
 
+        ImGui::End();
+    }
+
+    void BaseUILayer::ShowGLWindow()
+    {
+        ImGui::Begin("Scene");
+        ImGui::End();
+    }
+
+    void BaseUILayer::ShowDemoWidget()
+    {
+        ImGui::Begin("Demo");
         ImGui::End();
     }
 
