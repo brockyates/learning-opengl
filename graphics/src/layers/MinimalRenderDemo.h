@@ -4,10 +4,11 @@
 
 namespace Graphics {
 
-    class MinimalTriangleDemo : public Layer
+    class MinimalRenderDemo : public Layer
     {
     public:
-        MinimalTriangleDemo();
+        MinimalRenderDemo();
+        ~MinimalRenderDemo();
 
         virtual void OnRender() override;
         virtual void OnImGuiRender() override;
@@ -17,7 +18,7 @@ namespace Graphics {
         unsigned int m_VertexBufferID;
         bool m_Enabled = true;
 
-        float m_Vertexes[6] =
+        std::vector<float> m_Vertexes =
         {
             0.0f,  1.0f,
            -1.0f, -1.0f,

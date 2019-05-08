@@ -19,6 +19,7 @@ namespace Graphics {
 
     Shader::~Shader()
     {
+        Unbind();
         GLLoggedCall(glDeleteProgram(m_RendererID));
 
         LOG_DEBUG([&]() {
@@ -35,7 +36,7 @@ namespace Graphics {
 
     void Shader::Unbind() const
     {
-        GLLoggedCall(glUseProgram(0));
+        GLCall(glUseProgram(0));
     }
 
     void Shader::SetUniform1i(const std::string & name, int value)

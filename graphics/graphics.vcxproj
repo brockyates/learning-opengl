@@ -99,7 +99,7 @@
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\renderer\LayerManager.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
-    <ClInclude Include="src\layers\MinimalTriangleDemo.h" />
+    <ClInclude Include="src\layers\MinimalRenderDemo.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
@@ -118,7 +118,7 @@
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\renderer\LayerManager.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
-    <ClCompile Include="src\layers\MinimalTriangleDemo.cpp" />
+    <ClCompile Include="src\layers\MinimalRenderDemo.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
