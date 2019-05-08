@@ -1,6 +1,6 @@
 # OpenGL Graphics Demo
 
-This project is a collection small OpenGL demos that I've built as a learn OpenGL.
+This project is a collection small OpenGL demos that I've built as I learn OpenGL.
 
 ## Credits
 
