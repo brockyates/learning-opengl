@@ -66,7 +66,7 @@ namespace Graphics {
 
     void BaseUILayer::ShowGLWindow()
     {
-        ImGui::Begin("Scene");
+        ImGui::Begin("Scene", nullptr, ImGuiWindowFlags_NoCollapse);
         ImGui::End();
     }
 

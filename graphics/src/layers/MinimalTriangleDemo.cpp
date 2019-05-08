@@ -3,6 +3,7 @@
 #include "renderer/Shader.h"
 
 #include <glad/glad.h>
+#include <imgui.h>
 
 namespace Graphics {
 
@@ -18,8 +19,21 @@ namespace Graphics {
 
     void MinimalTriangleDemo::OnRender()
     {
+        if (!m_Enabled)
+            return;
+
         m_Shader.Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
+
+    void MinimalTriangleDemo::OnImGuiRender()
+    {
+        ImGui::Begin("Demo");
+            if (ImGui::CollapsingHeader("Minimal Render"))
+            {
+                ImGui::Checkbox("Enabled", &m_Enabled);
+            }
+        ImGui::End();
     }
 
 }

@@ -10,10 +10,12 @@ namespace Graphics {
         MinimalTriangleDemo();
 
         virtual void OnRender() override;
+        virtual void OnImGuiRender() override;
 
     private:
         Shader m_Shader;
         unsigned int m_VertexBufferID;
+        bool m_Enabled = true;
 
         float m_Vertexes[6] =
         {
