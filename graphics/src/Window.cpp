@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Window.h"
+#include "config/WindowConfig.h"
 
 #include "logging/GLDebugMessageCallback.h"
 #include "layers/Layer.h"
@@ -7,7 +8,7 @@
 namespace Graphics {
 
     Window::Window()
-        : m_WindowProperties("OpenGL Graphics Demo", 1920, 1080)
+        : m_WindowProperties(WindowConfig::Properties)
         , m_Window(CreateGLFWWindow(m_WindowProperties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
         , m_Layers(m_Window.get())
