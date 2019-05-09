@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "Renderer.h"
+#include "Window.h"
 
 #include "logging/GLDebugMessageCallback.h"
-#include "renderer/Layer.h"
+#include "layers/Layer.h"
 
 namespace Graphics {
 
-    Renderer::Renderer()
+    Window::Window()
         : m_WindowProperties("OpenGL Graphics Demo", 1920, 1080)
         , m_Window(CreateGLFWWindow(m_WindowProperties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
@@ -18,7 +18,7 @@ namespace Graphics {
 #endif
     }
 
-    void Renderer::OnRender()
+    void Window::OnRender()
     {
         RenderScene();
         RenderUIElements();
@@ -27,12 +27,12 @@ namespace Graphics {
         glfwPollEvents();
     }
 
-    bool Renderer::IsRunning() const
+    bool Window::IsRunning() const
     {
         return !glfwWindowShouldClose(m_Window.get());
     }
 
-    void Renderer::RenderScene()
+    void Window::RenderScene()
     {
         for (auto& layer : m_Layers)
         {
@@ -40,7 +40,7 @@ namespace Graphics {
         }
     }
 
-    void Renderer::RenderUIElements()
+    void Window::RenderUIElements()
     {
         m_UIRenderer.BeginFrame();
         for (auto& layer : m_Layers)

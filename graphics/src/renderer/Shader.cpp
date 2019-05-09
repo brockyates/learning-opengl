@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "renderer/Shader.h"
 
-#include "Renderer.h"
+#include "Window.h"
 
 #include <glad/glad.h>
 

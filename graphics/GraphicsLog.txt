@@ -1,5 +1,0 @@
-[22:19:29][Graphics] spdlog initialized
-[22:19:30][OpenGL] 4.6.0 NVIDIA 430.39
-[22:19:30][Graphics] Shader(id=1, vertexShaderPath=res/shaders/Minimal_Vertex.shader, fragmentShaderPath=res/shaders/Minimal_Fragment.shader) created
-[22:19:30][Graphics] Main application loop started
-[22:19:30][Graphics] OpenGL Debug Callback: 33356 type=824c, severity=9146, message: GL_INVALID_OPERATION error generated. <program> has not been linked, or is not a program object.

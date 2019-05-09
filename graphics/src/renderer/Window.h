@@ -1,17 +1,18 @@
 #pragma once
 #include "imgui/ImGuiRenderer.h"
-#include "LayerManager.h"
 #include "SmartGLFWWindow.h"
 #include "WindowProperties.h"
+
+#include "layers/LayerManager.h"
 
 namespace Graphics {
 
     struct WindowProperties;
 
-    class Renderer
+    class Window
     {
     public:
-        Renderer();
+        Window();
 
         void OnRender();
         bool IsRunning() const;

@@ -35,13 +35,6 @@
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
-    <ClInclude Include="src\renderer\Layer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\LayerManager.h" />
-    <ClInclude Include="src\renderer\Renderer.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -54,6 +47,13 @@
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\layers\MinimalRenderDemo.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
+    <ClInclude Include="src\layers\Layer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\LayerManager.h" />
+    <ClInclude Include="src\renderer\Window.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -70,13 +70,6 @@
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
-    <ClCompile Include="src\renderer\Layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\LayerManager.cpp" />
-    <ClCompile Include="src\renderer\Renderer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\Shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -88,6 +81,13 @@
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\layers\MinimalRenderDemo.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
+    <ClCompile Include="src\layers\Layer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\LayerManager.cpp" />
+    <ClCompile Include="src\renderer\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
@@ -97,5 +97,8 @@
     <None Include="res\shaders\Minimal_Vertex.shader">
       <Filter>res\shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\Consolas.ttf" />
   </ItemGroup>
 </Project>

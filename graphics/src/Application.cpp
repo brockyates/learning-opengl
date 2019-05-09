@@ -1,19 +1,18 @@
 #include "pch.h"
 #include "Application.h"
 
-#include "renderer/Renderer.h"
+#include "renderer/Window.h"
 
 namespace Graphics {
 
     Application::~Application()
     {
         glfwTerminate();
-        LOG_TRACE("~Application()");
     }
 
     void Application::Start()
     {
-        Renderer renderer;
+        Window renderer;
 
         LOG_INFO("Main application loop started");
 
