@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "MinimalRenderDemo.h"
-#include "Shader.h"
+#include "ShaderHelpers.h"
 
 #include <glad/glad.h>
 #include <imgui.h>

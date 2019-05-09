@@ -46,14 +46,14 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\Shader.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\Window.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\WindowProperties.h" />
+    <ClInclude Include="src\ShaderHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -81,11 +81,11 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
     <ClCompile Include="src\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
