@@ -9,7 +9,7 @@ namespace Graphics {
         Layer(const std::string& name = "Layer");
         virtual ~Layer() = default;
 
-        virtual void OnRender() {}
+        virtual void OnUpdate() {}
         virtual void OnImGuiRender() {}
 
         inline const std::string& GetName() const { return m_DebugName; }

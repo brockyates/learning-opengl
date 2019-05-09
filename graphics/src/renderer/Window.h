@@ -14,12 +14,12 @@ namespace Graphics {
     public:
         Window();
 
-        void OnRender();
-        bool IsRunning() const;
+        void OnUpdate();
+        bool IsOpen() const;
 
     private:
-        void RenderScene();
-        void RenderUIElements();
+        void DrawScene();
+        void DrawUIElements();
 
     private:
         WindowProperties m_WindowProperties;

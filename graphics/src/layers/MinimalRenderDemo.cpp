@@ -25,7 +25,7 @@ namespace Graphics {
         glDeleteBuffers(1, &m_VertexBufferID);
     }
 
-    void MinimalRenderDemo::OnRender()
+    void MinimalRenderDemo::OnUpdate()
     {
         if (!m_Enabled)
             return;
@@ -39,7 +39,7 @@ namespace Graphics {
 
     void MinimalRenderDemo::OnImGuiRender()
     {
-        ImGui::Begin("Demo");
+        ImGui::Begin("Demos");
             if (ImGui::CollapsingHeader("Minimal Render"))
             {
                 ImGui::Checkbox("Enabled", &m_Enabled);

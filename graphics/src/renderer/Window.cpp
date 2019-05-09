@@ -18,29 +18,29 @@ namespace Graphics {
 #endif
     }
 
-    void Window::OnRender()
+    void Window::OnUpdate()
     {
-        RenderScene();
-        RenderUIElements();
+        DrawScene();
+        DrawUIElements();
 
         glfwSwapBuffers(m_Window.get());
         glfwPollEvents();
     }
 
-    bool Window::IsRunning() const
+    bool Window::IsOpen() const
     {
         return !glfwWindowShouldClose(m_Window.get());
     }
 
-    void Window::RenderScene()
+    void Window::DrawScene()
     {
         for (auto& layer : m_Layers)
         {
-            layer->OnRender();
+            layer->OnUpdate();
         }
     }
 
-    void Window::RenderUIElements()
+    void Window::DrawUIElements()
     {
         m_UIRenderer.BeginFrame();
         for (auto& layer : m_Layers)

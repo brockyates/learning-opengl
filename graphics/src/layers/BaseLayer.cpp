@@ -11,7 +11,7 @@ namespace Graphics {
         :m_ClearColor({ 0.2f, 0.3f, 0.7f, 1.0f })
     {}
 
-    void BaseLayer::OnRender()
+    void BaseLayer::OnUpdate()
     {
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
@@ -19,7 +19,7 @@ namespace Graphics {
 
     void BaseLayer::OnImGuiRender()
     {
-        ImGui::Begin("Demo");
+        ImGui::Begin("Demos");
             if (ImGui::CollapsingHeader("Clear Color"))
             {
                 ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);

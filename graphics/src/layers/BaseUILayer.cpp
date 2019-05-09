@@ -72,7 +72,7 @@ namespace Graphics {
 
     void BaseUILayer::ShowDemoWidget()
     {
-        ImGui::Begin("Demo");
+        ImGui::Begin("Demos");
         ImGui::End();
     }
 

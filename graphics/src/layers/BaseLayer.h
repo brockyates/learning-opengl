@@ -10,7 +10,7 @@ namespace Graphics {
     public:
         BaseLayer();
 
-        virtual void OnRender() override;
+        virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
 
     private:

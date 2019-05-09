@@ -17,9 +17,9 @@ namespace Graphics {
         LOG_INFO("Main application loop started");
 
         try {
-            while (renderer.IsRunning())
+            while (renderer.IsOpen())
             {
-                renderer.OnRender();
+                renderer.OnUpdate();
             }
         }
         catch (...)
