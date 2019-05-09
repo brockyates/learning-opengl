@@ -6,7 +6,7 @@ namespace Graphics {
 
     SmartGLFWWindow CreateGLFWWindow(const WindowProperties& windowProperties)
     {
-        bool glfwInitStatus = glfwInit();
+        auto glfwInitStatus = glfwInit();
         APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
