@@ -15,6 +15,7 @@ namespace Graphics {
 
     private:
         unsigned int m_ShaderID;
+        unsigned int m_VertexArrayID;
         unsigned int m_VertexBufferID;
         bool m_Enabled = true;
 
