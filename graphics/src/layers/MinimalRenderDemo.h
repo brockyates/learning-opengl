@@ -14,7 +14,7 @@ namespace Graphics {
         virtual void OnImGuiRender() override;
 
     private:
-        Shader m_Shader;
+        unsigned int m_ShaderID;
         unsigned int m_VertexBufferID;
         bool m_Enabled = true;
 

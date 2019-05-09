@@ -8,7 +8,7 @@
 namespace Graphics {
 
     MinimalRenderDemo::MinimalRenderDemo()
-        : m_Shader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader")
+        : m_ShaderID(CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader"))
     {
         glGenBuffers(1, &m_VertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
@@ -19,6 +19,7 @@ namespace Graphics {
 
     MinimalRenderDemo::~MinimalRenderDemo()
     {
+        glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);
     }
 
@@ -27,11 +28,11 @@ namespace Graphics {
         if (!m_Enabled)
             return;
 
-        m_Shader.Bind();
+        glUseProgram(m_ShaderID);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        m_Shader.Unbind();
+        glUseProgram(0);
     }
 
     void MinimalRenderDemo::OnImGuiRender()
