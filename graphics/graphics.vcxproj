@@ -105,13 +105,13 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
     <ClInclude Include="src\layers\Layer.h" />
-    <ClInclude Include="src\renderer\Window.h" />
-    <ClInclude Include="src\renderer\Shader.h" />
+    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\layers\BaseUILayer.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\renderer\SmartGLFWWindow.h" />
-    <ClInclude Include="src\renderer\WindowProperties.h" />
+    <ClInclude Include="src\SmartGLFWWindow.h" />
+    <ClInclude Include="src\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
@@ -124,14 +124,14 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
-    <ClCompile Include="src\renderer\Window.cpp" />
-    <ClCompile Include="src\renderer\Shader.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\layers\BaseUILayer.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\renderer\SmartGLFWWindow.cpp" />
+    <ClCompile Include="src\SmartGLFWWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

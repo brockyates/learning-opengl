@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "renderer/Shader.h"
+#include "Shader.h"
 
 #include "Window.h"
 
@@ -66,9 +66,9 @@ namespace Graphics {
             return ss.str();
         }());
 
-        unsigned int program = glCreateProgram();
-        unsigned int vertexShader = Compile(GL_VERTEX_SHADER, Parse(vertexShaderPath));
-        unsigned int fragmentShader = Compile(GL_FRAGMENT_SHADER, Parse(fragmentShaderPath));
+        const auto program = glCreateProgram();
+        const auto vertexShader = Compile(GL_VERTEX_SHADER, Parse(vertexShaderPath));
+        const auto fragmentShader = Compile(GL_FRAGMENT_SHADER, Parse(fragmentShaderPath));
 
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);

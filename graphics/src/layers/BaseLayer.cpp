@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "BaseLayer.h"
-#include "renderer/Shader.h"
+#include "Shader.h"
 
 #include <glad/glad.h>
 #include <imgui.h>

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 
-#include "renderer/Window.h"
+#include "Window.h"
 
 namespace Graphics {
 
@@ -12,19 +12,13 @@ namespace Graphics {
 
     void Application::Start()
     {
-        Window renderer;
+        Window window;
 
         LOG_INFO("Main application loop started");
 
-        try {
-            while (renderer.IsOpen())
-            {
-                renderer.OnUpdate();
-            }
-        }
-        catch (...)
+        while (window.IsOpen())
         {
-            std::cout << "TOP LEVEL ERROR HANDLER";
+            window.OnUpdate();
         }
 
         LOG_INFO("Main application loop stopped");
