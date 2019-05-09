@@ -7,8 +7,8 @@ namespace Graphics {
 
         void WriteLogToFile()
         {
-            std::time_t t = std::time(nullptr);
-            std::tm utcTime = *std::gmtime(&t);
+            const auto t = std::time(nullptr);
+            const auto utcTime = *std::gmtime(&t);
 
             std::stringstream ss;
             ss << "../bin/logs/GraphicsLog" << std::put_time(&utcTime, "%Y%m%d_%H%M%S") << ".txt";
@@ -16,7 +16,6 @@ namespace Graphics {
             std::filesystem::create_directory("../bin/logs");
             std::ofstream file(ss.str(), std::ios::binary);
             file << Graphics::Utils::Log::GetLogStream().str();
-            file.close();
         }
 
     }
