@@ -11,8 +11,9 @@ namespace Graphics {
 
         std::string Parse(const std::string& filePath)
         {
-            std::ifstream file(filePath);
-            if (file.fail()) {
+            std::ifstream shaderFile(filePath);
+
+            if (shaderFile.fail()) {
                 LOG_ERROR([&]()
                 {
                     std::stringstream ss;
@@ -20,27 +21,28 @@ namespace Graphics {
                     return ss.str();
                 }());
             }
+
             std::stringstream ss;
-            ss << file.rdbuf();
+            ss << shaderFile.rdbuf();
 
             return ss.str();
         }
 
         unsigned int Compile(unsigned int type, const std::string& shaderSource)
         {
-            unsigned int shaderId = glCreateShader(type);
-            const char* source = shaderSource.c_str();
+            const auto shaderId = glCreateShader(type);
+            const auto source = shaderSource.c_str();
             glShaderSource(shaderId, 1, &source, nullptr);
             glCompileShader(shaderId);
 
-            int result;
-            glGetShaderiv(shaderId, GL_COMPILE_STATUS, &result);
-            if (result == GL_FALSE)
+            int shaderCompileStatus = GL_FALSE;
+            glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus);
+            if (shaderCompileStatus == GL_FALSE)
             {
-                int length;
-                glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &length);
-                char* message = (char*)alloca(length * sizeof(char));
-                glGetShaderInfoLog(shaderId, length, &length, message);
+                int msgLength = 0;
+                glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &msgLength);
+                auto msg = (char*)alloca(msgLength * sizeof(char));
+                glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg);
 
                 LOG_ERROR([&]()
                 {

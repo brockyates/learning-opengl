@@ -5,7 +5,7 @@ namespace Graphics {
 
     namespace {
 
-        void FlushLogToFile()
+        void WriteLogToFile()
         {
             std::time_t t = std::time(nullptr);
             std::tm utcTime = *std::gmtime(&t);
@@ -34,7 +34,7 @@ namespace Graphics {
         ss << "OpenGL Debug Callback: " << type << " type=" << std::hex << type << ", severity=" << std::hex << severity << ", message: " << message;
 
         LOG_ERROR(ss.str());
-        FlushLogToFile(); // If we're in this code, chances are the UI has crashed so we'll dump the log to a file for debugging.
+        WriteLogToFile(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
 
         APP_ASSERT(false, "Exiting due to OpenGL error");
     }
