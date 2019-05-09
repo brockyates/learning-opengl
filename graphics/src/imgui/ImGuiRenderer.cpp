@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ImGuiRenderer.h"
-#include "renderer/WindowProperties.h"
+#include "WindowProperties.h"
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
