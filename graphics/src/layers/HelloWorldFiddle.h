@@ -6,10 +6,10 @@
 
 namespace Graphics {
 
-    class TestLayer : public Layer
+    class HelloWorldFiddle : public Layer
     {
     public:
-        TestLayer();
+        HelloWorldFiddle();
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
@@ -24,7 +24,7 @@ namespace Graphics {
         unsigned int m_VertexBufferID = 0;
         bool m_Attached = false;
 
-        glm::vec4 m_ClearColor = { 0.9f, 0.8f, 0.1f, 1.0f };
+        glm::vec4 m_ClearColor = { 0.3f, 0.5f, 0.8f, 1.0f };
 
         std::vector<float> m_Vertexes =
         {

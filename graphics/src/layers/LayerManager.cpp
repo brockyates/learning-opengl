@@ -4,7 +4,7 @@
 #include "layers/Layer.h"
 #include "layers/BaseUILayer.h"
 #include "layers/HelloWorld.h"
-#include "layers/TestLayer.h"
+#include "layers/HelloWorldFiddle.h"
 
 #include <imgui.h>
 
@@ -17,7 +17,7 @@ namespace Graphics {
             std::vector<std::unique_ptr<Layer>> layers;
 
             layers.emplace_back(std::make_unique<HelloWorld>());
-            layers.emplace_back(std::make_unique<TestLayer>());
+            layers.emplace_back(std::make_unique<HelloWorldFiddle>());
 
             return layers;
         }

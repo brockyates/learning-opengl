@@ -25,7 +25,7 @@ namespace Graphics {
         unsigned int m_VertexBufferID = 0;
         bool m_Attached = false;
 
-        glm::vec4 m_ClearColor = { 0.2f, 0.3f, 0.7f, 1.0f };
+        glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
 
         std::vector<float> m_Vertexes =
         {

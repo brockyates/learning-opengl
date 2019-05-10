@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TestLayer.h"
+#include "HelloWorldFiddle.h"
 #include "ShaderHelpers.h"
 
 #include <glad/glad.h>
@@ -7,11 +7,11 @@
 
 namespace Graphics {
 
-    TestLayer::TestLayer()
-        : Layer("Test Layer")
+    HelloWorldFiddle::HelloWorldFiddle()
+        : Layer("Hello World Fiddle")
     {}
 
-    void TestLayer::OnUpdate()
+    void HelloWorldFiddle::OnUpdate()
     {
         if (!m_Attached)
             return;
@@ -26,22 +26,22 @@ namespace Graphics {
         glUseProgram(0);
     }
 
-    void TestLayer::OnImGuiRender()
+    void HelloWorldFiddle::OnImGuiRender()
     {
         if (!m_Attached) return;
 
         bool testBool = true;
 
         ImGui::Begin("Demos");
-        ImGui::Checkbox("Testing", &testBool);
+        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
         ImGui::End();
     }
 
-    void TestLayer::Attach()
+    void HelloWorldFiddle::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching TestLayer");
+        LOG_TRACE("Attaching HelloWorldFiddle");
 
         m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
@@ -56,11 +56,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void TestLayer::Detach()
+    void HelloWorldFiddle::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching TestLayer");
+        LOG_TRACE("Detaching HelloWorldFiddle");
 
         glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);

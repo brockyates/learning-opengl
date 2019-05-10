@@ -97,7 +97,7 @@
   <ItemGroup>
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\layers\TestLayer.h" />
+    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
     <ClInclude Include="src\layers\LayerManager.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
@@ -117,7 +117,7 @@
   <ItemGroup>
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="src\layers\TestLayer.cpp" />
+    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\layers\LayerManager.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />

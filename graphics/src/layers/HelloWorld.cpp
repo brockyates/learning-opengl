@@ -28,11 +28,7 @@ namespace Graphics {
 
     void HelloWorld::OnImGuiRender()
     {
-        if (!m_Attached) return;
-
-        ImGui::Begin("Demos");
-        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
-        ImGui::End();
+        return;
     }
 
     void HelloWorld::Attach()
