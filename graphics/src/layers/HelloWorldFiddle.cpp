@@ -30,8 +30,6 @@ namespace Graphics {
     {
         if (!m_Attached) return;
 
-        bool testBool = true;
-
         ImGui::Begin("Demos");
 
         ImGui::Spacing();
