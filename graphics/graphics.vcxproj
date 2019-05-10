@@ -100,7 +100,7 @@
     <ClInclude Include="src\layers\TestLayer.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
     <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\layers\MinimalRenderDemo.h" />
+    <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
@@ -120,7 +120,7 @@
     <ClCompile Include="src\layers\TestLayer.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\layers\MinimalRenderDemo.cpp" />
+    <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />

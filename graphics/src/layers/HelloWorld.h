@@ -6,10 +6,10 @@
 
 namespace Graphics {
 
-    class MinimalRenderDemo : public Layer
+    class HelloWorld : public Layer
     {
     public:
-        MinimalRenderDemo();
+        HelloWorld();
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "MinimalRenderDemo.h"
+#include "HelloWorld.h"
 #include "ShaderHelpers.h"
 
 #include <glad/glad.h>
@@ -7,11 +7,11 @@
 
 namespace Graphics {
 
-    MinimalRenderDemo::MinimalRenderDemo()
-        : Layer("Minimal Render Demo")
+    HelloWorld::HelloWorld()
+        : Layer("Hello World")
     {}
 
-    void MinimalRenderDemo::OnUpdate()
+    void HelloWorld::OnUpdate()
     {
         if (!m_Attached)
             return;
@@ -26,7 +26,7 @@ namespace Graphics {
         glUseProgram(0);
     }
 
-    void MinimalRenderDemo::OnImGuiRender()
+    void HelloWorld::OnImGuiRender()
     {
         if (!m_Attached) return;
 
@@ -35,11 +35,11 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void MinimalRenderDemo::Attach()
+    void HelloWorld::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching MinimalRenderDemo");
+        LOG_TRACE("Attaching HelloWorld");
 
         m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
@@ -54,11 +54,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void MinimalRenderDemo::Detach()
+    void HelloWorld::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching MinimalRenderDemo");
+        LOG_TRACE("Detaching HelloWorld");
 
         glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);

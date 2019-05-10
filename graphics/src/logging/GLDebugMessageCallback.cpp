@@ -34,11 +34,11 @@ namespace Graphics {
 
         if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
         {
-            LOG_DEBUG(ss.str());
+            LOG_GL_DEBUG(ss.str());
             return;
         }
 
-        LOG_ERROR(ss.str());
+        LOG_GL_ERROR(ss.str());
         WriteLogToFile(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
 
         APP_ASSERT(false, "Exiting due to OpenGL error");

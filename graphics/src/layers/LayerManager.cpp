@@ -3,7 +3,7 @@
 
 #include "layers/Layer.h"
 #include "layers/BaseUILayer.h"
-#include "layers/MinimalRenderDemo.h"
+#include "layers/HelloWorld.h"
 #include "layers/TestLayer.h"
 
 #include <imgui.h>
@@ -16,7 +16,7 @@ namespace Graphics {
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<MinimalRenderDemo>());
+            layers.emplace_back(std::make_unique<HelloWorld>());
             layers.emplace_back(std::make_unique<TestLayer>());
 
             return layers;
@@ -26,8 +26,9 @@ namespace Graphics {
     LayerManager::LayerManager(GLFWwindow* window)
         : m_Layers(MakeLayers())
         , m_BaseUILayer(window)
+        , m_ActiveLayer(m_Layers.front().get())
     {
-        m_Layers[0]->Attach();
+        m_ActiveLayer->Attach();
     }
 
     void LayerManager::OnUpdate()
@@ -56,38 +57,41 @@ namespace Graphics {
     {
         ImGui::Begin("Demos");
 
-        static Layer* item_current = m_Layers[0].get();
+        Layer* nextActiveLayer = m_ActiveLayer;
 
-        if (ImGui::BeginCombo("Demo", item_current->GetName().c_str()))
+        if (ImGui::BeginCombo("Active Scene", m_ActiveLayer->GetName().c_str()))
         {
-            for (int n = 0; n < std::size(m_Layers); n++)
+            for (auto& layer : m_Layers)
             {
-                bool is_selected = (item_current == m_Layers[n].get());
+                bool isSelected = (m_ActiveLayer == layer.get());
 
-                if (ImGui::Selectable(m_Layers[n]->GetName().c_str(), is_selected))
+                if (ImGui::Selectable(layer->GetName().c_str(), isSelected))
                 {
-                    item_current = m_Layers[n].get();
+                    nextActiveLayer = layer.get();
                 }
 
-                if (is_selected)
+                if (isSelected)
                 {
                     ImGui::SetItemDefaultFocus();
                 }
             }
+
             ImGui::EndCombo();
         }
 
-        if (!item_current->IsAttached())
-        {
-            for (auto& layer : m_Layers)
-            {
-                layer->Detach();
-            }
-
-            item_current->Attach();
-        }
+        UpdateActiveLayer(nextActiveLayer);
 
         ImGui::End();
+    }
+
+    void LayerManager::UpdateActiveLayer(Layer* nextActiveLayer)
+    {
+        if (nextActiveLayer->IsAttached())
+            return;
+
+        m_ActiveLayer->Detach();
+        m_ActiveLayer = nextActiveLayer;
+        m_ActiveLayer->Attach();
     }
 
 }

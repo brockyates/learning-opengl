@@ -44,7 +44,7 @@ namespace Graphics {
                 auto msg = (char*)alloca(msgLength * sizeof(char));
                 glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg);
 
-                LOG_ERROR([&]()
+                LOG_GL_ERROR([&]()
                 {
                     std::stringstream ss;
                     ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
@@ -61,7 +61,7 @@ namespace Graphics {
 
     unsigned int CreateShader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
     {
-        LOG_TRACE([&]()
+        LOG_GL_TRACE([&]()
         {
             std::stringstream ss;
             ss << "Creating shader: {VertexShader:\"" << vertexShaderPath << "\", \"FragmentShader:\"" << fragmentShaderPath << "}";

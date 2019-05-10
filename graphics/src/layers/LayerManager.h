@@ -17,11 +17,13 @@ namespace Graphics {
 
     private:
         void ShowDemoSelector();
+        void UpdateActiveLayer(Layer* activeLayer);
 
     private:
         BaseUILayer m_BaseUILayer;
 
         std::vector<std::unique_ptr<Layer>> m_Layers;
+        Layer* m_ActiveLayer;
     };
 
 }
