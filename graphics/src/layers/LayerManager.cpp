@@ -70,6 +70,11 @@ namespace Graphics {
                     nextActiveLayer = layer.get();
                 }
 
+                if (ImGui::IsItemHovered())
+                {
+                    ImGui::SetTooltip(layer->GetPopupText().c_str());
+                }
+
                 if (isSelected)
                 {
                     ImGui::SetItemDefaultFocus();

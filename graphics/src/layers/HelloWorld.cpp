@@ -28,7 +28,15 @@ namespace Graphics {
 
     void HelloWorld::OnImGuiRender()
     {
-        return;
+        if (!m_Attached)
+            return;
+
+        ImGui::Begin("Demos");
+
+        ImGui::Spacing();
+        ImGui::TextWrapped(GetDescription().c_str());
+
+        ImGui::End();
     }
 
     void HelloWorld::Attach()
@@ -60,6 +68,16 @@ namespace Graphics {
         glDeleteBuffers(1, &m_VertexBufferID);
 
         m_Attached = false;
+    }
+
+    std::string HelloWorld::GetPopupText() const
+    {
+        return "Draws triangle on minimal window";
+    }
+
+    std::string HelloWorld::GetDescription() const
+    {
+        return "Hello World is a minimal demo. Draws a triangle on the window, and exposes no UI controls.";
     }
 
 }

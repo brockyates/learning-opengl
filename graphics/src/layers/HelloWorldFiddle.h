@@ -13,10 +13,13 @@ namespace Graphics {
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
+
         virtual void Attach() override;
         virtual void Detach() override;
-
         virtual bool IsAttached() override { return m_Attached; }
+
+        virtual std::string GetPopupText() const override;
+        virtual std::string GetDescription() const override;
 
     private:
         unsigned int m_ShaderID = 0;

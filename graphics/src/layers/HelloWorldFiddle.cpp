@@ -33,7 +33,12 @@ namespace Graphics {
         bool testBool = true;
 
         ImGui::Begin("Demos");
+
+        ImGui::Spacing();
+        ImGui::TextWrapped(GetDescription().c_str());
+        ImGui::Spacing();
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
+
         ImGui::End();
     }
 
@@ -66,6 +71,16 @@ namespace Graphics {
         glDeleteBuffers(1, &m_VertexBufferID);
 
         m_Attached = false;
+    }
+
+    std::string HelloWorldFiddle::GetPopupText() const
+    {
+        return "Hello World, but with some UI controls";
+    }
+
+    std::string HelloWorldFiddle::GetDescription() const
+    {
+        return "Very basic demo that allows you to fiddle with simple parameters like color, vertex position, and draw mode.";
     }
 
 }
