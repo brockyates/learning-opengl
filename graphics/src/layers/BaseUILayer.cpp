@@ -23,8 +23,14 @@ namespace Graphics {
 
     void BaseUILayer::ShowMainWindow()
     {
-        bool isMainUIOpen;
+        bool isMainUIOpen = true;
+
         ImGui::Begin("OpenGL Graphics Demo", &isMainUIOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+
+        if (!isMainUIOpen)
+        {
+            m_IsWindowOpen = false;
+        }
 
         if (ImGui::BeginMenuBar())
         {

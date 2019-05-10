@@ -19,15 +19,22 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
+        // Clear main GL window
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+
         // Bindings
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
 
         // Draw
-        glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
-        glViewport(0, 0, 800, 600);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        glViewport(0, 0, 1920, 1080);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Release bindings
@@ -44,11 +51,12 @@ namespace Graphics {
         ImGui::Begin("Scene");
 
         ImVec2 pos = ImGui::GetCursorScreenPos();
+        auto size = ImGui::GetContentRegionAvail();
 
         ImGui::GetWindowDrawList()->AddImage(
             (void *)(intptr_t)m_RenderedTextureID,
             ImVec2(ImGui::GetCursorScreenPos()),
-            ImVec2(ImGui::GetCursorScreenPos().x + 800 / 2, ImGui::GetCursorScreenPos().y + 800 / 2),
+            ImVec2(ImGui::GetCursorScreenPos().x + size.x, ImGui::GetCursorScreenPos().y + size.y),
             ImVec2(0, 1),
             ImVec2(1, 0));
 
@@ -76,7 +84,7 @@ namespace Graphics {
 
         glGenTextures(1, &m_RenderedTextureID);
         glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1920, 1080, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -85,7 +93,7 @@ namespace Graphics {
 
         glGenRenderbuffers(1, &m_RenderBufferID);
         glBindRenderbuffer(GL_RENDERBUFFER, m_RenderBufferID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1920, 1080);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RenderBufferID);

@@ -19,8 +19,8 @@ namespace Graphics {
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<HelloWorld>(windowProperties));
-            layers.emplace_back(std::make_unique<HelloWorldFiddle>(windowProperties));
+            //layers.emplace_back(std::make_unique<HelloWorld>(windowProperties));
+            //layers.emplace_back(std::make_unique<HelloWorldFiddle>(windowProperties));
             layers.emplace_back(std::make_unique<RenderToTexture>(windowProperties));
 
             return layers;
