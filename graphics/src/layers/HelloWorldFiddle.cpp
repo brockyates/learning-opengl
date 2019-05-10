@@ -32,9 +32,10 @@ namespace Graphics {
 
         ImGui::Begin("Demos");
 
-        ImGui::Spacing();
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::TextWrapped(GetDescription().c_str());
-        ImGui::Spacing();
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Separator();
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
 
         ImGui::End();
