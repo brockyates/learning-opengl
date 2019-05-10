@@ -9,6 +9,13 @@ namespace Graphics {
         Layer(const std::string& name = "Layer");
         virtual ~Layer() = default;
 
+        // Layers work with OpenGL global state and may have const members
+        // I prefer that they're non-copyable, non-movable.
+        Layer(Layer&) = delete;
+        Layer(Layer&&) = delete;
+        Layer& operator=(Layer&) = delete;
+        Layer& operator=(Layer&&) = delete;
+
         virtual void OnUpdate() {}
         virtual void OnImGuiRender() {}
 

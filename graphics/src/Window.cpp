@@ -11,7 +11,7 @@ namespace Graphics {
         : m_WindowProperties(WindowConfig::Properties)
         , m_Window(CreateGLFWWindow(m_WindowProperties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
-        , m_Layers(m_Window.get())
+        , m_Layers(m_Window.get(), m_WindowProperties)
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);

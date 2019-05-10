@@ -6,11 +6,12 @@
 namespace Graphics {
 
     class Layer;
+    struct WindowProperties;
 
     class LayerManager
     {
     public:
-        LayerManager(GLFWwindow* window);
+        LayerManager(GLFWwindow* window, const WindowProperties& windowProperties);
 
         void OnUpdate();
         void OnImGuiRender();

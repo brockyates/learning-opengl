@@ -17,6 +17,9 @@ namespace Graphics {
         void OnUpdate();
         bool IsOpen() const;
 
+        unsigned int Width() const { return m_WindowProperties.Width; }
+        unsigned int Height() const{ return m_WindowProperties.Height; }
+
     private:
         void DrawScene();
         void DrawUIElements();

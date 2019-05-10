@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    SmartGLFWWindow CreateGLFWWindow(const WindowProperties& windowProperties)
+    SmartGLFWWindow CreateGLFWWindow(WindowProperties& windowProperties)
     {
         auto glfwInitStatus = glfwInit();
         APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
@@ -28,6 +28,17 @@ namespace Graphics {
             glfwTerminate();
             APP_ASSERT(gladLoadStatus, "Failed to initialize Glad");
         }
+
+        glfwSetWindowUserPointer(window.get(), &windowProperties);
+
+        // Set GLFW callbacks
+        glfwSetWindowSizeCallback(window.get(), [](GLFWwindow* window, int width, int height)
+        {
+            WindowProperties& windowProperties = *(WindowProperties*)glfwGetWindowUserPointer(window);
+
+            windowProperties.Width = width;
+            windowProperties.Height = height;
+        });
 
         LOG_GL_INFO(glGetString(GL_RENDERER));
         LOG_GL_INFO(glGetString(GL_VERSION));

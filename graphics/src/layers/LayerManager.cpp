@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "LayerManager.h"
 
+#include "WindowProperties.h"
+
 #include "layers/Layer.h"
 #include "layers/BaseUILayer.h"
 #include "layers/HelloWorld.h"
@@ -12,19 +14,19 @@ namespace Graphics {
 
     namespace {
 
-        std::vector<std::unique_ptr<Layer>> MakeLayers()
+        std::vector<std::unique_ptr<Layer>> MakeLayers(const WindowProperties& windowProperties)
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<HelloWorld>());
-            layers.emplace_back(std::make_unique<HelloWorldFiddle>());
+            layers.emplace_back(std::make_unique<HelloWorld>(windowProperties));
+            layers.emplace_back(std::make_unique<HelloWorldFiddle>(windowProperties));
 
             return layers;
         }
     }
 
-    LayerManager::LayerManager(GLFWwindow* window)
-        : m_Layers(MakeLayers())
+    LayerManager::LayerManager(GLFWwindow* window, const WindowProperties& windowProperties)
+        : m_Layers(MakeLayers(windowProperties))
         , m_BaseUILayer(window)
         , m_ActiveLayer(m_Layers.front().get())
     {

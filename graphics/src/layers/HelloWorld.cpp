@@ -2,13 +2,16 @@
 #include "HelloWorld.h"
 #include "ShaderHelpers.h"
 
+#include "WindowProperties.h"
+
 #include <glad/glad.h>
 #include <imgui.h>
 
 namespace Graphics {
 
-    HelloWorld::HelloWorld()
-        : Layer("Hello World")
+    HelloWorld::HelloWorld(const WindowProperties& windowProperties)
+        : m_WindowProperties(windowProperties)
+        , Layer("Hello World")
     {}
 
     void HelloWorld::OnUpdate()
@@ -20,6 +23,7 @@ namespace Graphics {
 
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+        glViewport(0, 0, m_WindowProperties.Width, m_WindowProperties.Height);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

@@ -6,10 +6,12 @@
 
 namespace Graphics {
 
+    struct WindowProperties;
+
     class HelloWorldFiddle : public Layer
     {
     public:
-        HelloWorldFiddle();
+        HelloWorldFiddle(const WindowProperties& windowProperties );
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
@@ -22,6 +24,8 @@ namespace Graphics {
         virtual std::string GetDescription() const override;
 
     private:
+        const WindowProperties& m_WindowProperties;
+
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
