@@ -9,6 +9,8 @@ namespace Graphics {
         BaseUILayer(GLFWwindow* window);
         virtual void OnImGuiRender() override;
 
+        virtual bool IsAttached() override { return true; }
+
     private:
         void CloseApplication() const;
         void ShowMainWindow();

@@ -35,19 +35,13 @@ namespace Graphics {
 
     void Window::DrawScene()
     {
-        for (auto& layer : m_Layers)
-        {
-            layer->OnUpdate();
-        }
+        m_Layers.OnUpdate();
     }
 
     void Window::DrawUIElements()
     {
         m_UIRenderer.BeginFrame();
-        for (auto& layer : m_Layers)
-        {
-            layer->OnImGuiRender();
-        }
+        m_Layers.OnImGuiRender();
         m_UIRenderer.Render(m_WindowProperties);
     }
 

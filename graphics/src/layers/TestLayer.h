@@ -6,14 +6,13 @@
 
 namespace Graphics {
 
-    class MinimalRenderDemo : public Layer
+    class TestLayer : public Layer
     {
     public:
-        MinimalRenderDemo();
+        TestLayer();
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
-
         virtual void Attach() override;
         virtual void Detach() override;
 
@@ -25,7 +24,7 @@ namespace Graphics {
         unsigned int m_VertexBufferID = 0;
         bool m_Attached = false;
 
-        glm::vec4 m_ClearColor = { 0.2f, 0.3f, 0.7f, 1.0f };
+        glm::vec4 m_ClearColor = { 0.9f, 0.8f, 0.1f, 1.0f };
 
         std::vector<float> m_Vertexes =
         {

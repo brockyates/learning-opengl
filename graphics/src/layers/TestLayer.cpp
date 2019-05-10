@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "MinimalRenderDemo.h"
+#include "TestLayer.h"
 #include "ShaderHelpers.h"
 
 #include <glad/glad.h>
@@ -7,11 +7,11 @@
 
 namespace Graphics {
 
-    MinimalRenderDemo::MinimalRenderDemo()
-        : Layer("Minimal Render Demo")
+    TestLayer::TestLayer()
+        : Layer("Test Layer")
     {}
 
-    void MinimalRenderDemo::OnUpdate()
+    void TestLayer::OnUpdate()
     {
         if (!m_Attached)
             return;
@@ -26,20 +26,22 @@ namespace Graphics {
         glUseProgram(0);
     }
 
-    void MinimalRenderDemo::OnImGuiRender()
+    void TestLayer::OnImGuiRender()
     {
         if (!m_Attached) return;
 
+        bool testBool = true;
+
         ImGui::Begin("Demos");
-        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
+        ImGui::Checkbox("Testing", &testBool);
         ImGui::End();
     }
 
-    void MinimalRenderDemo::Attach()
+    void TestLayer::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching MinimalRenderDemo");
+        LOG_TRACE("Attaching TestLayer");
 
         m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
@@ -54,11 +56,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void MinimalRenderDemo::Detach()
+    void TestLayer::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching MinimalRenderDemo");
+        LOG_TRACE("Detaching TestLayer");
 
         glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);

@@ -34,7 +34,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
-    <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\BaseUILayer.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
@@ -55,6 +54,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\config\WindowConfig.h" />
+    <ClInclude Include="src\layers\TestLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -70,7 +70,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
-    <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\BaseUILayer.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
@@ -90,6 +89,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\config\WindowConfig.cpp" />
+    <ClCompile Include="src\layers\TestLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

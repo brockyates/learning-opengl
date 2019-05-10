@@ -10,7 +10,8 @@
 namespace Graphics {
 
     BaseUILayer::BaseUILayer(GLFWwindow * window)
-        : m_Window(window)
+        : Layer("BaseUILayer")
+        , m_Window(window)
     {}
 
     void BaseUILayer::OnImGuiRender()

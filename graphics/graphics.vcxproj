@@ -97,9 +97,9 @@
   <ItemGroup>
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\layers\TestLayer.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
     <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\MinimalRenderDemo.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\Application.h" />
@@ -117,9 +117,9 @@
   <ItemGroup>
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\layers\TestLayer.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\MinimalRenderDemo.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Application.cpp" />

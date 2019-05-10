@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BaseUILayer.h"
 #include "Layer.h"
 
 namespace Graphics {
@@ -11,10 +12,15 @@ namespace Graphics {
     public:
         LayerManager(GLFWwindow* window);
 
-        std::vector<std::unique_ptr<Layer>>::iterator begin() { return m_Layers.begin(); }
-        std::vector<std::unique_ptr<Layer>>::iterator end() { return m_Layers.end(); }
+        void OnUpdate();
+        void OnImGuiRender();
 
     private:
+        void ShowDemoSelector();
+
+    private:
+        BaseUILayer m_BaseUILayer;
+
         std::vector<std::unique_ptr<Layer>> m_Layers;
     };
 

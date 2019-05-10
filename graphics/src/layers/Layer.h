@@ -12,10 +12,15 @@ namespace Graphics {
         virtual void OnUpdate() {}
         virtual void OnImGuiRender() {}
 
-        inline const std::string& GetName() const { return m_DebugName; }
+        virtual void Attach() {};
+        virtual void Detach() {};
+
+        virtual bool IsAttached() = 0;
+
+        inline const std::string& GetName() const { return m_Name; }
 
     protected:
-        std::string m_DebugName;
+        std::string m_Name;
     };
 
 }

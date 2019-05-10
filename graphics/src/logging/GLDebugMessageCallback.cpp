@@ -32,6 +32,12 @@ namespace Graphics {
         std::stringstream ss;
         ss << "OpenGL Debug Callback: " << type << " type=" << std::hex << type << ", severity=" << std::hex << severity << ", message: " << message;
 
+        if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
+        {
+            //LOG_DEBUG(ss.str());
+            return;
+        }
+
         LOG_ERROR(ss.str());
         WriteLogToFile(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
 
