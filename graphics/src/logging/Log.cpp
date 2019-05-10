@@ -13,7 +13,7 @@ namespace Graphics { namespace Utils {
     void Log::Init()
     {
         auto ostream_sink = std::make_shared<spdlog::sinks::ostream_sink_mt>(s_LogStream);
-        const auto pattern = "%^[%T][%n] %v%$";
+        const auto pattern = "%^[%T] [%l] [%n] %v%$";
 
         s_Logger = std::make_shared<spdlog::logger>("Graphics", ostream_sink);
         s_Logger->set_level(spdlog::level::trace);
