@@ -25,9 +25,9 @@ namespace Graphics {
         }
     }
 
-    LayerManager::LayerManager(GLFWwindow* window, const WindowProperties& windowProperties)
+    LayerManager::LayerManager(const WindowProperties& windowProperties)
         : m_Layers(MakeLayers(windowProperties))
-        , m_BaseUILayer(window)
+        , m_BaseUILayer()
         , m_ActiveLayer(m_Layers.front().get())
     {
         m_ActiveLayer->Attach();

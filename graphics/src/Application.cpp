@@ -16,7 +16,7 @@ namespace Graphics {
 
         LOG_INFO("Main application loop started");
 
-        while (window.IsOpen())
+        while (!window.ShouldClose())
         {
             window.OnUpdate();
         }

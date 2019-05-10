@@ -11,10 +11,12 @@ namespace Graphics {
     class LayerManager
     {
     public:
-        LayerManager(GLFWwindow* window, const WindowProperties& windowProperties);
+        LayerManager(const WindowProperties& windowProperties);
 
         void OnUpdate();
         void OnImGuiRender();
+
+        bool WindowShouldClose() const { return m_BaseUILayer.WindowShouldClose(); }
 
     private:
         void ShowDemoSelector();

@@ -27,12 +27,12 @@ namespace Graphics { namespace Utils {
 
 #ifdef APP_ENABLE_LOGGING
     // Application Log macros
-    #define LOG_TRACE(...)        ::Graphics::Utils::Log::GetLogger()->trace(__VA_ARGS__)
-    #define LOG_INFO(...)         ::Graphics::Utils::Log::GetLogger()->info(__VA_ARGS__)
-    #define LOG_WARN(...)         ::Graphics::Utils::Log::GetLogger()->warn(__VA_ARGS__)
-    #define LOG_ERROR(...)        ::Graphics::Utils::Log::GetLogger()->error(__VA_ARGS__)
-    #define LOG_DEBUG(...)        ::Graphics::Utils::Log::GetLogger()->debug(__VA_ARGS__)
-    #define LOG_CRITICAL(...)     ::Graphics::Utils::Log::GetLogger()->critical(__VA_ARGS__)
+    #define LOG_TRACE(...)           ::Graphics::Utils::Log::GetLogger()->trace(__VA_ARGS__)
+    #define LOG_INFO(...)            ::Graphics::Utils::Log::GetLogger()->info(__VA_ARGS__)
+    #define LOG_WARN(...)            ::Graphics::Utils::Log::GetLogger()->warn(__VA_ARGS__)
+    #define LOG_ERROR(...)           ::Graphics::Utils::Log::GetLogger()->error(__VA_ARGS__)
+    #define LOG_DEBUG(...)           ::Graphics::Utils::Log::GetLogger()->debug(__VA_ARGS__)
+    #define LOG_CRITICAL(...)        ::Graphics::Utils::Log::GetLogger()->critical(__VA_ARGS__)
 
     // OpenGL Log macros
     #define LOG_GL_TRACE(...)        ::Graphics::Utils::Log::GetOpenGLLogger()->trace(__VA_ARGS__)

@@ -15,7 +15,7 @@ namespace Graphics {
         Window();
 
         void OnUpdate();
-        bool IsOpen() const;
+        bool ShouldClose() const;
 
         unsigned int Width() const { return m_WindowProperties.Width; }
         unsigned int Height() const{ return m_WindowProperties.Height; }

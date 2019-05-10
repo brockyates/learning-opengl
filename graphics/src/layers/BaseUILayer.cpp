@@ -9,32 +9,22 @@
 
 namespace Graphics {
 
-    BaseUILayer::BaseUILayer(GLFWwindow * window)
+    BaseUILayer::BaseUILayer()
         : Layer("BaseUILayer")
-        , m_Window(window)
     {}
 
     void BaseUILayer::OnImGuiRender()
     {
-        if (!m_IsWindowOpen)
-        {
-            CloseApplication();
-        }
-
         ShowMainWindow();
         ShowLogWindow();
         ShowGLWindow();
         ShowDemoWidget();
     }
 
-    void BaseUILayer::CloseApplication() const
-    {
-        glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
-    }
-
     void BaseUILayer::ShowMainWindow()
     {
-        ImGui::Begin("OpenGL Graphics Demo", &m_IsWindowOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+        bool isMainUIOpen;
+        ImGui::Begin("OpenGL Graphics Demo", &isMainUIOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
 
         if (ImGui::BeginMenuBar())
         {
@@ -42,7 +32,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    CloseApplication();
+                    m_IsWindowOpen = false;
                 }
                 ImGui::EndMenu();
             }
