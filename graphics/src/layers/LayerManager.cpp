@@ -65,14 +65,13 @@ namespace Graphics {
                 bool is_selected = (item_current == m_Layers[n].get());
 
                 if (ImGui::Selectable(m_Layers[n]->GetName().c_str(), is_selected))
+                {
                     item_current = m_Layers[n].get();
+                }
 
                 if (is_selected)
                 {
                     ImGui::SetItemDefaultFocus();
-                }
-                else
-                {
                 }
             }
             ImGui::EndCombo();
