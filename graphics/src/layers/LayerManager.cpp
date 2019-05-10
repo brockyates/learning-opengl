@@ -7,6 +7,7 @@
 #include "layers/BaseUILayer.h"
 #include "layers/HelloWorld.h"
 #include "layers/HelloWorldFiddle.h"
+#include "layers/RenderToTexture.h"
 
 #include <imgui.h>
 
@@ -20,6 +21,7 @@ namespace Graphics {
 
             layers.emplace_back(std::make_unique<HelloWorld>(windowProperties));
             layers.emplace_back(std::make_unique<HelloWorldFiddle>(windowProperties));
+            layers.emplace_back(std::make_unique<RenderToTexture>(windowProperties));
 
             return layers;
         }

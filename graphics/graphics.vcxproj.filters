@@ -55,6 +55,7 @@
     <ClInclude Include="src\config\WindowConfig.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
+    <ClInclude Include="src\layers\RenderToTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -90,6 +91,7 @@
     <ClCompile Include="src\config\WindowConfig.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
+    <ClCompile Include="src\layers\RenderToTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
