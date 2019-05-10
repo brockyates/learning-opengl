@@ -61,6 +61,7 @@ namespace Graphics {
             
             const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());
+            ImGui::SetScrollHereY(1.0f);
 
         ImGui::End();
     }
