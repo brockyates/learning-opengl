@@ -9,10 +9,10 @@ namespace Graphics {
     {
     public:
         ImGuiRenderer(GLFWwindow * window);
-        ~ImGuiRenderer();
+        void Shutdown();
 
-        ImGuiRenderer(ImGuiRenderer&) = delete;
-        ImGuiRenderer& operator=(ImGuiRenderer&) = delete;
+        ImGuiRenderer(ImGuiRenderer&) = default;
+        ImGuiRenderer& operator=(ImGuiRenderer&) = default;
 
         void BeginFrame() const;
         void Render(const WindowProperties& windowProperties) const;

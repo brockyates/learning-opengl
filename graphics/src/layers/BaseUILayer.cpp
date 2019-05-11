@@ -15,6 +15,15 @@ namespace Graphics {
         , m_Input(window)
     {}
 
+    void BaseUILayer::SetWindow(GLFWwindow * window)
+    {
+        m_Window = window;
+        m_Input = Input(window);
+
+        Detach();
+        Attach();
+    }
+
     void BaseUILayer::HandleInput()
     {
         ImGuiIO& io = ImGui::GetIO();
@@ -37,28 +46,18 @@ namespace Graphics {
                 return;
 
             m_IsUIEnabled = true;
-            glfwSetWindowMonitor(m_Window, 0, 0, 0, 1024, 768, GLFW_DONT_CARE);
-            glfwHideWindow(m_Window);
-        }
-
-        if (m_Input.IsKeyPressed(GLFW_KEY_0) || ImGui::IsKeyPressed(GLFW_KEY_0))
-        {
-            m_IsUIEnabled = false;
-        }
-
-        if (m_Input.IsKeyPressed(GLFW_KEY_9) || ImGui::IsKeyPressed(GLFW_KEY_9))
-        {
-            m_IsUIEnabled = true;
+            //glfwSetWindowMonitor(m_Window, 0, 0, 0, 1024, 768, GLFW_DONT_CARE);
+            //glfwHideWindow(m_Window);
         }
 
         if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
         {
-            LOG_TRACE("Left mouse button is pressed");
+            //LOG_TRACE("Left mouse button is pressed");
         }
 
         if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
         {
-            LOG_TRACE("Right mouse button is pressed");
+            //LOG_TRACE("Right mouse button is pressed");
         }
     }
 
@@ -112,8 +111,8 @@ namespace Graphics {
         if (ImGui::Button("Go Fullscreen"))
         {
             m_IsUIEnabled = false;
-            glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
-            glfwShowWindow(m_Window);
+            //glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
+            //glfwShowWindow(m_Window);
         }
         ImGui::End();
     }

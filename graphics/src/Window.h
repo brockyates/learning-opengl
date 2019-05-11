@@ -13,6 +13,7 @@ namespace Graphics {
     {
     public:
         Window();
+        ~Window();
 
         void OnUpdate();
         bool ShouldClose() const;

@@ -19,6 +19,8 @@ namespace Graphics {
         bool WindowShouldClose() const { return m_BaseUILayer.WindowShouldClose(); }
         bool UIIsEnabled() const { return m_BaseUILayer.UIIsEnabled(); }
 
+        void SetWindow(GLFWwindow* window);
+
     private:
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);

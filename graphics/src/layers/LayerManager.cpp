@@ -49,12 +49,23 @@ namespace Graphics {
     {
         m_BaseUILayer.OnImGuiRender();
 
+        if (!m_BaseUILayer.UIIsEnabled())
+            return;
+
         ShowDemoSelector();
 
         for (auto& layer : m_Layers)
         {
             layer->OnImGuiRender();
         }
+    }
+
+    void LayerManager::SetWindow(GLFWwindow * window)
+    {
+        m_BaseUILayer.SetWindow(window);
+
+        m_ActiveLayer->Detach();
+        m_ActiveLayer->Attach();
     }
 
     void LayerManager::ShowDemoSelector()

@@ -9,10 +9,8 @@ namespace Graphics {
     public:
         Input(GLFWwindow* window);
 
-        Input(Input&) = delete;
-        Input(Input&&) = delete;
-        Input& operator=(Input&) = delete;
-        Input& operator=(Input&&) = delete;
+        Input(Input&&) = default;
+        Input& operator=(Input&&) = default;
 
         bool IsKeyPressed(int keycode);
 

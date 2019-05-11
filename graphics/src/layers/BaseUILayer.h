@@ -17,6 +17,8 @@ namespace Graphics {
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
         bool UIIsEnabled() const { return m_IsUIEnabled; }
 
+        void SetWindow(GLFWwindow* window);
+
     private:
         void HandleInput();
         void ShowMainWindow();

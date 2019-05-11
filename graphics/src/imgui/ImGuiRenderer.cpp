@@ -38,12 +38,12 @@ namespace Graphics {
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
-    ImGuiRenderer::~ImGuiRenderer()
+    void ImGuiRenderer::Shutdown()
     {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-        LOG_TRACE("~ImGuiRenderer()");
+        LOG_TRACE("ImGuiRenderer::Shutdown");
     }
 
     void ImGuiRenderer::BeginFrame() const
