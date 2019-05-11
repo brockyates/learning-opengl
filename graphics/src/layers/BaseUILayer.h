@@ -6,7 +6,7 @@ namespace Graphics {
     class BaseUILayer : public Layer
     {
     public:
-        BaseUILayer();
+        BaseUILayer(GLFWwindow* window);
 
         virtual void OnImGuiRender() override;
         virtual bool IsAttached() override { return true; }
@@ -21,6 +21,7 @@ namespace Graphics {
 
     private:
         bool m_IsWindowOpen = true;
+        GLFWwindow* m_Window;
     };
 
 }

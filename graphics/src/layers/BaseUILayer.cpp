@@ -9,8 +9,9 @@
 
 namespace Graphics {
 
-    BaseUILayer::BaseUILayer()
+    BaseUILayer::BaseUILayer(GLFWwindow* window)
         : Layer("BaseUILayer")
+        , m_Window(window)
     {}
 
     void BaseUILayer::OnImGuiRender()
@@ -42,6 +43,20 @@ namespace Graphics {
                 }
                 ImGui::EndMenu();
             }
+
+            if (ImGui::BeginMenu("Window"))
+            {
+                if (ImGui::MenuItem("Show GLFW Window"))
+                {
+                    glfwShowWindow(m_Window);
+                }
+                if (ImGui::MenuItem("Hide GLFW Window"))
+                {
+                    glfwHideWindow(m_Window);
+                }
+                ImGui::EndMenu();
+            }
+
             ImGui::EndMenuBar();
         }
 
@@ -50,10 +65,8 @@ namespace Graphics {
 
     void BaseUILayer::ShowLogWindow()
     {
-        bool isLogWindowOpen = true;
-
         ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
-        ImGui::Begin("Output", &isLogWindowOpen, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Begin("Output", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
             const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());
@@ -64,13 +77,13 @@ namespace Graphics {
 
     void BaseUILayer::ShowGLWindow()
     {
-        ImGui::Begin("Scene", nullptr, ImGuiWindowFlags_NoCollapse);
+        ImGui::Begin("Scene", 0, ImGuiWindowFlags_NoCollapse);
         ImGui::End();
     }
 
     void BaseUILayer::ShowDemoWidget()
     {
-        ImGui::Begin("Demos");
+        ImGui::Begin("Demos", 0);
         ImGui::End();
     }
 
