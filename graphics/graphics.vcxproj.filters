@@ -58,6 +58,7 @@
     <ClInclude Include="src\layers\RenderToTexture.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\WindowMode.h" />
+    <ClInclude Include="src\WindowModeChangeStates.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

@@ -24,17 +24,26 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    void Window::SetNextWindowMode()
+    WindowModeChangeStates Window::GetNextWindowStateChange() const
     {
         if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Fullscreen))
-            return;
+            return WindowModeChangeStates::NoChangeRequired;
 
         if ((m_WindowProperties.Mode == WindowMode::Windowed) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return;
+            return WindowModeChangeStates::NoChangeRequired;
 
         if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
+            return WindowModeChangeStates::EnterWindowed;
+
+        return WindowModeChangeStates::EnterFullscreen;
+    }
+
+    void Window::SetNextWindowMode()
+    {
+        const auto nextWindowState = GetNextWindowStateChange();
+
+        if (nextWindowState == WindowModeChangeStates::EnterWindowed)
         {
-            //Switch from Fullscreen to Windowed
             m_UIRenderer.Shutdown();
             glfwTerminate();
             m_Window.reset();
@@ -46,14 +55,18 @@ namespace Graphics {
             return;
         }
 
-        //Switch from Windowed to Fullscreen
-        m_UIRenderer.Shutdown();
-        glfwTerminate();
-        m_Window.reset();
-        m_WindowProperties.Mode = WindowMode::Fullscreen;
-        m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
-        m_UIRenderer = ImGuiRenderer(m_Window.get());
-        m_Layers.OnWindowStateChange(m_Window.get());
+        if (nextWindowState == WindowModeChangeStates::EnterFullscreen)
+        {
+            m_UIRenderer.Shutdown();
+            glfwTerminate();
+            m_Window.reset();
+            m_WindowProperties.Mode = WindowMode::Fullscreen;
+            m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
+            m_UIRenderer = ImGuiRenderer(m_Window.get());
+            m_Layers.OnWindowStateChange(m_Window.get());
+
+            return;
+        }
     }
 
     void Window::OnUpdate()

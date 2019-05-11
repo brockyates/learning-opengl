@@ -2,6 +2,7 @@
 #include "imgui/ImGuiRenderer.h"
 #include "SmartGLFWWindow.h"
 #include "WindowProperties.h"
+#include "WindowModeChangeStates.h"
 
 #include "layers/LayerManager.h"
 
@@ -22,6 +23,7 @@ namespace Graphics {
         unsigned int Height() const{ return m_WindowProperties.Height; }
 
     private:
+        WindowModeChangeStates GetNextWindowStateChange() const;
         void SetNextWindowMode();
         void DrawScene();
         void DrawUIElements();
