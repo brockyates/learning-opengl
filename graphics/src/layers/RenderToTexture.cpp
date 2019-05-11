@@ -19,16 +19,15 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        // Clear main GL window
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        
+        if (!m_WindowProperties.IsFullscreen)
+        {
+            glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
+        }
 
         // Bindings
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
+
 
         // Draw
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);

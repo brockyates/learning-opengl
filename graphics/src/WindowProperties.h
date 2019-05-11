@@ -15,6 +15,8 @@ namespace Graphics
         std::string Title;
         unsigned int Width;
         unsigned int Height;
+
+        bool IsFullscreen = false;
     };
 
 }

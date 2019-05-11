@@ -37,6 +37,7 @@ namespace Graphics {
             m_UIRenderer.Shutdown();
             glfwTerminate();
             m_Window.reset();
+            m_WindowProperties.IsFullscreen = false;
             m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
             m_UIRenderer = ImGuiRenderer(m_Window.get());
             m_Layers.SetWindow(m_Window.get());
@@ -48,6 +49,7 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
         glfwTerminate();
         m_Window.reset();
+        m_WindowProperties.IsFullscreen = true;
         m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
         m_UIRenderer = ImGuiRenderer(m_Window.get());
         m_Layers.SetWindow(m_Window.get());
