@@ -6,7 +6,8 @@ namespace Graphics {
     {
         Unknown = 0,
         Windowed,
-        Fullscreen
+        Fullscreen,
+        SameAsPrevious
     };
 
 }

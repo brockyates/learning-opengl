@@ -24,47 +24,62 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    WindowModeChangeStates Window::GetNextWindowStateChange() const
+    WindowMode Window::GetNextWindowMode() const
     {
         if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Fullscreen))
-            return WindowModeChangeStates::NoChangeRequired;
+            return WindowMode::SameAsPrevious;
 
         if ((m_WindowProperties.Mode == WindowMode::Windowed) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return WindowModeChangeStates::NoChangeRequired;
+            return WindowMode::SameAsPrevious;
 
         if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return WindowModeChangeStates::EnterWindowed;
+            return WindowMode::Windowed;
 
-        return WindowModeChangeStates::EnterFullscreen;
+        return WindowMode::Fullscreen;
+    }
+
+    void Window::ShutdownCurrentContext()
+    {
+        m_UIRenderer.Shutdown();
+        glfwTerminate();
+        m_Window.reset();
+    }
+
+    void Window::StartWindowSystems()
+    {
+        m_UIRenderer = ImGuiRenderer(m_Window.get());
+        m_Layers.OnWindowStateChange(m_Window.get());
+    }
+
+    void Window::EnterWindowed()
+    {
+        ShutdownCurrentContext();
+        m_WindowProperties.Mode = WindowMode::Windowed;
+        m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
+        StartWindowSystems();
+    }
+
+    void Window::EnterFullscreen()
+    {
+        ShutdownCurrentContext();
+        m_WindowProperties.Mode = WindowMode::Fullscreen;
+        m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
+        StartWindowSystems();
     }
 
     void Window::SetNextWindowMode()
     {
-        const auto nextWindowState = GetNextWindowStateChange();
+        const auto nextWindowMode = GetNextWindowMode();
 
-        if (nextWindowState == WindowModeChangeStates::EnterWindowed)
+        if (nextWindowMode == WindowMode::Windowed)
         {
-            m_UIRenderer.Shutdown();
-            glfwTerminate();
-            m_Window.reset();
-            m_WindowProperties.Mode = WindowMode::Windowed;
-            m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
-            m_UIRenderer = ImGuiRenderer(m_Window.get());
-            m_Layers.OnWindowStateChange(m_Window.get());
-
+            EnterWindowed();
             return;
         }
 
-        if (nextWindowState == WindowModeChangeStates::EnterFullscreen)
+        if (nextWindowMode == WindowMode::Fullscreen)
         {
-            m_UIRenderer.Shutdown();
-            glfwTerminate();
-            m_Window.reset();
-            m_WindowProperties.Mode = WindowMode::Fullscreen;
-            m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
-            m_UIRenderer = ImGuiRenderer(m_Window.get());
-            m_Layers.OnWindowStateChange(m_Window.get());
-
+            EnterFullscreen();
             return;
         }
     }
