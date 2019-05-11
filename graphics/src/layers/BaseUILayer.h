@@ -15,6 +15,7 @@ namespace Graphics {
         virtual bool IsAttached() override { return true; }
 
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
+        bool UIIsEnabled() const { return m_IsUIEnabled; }
 
     private:
         void HandleInput();
@@ -27,6 +28,7 @@ namespace Graphics {
         Input m_Input;
 
         bool m_IsWindowOpen = true;
+        bool m_IsUIEnabled = true;
         GLFWwindow* m_Window;
     };
 

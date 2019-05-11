@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    SmartGLFWWindow CreateGLFWWindow(WindowProperties& windowProperties)
+    void InitializeGLFW()
     {
         auto glfwInitStatus = glfwInit();
         APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
@@ -13,15 +13,17 @@ namespace Graphics {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    }
 
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), NULL, NULL));
+    void SetWindowContext(GLFWwindow* window, WindowProperties& windowProperties)
+    {
         if (!window)
         {
             glfwTerminate();
             APP_ASSERT(window, "Failed to create GLFW window");
         }
 
-        glfwMakeContextCurrent(window.get());
+        glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         int gladLoadStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         if (!gladLoadStatus)
@@ -30,10 +32,10 @@ namespace Graphics {
             APP_ASSERT(gladLoadStatus, "Failed to initialize Glad");
         }
 
-        glfwSetWindowUserPointer(window.get(), &windowProperties);
+        glfwSetWindowUserPointer(window, &windowProperties);
 
         // Set GLFW callbacks
-        glfwSetWindowSizeCallback(window.get(), [](GLFWwindow* window, int width, int height)
+        glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height)
         {
             WindowProperties& windowProperties = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
@@ -43,6 +45,23 @@ namespace Graphics {
 
         LOG_GL_INFO(glGetString(GL_RENDERER));
         LOG_GL_INFO(glGetString(GL_VERSION));
+    } 
+
+    SmartGLFWWindow CreateWindowedGLFWWindow(WindowProperties& windowProperties)
+    {
+        InitializeGLFW();
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), NULL, NULL));
+        SetWindowContext(window.get(), windowProperties);
+
+        return window;
+    }
+
+    SmartGLFWWindow CreateFullscreenGLFWWindow(WindowProperties& windowProperties)
+    {
+        InitializeGLFW();
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), glfwGetPrimaryMonitor(), NULL));
+        SetWindowContext(window.get(), windowProperties);
+
         return window;
     }
 

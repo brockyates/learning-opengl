@@ -9,7 +9,7 @@ namespace Graphics {
 
     Window::Window()
         : m_WindowProperties(WindowConfig::Properties)
-        , m_Window(CreateGLFWWindow(m_WindowProperties))
+        , m_Window(CreateWindowedGLFWWindow(m_WindowProperties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
         , m_Layers(m_WindowProperties, m_Window.get())
     {
@@ -19,8 +19,27 @@ namespace Graphics {
 #endif
     }
 
+    void Window::SetWindowFullscreenState()
+    {
+        if (m_IsFullscreen && !m_Layers.UIIsEnabled())
+            return;
+
+        if (!m_IsFullscreen && m_Layers.UIIsEnabled())
+            return;
+
+        if (m_IsFullscreen && m_Layers.UIIsEnabled())
+        {
+            m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
+            return;
+        }
+
+        m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
+    }
+
     void Window::OnUpdate()
     {
+        //SetWindowFullscreenState();
+
         DrawScene();
         DrawUIElements();
 
@@ -41,7 +60,11 @@ namespace Graphics {
     void Window::DrawUIElements()
     {
         m_UIRenderer.BeginFrame();
-        m_Layers.OnImGuiRender();
+
+        if (m_Layers.UIIsEnabled())
+        {
+            m_Layers.OnImGuiRender();
+        }
         m_UIRenderer.Render(m_WindowProperties);
     }
 

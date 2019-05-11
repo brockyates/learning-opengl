@@ -21,6 +21,7 @@ namespace Graphics {
         unsigned int Height() const{ return m_WindowProperties.Height; }
 
     private:
+        void SetWindowFullscreenState();
         void DrawScene();
         void DrawUIElements();
 
@@ -29,6 +30,7 @@ namespace Graphics {
         SmartGLFWWindow m_Window;
         ImGuiRenderer m_UIRenderer;
         LayerManager m_Layers;
+        bool m_IsFullscreen = false;
     };
 
 }
