@@ -19,7 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        if (m_WindowProperties.CurrentWindowState == WindowState::Windowed)
+        if (m_WindowProperties.Mode == WindowMode::Windowed)
         {
             glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         }

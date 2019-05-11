@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "WindowState.h"
+#include "WindowMode.h"
 
 namespace Graphics
 {
@@ -18,7 +18,7 @@ namespace Graphics
         unsigned int Width;
         unsigned int Height;
 
-        WindowState CurrentWindowState = WindowState::Windowed;
+        WindowMode Mode = WindowMode::Windowed;
     };
 
 }

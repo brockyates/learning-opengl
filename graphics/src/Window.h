@@ -22,7 +22,7 @@ namespace Graphics {
         unsigned int Height() const{ return m_WindowProperties.Height; }
 
     private:
-        void SetNextWindowState();
+        void SetNextWindowMode();
         void DrawScene();
         void DrawUIElements();
 

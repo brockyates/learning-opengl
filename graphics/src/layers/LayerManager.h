@@ -17,7 +17,7 @@ namespace Graphics {
         void OnImGuiRender();
 
         bool WindowShouldClose() const { return m_BaseUILayer.WindowShouldClose(); }
-        bool UIIsEnabled() const { return m_BaseUILayer.UIIsEnabled(); }
+        WindowMode NextWindowMode() const { return m_BaseUILayer.NextWindowMode(); }
 
         void OnWindowStateChange(GLFWwindow* window);
 

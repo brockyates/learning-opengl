@@ -29,7 +29,7 @@ namespace Graphics {
 
     LayerManager::LayerManager(const WindowProperties& windowProperties, GLFWwindow* window)
         : m_Layers(MakeLayers(windowProperties))
-        , m_BaseUILayer(window)
+        , m_BaseUILayer(window, windowProperties)
         , m_ActiveLayer(m_Layers.front().get())
     {
         m_ActiveLayer->Attach();
@@ -49,7 +49,7 @@ namespace Graphics {
     {
         m_BaseUILayer.OnImGuiRender();
 
-        if (!m_BaseUILayer.UIIsEnabled())
+        if (m_BaseUILayer.NextWindowMode() == WindowMode::Fullscreen)
             return;
 
         ShowDemoSelector();

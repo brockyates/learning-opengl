@@ -115,7 +115,7 @@
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\config\WindowConfig.h" />
     <ClInclude Include="src\WindowProperties.h" />
-    <ClInclude Include="src\WindowState.h" />
+    <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Input.cpp" />

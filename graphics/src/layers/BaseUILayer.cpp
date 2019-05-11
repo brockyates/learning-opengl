@@ -9,9 +9,10 @@
 
 namespace Graphics {
 
-    BaseUILayer::BaseUILayer(GLFWwindow* window)
+    BaseUILayer::BaseUILayer(GLFWwindow* window, const WindowProperties& windowProperties)
         : Layer("BaseUILayer")
         , m_Window(window)
+        , m_WindowProperties(windowProperties)
         , m_Input(window)
     {}
 
@@ -42,9 +43,9 @@ namespace Graphics {
 
         if (m_Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
         {
-            if (!m_IsUIEnabled)
+            if (m_WindowProperties.Mode == WindowMode::Fullscreen)
             {
-                m_IsUIEnabled = true;
+                m_NextWindowMode = WindowMode::Windowed;
             }
         }
 
@@ -106,7 +107,7 @@ namespace Graphics {
         ImGui::Begin("Demos", 0);
         if (ImGui::Button("Go Fullscreen"))
         {
-            m_IsUIEnabled = false;
+            m_NextWindowMode = WindowMode::Fullscreen;
         }
         ImGui::End();
     }

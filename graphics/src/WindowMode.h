@@ -2,7 +2,7 @@
 
 namespace Graphics {
 
-    enum class WindowState
+    enum class WindowMode
     {
         Unknown = 0,
         Windowed,

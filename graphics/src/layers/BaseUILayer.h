@@ -2,20 +2,22 @@
 #include "layers/Layer.h"
 
 #include "Input.h"
+#include "WindowMode.h"
+#include "WindowProperties.h"
 
 namespace Graphics {
 
     class BaseUILayer : public Layer
     {
     public:
-        BaseUILayer(GLFWwindow* window);
+        BaseUILayer(GLFWwindow* window, const WindowProperties& windowProperties);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
         virtual bool IsAttached() override { return true; }
 
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
-        bool UIIsEnabled() const { return m_IsUIEnabled; }
+        WindowMode NextWindowMode() const { return m_NextWindowMode; }
 
         void OnWindowStateChange(GLFWwindow* window);
 
@@ -28,10 +30,12 @@ namespace Graphics {
 
     private:
         Input m_Input;
+        WindowMode m_NextWindowMode = WindowMode::Windowed;
 
         bool m_IsWindowOpen = true;
-        bool m_IsUIEnabled = true;
+
         GLFWwindow* m_Window;
+        const WindowProperties& m_WindowProperties;
     };
 
 }

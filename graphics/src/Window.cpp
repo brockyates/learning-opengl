@@ -24,20 +24,21 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    void Window::SetNextWindowState()
+    void Window::SetNextWindowMode()
     {
-        if ((m_WindowProperties.CurrentWindowState == WindowState::Fullscreen) && !m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Fullscreen))
             return;
 
-        if ((m_WindowProperties.CurrentWindowState == WindowState::Windowed) && m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.Mode == WindowMode::Windowed) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
             return;
 
-        if ((m_WindowProperties.CurrentWindowState == WindowState::Fullscreen) && m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
         {
+            //Switch from Fullscreen to Windowed
             m_UIRenderer.Shutdown();
             glfwTerminate();
             m_Window.reset();
-            m_WindowProperties.CurrentWindowState = WindowState::Windowed;
+            m_WindowProperties.Mode = WindowMode::Windowed;
             m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
             m_UIRenderer = ImGuiRenderer(m_Window.get());
             m_Layers.OnWindowStateChange(m_Window.get());
@@ -45,10 +46,11 @@ namespace Graphics {
             return;
         }
 
+        //Switch from Windowed to Fullscreen
         m_UIRenderer.Shutdown();
         glfwTerminate();
         m_Window.reset();
-        m_WindowProperties.CurrentWindowState = WindowState::Fullscreen;
+        m_WindowProperties.Mode = WindowMode::Fullscreen;
         m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
         m_UIRenderer = ImGuiRenderer(m_Window.get());
         m_Layers.OnWindowStateChange(m_Window.get());
@@ -56,11 +58,11 @@ namespace Graphics {
 
     void Window::OnUpdate()
     {
-        SetNextWindowState();
+        SetNextWindowMode();
 
         DrawScene();
 
-        if (!(m_WindowProperties.CurrentWindowState == WindowState::Fullscreen))
+        if (!(m_WindowProperties.Mode == WindowMode::Fullscreen))
         {
             DrawUIElements();
         }
