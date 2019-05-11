@@ -12,7 +12,45 @@ namespace Graphics {
     BaseUILayer::BaseUILayer(GLFWwindow* window)
         : Layer("BaseUILayer")
         , m_Window(window)
+        , m_Input(window)
     {}
+
+    void BaseUILayer::HandleInput()
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        if (ImGui::IsMousePosValid())
+        {
+            /* Too noisy in the logs, but useful for documentation for now
+            LOG_TRACE([&]()
+            {
+                std::stringstream ss;
+                ss << "Mouse pos: " << io.MousePos.x << "," << io.MousePos.y;
+                return ss.str();
+            }());
+            */
+        }
+
+        if (m_Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
+        {
+            LOG_TRACE("Escape key is pressed");
+        }
+
+        if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
+        {
+            LOG_TRACE("Left mouse button is pressed");
+        }
+
+        if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
+        {
+            LOG_TRACE("Right mouse button is pressed");
+        }
+    }
+
+    void BaseUILayer::OnUpdate()
+    {
+        HandleInput();
+    }
 
     void BaseUILayer::OnImGuiRender()
     {
