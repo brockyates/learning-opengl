@@ -57,6 +57,7 @@
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\RenderToTexture.h" />
     <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\WindowState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

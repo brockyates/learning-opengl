@@ -24,24 +24,23 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    void Window::SetWindowFullscreenState()
+    void Window::SetNextWindowState()
     {
-        if (m_IsFullscreen && !m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.CurrentWindowState == WindowState::Fullscreen) && !m_Layers.UIIsEnabled())
             return;
 
-        if (!m_IsFullscreen && m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.CurrentWindowState == WindowState::Windowed) && m_Layers.UIIsEnabled())
             return;
 
-        if (m_IsFullscreen && m_Layers.UIIsEnabled())
+        if ((m_WindowProperties.CurrentWindowState == WindowState::Fullscreen) && m_Layers.UIIsEnabled())
         {
             m_UIRenderer.Shutdown();
             glfwTerminate();
             m_Window.reset();
-            m_WindowProperties.IsFullscreen = false;
+            m_WindowProperties.CurrentWindowState = WindowState::Windowed;
             m_Window = CreateWindowedGLFWWindow(m_WindowProperties);
             m_UIRenderer = ImGuiRenderer(m_Window.get());
-            m_Layers.SetWindow(m_Window.get());
-            m_IsFullscreen = false;
+            m_Layers.OnWindowStateChange(m_Window.get());
 
             return;
         }
@@ -49,20 +48,19 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
         glfwTerminate();
         m_Window.reset();
-        m_WindowProperties.IsFullscreen = true;
+        m_WindowProperties.CurrentWindowState = WindowState::Fullscreen;
         m_Window = CreateFullscreenGLFWWindow(m_WindowProperties);
         m_UIRenderer = ImGuiRenderer(m_Window.get());
-        m_Layers.SetWindow(m_Window.get());
-        m_IsFullscreen = true;
+        m_Layers.OnWindowStateChange(m_Window.get());
     }
 
     void Window::OnUpdate()
     {
-        SetWindowFullscreenState();
+        SetNextWindowState();
 
         DrawScene();
 
-        if (!m_IsFullscreen)
+        if (!(m_WindowProperties.CurrentWindowState == WindowState::Fullscreen))
         {
             DrawUIElements();
         }
@@ -84,12 +82,7 @@ namespace Graphics {
     void Window::DrawUIElements()
     {
         m_UIRenderer.BeginFrame();
-
-        if (m_Layers.UIIsEnabled())
-        {
-            m_Layers.OnImGuiRender();
-        }
-
+        m_Layers.OnImGuiRender();
         m_UIRenderer.Render(m_WindowProperties);
 
     }

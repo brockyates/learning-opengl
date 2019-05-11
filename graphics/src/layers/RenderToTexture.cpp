@@ -19,7 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        if (!m_WindowProperties.IsFullscreen)
+        if (m_WindowProperties.CurrentWindowState == WindowState::Windowed)
         {
             glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         }
@@ -27,7 +27,6 @@ namespace Graphics {
         // Bindings
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
-
 
         // Draw
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);

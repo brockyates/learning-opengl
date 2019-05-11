@@ -15,7 +15,7 @@ namespace Graphics {
         , m_Input(window)
     {}
 
-    void BaseUILayer::SetWindow(GLFWwindow * window)
+    void BaseUILayer::OnWindowStateChange(GLFWwindow * window)
     {
         m_Window = window;
         m_Input = Input(window);
@@ -30,7 +30,7 @@ namespace Graphics {
 
         if (ImGui::IsMousePosValid())
         {
-            /* Too noisy in the logs, but useful for documentation for now
+            /* Too noisy in the logs, but useful for documentati ImGui MousePos
             LOG_TRACE([&]()
             {
                 std::stringstream ss;
@@ -42,22 +42,18 @@ namespace Graphics {
 
         if (m_Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
         {
-            if (m_IsUIEnabled)
-                return;
-
-            m_IsUIEnabled = true;
-            //glfwSetWindowMonitor(m_Window, 0, 0, 0, 1024, 768, GLFW_DONT_CARE);
-            //glfwHideWindow(m_Window);
+            if (!m_IsUIEnabled)
+            {
+                m_IsUIEnabled = true;
+            }
         }
 
         if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
         {
-            //LOG_TRACE("Left mouse button is pressed");
         }
 
         if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
         {
-            //LOG_TRACE("Right mouse button is pressed");
         }
     }
 
@@ -111,8 +107,6 @@ namespace Graphics {
         if (ImGui::Button("Go Fullscreen"))
         {
             m_IsUIEnabled = false;
-            //glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
-            //glfwShowWindow(m_Window);
         }
         ImGui::End();
     }

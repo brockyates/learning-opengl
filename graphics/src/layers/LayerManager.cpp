@@ -60,9 +60,9 @@ namespace Graphics {
         }
     }
 
-    void LayerManager::SetWindow(GLFWwindow * window)
+    void LayerManager::OnWindowStateChange(GLFWwindow * window)
     {
-        m_BaseUILayer.SetWindow(window);
+        m_BaseUILayer.OnWindowStateChange(window);
 
         m_ActiveLayer->Detach();
         m_ActiveLayer->Attach();

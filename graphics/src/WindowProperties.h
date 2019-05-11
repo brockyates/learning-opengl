@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#include "WindowState.h"
+
 namespace Graphics
 {
 
@@ -16,7 +18,7 @@ namespace Graphics
         unsigned int Width;
         unsigned int Height;
 
-        bool IsFullscreen = false;
+        WindowState CurrentWindowState = WindowState::Windowed;
     };
 
 }
