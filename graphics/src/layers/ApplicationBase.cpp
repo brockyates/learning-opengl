@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ApplicationBase.h"
 
+#include "config/WindowConfig.h"
 #include "WindowContext.h"
 
 #include "imgui/imgui_impl_glfw.h"
@@ -62,7 +63,7 @@ namespace Graphics {
             {
                 if (ImGui::BeginCombo("Resolution", m_FullscreenResolution.DisplayName.c_str()))
                 {
-                    for (const auto& res : SupportedResolutions)
+                    for (const auto& res : WindowConfig::SupportedResolutions)
                     {
                         bool isSelected = (m_FullscreenResolution == res);
 
