@@ -6,10 +6,10 @@
 
 namespace Graphics {
 
-    class BaseUILayer : public Layer
+    class ApplicationBase : public Layer
     {
     public:
-        BaseUILayer(const WindowContext* window);
+        ApplicationBase(const WindowContext* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;

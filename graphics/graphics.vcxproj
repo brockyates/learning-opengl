@@ -108,7 +108,7 @@
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\ShaderHelpers.h" />
-    <ClInclude Include="src\layers\BaseUILayer.h" />
+    <ClInclude Include="src\layers\ApplicationBase.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
@@ -130,7 +130,7 @@
     <ClCompile Include="src\layers\Layer.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\ShaderHelpers.cpp" />
-    <ClCompile Include="src\layers\BaseUILayer.cpp" />
+    <ClCompile Include="src\layers\ApplicationBase.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

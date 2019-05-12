@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "BaseUILayer.h"
+#include "ApplicationBase.h"
 
 #include "WindowContext.h"
 
@@ -11,11 +11,11 @@
 
 namespace Graphics {
 
-    BaseUILayer::BaseUILayer(const WindowContext* window)
-        : Layer(window, "BaseUILayer")
+    ApplicationBase::ApplicationBase(const WindowContext* window)
+        : Layer(window, "ApplicationBase")
     {}
 
-    void BaseUILayer::HandleInput()
+    void ApplicationBase::HandleInput()
     {
         ImGuiIO& io = ImGui::GetIO();
 
@@ -28,12 +28,12 @@ namespace Graphics {
         }
     }
 
-    void BaseUILayer::OnUpdate()
+    void ApplicationBase::OnUpdate()
     {
         HandleInput();
     }
 
-    void BaseUILayer::OnImGuiRender()
+    void ApplicationBase::OnImGuiRender()
     {
         ShowMainWindow();
         ShowLogWindow();
@@ -41,7 +41,7 @@ namespace Graphics {
         ShowDemoWidget();
     }
 
-    void BaseUILayer::ShowMainWindow()
+    void ApplicationBase::ShowMainWindow()
     {
         bool isMainUIOpen = true;
 
@@ -60,7 +60,7 @@ namespace Graphics {
 
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Fullscreen resolution", m_FullscreenResolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Resolution", m_FullscreenResolution.DisplayName.c_str()))
                 {
                     for (const auto& res : SupportedResolutions)
                     {
@@ -101,7 +101,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void BaseUILayer::ShowLogWindow()
+    void ApplicationBase::ShowLogWindow()
     {
         ImGui::Begin("Output", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
@@ -112,13 +112,13 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void BaseUILayer::ShowGLWindow()
+    void ApplicationBase::ShowGLWindow()
     {
         ImGui::Begin("Scene", 0, ImGuiWindowFlags_NoCollapse);
         ImGui::End();
     }
 
-    void BaseUILayer::ShowDemoWidget()
+    void ApplicationBase::ShowDemoWidget()
     {
         ImGui::Begin("Demos", 0);
         if (ImGui::Button("Go Fullscreen"))

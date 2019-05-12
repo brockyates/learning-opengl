@@ -4,7 +4,7 @@
 #include "WindowContext.h"
 
 #include "layers/Layer.h"
-#include "layers/BaseUILayer.h"
+#include "layers/ApplicationBase.h"
 #include "layers/RenderToTexture.h"
 
 #include <imgui.h>
@@ -25,7 +25,7 @@ namespace Graphics {
 
     LayerManager::LayerManager(const WindowContext* window)
         : m_Layers(MakeLayers(window))
-        , m_BaseUILayer(window)
+        , m_ApplicationBase(window)
         , m_ActiveLayer(m_Layers.front().get())
     {
         m_ActiveLayer->Attach();
@@ -33,7 +33,7 @@ namespace Graphics {
 
     void LayerManager::OnUpdate()
     {
-        m_BaseUILayer.OnUpdate();
+        m_ApplicationBase.OnUpdate();
 
         for (auto& layer : m_Layers)
         {
@@ -43,9 +43,9 @@ namespace Graphics {
 
     void LayerManager::OnImGuiRender()
     {
-        m_BaseUILayer.OnImGuiRender();
+        m_ApplicationBase.OnImGuiRender();
 
-        if (m_BaseUILayer.NextWindowMode() == WindowMode::Fullscreen)
+        if (m_ApplicationBase.NextWindowMode() == WindowMode::Fullscreen)
             return;
 
         ShowDemoSelector();
@@ -58,7 +58,7 @@ namespace Graphics {
 
     void LayerManager::OnWindowStateChange(const WindowContext* window)
     {
-        m_BaseUILayer.ChangeContext(window);
+        m_ApplicationBase.ChangeContext(window);
        
         for (auto& layer : m_Layers)
         {

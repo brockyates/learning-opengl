@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseUILayer.h"
+#include "ApplicationBase.h"
 #include "Layer.h"
 
 namespace Graphics {
@@ -16,8 +16,8 @@ namespace Graphics {
         void OnUpdate();
         void OnImGuiRender();
 
-        bool WindowShouldClose() const { return m_BaseUILayer.WindowShouldClose(); }
-        WindowMode NextWindowMode() const { return m_BaseUILayer.NextWindowMode(); }
+        bool WindowShouldClose() const { return m_ApplicationBase.WindowShouldClose(); }
+        WindowMode NextWindowMode() const { return m_ApplicationBase.NextWindowMode(); }
 
         void OnWindowStateChange(const WindowContext* window);
 
@@ -26,7 +26,7 @@ namespace Graphics {
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        BaseUILayer m_BaseUILayer;
+        ApplicationBase m_ApplicationBase;
 
         std::vector<std::unique_ptr<Layer>> m_Layers;
         Layer* m_ActiveLayer;
