@@ -26,68 +26,44 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    WindowMode Window::GetNextWindowMode() const
+    void Window::SetNextWindowMode()
     {
         if ((m_WindowContext->Properties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Fullscreen))
-            return WindowMode::SameAsPrevious;
+            return;
 
         if ((m_WindowContext->Properties.Mode == WindowMode::Windowed) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return WindowMode::SameAsPrevious;
+            return;
+
+        ShutdownCurrentContext();
 
         if ((m_WindowContext->Properties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return WindowMode::Windowed;
+        {
+            m_WindowContext->Properties.Mode = WindowMode::Windowed;
+            m_Window = CreateWindowedGLFWWindow(m_WindowContext->Properties);
+        }
+        else
+        {
+            m_WindowContext->Properties.Mode = WindowMode::Fullscreen;
+            m_Window = CreateFullscreenGLFWWindow(m_WindowContext->Properties);
+        }
 
-        return WindowMode::Fullscreen;
+        StartWindowSystems();
     }
 
     void Window::ShutdownCurrentContext()
     {
         m_UIRenderer.Shutdown();
         glfwTerminate();
-        m_Window.reset();
+        m_Window.reset(); //The existing GLFW window needs to be destroyed before the new window is constructed
     }
 
     void Window::StartWindowSystems()
     {
         const auto windowProperties = m_WindowContext->Properties;
-        m_WindowContext.reset();
         m_WindowContext = std::make_unique<WindowContext>(m_Window.get(), windowProperties);
 
         m_UIRenderer = ImGuiRenderer(m_Window.get());
         m_Layers.OnWindowStateChange(m_WindowContext.get());
-    }
-
-    void Window::EnterWindowed()
-    {
-        ShutdownCurrentContext();
-        m_WindowContext->Properties.Mode = WindowMode::Windowed;
-        m_Window = CreateWindowedGLFWWindow(m_WindowContext->Properties);
-        StartWindowSystems();
-    }
-
-    void Window::EnterFullscreen()
-    {
-        ShutdownCurrentContext();
-        m_WindowContext->Properties.Mode = WindowMode::Fullscreen;
-        m_Window = CreateFullscreenGLFWWindow(m_WindowContext->Properties);
-        StartWindowSystems();
-    }
-
-    void Window::SetNextWindowMode()
-    {
-        const auto nextWindowMode = GetNextWindowMode();
-
-        if (nextWindowMode == WindowMode::Windowed)
-        {
-            EnterWindowed();
-            return;
-        }
-
-        if (nextWindowMode == WindowMode::Fullscreen)
-        {
-            EnterFullscreen();
-            return;
-        }
     }
 
     void Window::OnUpdate()

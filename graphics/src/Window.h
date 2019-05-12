@@ -21,13 +21,12 @@ namespace Graphics {
         unsigned int Height() const{ return m_WindowContext->Properties.Height; }
 
     private:
-        WindowMode GetNextWindowMode() const;
+        void SetNextWindowMode();
         void ShutdownCurrentContext();
         void StartWindowSystems();
         void EnterWindowed();
         void EnterFullscreen();
 
-        void SetNextWindowMode();
         void DrawScene();
         void DrawUIElements();
 
