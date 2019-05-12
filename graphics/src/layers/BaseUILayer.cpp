@@ -60,33 +60,15 @@ namespace Graphics {
 
             if (ImGui::BeginMenu("Video"))
             {
-                std::vector<std::string> resolutions =
+                if (ImGui::BeginCombo("Fullscreen resolution", m_FullscreenResolution.DisplayName.c_str()))
                 {
-                    "640 x 480",
-                    "800 x 600",
-                    "1024 x 768",
-                    "1280 x 720 (720p)",
-                    "1280 x 800",
-                    "1366 x 768",
-                    "1440 x 900",
-                    "1600 x 900 (900p)",
-                    "1600 x 1200",
-                    "920 x 1080 (1080p)",
-                    "1920 x 1200",
-                    "2560 x 1440",
-                    "2560 x 1600",
-                    "3840 x 2160 (4k)"
-                };
-
-                if (ImGui::BeginCombo("Fullscreen resolution", m_CurRes.c_str()))
-                {
-                    for (const auto& res : resolutions)
+                    for (const auto& res : SupportedResolutions)
                     {
-                        bool isSelected = (m_CurRes == res);
+                        bool isSelected = (m_FullscreenResolution == res);
 
-                        if (ImGui::Selectable(res.c_str(), isSelected))
+                        if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
-                            m_CurRes = res;
+                            m_FullscreenResolution = res;
                         }
 
                         if (isSelected)
