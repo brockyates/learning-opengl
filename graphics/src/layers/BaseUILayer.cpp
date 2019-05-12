@@ -60,66 +60,44 @@ namespace Graphics {
 
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginMenu("Set fullscreen resolution..."))
+                std::vector<std::string> resolutions =
                 {
-                    if (ImGui::MenuItem("640 x 480"))
-                    {
+                    "640 x 480",
+                    "800 x 600",
+                    "1024 x 768",
+                    "1280 x 720 (720p)",
+                    "1280 x 800",
+                    "1366 x 768",
+                    "1440 x 900",
+                    "1600 x 900 (900p)",
+                    "1600 x 1200",
+                    "920 x 1080 (1080p)",
+                    "1920 x 1200",
+                    "2560 x 1440",
+                    "2560 x 1600",
+                    "3840 x 2160 (4k)"
+                };
 
-                    }
-                    if (ImGui::MenuItem("800 x 600"))
+                if (ImGui::BeginCombo("Fullscreen resolution", m_CurRes.c_str()))
+                {
+                    for (const auto& res : resolutions)
                     {
+                        bool isSelected = (m_CurRes == res);
 
-                    }
-                    if (ImGui::MenuItem("1024 x 768"))
-                    {
+                        if (ImGui::Selectable(res.c_str(), isSelected))
+                        {
+                            m_CurRes = res;
+                        }
 
+                        if (isSelected)
+                        {
+                            ImGui::SetItemDefaultFocus();
+                        }
                     }
-                    if (ImGui::MenuItem("1280 x 720 (720p)"))
-                    {
 
-                    }
-                    if (ImGui::MenuItem("1280 x 800"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("1366 x 768"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("1440 x 900"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("1600 x 900 (900p)"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("1600 x 1200"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("920 x 1080 (1080p)"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("1920 x 1200"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("2560 x 1440"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("2560 x 1600"))
-                    {
-
-                    }
-                    if (ImGui::MenuItem("3840 x 2160 (4k)"))
-                    {
-
-                    }
-                    ImGui::EndMenu();
+                    ImGui::EndCombo();
                 }
+
                 ImGui::EndMenu();
             }
 

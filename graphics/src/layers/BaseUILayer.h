@@ -28,6 +28,8 @@ namespace Graphics {
         WindowMode m_NextWindowMode = WindowMode::Windowed;
 
         bool m_IsWindowOpen = true;
+
+        std::string m_CurRes = "1024 x 768";
     };
 
 }
