@@ -98,11 +98,9 @@
     <ClInclude Include="src\WindowInput.h" />
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\RenderToTexture.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
     <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
@@ -122,11 +120,9 @@
     <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
     <ClCompile Include="src\layers\RenderToTexture.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />

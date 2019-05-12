@@ -17,8 +17,6 @@ namespace Graphics {
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
         WindowMode NextWindowMode() const { return m_NextWindowMode; }
 
-        void OnWindowStateChange(const WindowContext* window);
-
     private:
         void HandleInput();
         void ShowMainWindow();
@@ -30,8 +28,6 @@ namespace Graphics {
         WindowMode m_NextWindowMode = WindowMode::Windowed;
 
         bool m_IsWindowOpen = true;
-
-        const WindowContext* m_Window;
     };
 
 }

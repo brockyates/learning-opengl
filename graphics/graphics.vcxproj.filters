@@ -53,8 +53,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\config\WindowConfig.h" />
-    <ClInclude Include="src\layers\HelloWorld.h" />
-    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\RenderToTexture.h" />
     <ClInclude Include="src\WindowMode.h" />
     <ClInclude Include="src\WindowContext.h" />
@@ -92,8 +90,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\config\WindowConfig.cpp" />
-    <ClCompile Include="src\layers\HelloWorld.cpp" />
-    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
     <ClCompile Include="src\layers\RenderToTexture.cpp" />
     <ClCompile Include="src\WindowInput.cpp" />
   </ItemGroup>

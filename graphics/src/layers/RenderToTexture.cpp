@@ -9,9 +9,8 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(const WindowProperties& windowProperties)
-        : m_WindowProperties(windowProperties)
-        , Layer("Render to Texture")
+    RenderToTexture::RenderToTexture(const WindowContext* window)
+        : Layer(window, "Render to Texture")
     {}
 
     void RenderToTexture::OnUpdate()
@@ -19,7 +18,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        if (m_WindowProperties.Mode == WindowMode::Windowed)
+        if (m_Window->Properties.Mode == WindowMode::Windowed)
         {
             glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         }

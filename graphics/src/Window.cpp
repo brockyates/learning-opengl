@@ -49,6 +49,10 @@ namespace Graphics {
 
     void Window::StartWindowSystems()
     {
+        const auto windowProperties = m_WindowContext->Properties;
+        m_WindowContext.reset();
+        m_WindowContext = std::make_unique<WindowContext>(m_Window.get(), windowProperties);
+
         m_UIRenderer = ImGuiRenderer(m_Window.get());
         m_Layers.OnWindowStateChange(m_WindowContext.get());
     }
@@ -116,7 +120,6 @@ namespace Graphics {
         m_UIRenderer.BeginFrame();
         m_Layers.OnImGuiRender();
         m_UIRenderer.Render(m_WindowContext->Properties);
-
     }
 
 }

@@ -5,8 +5,6 @@
 
 #include "layers/Layer.h"
 #include "layers/BaseUILayer.h"
-#include "layers/HelloWorld.h"
-#include "layers/HelloWorldFiddle.h"
 #include "layers/RenderToTexture.h"
 
 #include <imgui.h>
@@ -15,18 +13,18 @@ namespace Graphics {
 
     namespace {
 
-        std::vector<std::unique_ptr<Layer>> MakeLayers(const WindowProperties& windowProperties)
+        std::vector<std::unique_ptr<Layer>> MakeLayers(const WindowContext* window)
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<RenderToTexture>(windowProperties));
+            layers.emplace_back(std::make_unique<RenderToTexture>(window));
 
             return layers;
         }
     }
 
     LayerManager::LayerManager(const WindowContext* window)
-        : m_Layers(MakeLayers(window->Properties))
+        : m_Layers(MakeLayers(window))
         , m_BaseUILayer(window)
         , m_ActiveLayer(m_Layers.front().get())
     {
@@ -60,10 +58,16 @@ namespace Graphics {
 
     void LayerManager::OnWindowStateChange(const WindowContext* window)
     {
-        m_BaseUILayer.OnWindowStateChange(window);
+        m_BaseUILayer.ChangeContext(window);
+       
+        for (auto& layer : m_Layers)
+        {
+            layer->ChangeContext(window);
+        }
 
         m_ActiveLayer->Detach();
         m_ActiveLayer->Attach();
+
     }
 
     void LayerManager::ShowDemoSelector()

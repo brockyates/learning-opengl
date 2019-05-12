@@ -12,17 +12,8 @@
 namespace Graphics {
 
     BaseUILayer::BaseUILayer(const WindowContext* window)
-        : Layer("BaseUILayer")
-        , m_Window(window)
+        : Layer(window, "BaseUILayer")
     {}
-
-    void BaseUILayer::OnWindowStateChange(const WindowContext* window)
-    {
-        m_Window = window;
-
-        Detach();
-        Attach();
-    }
 
     void BaseUILayer::HandleInput()
     {
@@ -34,14 +25,6 @@ namespace Graphics {
             {
                 m_NextWindowMode = WindowMode::Windowed;
             }
-        }
-
-        if (m_Window->Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
-        {
-        }
-
-        if (m_Window->Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
-        {
         }
     }
 
