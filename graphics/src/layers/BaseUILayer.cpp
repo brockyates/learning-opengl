@@ -47,6 +47,92 @@ namespace Graphics {
 
         ImGui::Begin("OpenGL Graphics Demo", &isMainUIOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
 
+        if (ImGui::BeginMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+                if (ImGui::MenuItem("Exit", "Alt+F4"))
+                {
+                    isMainUIOpen = false;
+                }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Video"))
+            {
+                if (ImGui::BeginMenu("Set fullscreen resolution..."))
+                {
+                    if (ImGui::MenuItem("640 x 480"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("800 x 600"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1024 x 768"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1280 x 720 (720p)"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1280 x 800"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1366 x 768"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1440 x 900"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1600 x 900 (900p)"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1600 x 1200"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("920 x 1080 (1080p)"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("1920 x 1200"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("2560 x 1440"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("2560 x 1600"))
+                    {
+
+                    }
+                    if (ImGui::MenuItem("3840 x 2160 (4k)"))
+                    {
+
+                    }
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Help"))
+            {
+                if (ImGui::MenuItem("Fullscreen Controls"))
+                {
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenuBar();
+        }
+
         if (!isMainUIOpen)
         {
             m_IsWindowOpen = false;
