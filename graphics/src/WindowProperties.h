@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+#include "ResolutionSetting.h"
 #include "WindowMode.h"
 
 namespace Graphics
@@ -8,17 +9,15 @@ namespace Graphics
 
     struct WindowProperties
     {
-        WindowProperties(std::string title, unsigned int width, unsigned int height)
+        WindowProperties(std::string title, ResolutionSetting resolution, WindowMode windowMode)
             : Title(title)
-            , Width(width)
-            , Height(height)
+            , Resolution(resolution)
+            , Mode(windowMode)
         {}
 
         std::string Title;
-        unsigned int Width;
-        unsigned int Height;
-
-        WindowMode Mode = WindowMode::Windowed;
+        ResolutionSetting Resolution;
+        WindowMode Mode;
     };
 
 }

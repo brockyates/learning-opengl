@@ -17,15 +17,13 @@ namespace Graphics {
         void OnUpdate();
         bool ShouldClose() const;
 
-        unsigned int Width() const { return m_WindowContext->Properties.Width; }
-        unsigned int Height() const{ return m_WindowContext->Properties.Height; }
+        unsigned int Width() const { return m_WindowContext->Properties.Resolution.Width; }
+        unsigned int Height() const{ return m_WindowContext->Properties.Resolution.Height; }
 
     private:
         void SetNextWindowMode();
         void ShutdownCurrentContext();
         void StartWindowSystems();
-        void EnterWindowed();
-        void EnterFullscreen();
 
         void DrawScene();
         void DrawUIElements();

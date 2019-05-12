@@ -4,8 +4,6 @@
 
 namespace Graphics {
 
-    WindowProperties WindowConfig::Properties{ "OpenGL Graphics Demo", 1920, 1080 };
-
     std::vector<ResolutionSetting> WindowConfig::SupportedResolutions =
     {
         {640,  480,  "640 x 480"},
@@ -22,6 +20,12 @@ namespace Graphics {
         {2560, 1440, "2560 x 1440"},
         {2560, 1600, "2560 x 1600"},
         {3840, 2160, "3840 x 2160 (4k)"}
+    };
+
+    WindowProperties WindowConfig::Properties{
+        "OpenGL Graphics Demo",
+        WindowConfig::SupportedResolutions[9], /*1920 x 1080*/
+        WindowMode::Windowed
     };
 
 }

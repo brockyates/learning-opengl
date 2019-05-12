@@ -56,7 +56,7 @@ namespace Graphics {
     void ImGuiRenderer::Render(const WindowProperties& windowProperties) const
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(windowProperties.Width), static_cast<float>(windowProperties.Height));
+        io.DisplaySize = ImVec2(static_cast<float>(windowProperties.Resolution.Width), static_cast<float>(windowProperties.Resolution.Height));
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

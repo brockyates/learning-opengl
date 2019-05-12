@@ -39,8 +39,8 @@ namespace Graphics {
         {
             WindowProperties& windowProperties = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
-            windowProperties.Width = width;
-            windowProperties.Height = height;
+            windowProperties.Resolution.Width = width;
+            windowProperties.Resolution.Height = height;
         });
 
         LOG_GL_INFO(glGetString(GL_RENDERER));
@@ -50,7 +50,7 @@ namespace Graphics {
     SmartGLFWWindow CreateWindowedGLFWWindow(WindowProperties& windowProperties)
     {
         InitializeGLFW();
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), NULL, NULL));
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width, windowProperties.Resolution.Height, windowProperties.Title.c_str(), NULL, NULL));
         SetWindowContext(window.get(), windowProperties);
 
         return window;
@@ -59,7 +59,7 @@ namespace Graphics {
     SmartGLFWWindow CreateFullscreenGLFWWindow(WindowProperties& windowProperties)
     {
         InitializeGLFW();
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Width, windowProperties.Height, windowProperties.Title.c_str(), glfwGetPrimaryMonitor(), NULL));
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width, windowProperties.Resolution.Height, windowProperties.Title.c_str(), glfwGetPrimaryMonitor(), NULL));
         SetWindowContext(window.get(), windowProperties);
 
         return window;
