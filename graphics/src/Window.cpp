@@ -49,7 +49,14 @@ namespace Graphics {
 
         if (m_Layers.IsResolutionChangeRequired())
         {
-            ///
+            m_WindowContext->Properties = m_Layers.NextWindowProperties();
+
+            glfwSetWindowSize(m_Window.get(),
+                m_WindowContext->Properties.Resolution.Width,
+                m_WindowContext->Properties.Resolution.Height);
+
+            m_Layers.OnWindowStateChange(m_WindowContext.get());
+
             return;
         }
     }

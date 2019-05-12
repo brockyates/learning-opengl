@@ -73,6 +73,7 @@ namespace Graphics {
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
                             m_NextWindowProperties.Resolution = res;
+                            m_IsResolutionChangeRequired = true;
                         }
 
                         if (isSelected)
