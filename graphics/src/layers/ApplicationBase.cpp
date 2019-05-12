@@ -24,13 +24,16 @@ namespace Graphics {
         {
             if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
-                m_NextWindowMode = WindowMode::Windowed;
+                m_NextWindowProperties.Mode = WindowMode::Windowed;
+                m_IsNewWindowRequired = true;
             }
         }
     }
 
     void ApplicationBase::OnUpdate()
     {
+        m_IsNewWindowRequired = false;
+        m_IsResolutionChangeRequired = false;
         HandleInput();
     }
 
@@ -61,15 +64,15 @@ namespace Graphics {
 
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Resolution", m_FullscreenResolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Resolution", m_NextWindowProperties.Resolution.DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
-                        bool isSelected = (m_FullscreenResolution == res);
+                        bool isSelected = (m_NextWindowProperties.Resolution == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
-                            m_FullscreenResolution = res;
+                            m_NextWindowProperties.Resolution = res;
                         }
 
                         if (isSelected)
@@ -124,7 +127,8 @@ namespace Graphics {
         ImGui::Begin("Demos", 0);
         if (ImGui::Button("Go Fullscreen"))
         {
-            m_NextWindowMode = WindowMode::Fullscreen;
+            m_NextWindowProperties.Mode = WindowMode::Fullscreen;
+            m_IsNewWindowRequired = true;
         }
         ImGui::End();
     }

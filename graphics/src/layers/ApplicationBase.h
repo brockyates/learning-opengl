@@ -1,8 +1,10 @@
 #pragma once
 #include "layers/Layer.h"
 
+#include "config/WindowConfig.h"
+
 #include "WindowContext.h"
-#include "ResolutionSetting.h"
+#include "WindowProperties.h"
 
 namespace Graphics {
 
@@ -19,7 +21,7 @@ namespace Graphics {
         bool IsNewWindowRequired() const { return m_IsNewWindowRequired; }
         bool IsResolutionChangeRequired() const { return m_IsResolutionChangeRequired; }
 
-        WindowMode NextWindowMode() const { return m_NextWindowMode; }
+        WindowProperties NextWindowProperties() const { return m_NextWindowProperties; }
 
     private:
         void HandleInput();
@@ -33,8 +35,7 @@ namespace Graphics {
         bool m_IsNewWindowRequired = false;
         bool m_IsResolutionChangeRequired = false;
 
-        WindowMode m_NextWindowMode = WindowMode::Windowed;
-        ResolutionSetting m_FullscreenResolution = { 1920, 1080, "1920 x 1080 (1080p)" };
+        WindowProperties m_NextWindowProperties = WindowConfig::Properties;
     };
 
 }

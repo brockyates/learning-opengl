@@ -28,26 +28,30 @@ namespace Graphics {
 
     void Window::SetNextWindowMode()
     {
-        if ((m_WindowContext->Properties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Fullscreen))
-            return;
-
-        if ((m_WindowContext->Properties.Mode == WindowMode::Windowed) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
-            return;
-
-        ShutdownCurrentContext();
-
-        if ((m_WindowContext->Properties.Mode == WindowMode::Fullscreen) && (m_Layers.NextWindowMode() == WindowMode::Windowed))
+        if (m_Layers.IsNewWindWindowRequired())
         {
-            m_WindowContext->Properties.Mode = WindowMode::Windowed;
-            m_Window = CreateWindowedGLFWWindow(m_WindowContext->Properties);
-        }
-        else
-        {
-            m_WindowContext->Properties.Mode = WindowMode::Fullscreen;
-            m_Window = CreateFullscreenGLFWWindow(m_WindowContext->Properties);
+            ShutdownCurrentContext();
+            m_WindowContext->Properties = m_Layers.NextWindowProperties();
+
+            if(m_Layers.NextWindowProperties().Mode == WindowMode::Windowed)
+            {                
+                m_Window = CreateWindowedGLFWWindow(m_WindowContext->Properties);
+            }
+            else
+            {
+                m_Window = CreateFullscreenGLFWWindow(m_WindowContext->Properties);
+            }
+
+            StartWindowSystems();
+
+            return;
         }
 
-        StartWindowSystems();
+        if (m_Layers.IsResolutionChangeRequired())
+        {
+            ///
+            return;
+        }
     }
 
     void Window::ShutdownCurrentContext()

@@ -24,7 +24,8 @@ namespace Graphics {
     }
 
     LayerManager::LayerManager(const WindowContext* window)
-        : m_Layers(MakeLayers(window))
+        : m_Window(window)
+        , m_Layers(MakeLayers(window))
         , m_ApplicationBase(window)
         , m_ActiveLayer(m_Layers.front().get())
     {
@@ -45,7 +46,7 @@ namespace Graphics {
     {
         m_ApplicationBase.OnImGuiRender();
 
-        if (m_ApplicationBase.NextWindowMode() == WindowMode::Fullscreen)
+        if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             return;
 
         ShowDemoSelector();
