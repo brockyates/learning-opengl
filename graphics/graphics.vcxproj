@@ -95,7 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\WindowInput.h" />
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
@@ -114,11 +114,12 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\config\WindowConfig.h" />
+    <ClInclude Include="src\WindowContext.h" />
     <ClInclude Include="src\WindowProperties.h" />
     <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />

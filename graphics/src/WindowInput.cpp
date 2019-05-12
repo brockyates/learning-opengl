@@ -1,25 +1,25 @@
 #include "pch.h"
-#include "Input.h"
+#include "WindowInput.h"
 
 namespace Graphics {
 
-    Input::Input(GLFWwindow* window)
+    WindowInput::WindowInput(GLFWwindow* window)
         : m_Window(window)
     {}
 
-    bool Input::IsKeyPressed(int keycode)
+    bool WindowInput::IsKeyPressed(int keycode)
     {
         const auto keyboardState = glfwGetKey(m_Window, keycode);
         return keyboardState == GLFW_PRESS || keyboardState == GLFW_REPEAT;
     }
 
-    bool Input::IsMouseButtonPressed(int button)
+    bool WindowInput::IsMouseButtonPressed(int button)
     {
         const auto mouseState = glfwGetMouseButton(m_Window, button);
         return mouseState == GLFW_PRESS;
     }
 
-    std::pair<float, float> Input::GetMousePosition()
+    std::pair<float, float> WindowInput::GetMousePosition()
     {
         double mousePositionX;
         double mousePositionY;

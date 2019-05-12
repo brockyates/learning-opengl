@@ -1,7 +1,7 @@
 #pragma once
 #include "layers/Layer.h"
 
-#include "Input.h"
+#include "WindowInput.h"
 #include "WindowMode.h"
 #include "WindowProperties.h"
 
@@ -29,12 +29,11 @@ namespace Graphics {
         void ShowDemoWidget();
 
     private:
-        Input m_Input;
+        WindowInput m_Input;
         WindowMode m_NextWindowMode = WindowMode::Windowed;
 
         bool m_IsWindowOpen = true;
 
-        GLFWwindow* m_Window;
         const WindowProperties& m_WindowProperties;
     };
 

@@ -11,15 +11,13 @@ namespace Graphics {
 
     BaseUILayer::BaseUILayer(GLFWwindow* window, const WindowProperties& windowProperties)
         : Layer("BaseUILayer")
-        , m_Window(window)
         , m_WindowProperties(windowProperties)
         , m_Input(window)
     {}
 
     void BaseUILayer::OnWindowStateChange(GLFWwindow * window)
     {
-        m_Window = window;
-        m_Input = Input(window);
+        m_Input = WindowInput(window);
 
         Detach();
         Attach();
@@ -28,18 +26,6 @@ namespace Graphics {
     void BaseUILayer::HandleInput()
     {
         ImGuiIO& io = ImGui::GetIO();
-
-        if (ImGui::IsMousePosValid())
-        {
-            /* Too noisy in the logs, but useful for documentati ImGui MousePos
-            LOG_TRACE([&]()
-            {
-                std::stringstream ss;
-                ss << "Mouse pos: " << io.MousePos.x << "," << io.MousePos.y;
-                return ss.str();
-            }());
-            */
-        }
 
         if (m_Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
         {

@@ -4,13 +4,13 @@
 
 namespace Graphics {
 
-    class Input
+    class WindowInput
     {
     public:
-        Input(GLFWwindow* window);
+        WindowInput(GLFWwindow* window);
 
-        Input(Input&&) = default;
-        Input& operator=(Input&&) = default;
+        WindowInput(WindowInput&&) = default;
+        WindowInput& operator=(WindowInput&&) = default;
 
         bool IsKeyPressed(int keycode);
 
