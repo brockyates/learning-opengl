@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "BaseUILayer.h"
 
+#include "WindowContext.h"
+
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
@@ -9,15 +11,14 @@
 
 namespace Graphics {
 
-    BaseUILayer::BaseUILayer(GLFWwindow* window, const WindowProperties& windowProperties)
+    BaseUILayer::BaseUILayer(const WindowContext* window)
         : Layer("BaseUILayer")
-        , m_WindowProperties(windowProperties)
-        , m_Input(window)
+        , m_Window(window)
     {}
 
-    void BaseUILayer::OnWindowStateChange(GLFWwindow * window)
+    void BaseUILayer::OnWindowStateChange(const WindowContext* window)
     {
-        m_Input = WindowInput(window);
+        m_Window = window;
 
         Detach();
         Attach();
@@ -27,19 +28,19 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
+        if (m_Window->Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
         {
-            if (m_WindowProperties.Mode == WindowMode::Fullscreen)
+            if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
                 m_NextWindowMode = WindowMode::Windowed;
             }
         }
 
-        if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
+        if (m_Window->Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_LEFT] >= 0.0f)
         {
         }
 
-        if (m_Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
+        if (m_Window->Input.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT) || io.MouseDownDuration[GLFW_MOUSE_BUTTON_RIGHT] >= 0.0f)
         {
         }
     }

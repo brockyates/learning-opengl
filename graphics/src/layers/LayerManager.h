@@ -11,7 +11,7 @@ namespace Graphics {
     class LayerManager
     {
     public:
-        LayerManager(const WindowProperties& windowProperties, GLFWwindow* window);
+        LayerManager(const WindowContext* window);
 
         void OnUpdate();
         void OnImGuiRender();
@@ -19,7 +19,7 @@ namespace Graphics {
         bool WindowShouldClose() const { return m_BaseUILayer.WindowShouldClose(); }
         WindowMode NextWindowMode() const { return m_BaseUILayer.NextWindowMode(); }
 
-        void OnWindowStateChange(GLFWwindow* window);
+        void OnWindowStateChange(const WindowContext* window);
 
     private:
         void ShowDemoSelector();

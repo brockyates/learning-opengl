@@ -1,13 +1,12 @@
 #pragma once
-#include "imgui/ImGuiRenderer.h"
+
 #include "SmartGLFWWindow.h"
-#include "WindowProperties.h"
 
 #include "layers/LayerManager.h"
 
-namespace Graphics {
+#include "imgui/ImGuiRenderer.h"
 
-    struct WindowProperties;
+namespace Graphics {
 
     class Window
     {
@@ -18,8 +17,8 @@ namespace Graphics {
         void OnUpdate();
         bool ShouldClose() const;
 
-        unsigned int Width() const { return m_WindowProperties.Width; }
-        unsigned int Height() const{ return m_WindowProperties.Height; }
+        unsigned int Width() const { return m_WindowContext->Properties.Width; }
+        unsigned int Height() const{ return m_WindowContext->Properties.Height; }
 
     private:
         WindowMode GetNextWindowMode() const;
@@ -33,8 +32,8 @@ namespace Graphics {
         void DrawUIElements();
 
     private:
-        WindowProperties m_WindowProperties;
         SmartGLFWWindow m_Window;
+        std::unique_ptr<WindowContext> m_WindowContext = nullptr;
         ImGuiRenderer m_UIRenderer;
         LayerManager m_Layers;
     };

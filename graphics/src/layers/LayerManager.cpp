@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "LayerManager.h"
 
-#include "WindowProperties.h"
+#include "WindowContext.h"
 
 #include "layers/Layer.h"
 #include "layers/BaseUILayer.h"
@@ -19,17 +19,15 @@ namespace Graphics {
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            //layers.emplace_back(std::make_unique<HelloWorld>(windowProperties));
-            //layers.emplace_back(std::make_unique<HelloWorldFiddle>(windowProperties));
             layers.emplace_back(std::make_unique<RenderToTexture>(windowProperties));
 
             return layers;
         }
     }
 
-    LayerManager::LayerManager(const WindowProperties& windowProperties, GLFWwindow* window)
-        : m_Layers(MakeLayers(windowProperties))
-        , m_BaseUILayer(window, windowProperties)
+    LayerManager::LayerManager(const WindowContext* window)
+        : m_Layers(MakeLayers(window->Properties))
+        , m_BaseUILayer(window)
         , m_ActiveLayer(m_Layers.front().get())
     {
         m_ActiveLayer->Attach();
@@ -60,7 +58,7 @@ namespace Graphics {
         }
     }
 
-    void LayerManager::OnWindowStateChange(GLFWwindow * window)
+    void LayerManager::OnWindowStateChange(const WindowContext* window)
     {
         m_BaseUILayer.OnWindowStateChange(window);
 

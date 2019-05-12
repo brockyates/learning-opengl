@@ -1,16 +1,14 @@
 #pragma once
 #include "layers/Layer.h"
 
-#include "WindowInput.h"
-#include "WindowMode.h"
-#include "WindowProperties.h"
+#include "WindowContext.h"
 
 namespace Graphics {
 
     class BaseUILayer : public Layer
     {
     public:
-        BaseUILayer(GLFWwindow* window, const WindowProperties& windowProperties);
+        BaseUILayer(const WindowContext* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
@@ -19,7 +17,7 @@ namespace Graphics {
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
         WindowMode NextWindowMode() const { return m_NextWindowMode; }
 
-        void OnWindowStateChange(GLFWwindow* window);
+        void OnWindowStateChange(const WindowContext* window);
 
     private:
         void HandleInput();
@@ -29,12 +27,11 @@ namespace Graphics {
         void ShowDemoWidget();
 
     private:
-        WindowInput m_Input;
         WindowMode m_NextWindowMode = WindowMode::Windowed;
 
         bool m_IsWindowOpen = true;
 
-        const WindowProperties& m_WindowProperties;
+        const WindowContext* m_Window;
     };
 
 }

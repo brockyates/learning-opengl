@@ -7,6 +7,11 @@ namespace Graphics {
 
     struct WindowContext
     {
+        WindowContext(GLFWwindow* window, WindowProperties properties)
+            : Properties(properties)
+            , Input(window)
+        {}
+
         WindowProperties Properties;
         WindowInput Input;
     };
