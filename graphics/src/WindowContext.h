@@ -10,10 +10,12 @@ namespace Graphics {
         WindowContext(GLFWwindow* window, WindowProperties properties)
             : Properties(properties)
             , Input(window)
+            , Window(window)
         {}
 
         WindowProperties Properties;
         WindowInput Input;
+        GLFWwindow* Window;
     };
 
 }

@@ -139,7 +139,6 @@
     <ClCompile Include="src\config\WindowConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgui.ini" />
     <None Include="res\shaders\Minimal_Fragment.shader" />
     <None Include="res\shaders\Minimal_Vertex.shader" />
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 
 #include <imgui.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Graphics {
@@ -39,17 +40,72 @@ namespace Graphics {
 
     void ApplicationBase::OnImGuiRender()
     {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         ShowMainWindow();
         ShowLogWindow();
-        ShowGLWindow();
-        ShowDemoWidget();
+        //ShowGLWindow();
+        //ShowDemoWidget();
     }
 
     void ApplicationBase::ShowMainWindow()
     {
+        bool p_open = true;
         bool isMainUIOpen = true;
 
-        ImGui::Begin("OpenGL Graphics Demo", &isMainUIOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+        int xpos, ypos, width, height;
+        glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+        glfwGetWindowSize(m_Window->Window, &width, &height);
+
+        ImGui::SetNextWindowSize(ImVec2(static_cast<float>(width), static_cast<float>(height)));
+        ImGui::SetNextWindowPos(ImVec2(static_cast<float>(xpos), static_cast<float>(ypos)));
+        //ImGui::Begin("MainWindow", &isMainUIOpen, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+
+        // =======================
+        static bool opt_fullscreen_persistant = true;
+        bool opt_fullscreen = opt_fullscreen_persistant;
+        static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+
+        // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
+        // because it would be confusing to have two docking targets within each others.
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+        if (opt_fullscreen)
+        {
+            ImGuiViewport* viewport = ImGui::GetMainViewport();
+            ImGui::SetNextWindowPos(viewport->Pos);
+            ImGui::SetNextWindowSize(viewport->Size);
+            ImGui::SetNextWindowViewport(viewport->ID);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+            window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+        }
+
+        // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
+        if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+            window_flags |= ImGuiWindowFlags_NoBackground;
+
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        ImGui::Begin("MainWindow", &p_open, window_flags);
+        ImGui::PopStyleVar();
+
+        if (opt_fullscreen)
+            ImGui::PopStyleVar(2);
+
+        // DockSpace
+        ImGuiIO& io = ImGui::GetIO();
+        if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+        {
+            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+        }
+        else
+        {
+            LOG_TRACE("Docking disabled");
+        }
+
+        //=============================
 
         if (ImGui::BeginMenuBar())
         {
@@ -61,7 +117,9 @@ namespace Graphics {
                 }
                 ImGui::EndMenu();
             }
-
+            ImGui::Spacing();
+            ImGui::Spacing();
+            ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
                 if (ImGui::BeginCombo("Resolution", m_NextWindowProperties.Resolution.DisplayName.c_str()))
@@ -87,7 +145,9 @@ namespace Graphics {
 
                 ImGui::EndMenu();
             }
-
+            ImGui::Spacing();
+            ImGui::Spacing();
+            ImGui::Spacing();
             if (ImGui::BeginMenu("Help"))
             {
                 if (ImGui::MenuItem("Fullscreen Controls"))
@@ -108,7 +168,8 @@ namespace Graphics {
 
     void ApplicationBase::ShowLogWindow()
     {
-        ImGui::Begin("Output", 0, ImGuiWindowFlags_HorizontalScrollbar);
+        //ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+        ImGui::Begin("MyDockSpace", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
             const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());

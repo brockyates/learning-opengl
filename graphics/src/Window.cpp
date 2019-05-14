@@ -30,16 +30,19 @@ namespace Graphics {
     {
         if (m_Layers.IsNewWindWindowRequired())
         {
-            ShutdownCurrentContext();
             m_WindowContext->Properties = m_Layers.NextWindowProperties();
 
             if(m_Layers.NextWindowProperties().Mode == WindowMode::Windowed)
-            {                
-                m_Window = CreateWindowedGLFWWindow(m_WindowContext->Properties);
+            {
+                glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_WindowContext->Properties.Resolution.Width, m_WindowContext->Properties.Resolution.Height, GLFW_DONT_CARE);
+                //glfwHideWindow(m_Window.get());
+                //glfwFocusWindow(m_Window.get());
             }
             else
             {
-                m_Window = CreateFullscreenGLFWWindow(m_WindowContext->Properties);
+                glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_WindowContext->Properties.Resolution.Width, m_WindowContext->Properties.Resolution.Height, GLFW_DONT_CARE);
+                glfwShowWindow(m_Window.get());
+                glfwFocusWindow(m_Window.get());
             }
 
             StartWindowSystems();
@@ -61,19 +64,8 @@ namespace Graphics {
         }
     }
 
-    void Window::ShutdownCurrentContext()
-    {
-        m_UIRenderer.Shutdown();
-        glfwTerminate();
-        m_Window.reset(); //The existing GLFW window needs to be destroyed before the new window is constructed
-    }
-
     void Window::StartWindowSystems()
     {
-        const auto windowProperties = m_WindowContext->Properties;
-        m_WindowContext = std::make_unique<WindowContext>(m_Window.get(), windowProperties);
-
-        m_UIRenderer = ImGuiRenderer(m_Window.get());
         m_Layers.OnWindowStateChange(m_WindowContext.get());
     }
 

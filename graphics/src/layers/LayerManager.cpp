@@ -46,6 +46,7 @@ namespace Graphics {
     {
         m_ApplicationBase.OnImGuiRender();
 
+        /*
         if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             return;
 
@@ -55,20 +56,13 @@ namespace Graphics {
         {
             layer->OnImGuiRender();
         }
+        */
     }
 
     void LayerManager::OnWindowStateChange(const WindowContext* window)
     {
-        m_ApplicationBase.ChangeContext(window);
-       
-        for (auto& layer : m_Layers)
-        {
-            layer->ChangeContext(window);
-        }
-
         m_ActiveLayer->Detach();
         m_ActiveLayer->Attach();
-
     }
 
     void LayerManager::ShowDemoSelector()

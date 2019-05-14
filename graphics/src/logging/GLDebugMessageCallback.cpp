@@ -34,7 +34,7 @@ namespace Graphics {
 
         if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
         {
-            LOG_GL_DEBUG(ss.str());
+            //LOG_GL_DEBUG(ss.str());
             return;
         }
 

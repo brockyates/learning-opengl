@@ -22,7 +22,6 @@ namespace Graphics {
 
     private:
         void SetNextWindowMode();
-        void ShutdownCurrentContext();
         void StartWindowSystems();
 
         void DrawScene();
