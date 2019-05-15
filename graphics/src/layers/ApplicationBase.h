@@ -6,6 +6,8 @@
 #include "WindowContext.h"
 #include "WindowProperties.h"
 
+#include <imgui.h>
+
 namespace Graphics {
 
     class ApplicationBase : public Layer
