@@ -104,15 +104,16 @@ namespace Graphics {
         }
     }
 
-    void ApplicationBase::LayoutPreset(ImGuiID dockspaceID)
+    void ApplicationBase::LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize)
     {
         ImGui::DockBuilderRemoveNode(dockspaceID);
         ImGuiDockNodeFlags dockSpaceFlags = ImGuiDockNodeFlags_DockSpace;
         ImGui::DockBuilderAddNode(dockspaceID, dockSpaceFlags);
+        ImGui::DockBuilderSetNodeSize(dockspaceID, dockSize);
 
         ImGuiID dockMain = dockspaceID;
-        ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.20f, NULL, &dockMain);
-        ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.40f, NULL, &dockMain);
+        ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.15f, NULL, &dockMain);
+        ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.15f, NULL, &dockMain);
 
         ImGui::DockBuilderDockWindow("Scene", dockMain);
         ImGui::DockBuilderDockWindow("DemoWidget", dockLeft);
@@ -126,6 +127,8 @@ namespace Graphics {
         bool opt_fullscreen = opt_fullscreen_persistant;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
+        ImVec2 dockSize;
+
         // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
         // because it would be confusing to have two docking targets within each others.
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
@@ -134,6 +137,7 @@ namespace Graphics {
             ImGuiViewport* viewport = ImGui::GetMainViewport();
             ImGui::SetNextWindowPos(viewport->Pos);
             ImGui::SetNextWindowSize(viewport->Size);
+            dockSize = viewport->Size;
             ImGui::SetNextWindowViewport(viewport->ID);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
@@ -155,7 +159,7 @@ namespace Graphics {
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 
             if (ImGui::DockBuilderGetNode(dockspace_id) == NULL)
-                LayoutPreset(dockspace_id);
+                LayoutPreset(dockspace_id, dockSize);
 
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 
