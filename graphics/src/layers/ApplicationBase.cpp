@@ -45,25 +45,79 @@ namespace Graphics {
         glClear(GL_COLOR_BUFFER_BIT);
 
         ShowMainWindow();
-        //ShowLogWindow();
-        //ShowGLWindow();
-        //ShowDemoWidget();
+        ShowLogWindow();
+        ShowGLWindow();
+        ShowDemoWidget();
     }
 
-    namespace {
-
-        void MyEditor_LayoutPreset(ImGuiID dockspace_id)
+    void ApplicationBase::ShowMenuBar()
+    {
+        if (ImGui::BeginMenuBar())
         {
-            ImGui::DockBuilderRemoveNode(dockspace_id);
-            ImGuiDockNodeFlags dockSpaceFlags = ImGuiDockNodeFlags_DockSpace;
-            ImGui::DockBuilderAddNode(dockspace_id, dockSpaceFlags);
+            if (ImGui::BeginMenu("File"))
+            {
+                if (ImGui::MenuItem("Exit", "Alt+F4"))
+                {
+                    m_IsWindowOpen = false;
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+            ImGui::Spacing();
+            if (ImGui::BeginMenu("Video"))
+            {
+                if (ImGui::BeginCombo("Resolution", m_NextWindowProperties.Resolution.DisplayName.c_str()))
+                {
+                    for (const auto& res : WindowConfig::SupportedResolutions)
+                    {
+                        bool isSelected = (m_NextWindowProperties.Resolution == res);
 
-            ImGuiID dockMain = dockspace_id;
-            ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.40f, NULL, &dockMain);
+                        if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
+                        {
+                            m_NextWindowProperties.Resolution = res;
+                            m_IsResolutionChangeRequired = true;
+                        }
 
-            ImGui::DockBuilderDockWindow("Log", dockLeft);
-            ImGui::DockBuilderFinish(dockspace_id);
+                        if (isSelected)
+                        {
+                            ImGui::SetItemDefaultFocus();
+                        }
+                    }
+
+                    ImGui::EndCombo();
+                }
+
+                ImGui::EndMenu();
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+            ImGui::Spacing();
+            if (ImGui::BeginMenu("Help"))
+            {
+                if (ImGui::MenuItem("Fullscreen Controls"))
+                {
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenuBar();
         }
+    }
+
+    void ApplicationBase::LayoutPreset(ImGuiID dockspaceID)
+    {
+        ImGui::DockBuilderRemoveNode(dockspaceID);
+        ImGuiDockNodeFlags dockSpaceFlags = ImGuiDockNodeFlags_DockSpace;
+        ImGui::DockBuilderAddNode(dockspaceID, dockSpaceFlags);
+
+        ImGuiID dockMain = dockspaceID;
+        ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.20f, NULL, &dockMain);
+        ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.40f, NULL, &dockMain);
+
+        ImGui::DockBuilderDockWindow("Scene", dockMain);
+        ImGui::DockBuilderDockWindow("DemoWidget", dockLeft);
+        ImGui::DockBuilderDockWindow("Log", dockBottom);
+        ImGui::DockBuilderFinish(dockspaceID);
     }
 
     void ApplicationBase::ShowMainWindow()
@@ -98,44 +152,22 @@ namespace Graphics {
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
         {
-            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");            
+            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 
             if (ImGui::DockBuilderGetNode(dockspace_id) == NULL)
-                MyEditor_LayoutPreset(dockspace_id);
+                LayoutPreset(dockspace_id);
 
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 
             std::cout << "Break";
         }
 
-        if (ImGui::BeginMenuBar())
-        {
-            if (ImGui::BeginMenu("Docking"))
-            {
-                // Disabling fullscreen would allow the window to be moved to the front of other windows, 
-                // which we can't undo at the moment without finer window depth/z control.
-                //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
-
-                if (ImGui::MenuItem("Flag: NoSplit", "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) != 0))                 dockspace_flags ^= ImGuiDockNodeFlags_NoSplit;
-                if (ImGui::MenuItem("Flag: NoResize", "", (dockspace_flags & ImGuiDockNodeFlags_NoResize) != 0))                dockspace_flags ^= ImGuiDockNodeFlags_NoResize;
-                if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0))  dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode;
-                if (ImGui::MenuItem("Flag: PassthruCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0))     dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode;
-                if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0))          dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar;
-                ImGui::EndMenu();
-            }
-            ImGui::EndMenuBar();
-        }
-
-        ImGui::Begin("Log");
-        ImGui::Text("Test window");
-        ImGui::End();
-
+        ShowMenuBar();
         ImGui::End();
     }
 
     void ApplicationBase::ShowLogWindow()
     {
-        //ImGui::SetNextWindowDockID(dock_main_id, dock_id_bottom);
         ImGui::Begin("Log", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
             const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
@@ -153,7 +185,7 @@ namespace Graphics {
 
     void ApplicationBase::ShowDemoWidget()
     {
-        ImGui::Begin("Demos", 0);
+        ImGui::Begin("DemoWidget", 0);
         if (ImGui::Button("Go Fullscreen"))
         {
             m_NextWindowProperties.Mode = WindowMode::Fullscreen;

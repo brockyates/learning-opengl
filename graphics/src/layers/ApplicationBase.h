@@ -27,6 +27,9 @@ namespace Graphics {
 
     private:
         void HandleInput();
+
+        void LayoutPreset(ImGuiID dockspaceID);
+        void ShowMenuBar();
         void ShowMainWindow();
         void ShowLogWindow();
         void ShowGLWindow();
