@@ -35,8 +35,6 @@ namespace Graphics {
             if(m_Layers.NextWindowProperties().Mode == WindowMode::Windowed)
             {
                 glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_WindowContext->Properties.Resolution.Width, m_WindowContext->Properties.Resolution.Height, GLFW_DONT_CARE);
-                //glfwHideWindow(m_Window.get());
-                //glfwFocusWindow(m_Window.get());
             }
             else
             {

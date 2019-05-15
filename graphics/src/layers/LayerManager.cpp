@@ -46,7 +46,6 @@ namespace Graphics {
     {
         m_ApplicationBase.OnImGuiRender();
 
-        /*
         if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             return;
 
@@ -56,7 +55,6 @@ namespace Graphics {
         {
             layer->OnImGuiRender();
         }
-        */
     }
 
     void LayerManager::OnWindowStateChange(const WindowContext* window)
@@ -67,7 +65,7 @@ namespace Graphics {
 
     void LayerManager::ShowDemoSelector()
     {
-        ImGui::Begin("Demos");
+        ImGui::Begin("DemoWidget");
 
         Layer* nextActiveLayer = m_ActiveLayer;
 

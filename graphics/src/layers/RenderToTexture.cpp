@@ -59,7 +59,7 @@ namespace Graphics {
 
         ImGui::End();
 
-        ImGui::Begin("Demos");
+        ImGui::Begin("DemoWidget");
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::TextWrapped(GetDescription().c_str());
