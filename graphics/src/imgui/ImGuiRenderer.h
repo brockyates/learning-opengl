@@ -1,5 +1,6 @@
 #pragma once
-#include <GLFW/glfw3.h>
+
+#include "WindowContext.h"
 
 namespace Graphics {
 
@@ -8,7 +9,7 @@ namespace Graphics {
     class ImGuiRenderer
     {
     public:
-        ImGuiRenderer(GLFWwindow * window);
+        ImGuiRenderer(WindowContext* context);
         void Shutdown();
 
         ImGuiRenderer(ImGuiRenderer&) = default;

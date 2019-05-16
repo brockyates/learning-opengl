@@ -69,7 +69,7 @@ namespace Graphics {
 
         Layer* nextActiveLayer = m_ActiveLayer;
 
-        if (ImGui::BeginCombo("Active Scene", m_ActiveLayer->GetName().c_str()))
+        if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
         {
             for (auto& layer : m_Layers)
             {

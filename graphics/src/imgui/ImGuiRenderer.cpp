@@ -10,7 +10,7 @@
 
 namespace Graphics {
 
-    ImGuiRenderer::ImGuiRenderer(GLFWwindow* window)
+    ImGuiRenderer::ImGuiRenderer(WindowContext* context)
     {
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
@@ -20,11 +20,10 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        //io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", 24.0f); // Looks good on 4k
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", 16.0f); // Looks good on 1080p
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", context->Properties.Resolution.DefaultFontSize); // Looks good on 1080p
 
         // Setup Dear ImGui style
-        ImGui::StyleColorsDark();
+        ImGui::StyleColorsClassic();
 
         // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
         ImGuiStyle& style = ImGui::GetStyle();
@@ -35,7 +34,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplGlfw_InitForOpenGL(context->Window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
@@ -57,7 +56,7 @@ namespace Graphics {
     void ImGuiRenderer::Render(const WindowProperties& windowProperties) const
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<int>(windowProperties.Resolution.Width), static_cast<int>(windowProperties.Resolution.Height));
+        io.DisplaySize = ImVec2(static_cast<float>(windowProperties.Resolution.Width), static_cast<float>(windowProperties.Resolution.Height));
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

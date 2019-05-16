@@ -112,8 +112,8 @@ namespace Graphics {
         ImGui::DockBuilderSetNodeSize(dockspaceID, dockSize);
 
         ImGuiID dockMain = dockspaceID;
-        ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.20f, NULL, &dockMain);
-        ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.20f, NULL, &dockMain);
+        ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.22f, NULL, &dockMain);
+        ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.30f, NULL, &dockMain);
 
         ImGui::DockBuilderDockWindow("Scene", dockMain);
         ImGui::DockBuilderDockWindow("DemoWidget", dockLeft);
