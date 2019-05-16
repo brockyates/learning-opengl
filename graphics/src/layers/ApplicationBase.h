@@ -5,6 +5,7 @@
 
 #include "WindowContext.h"
 #include "WindowProperties.h"
+#include "WindowedSettings.h"
 
 #include <imgui.h>
 
@@ -26,8 +27,10 @@ namespace Graphics {
         bool IsResolutionChangeRequired() const { return m_IsResolutionChangeRequired; }
 
         WindowProperties NextWindowProperties() const { return m_NextWindowProperties; }
+        WindowedSettings GetWindowedSettings() const { return m_WindowedSettings; }
 
     private:
+        WindowedSettings InitializeWindowedSettings(const WindowContext* ctx);
         void HandleInput();
 
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
@@ -42,6 +45,7 @@ namespace Graphics {
         bool m_F11Ready = true;
 
         WindowProperties m_NextWindowProperties = WindowConfig::Properties;
+        WindowedSettings m_WindowedSettings;
     };
 
 }

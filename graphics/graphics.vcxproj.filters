@@ -58,6 +58,7 @@
     <ClInclude Include="src\layers\ApplicationBase.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\WindowedSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

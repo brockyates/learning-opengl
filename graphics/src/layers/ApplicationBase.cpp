@@ -14,8 +14,19 @@
 
 namespace Graphics {
 
+    WindowedSettings ApplicationBase::InitializeWindowedSettings(const WindowContext* ctx)
+    {
+        int width, height, xpos, ypos;
+
+        glfwGetWindowSize(m_Window->Window, &width, &height);
+        glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+
+        return { width, height, xpos, ypos };
+    }
+
     ApplicationBase::ApplicationBase(const WindowContext* window)
         : Layer(window, "ApplicationBase")
+        , m_WindowedSettings(InitializeWindowedSettings(window))
     {}
 
     void ApplicationBase::HandleInput()
@@ -28,11 +39,22 @@ namespace Graphics {
 
             if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
+                glfwHideWindow(m_Window->Window);
+                glfwSetWindowMonitor(m_Window->Window, 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(m_Window->Window, m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+                glfwShowWindow(m_Window->Window);
+
                 m_NextWindowProperties.Mode = WindowMode::Windowed;
                 m_IsNewWindowRequired = true;
             }
             else
             {
+                int width, height, xpos, ypos;
+
+                glfwGetWindowSize(m_Window->Window, &width, &height);
+                glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+
+                m_WindowedSettings = { width, height, xpos, ypos };
                 m_NextWindowProperties.Mode = WindowMode::Fullscreen;
                 m_IsNewWindowRequired = true;
             }
@@ -66,6 +88,13 @@ namespace Graphics {
 
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
+            int width, height, xpos, ypos;
+
+            glfwGetWindowSize(m_Window->Window, &width, &height);
+            glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+
+            m_WindowedSettings = { width, height, xpos, ypos };
+
             m_NextWindowProperties.Mode = WindowMode::Fullscreen;
             m_IsNewWindowRequired = true;
         }

@@ -77,6 +77,7 @@ namespace Graphics {
         windowProperties.Resolution = GetDesktopResolutionOrDefault();
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
         auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width / 2, windowProperties.Resolution.Height / 2, windowProperties.Title.c_str(), NULL, NULL));
         glfwSetWindowPos(window.get(), windowProperties.Resolution.Width / 4, windowProperties.Resolution.Height / 4);
         glfwShowWindow(window.get());
