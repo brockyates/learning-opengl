@@ -24,7 +24,7 @@ namespace Graphics {
 
     WindowProperties WindowConfig::Properties{
         "OpenGL Graphics Demo",
-        WindowConfig::SupportedResolutions[13], /*1920 x 1080*/
+        WindowConfig::SupportedResolutions[3], /* 720p as safe default resolution */
         WindowMode::Windowed
     };
 

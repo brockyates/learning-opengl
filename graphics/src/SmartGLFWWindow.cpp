@@ -69,14 +69,19 @@ namespace Graphics {
 
     }
 
+    // Create a windowed GLFW window, half the size of desktop resolution, centered on screen.
+    // If the desktop resolution isn't supported, we'll choose 720p as the default window size.
     SmartGLFWWindow CreateInitialWindowedGLFWWindow(WindowProperties& windowProperties)
     {
         InitializeGLFW();
-        const auto desktopResolutionSetting = GetDesktopResolutionOrDefault();
-        auto window = SmartGLFWWindow(glfwCreateWindow(1366, 768, windowProperties.Title.c_str(), NULL, NULL));
+        windowProperties.Resolution = GetDesktopResolutionOrDefault();
+
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width / 2, windowProperties.Resolution.Height / 2, windowProperties.Title.c_str(), NULL, NULL));
+        glfwSetWindowPos(window.get(), windowProperties.Resolution.Width / 4, windowProperties.Resolution.Height / 4);
+        glfwShowWindow(window.get());
 
         SetWindowContext(window.get(), windowProperties);
-
         return window;
     }
 
