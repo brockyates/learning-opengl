@@ -22,13 +22,25 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_Window->Input.IsKeyPressed(GLFW_KEY_ESCAPE) || ImGui::IsKeyPressed(GLFW_KEY_ESCAPE))
+        if (m_F11Ready && (m_Window->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
+            m_F11Ready = false;
+
             if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
                 m_NextWindowProperties.Mode = WindowMode::Windowed;
                 m_IsNewWindowRequired = true;
             }
+            else
+            {
+                m_NextWindowProperties.Mode = WindowMode::Fullscreen;
+                m_IsNewWindowRequired = true;
+            }
+        }
+
+        if (m_Window->Input.IsKeyReleased(GLFW_KEY_F11))
+        {
+            m_F11Ready = true;
         }
     }
 
@@ -46,8 +58,19 @@ namespace Graphics {
 
         ShowMainWindow();
         ShowLogWindow();
-        ShowGLWindow();
-        ShowDemoWidget();
+    }
+
+    void ApplicationBase::OnImGuiRenderOverlay()
+    {
+        ImGui::Begin("Scene");
+
+        if (ImGui::Button("Toggle Fullscreen (F11)"))
+        {
+            m_NextWindowProperties.Mode = WindowMode::Fullscreen;
+            m_IsNewWindowRequired = true;
+        }
+
+        ImGui::End();
     }
 
     void ApplicationBase::ShowMenuBar()
@@ -162,8 +185,6 @@ namespace Graphics {
                 LayoutPreset(dockspace_id, dockSize);
 
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
-
-            std::cout << "Break";
         }
 
         ShowMenuBar();
@@ -178,23 +199,6 @@ namespace Graphics {
             ImGui::TextUnformatted(logString.c_str());
             ImGui::SetScrollHereY(1.0f);
 
-        ImGui::End();
-    }
-
-    void ApplicationBase::ShowGLWindow()
-    {
-        ImGui::Begin("Scene", 0, ImGuiWindowFlags_NoCollapse);
-        ImGui::End();
-    }
-
-    void ApplicationBase::ShowDemoWidget()
-    {
-        ImGui::Begin("DemoWidget", 0);
-        if (ImGui::Button("Go Fullscreen"))
-        {
-            m_NextWindowProperties.Mode = WindowMode::Fullscreen;
-            m_IsNewWindowRequired = true;
-        }
         ImGui::End();
     }
 

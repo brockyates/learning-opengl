@@ -13,6 +13,7 @@ namespace Graphics {
         WindowInput& operator=(WindowInput&&) = default;
 
         bool IsKeyPressed(int keycode) const;
+        bool IsKeyReleased(int keycode) const;
 
         bool IsMouseButtonPressed(int button) const;
         std::pair<float, float> GetMousePosition() const;

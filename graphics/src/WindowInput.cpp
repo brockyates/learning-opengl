@@ -13,6 +13,12 @@ namespace Graphics {
         return keyboardState == GLFW_PRESS || keyboardState == GLFW_REPEAT;
     }
 
+    bool WindowInput::IsKeyReleased(int keycode) const
+    {
+        const auto keyboardState = glfwGetKey(m_Window, keycode);
+        return keyboardState == GLFW_RELEASE;
+    }
+
     bool WindowInput::IsMouseButtonPressed(int button) const
     {
         const auto mouseState = glfwGetMouseButton(m_Window, button);

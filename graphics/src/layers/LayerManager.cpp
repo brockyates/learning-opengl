@@ -55,6 +55,8 @@ namespace Graphics {
         {
             layer->OnImGuiRender();
         }
+
+        m_ApplicationBase.OnImGuiRenderOverlay();
     }
 
     void LayerManager::OnWindowStateChange(const WindowContext* window)

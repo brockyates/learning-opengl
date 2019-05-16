@@ -19,6 +19,8 @@ namespace Graphics {
         virtual void OnImGuiRender() override;
         virtual bool IsAttached() override { return true; }
 
+        void OnImGuiRenderOverlay();
+
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
         bool IsNewWindowRequired() const { return m_IsNewWindowRequired; }
         bool IsResolutionChangeRequired() const { return m_IsResolutionChangeRequired; }
@@ -32,13 +34,12 @@ namespace Graphics {
         void ShowMenuBar();
         void ShowMainWindow();
         void ShowLogWindow();
-        void ShowGLWindow();
-        void ShowDemoWidget();
 
     private:
         bool m_IsWindowOpen = true;
         bool m_IsNewWindowRequired = false;
         bool m_IsResolutionChangeRequired = false;
+        bool m_F11Ready = true;
 
         WindowProperties m_NextWindowProperties = WindowConfig::Properties;
     };
