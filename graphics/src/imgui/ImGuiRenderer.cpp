@@ -20,7 +20,8 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", 24.0f);
+        //io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", 24.0f); // Looks good on 4k
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", 16.0f); // Looks good on 1080p
 
         // Setup Dear ImGui style
         ImGui::StyleColorsDark();

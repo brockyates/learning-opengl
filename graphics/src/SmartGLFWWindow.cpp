@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "SmartGLFWWindow.h"
+
+#include "config/WindowConfig.h"
 #include "WindowProperties.h"
 
 namespace Graphics {
@@ -48,19 +50,31 @@ namespace Graphics {
         LOG_GL_INFO(glGetString(GL_VERSION));
     } 
 
-    SmartGLFWWindow CreateWindowedGLFWWindow(WindowProperties& windowProperties)
-    {
-        InitializeGLFW();
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width, windowProperties.Resolution.Height, windowProperties.Title.c_str(), NULL, NULL));
-        SetWindowContext(window.get(), windowProperties);
+    namespace {
 
-        return window;
+        ResolutionSetting GetDesktopResolutionOrDefault()
+        {
+            const auto mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+            const auto found = std::find_if(std::begin(WindowConfig::SupportedResolutions), std::end(WindowConfig::SupportedResolutions), [mode](const ResolutionSetting& setting)
+            {
+                return setting.Width == mode->width;
+            });
+
+            if(found != std::end(WindowConfig::SupportedResolutions))
+                return *found;
+
+            const auto defaultResolution = WindowConfig::SupportedResolutions[3]; // 720p as a safe default resolution.
+            return defaultResolution;
+        }
+
     }
 
-    SmartGLFWWindow CreateFullscreenGLFWWindow(WindowProperties& windowProperties)
+    SmartGLFWWindow CreateInitialWindowedGLFWWindow(WindowProperties& windowProperties)
     {
         InitializeGLFW();
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Resolution.Width, windowProperties.Resolution.Height, windowProperties.Title.c_str(), glfwGetPrimaryMonitor(), NULL));
+        const auto desktopResolutionSetting = GetDesktopResolutionOrDefault();
+        auto window = SmartGLFWWindow(glfwCreateWindow(1366, 768, windowProperties.Title.c_str(), NULL, NULL));
+
         SetWindowContext(window.get(), windowProperties);
 
         return window;

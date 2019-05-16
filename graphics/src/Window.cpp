@@ -10,7 +10,7 @@
 namespace Graphics {
 
     Window::Window()
-        : m_Window(CreateWindowedGLFWWindow(WindowConfig::Properties))
+        : m_Window(CreateInitialWindowedGLFWWindow(WindowConfig::Properties))
         , m_WindowContext(std::make_unique<WindowContext>(m_Window.get(), WindowConfig::Properties))
         , m_UIRenderer(ImGuiRenderer(m_Window.get()))
         , m_Layers(m_WindowContext.get())
