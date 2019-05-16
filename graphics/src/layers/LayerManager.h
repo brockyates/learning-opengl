@@ -12,18 +12,12 @@ namespace Graphics {
     class LayerManager
     {
     public:
-        LayerManager(const WindowContext* window);
+        LayerManager(WindowContext* window);
 
         void OnUpdate();
         void OnImGuiRender();
 
         bool WindowShouldClose() const { return m_ApplicationBase.WindowShouldClose(); }
-        bool IsNewWindWindowRequired() const { return m_ApplicationBase.IsNewWindowRequired(); }
-        bool IsResolutionChangeRequired() const { return m_ApplicationBase.IsResolutionChangeRequired(); }
-
-        WindowProperties NextWindowProperties() const { return m_ApplicationBase.NextWindowProperties(); }
-
-        void OnWindowStateChange(const WindowContext* window);
 
     private:
         void ShowDemoSelector();

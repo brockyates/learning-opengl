@@ -14,7 +14,7 @@ namespace Graphics {
     class ApplicationBase : public Layer
     {
     public:
-        ApplicationBase(const WindowContext* window);
+        ApplicationBase(WindowContext* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
@@ -23,11 +23,7 @@ namespace Graphics {
         void OnImGuiRenderOverlay();
 
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
-        bool IsNewWindowRequired() const { return m_IsNewWindowRequired; }
-        bool IsResolutionChangeRequired() const { return m_IsResolutionChangeRequired; }
-
-        WindowProperties NextWindowProperties() const { return m_NextWindowProperties; }
-        WindowedSettings GetWindowedSettings() const { return m_WindowedSettings; }
+        bool HasWindowStateChanged() const { return m_WindowStateChange; }
 
     private:
         WindowedSettings InitializeWindowedSettings(const WindowContext* ctx);
@@ -40,11 +36,9 @@ namespace Graphics {
 
     private:
         bool m_IsWindowOpen = true;
-        bool m_IsNewWindowRequired = false;
-        bool m_IsResolutionChangeRequired = false;
         bool m_F11Ready = true;
+        bool m_WindowStateChange = false;
 
-        WindowProperties m_NextWindowProperties = WindowConfig::Properties;
         WindowedSettings m_WindowedSettings;
     };
 

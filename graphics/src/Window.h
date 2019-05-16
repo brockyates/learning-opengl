@@ -21,9 +21,6 @@ namespace Graphics {
         unsigned int Height() const{ return m_WindowContext->Properties.Resolution.Height; }
 
     private:
-        void SetNextWindowMode();
-        void StartWindowSystems();
-
         void DrawScene();
         void DrawUIElements();
 

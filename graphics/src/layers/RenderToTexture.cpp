@@ -9,7 +9,7 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(const WindowContext* window)
+    RenderToTexture::RenderToTexture(WindowContext* window)
         : Layer(window, "Render to Texture")
     {}
 

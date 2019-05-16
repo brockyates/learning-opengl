@@ -26,51 +26,8 @@ namespace Graphics {
         m_UIRenderer.Shutdown();
     }
 
-    void Window::SetNextWindowMode()
-    {
-        if (m_Layers.IsNewWindWindowRequired())
-        {
-            m_WindowContext->Properties = m_Layers.NextWindowProperties();
-
-            if(m_Layers.NextWindowProperties().Mode == WindowMode::Windowed)
-            {
-                // Remove in upcoming refactor
-            }
-            else
-            {
-                glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_WindowContext->Properties.Resolution.Width, m_WindowContext->Properties.Resolution.Height, GLFW_DONT_CARE);
-                glfwShowWindow(m_Window.get());
-                glfwFocusWindow(m_Window.get());
-            }
-
-            StartWindowSystems();
-
-            return;
-        }
-
-        if (m_Layers.IsResolutionChangeRequired())
-        {
-            m_WindowContext->Properties = m_Layers.NextWindowProperties();
-
-            glfwSetWindowSize(m_Window.get(),
-                m_WindowContext->Properties.Resolution.Width,
-                m_WindowContext->Properties.Resolution.Height);
-
-            m_Layers.OnWindowStateChange(m_WindowContext.get());
-
-            return;
-        }
-    }
-
-    void Window::StartWindowSystems()
-    {
-        m_Layers.OnWindowStateChange(m_WindowContext.get());
-    }
-
     void Window::OnUpdate()
     {
-        SetNextWindowMode();
-
         DrawScene();
 
         if (!(m_WindowContext->Properties.Mode == WindowMode::Fullscreen))

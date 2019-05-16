@@ -24,7 +24,7 @@ namespace Graphics {
         return { width, height, xpos, ypos };
     }
 
-    ApplicationBase::ApplicationBase(const WindowContext* window)
+    ApplicationBase::ApplicationBase(WindowContext* window)
         : Layer(window, "ApplicationBase")
         , m_WindowedSettings(InitializeWindowedSettings(window))
     {}
@@ -39,24 +39,30 @@ namespace Graphics {
 
             if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
+                m_Window->Properties.Mode = WindowMode::Windowed;
                 glfwHideWindow(m_Window->Window);
                 glfwSetWindowMonitor(m_Window->Window, 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
                 glfwSetWindowPos(m_Window->Window, m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
                 glfwShowWindow(m_Window->Window);
 
-                m_NextWindowProperties.Mode = WindowMode::Windowed;
-                m_IsNewWindowRequired = true;
+                m_WindowStateChange = true;
             }
             else
             {
+                m_Window->Properties.Mode = WindowMode::Fullscreen;
+
                 int width, height, xpos, ypos;
 
                 glfwGetWindowSize(m_Window->Window, &width, &height);
                 glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
 
                 m_WindowedSettings = { width, height, xpos, ypos };
-                m_NextWindowProperties.Mode = WindowMode::Fullscreen;
-                m_IsNewWindowRequired = true;
+
+                glfwSetWindowMonitor(m_Window->Window, glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
+                glfwShowWindow(m_Window->Window);
+                glfwFocusWindow(m_Window->Window);
+
+                m_WindowStateChange = true;
             }
         }
 
@@ -68,8 +74,7 @@ namespace Graphics {
 
     void ApplicationBase::OnUpdate()
     {
-        m_IsNewWindowRequired = false;
-        m_IsResolutionChangeRequired = false;
+        m_WindowStateChange = false;
         HandleInput();
     }
 
@@ -88,6 +93,8 @@ namespace Graphics {
 
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
+            m_Window->Properties.Mode = WindowMode::Fullscreen;
+
             int width, height, xpos, ypos;
 
             glfwGetWindowSize(m_Window->Window, &width, &height);
@@ -95,8 +102,9 @@ namespace Graphics {
 
             m_WindowedSettings = { width, height, xpos, ypos };
 
-            m_NextWindowProperties.Mode = WindowMode::Fullscreen;
-            m_IsNewWindowRequired = true;
+            glfwSetWindowMonitor(m_Window->Window, glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
+            glfwShowWindow(m_Window->Window);
+            glfwFocusWindow(m_Window->Window);
         }
 
         ImGui::End();
@@ -119,16 +127,16 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Resolution", m_NextWindowProperties.Resolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Resolution", m_Window->Properties.Resolution.DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
-                        bool isSelected = (m_NextWindowProperties.Resolution == res);
+                        bool isSelected = (m_Window->Properties.Resolution == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
-                            m_NextWindowProperties.Resolution = res;
-                            m_IsResolutionChangeRequired = true;
+                            m_WindowStateChange = true;
+                            m_Window->Properties.Resolution = res;
                         }
 
                         if (isSelected)

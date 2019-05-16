@@ -13,7 +13,7 @@ namespace Graphics {
 
     namespace {
 
-        std::vector<std::unique_ptr<Layer>> MakeLayers(const WindowContext* window)
+        std::vector<std::unique_ptr<Layer>> MakeLayers(WindowContext* window)
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
@@ -23,7 +23,7 @@ namespace Graphics {
         }
     }
 
-    LayerManager::LayerManager(const WindowContext* window)
+    LayerManager::LayerManager(WindowContext* window)
         : m_Window(window)
         , m_Layers(MakeLayers(window))
         , m_ApplicationBase(window)
@@ -36,15 +36,24 @@ namespace Graphics {
     {
         m_ApplicationBase.OnUpdate();
 
-        for (auto& layer : m_Layers)
+        if (m_ApplicationBase.HasWindowStateChanged())
         {
-            layer->OnUpdate();
+            m_ActiveLayer->Detach();
+            m_ActiveLayer->Attach();
         }
+
+        m_ActiveLayer->OnUpdate();
     }
 
     void LayerManager::OnImGuiRender()
     {
         m_ApplicationBase.OnImGuiRender();
+
+        if (m_ApplicationBase.HasWindowStateChanged())
+        {
+            m_ActiveLayer->Detach();
+            m_ActiveLayer->Attach();
+        }
 
         if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             return;
@@ -57,12 +66,6 @@ namespace Graphics {
         }
 
         m_ApplicationBase.OnImGuiRenderOverlay();
-    }
-
-    void LayerManager::OnWindowStateChange(const WindowContext* window)
-    {
-        m_ActiveLayer->Detach();
-        m_ActiveLayer->Attach();
     }
 
     void LayerManager::ShowDemoSelector()

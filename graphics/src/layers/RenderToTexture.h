@@ -14,7 +14,7 @@ namespace Graphics {
     class RenderToTexture : public Layer
     {
     public:
-        RenderToTexture(const WindowContext* window);
+        RenderToTexture(WindowContext* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
