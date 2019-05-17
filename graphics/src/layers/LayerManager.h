@@ -27,7 +27,7 @@ namespace Graphics {
         const WindowContext* m_Window;
         ApplicationBase m_ApplicationBase;
 
-        std::vector<std::unique_ptr<Layer>> m_Layers;
+        std::vector<std::unique_ptr<Layer>> m_LayerManager;
         Layer* m_ActiveLayer;
     };
 

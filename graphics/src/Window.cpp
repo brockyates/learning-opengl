@@ -1,11 +1,10 @@
 #include "pch.h"
 #include "Window.h"
+
 #include "config/WindowConfig.h"
-
 #include "SmartGLFWWindow.h"
-
-#include "logging/GLDebugMessageCallback.h"
 #include "layers/Layer.h"
+#include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {
 
@@ -13,7 +12,7 @@ namespace Graphics {
         : m_Window(CreateInitialWindowedGLFWWindow(WindowConfig::Properties))
         , m_WindowContext(std::make_unique<WindowContext>(m_Window.get(), WindowConfig::Properties))
         , m_UIRenderer(ImGuiRenderer(m_WindowContext.get()))
-        , m_Layers(m_WindowContext.get())
+        , m_LayerManager(m_WindowContext.get())
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
@@ -41,18 +40,18 @@ namespace Graphics {
 
     bool Window::ShouldClose() const
     {
-        return glfwWindowShouldClose(m_Window.get()) || m_Layers.WindowShouldClose();
+        return glfwWindowShouldClose(m_Window.get()) || m_LayerManager.WindowShouldClose();
     }
 
     void Window::DrawScene()
     {
-        m_Layers.OnUpdate();
+        m_LayerManager.OnUpdate();
     }
 
     void Window::DrawUIElements()
     {
         m_UIRenderer.BeginFrame();
-        m_Layers.OnImGuiRender();
+        m_LayerManager.OnImGuiRender();
         m_UIRenderer.Render(m_WindowContext->Properties);
     }
 

@@ -25,9 +25,9 @@ namespace Graphics {
 
     LayerManager::LayerManager(WindowContext* window)
         : m_Window(window)
-        , m_Layers(MakeLayers(window))
+        , m_LayerManager(MakeLayers(window))
         , m_ApplicationBase(window)
-        , m_ActiveLayer(m_Layers.front().get())
+        , m_ActiveLayer(m_LayerManager.front().get())
     {
         m_ActiveLayer->Attach();
     }
@@ -54,7 +54,7 @@ namespace Graphics {
 
         ShowDemoSelector();
 
-        for (auto& layer : m_Layers)
+        for (auto& layer : m_LayerManager)
         {
             layer->OnImGuiRender();
         }
@@ -70,7 +70,7 @@ namespace Graphics {
 
         if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
         {
-            for (auto& layer : m_Layers)
+            for (auto& layer : m_LayerManager)
             {
                 bool isSelected = (m_ActiveLayer == layer.get());
 
