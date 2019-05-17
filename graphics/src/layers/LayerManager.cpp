@@ -34,13 +34,13 @@ namespace Graphics {
 
     void LayerManager::OnUpdate()
     {
-        m_ApplicationBase.OnUpdate();
-
-        if (m_ApplicationBase.HasWindowStateChanged())
+        if (m_ApplicationBase.HasSceneResolutionChanged())
         {
             m_ActiveLayer->Detach();
             m_ActiveLayer->Attach();
         }
+
+        m_ApplicationBase.OnUpdate();
 
         m_ActiveLayer->OnUpdate();
     }
@@ -48,12 +48,6 @@ namespace Graphics {
     void LayerManager::OnImGuiRender()
     {
         m_ApplicationBase.OnImGuiRender();
-
-        if (m_ApplicationBase.HasWindowStateChanged())
-        {
-            m_ActiveLayer->Detach();
-            m_ActiveLayer->Attach();
-        }
 
         if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             return;

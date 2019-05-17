@@ -23,7 +23,7 @@ namespace Graphics {
         void OnImGuiRenderOverlay();
 
         bool WindowShouldClose() const { return !m_IsWindowOpen; }
-        bool HasWindowStateChanged() const { return m_WindowStateChange; }
+        bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
         WindowedSettings InitializeWindowedSettings(const WindowContext* ctx);

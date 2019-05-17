@@ -112,6 +112,8 @@ namespace Graphics {
 
     void ApplicationBase::ShowMenuBar()
     {
+        bool showFullscreenControlsPopup = false;
+
         if (ImGui::BeginMenuBar())
         {
             if (ImGui::BeginMenu("File"))
@@ -127,7 +129,7 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Resolution", m_Window->Properties.Resolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Scene Resolution", m_Window->Properties.Resolution.DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
@@ -157,10 +159,24 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Fullscreen Controls"))
                 {
+                    showFullscreenControlsPopup = true;
                 }
                 ImGui::EndMenu();
             }
             ImGui::EndMenuBar();
+        }
+
+        if (showFullscreenControlsPopup)
+        {
+            ImGui::OpenPopup("FullscreenControlsPopup");
+        }
+
+        if (ImGui::BeginPopup("FullscreenControlsPopup"))
+        {
+            ImGui::Text("Fullscreen Controls");
+            ImGui::Separator();
+            ImGui::Text("F11: Exit Fullscreen");
+            ImGui::EndPopup();
         }
     }
 
@@ -206,7 +222,7 @@ namespace Graphics {
         }
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-        ImGui::Begin("DockSpace Demo", 0, window_flags);
+        ImGui::Begin("MainDockspaceWindow", 0, window_flags);
         ImGui::PopStyleVar();
 
         if (opt_fullscreen)
@@ -216,7 +232,7 @@ namespace Graphics {
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
         {
-            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+            ImGuiID dockspace_id = ImGui::GetID("MainDockspace");
 
             if (ImGui::DockBuilderGetNode(dockspace_id) == NULL)
                 LayoutPreset(dockspace_id, dockSize);
