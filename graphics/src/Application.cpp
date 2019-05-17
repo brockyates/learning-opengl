@@ -5,11 +5,6 @@
 
 namespace Graphics {
 
-    Application::~Application()
-    {
-        glfwTerminate();
-    }
-
     void Application::Start()
     {
         Window window;

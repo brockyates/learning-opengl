@@ -1,16 +1,13 @@
 #include "pch.h"
 #include "Window.h"
 
-#include "config/WindowConfig.h"
-#include "SmartGLFWWindow.h"
 #include "layers/Layer.h"
 #include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {
 
     Window::Window()
-        : m_Window(CreateInitialWindowedGLFWWindow(WindowConfig::Properties))
-        , m_Context(m_Window.get(), WindowConfig::Properties)
+        : m_Context()
         , m_UIRenderer(ImGuiRenderer(&m_Context))
         , m_LayerManager(&m_Context)
     {
@@ -23,6 +20,7 @@ namespace Graphics {
     Window::~Window()
     {
         m_UIRenderer.Shutdown();
+        glfwTerminate();
     }
 
     void Window::OnUpdate()
@@ -34,13 +32,13 @@ namespace Graphics {
             DrawUIElements();
         }
 
-        glfwSwapBuffers(m_Window.get());
+        glfwSwapBuffers(m_Context.NativeWindow());
         glfwPollEvents();
     }
 
-    bool Window::ShouldClose() const
+    bool Window::ShouldClose()
     {
-        return glfwWindowShouldClose(m_Window.get()) || m_LayerManager.WindowShouldClose();
+        return glfwWindowShouldClose(m_Context.NativeWindow()) || m_LayerManager.WindowShouldClose();
     }
 
     void Window::DrawScene()

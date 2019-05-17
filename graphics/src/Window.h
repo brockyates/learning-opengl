@@ -1,9 +1,7 @@
 #pragma once
 
-#include "layers/LayerManager.h"
-#include "SmartGLFWWindow.h"
-
 #include "imgui/ImGuiRenderer.h"
+#include "layers/LayerManager.h"
 
 namespace Graphics {
 
@@ -14,14 +12,13 @@ namespace Graphics {
         ~Window();
 
         void OnUpdate();
-        bool ShouldClose() const;
+        bool ShouldClose();
 
     private:
         void DrawScene();
         void DrawUIElements();
 
     private:
-        SmartGLFWWindow m_Window;
         WindowContext m_Context;
         ImGuiRenderer m_UIRenderer;
         LayerManager m_LayerManager;

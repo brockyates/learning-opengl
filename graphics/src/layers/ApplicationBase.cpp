@@ -18,8 +18,8 @@ namespace Graphics {
     {
         int width, height, xpos, ypos;
 
-        glfwGetWindowSize(m_Window->Window, &width, &height);
-        glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+        glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
+        glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
 
         return { width, height, xpos, ypos };
     }
@@ -40,10 +40,10 @@ namespace Graphics {
             if (m_Window->Properties.Mode == WindowMode::Fullscreen)
             {
                 m_Window->Properties.Mode = WindowMode::Windowed;
-                glfwHideWindow(m_Window->Window);
-                glfwSetWindowMonitor(m_Window->Window, 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->Window, m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
-                glfwShowWindow(m_Window->Window);
+                glfwHideWindow(m_Window->NativeWindow());
+                glfwSetWindowMonitor(m_Window->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(m_Window->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+                glfwShowWindow(m_Window->NativeWindow());
 
                 m_WindowStateChange = true;
             }
@@ -53,14 +53,14 @@ namespace Graphics {
 
                 int width, height, xpos, ypos;
 
-                glfwGetWindowSize(m_Window->Window, &width, &height);
-                glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+                glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
+                glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
 
                 m_WindowedSettings = { width, height, xpos, ypos };
 
-                glfwSetWindowMonitor(m_Window->Window, glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
-                glfwShowWindow(m_Window->Window);
-                glfwFocusWindow(m_Window->Window);
+                glfwSetWindowMonitor(m_Window->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
+                glfwShowWindow(m_Window->NativeWindow());
+                glfwFocusWindow(m_Window->NativeWindow());
 
                 m_WindowStateChange = true;
             }
@@ -97,14 +97,14 @@ namespace Graphics {
 
             int width, height, xpos, ypos;
 
-            glfwGetWindowSize(m_Window->Window, &width, &height);
-            glfwGetWindowPos(m_Window->Window, &xpos, &ypos);
+            glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
+            glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
 
             m_WindowedSettings = { width, height, xpos, ypos };
 
-            glfwSetWindowMonitor(m_Window->Window, glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
-            glfwShowWindow(m_Window->Window);
-            glfwFocusWindow(m_Window->Window);
+            glfwSetWindowMonitor(m_Window->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
+            glfwShowWindow(m_Window->NativeWindow());
+            glfwFocusWindow(m_Window->NativeWindow());
         }
 
         ImGui::End();

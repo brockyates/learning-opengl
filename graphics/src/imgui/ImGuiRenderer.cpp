@@ -34,7 +34,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(context->Window, true);
+        ImGui_ImplGlfw_InitForOpenGL(context->NativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
