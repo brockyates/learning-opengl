@@ -22,7 +22,7 @@ namespace Graphics {
 
     private:
         SmartGLFWWindow m_Window;
-        std::unique_ptr<WindowContext> m_WindowContext = nullptr;
+        WindowContext m_Context;
         ImGuiRenderer m_UIRenderer;
         LayerManager m_LayerManager;
     };

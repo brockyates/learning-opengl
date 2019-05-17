@@ -10,9 +10,9 @@ namespace Graphics {
 
     Window::Window()
         : m_Window(CreateInitialWindowedGLFWWindow(WindowConfig::Properties))
-        , m_WindowContext(std::make_unique<WindowContext>(m_Window.get(), WindowConfig::Properties))
-        , m_UIRenderer(ImGuiRenderer(m_WindowContext.get()))
-        , m_LayerManager(m_WindowContext.get())
+        , m_Context(m_Window.get(), WindowConfig::Properties)
+        , m_UIRenderer(ImGuiRenderer(&m_Context))
+        , m_LayerManager(&m_Context)
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
@@ -29,7 +29,7 @@ namespace Graphics {
     {
         DrawScene();
 
-        if (!(m_WindowContext->Properties.Mode == WindowMode::Fullscreen))
+        if (!(m_Context.Properties.Mode == WindowMode::Fullscreen))
         {
             DrawUIElements();
         }
@@ -52,7 +52,7 @@ namespace Graphics {
     {
         m_UIRenderer.BeginFrame();
         m_LayerManager.OnImGuiRender();
-        m_UIRenderer.Render(m_WindowContext->Properties);
+        m_UIRenderer.Render(m_Context.Properties);
     }
 
 }
