@@ -2,10 +2,10 @@
 #include "ApplicationBase.h"
 
 #include "config/WindowConfig.h"
-#include "WindowContext.h"
-
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "Window.h"
+#include "WindowMode.h"
 
 #include <imgui.h>
 #include <imgui_internal.h>
@@ -22,40 +22,41 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_F11Ready && (m_Window->Context()->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_F11Ready && (m_Window->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
             m_F11Ready = false;
 
+            // TODO: Push all of these GLFW calls to Window class
             if (m_Window->IsFullscreen())
             {
-                m_Window->Context()->Properties.Mode = WindowMode::Windowed;
-                glfwHideWindow(m_Window->Context()->NativeWindow());
-                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), 0, 0, 0, m_Window->GetWindowedSettings().Width, m_Window->GetWindowedSettings().Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->Context()->NativeWindow(), m_Window->GetWindowedSettings().Xpos, m_Window->GetWindowedSettings().Ypos);
-                glfwShowWindow(m_Window->Context()->NativeWindow());
+                m_Window->SetMode(WindowMode::Windowed); // TODO: Fire event
+                glfwHideWindow(m_Window->GetNativeWindow());
+                glfwSetWindowMonitor(m_Window->GetNativeWindow(), 0, 0, 0, m_Window->GetWindowedSettings().Width, m_Window->GetWindowedSettings().Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(m_Window->GetNativeWindow(), m_Window->GetWindowedSettings().Xpos, m_Window->GetWindowedSettings().Ypos);
+                glfwShowWindow(m_Window->GetNativeWindow());
 
                 m_WindowStateChange = true;
             }
             else
             {
-                m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
+                m_Window->SetMode(WindowMode::Fullscreen);
 
                 int width, height, xpos, ypos;
 
-                glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
-                glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
+                glfwGetWindowSize(m_Window->GetNativeWindow(), &width, &height);
+                glfwGetWindowPos(m_Window->GetNativeWindow(), &xpos, &ypos);
 
                 m_Window->SetWindowedSettings({ width, height, xpos, ypos });  // TODO: Fire event
 
-                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-                glfwShowWindow(m_Window->Context()->NativeWindow());
-                glfwFocusWindow(m_Window->Context()->NativeWindow());
+                glfwSetWindowMonitor(m_Window->GetNativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
+                glfwShowWindow(m_Window->GetNativeWindow());
+                glfwFocusWindow(m_Window->GetNativeWindow());
 
                 m_WindowStateChange = true;
             }
         }
 
-        if (m_Window->Context()->Input.IsKeyReleased(GLFW_KEY_F11))
+        if (m_Window->Input.IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
         }
@@ -80,20 +81,21 @@ namespace Graphics {
     {
         ImGui::Begin("Scene");
 
+        //TODO: Push all of these GLFW calls to Window class
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
-            m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
+            m_Window->SetMode(WindowMode::Fullscreen);
 
             int width, height, xpos, ypos;
 
-            glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
-            glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
+            glfwGetWindowSize(m_Window->GetNativeWindow(), &width, &height);
+            glfwGetWindowPos(m_Window->GetNativeWindow(), &xpos, &ypos);
 
             m_Window->SetWindowedSettings({ width, height, xpos, ypos }); // TODO: Fire event
 
-            glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-            glfwShowWindow(m_Window->Context()->NativeWindow());
-            glfwFocusWindow(m_Window->Context()->NativeWindow());
+            glfwSetWindowMonitor(m_Window->GetNativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
+            glfwShowWindow(m_Window->GetNativeWindow());
+            glfwFocusWindow(m_Window->GetNativeWindow());
         }
 
         ImGui::End();
@@ -109,7 +111,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    glfwSetWindowShouldClose(m_Window->Context()->NativeWindow(), GLFW_TRUE);
+                    glfwSetWindowShouldClose(m_Window->GetNativeWindow(), GLFW_TRUE);
                 }
                 ImGui::EndMenu();
             }
@@ -118,16 +120,16 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Scene Resolution", m_Window->Context()->Properties.Resolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Scene Resolution", m_Window->Resolution().DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
-                        bool isSelected = (m_Window->Context()->Properties.Resolution == res);
+                        bool isSelected = (m_Window->Resolution() == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
                             m_WindowStateChange = true;
-                            m_Window->Context()->Properties.Resolution = res;
+                            m_Window->SetResolution(res); //TODO: Fire event
                         }
 
                         if (isSelected)

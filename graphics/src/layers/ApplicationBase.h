@@ -1,9 +1,6 @@
 #pragma once
-#include "layers/Layer.h"
 
-#include "config/WindowConfig.h"
-#include "Window.h"
-#include "WindowedSettings.h"
+#include "layers/Layer.h"
 
 #include <imgui.h>
 

@@ -20,7 +20,7 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", m_Window->Context()->Properties.Resolution.DefaultFontSize);
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", m_Window->DefaultFontSize());
 
         // Setup Dear ImGui style
         ImGui::StyleColorsClassic();
@@ -34,7 +34,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(m_Window->Context()->NativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(m_Window->GetNativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 

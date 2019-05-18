@@ -114,7 +114,6 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\config\WindowConfig.h" />
-    <ClInclude Include="src\WindowContext.h" />
     <ClInclude Include="src\WindowProperties.h" />
     <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
