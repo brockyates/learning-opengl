@@ -16,7 +16,7 @@ namespace Graphics {
 
         while (!window->ShouldClose())
         {
-            sceneManager.RenderScene();
+            sceneManager.RenderScene(window.get());
 
             if (!window->IsFullscreen())
             {

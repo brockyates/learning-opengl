@@ -19,12 +19,12 @@ namespace Graphics {
         SceneManager(SceneManager&&) = default;
         SceneManager& operator=(SceneManager&&) = default;
 
-        void RenderScene();
+        void RenderScene(Window* window);
         void RenderUI(Window* window);
 
     private:
-        void ShowDemoSelector();
-        void UpdateActiveLayer(Layer* activeLayer);
+        void ShowDemoSelector(Window* window);
+        void UpdateActiveLayer(Window* window, Layer* activeLayer);
 
     private:
         ApplicationBase m_ApplicationBase;

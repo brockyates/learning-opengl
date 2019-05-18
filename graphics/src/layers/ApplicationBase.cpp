@@ -25,92 +25,92 @@ namespace Graphics {
     }
 
     ApplicationBase::ApplicationBase(Window* window)
-        : Layer(window, "ApplicationBase")
+        : Layer("ApplicationBase")
         , m_WindowedSettings(InitializeWindowedSettings(window))
     {}
 
-    void ApplicationBase::HandleInput()
+    void ApplicationBase::HandleInput(Window* window)
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_F11Ready && (m_Window->Context()->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_F11Ready && (window->Context()->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
             m_F11Ready = false;
 
-            if (m_Window->Context()->Properties.Mode == WindowMode::Fullscreen)
+            if (window->IsFullscreen())
             {
-                m_Window->Context()->Properties.Mode = WindowMode::Windowed;
-                glfwHideWindow(m_Window->Context()->NativeWindow());
-                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->Context()->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
-                glfwShowWindow(m_Window->Context()->NativeWindow());
+                window->Context()->Properties.Mode = WindowMode::Windowed;
+                glfwHideWindow(window->Context()->NativeWindow());
+                glfwSetWindowMonitor(window->Context()->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(window->Context()->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+                glfwShowWindow(window->Context()->NativeWindow());
 
                 m_WindowStateChange = true;
             }
             else
             {
-                m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
+                window->Context()->Properties.Mode = WindowMode::Fullscreen;
 
                 int width, height, xpos, ypos;
 
-                glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
-                glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
+                glfwGetWindowSize(window->Context()->NativeWindow(), &width, &height);
+                glfwGetWindowPos(window->Context()->NativeWindow(), &xpos, &ypos);
 
                 m_WindowedSettings = { width, height, xpos, ypos };
 
-                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-                glfwShowWindow(m_Window->Context()->NativeWindow());
-                glfwFocusWindow(m_Window->Context()->NativeWindow());
+                glfwSetWindowMonitor(window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, window->Width(), window->Height(), GLFW_DONT_CARE);
+                glfwShowWindow(window->Context()->NativeWindow());
+                glfwFocusWindow(window->Context()->NativeWindow());
 
                 m_WindowStateChange = true;
             }
         }
 
-        if (m_Window->Context()->Input.IsKeyReleased(GLFW_KEY_F11))
+        if (window->Context()->Input.IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
         }
     }
 
-    void ApplicationBase::OnUpdate()
+    void ApplicationBase::RenderScene(Window* window)
     {
         m_WindowStateChange = false;
-        HandleInput();
+        HandleInput(window);
     }
 
-    void ApplicationBase::OnImGuiRender()
+    void ApplicationBase::RenderUI(Window* window)
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        ShowMainWindow();
+        ShowMainWindow(window);
         ShowLogWindow();
     }
 
-    void ApplicationBase::OnImGuiRenderOverlay()
+    void ApplicationBase::OnImGuiRenderOverlay(Window* window)
     {
         ImGui::Begin("Scene");
 
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
-            m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
+            window->Context()->Properties.Mode = WindowMode::Fullscreen;
 
             int width, height, xpos, ypos;
 
-            glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
-            glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
+            glfwGetWindowSize(window->Context()->NativeWindow(), &width, &height);
+            glfwGetWindowPos(window->Context()->NativeWindow(), &xpos, &ypos);
 
             m_WindowedSettings = { width, height, xpos, ypos };
 
-            glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-            glfwShowWindow(m_Window->Context()->NativeWindow());
-            glfwFocusWindow(m_Window->Context()->NativeWindow());
+            glfwSetWindowMonitor(window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, window->Width(), window->Height(), GLFW_DONT_CARE);
+            glfwShowWindow(window->Context()->NativeWindow());
+            glfwFocusWindow(window->Context()->NativeWindow());
         }
 
         ImGui::End();
     }
 
-    void ApplicationBase::ShowMenuBar()
+    void ApplicationBase::ShowMenuBar(Window* window)
     {
         bool showFullscreenControlsPopup = false;
 
@@ -120,7 +120,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    glfwSetWindowShouldClose(m_Window->Context()->NativeWindow(), GLFW_TRUE);
+                    glfwSetWindowShouldClose(window->Context()->NativeWindow(), GLFW_TRUE);
                 }
                 ImGui::EndMenu();
             }
@@ -129,16 +129,16 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Scene Resolution", m_Window->Context()->Properties.Resolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Scene Resolution", window->Context()->Properties.Resolution.DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
-                        bool isSelected = (m_Window->Context()->Properties.Resolution == res);
+                        bool isSelected = (window->Context()->Properties.Resolution == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
                             m_WindowStateChange = true;
-                            m_Window->Context()->Properties.Resolution = res;
+                            window->Context()->Properties.Resolution = res;
                         }
 
                         if (isSelected)
@@ -197,7 +197,7 @@ namespace Graphics {
         ImGui::DockBuilderFinish(dockspaceID);
     }
 
-    void ApplicationBase::ShowMainWindow()
+    void ApplicationBase::ShowMainWindow(Window* window)
     {
         static bool opt_fullscreen_persistant = true;
         bool opt_fullscreen = opt_fullscreen_persistant;
@@ -240,7 +240,7 @@ namespace Graphics {
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
         }
 
-        ShowMenuBar();
+        ShowMenuBar(window);
         ImGui::End();
     }
 

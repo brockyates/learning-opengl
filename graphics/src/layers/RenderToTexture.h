@@ -14,13 +14,13 @@ namespace Graphics {
     class RenderToTexture : public Layer
     {
     public:
-        RenderToTexture(Window* window);
+        RenderToTexture();
 
-        virtual void OnUpdate() override;
-        virtual void OnImGuiRender() override;
+        virtual void RenderScene(Window* window) override;
+        virtual void RenderUI(Window* window) override;
 
-        virtual void Attach() override;
-        virtual void Detach() override;
+        virtual void Attach(Window* window) override;
+        virtual void Detach(Window* window) override;
         virtual bool IsAttached() override { return m_Attached; }
 
         virtual std::string GetPopupText() const override;

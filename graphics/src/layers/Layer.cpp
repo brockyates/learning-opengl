@@ -3,8 +3,7 @@
 
 namespace Graphics {
 
-    Layer::Layer(Window* window, const std::string& name)
+    Layer::Layer(const std::string& name)
         : m_Name(name)
-        , m_Window(window)
     {}
 }

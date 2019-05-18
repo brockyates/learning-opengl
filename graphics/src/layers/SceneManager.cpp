@@ -15,7 +15,7 @@ namespace Graphics {
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<RenderToTexture>(window));
+            layers.emplace_back(std::make_unique<RenderToTexture>());
 
             return layers;
         }
@@ -27,43 +27,43 @@ namespace Graphics {
         , m_ActiveLayer(m_SceneManager.front().get())
         , m_UIRenderer(window)
     {
-        m_ActiveLayer->Attach();
+        m_ActiveLayer->Attach(window);
     }
 
-    void SceneManager::RenderScene()
+    void SceneManager::RenderScene(Window* window)
     {
         if (m_ApplicationBase.HasSceneResolutionChanged())
         {
-            m_ActiveLayer->Detach();
-            m_ActiveLayer->Attach();
+            m_ActiveLayer->Detach(window);
+            m_ActiveLayer->Attach(window);
         }
 
-        m_ApplicationBase.OnUpdate();
+        m_ApplicationBase.RenderScene(window);
 
-        m_ActiveLayer->OnUpdate();
+        m_ActiveLayer->RenderScene(window);
     }
 
     void SceneManager::RenderUI(Window* window)
     {
         m_UIRenderer.BeginFrame();
 
-        m_ApplicationBase.OnImGuiRender();
+        m_ApplicationBase.RenderUI(window);
 
         //if (m_Window->Properties.Mode == WindowMode::Fullscreen) return;
 
-        ShowDemoSelector();
+        ShowDemoSelector(window);
 
         for (auto& layer : m_SceneManager)
         {
-            layer->OnImGuiRender();
+            layer->RenderUI(window);
         }
 
-        m_ApplicationBase.OnImGuiRenderOverlay();
+        m_ApplicationBase.OnImGuiRenderOverlay(window);
 
         m_UIRenderer.Render(window);
     }
 
-    void SceneManager::ShowDemoSelector()
+    void SceneManager::ShowDemoSelector(Window* window)
     {
         ImGui::Begin("DemoWidget");
 
@@ -94,19 +94,19 @@ namespace Graphics {
             ImGui::EndCombo();
         }
 
-        UpdateActiveLayer(nextActiveLayer);
+        UpdateActiveLayer(window, nextActiveLayer);
 
         ImGui::End();
     }
 
-    void SceneManager::UpdateActiveLayer(Layer* nextActiveLayer)
+    void SceneManager::UpdateActiveLayer(Window* window, Layer* nextActiveLayer)
     {
         if (nextActiveLayer->IsAttached())
             return;
 
-        m_ActiveLayer->Detach();
+        m_ActiveLayer->Detach(window);
         m_ActiveLayer = nextActiveLayer;
-        m_ActiveLayer->Attach();
+        m_ActiveLayer->Attach(window);
     }
 
 }

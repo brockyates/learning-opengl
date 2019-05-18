@@ -9,16 +9,16 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(Window* window)
-        : Layer(window, "Render to Texture")
+    RenderToTexture::RenderToTexture()
+        : Layer("Render to Texture")
     {}
 
-    void RenderToTexture::OnUpdate()
+    void RenderToTexture::RenderScene(Window* window)
     {
         if (!m_Attached)
             return;
 
-        if (m_Window->Context()->Properties.Mode == WindowMode::Windowed)
+        if (!window->IsFullscreen())
         {
             glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         }
@@ -31,7 +31,7 @@ namespace Graphics {
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        glViewport(0, 0, m_Window->Context()->Properties.Resolution.Width, m_Window->Context()->Properties.Resolution.Height);
+        glViewport(0, 0, window->Width(), window->Height());
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Release bindings
@@ -40,7 +40,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void RenderToTexture::OnImGuiRender()
+    void RenderToTexture::RenderUI(Window* window)
     {
         if (!m_Attached)
             return;
@@ -70,7 +70,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void RenderToTexture::Attach()
+    void RenderToTexture::Attach(Window* window)
     {
         if (m_Attached) return;
 
@@ -81,7 +81,7 @@ namespace Graphics {
 
         glGenTextures(1, &m_RenderedTextureID);
         glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Window->Width(), m_Window->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window->Width(), window->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -90,7 +90,7 @@ namespace Graphics {
 
         glGenRenderbuffers(1, &m_RenderBufferID);
         glBindRenderbuffer(GL_RENDERBUFFER, m_RenderBufferID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_Window->Width(), m_Window->Height());
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window->Width(), window->Height());
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RenderBufferID);
@@ -127,7 +127,7 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void RenderToTexture::Detach()
+    void RenderToTexture::Detach(Window* window)
     {
         if (!m_Attached) return;
 
