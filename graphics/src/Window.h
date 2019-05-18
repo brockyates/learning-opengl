@@ -13,15 +13,12 @@ namespace Graphics {
 
         void OnUpdate();
         bool ShouldClose();
+        bool IsFullscreen() const;
 
-    private:
-        void DrawScene();
-        void DrawUIElements();
+        WindowContext* Context() { return &m_Context; }
 
     private:
         WindowContext m_Context;
-        ImGuiRenderer m_UIRenderer;
-        LayerManager m_LayerManager;
     };
 
 }

@@ -10,7 +10,7 @@ namespace Graphics {
     {
     public:
         ImGuiRenderer(WindowContext* context);
-        void Shutdown();
+        ~ImGuiRenderer();
 
         ImGuiRenderer(ImGuiRenderer&) = default;
         ImGuiRenderer& operator=(ImGuiRenderer&) = default;
