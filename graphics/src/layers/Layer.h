@@ -8,7 +8,7 @@ namespace Graphics {
     class Layer
     {
     public:
-        Layer(const std::string& name = "Layer");
+        Layer(Window* window, const std::string& name = "Layer");
         virtual ~Layer() = default;
 
         // Layers work with OpenGL global state and may have const members
@@ -18,11 +18,11 @@ namespace Graphics {
         Layer& operator=(Layer&) = delete;
         Layer& operator=(Layer&&) = delete;
 
-        virtual void RenderScene(Window* window) {}
-        virtual void RenderUI(Window* window) {}
+        virtual void RenderScene() {}
+        virtual void RenderUI() {}
 
-        virtual void Attach(Window* window) {};
-        virtual void Detach(Window* window) {};
+        virtual void Attach() {};
+        virtual void Detach() {};
         virtual bool IsAttached() = 0;
 
         virtual std::string GetPopupText() const { return ""; }
@@ -31,6 +31,7 @@ namespace Graphics {
         inline const std::string& GetName() const { return m_Name; }
 
     protected:
+        Window* m_Window;
         std::string m_Name;
     };
 

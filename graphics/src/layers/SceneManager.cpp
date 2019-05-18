@@ -15,7 +15,7 @@ namespace Graphics {
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
-            layers.emplace_back(std::make_unique<RenderToTexture>());
+            layers.emplace_back(std::make_unique<RenderToTexture>(window));
 
             return layers;
         }
@@ -27,40 +27,40 @@ namespace Graphics {
         , m_ActiveLayer(m_SceneManager.front().get())
         , m_UIRenderer(window)
     {
-        m_ActiveLayer->Attach(window);
+        m_ActiveLayer->Attach();
     }
 
-    void SceneManager::RenderScene(Window* window)
+    void SceneManager::RenderScene()
     {
         if (m_ApplicationBase.HasSceneResolutionChanged())
         {
-            m_ActiveLayer->Detach(window);
-            m_ActiveLayer->Attach(window);
+            m_ActiveLayer->Detach();
+            m_ActiveLayer->Attach();
         }
 
-        m_ApplicationBase.RenderScene(window);
+        m_ApplicationBase.RenderScene();
 
-        m_ActiveLayer->RenderScene(window);
+        m_ActiveLayer->RenderScene();
     }
 
-    void SceneManager::RenderUI(Window* window)
+    void SceneManager::RenderUI()
     {
         m_UIRenderer.BeginFrame();
-        m_ApplicationBase.RenderUI(window);
+        m_ApplicationBase.RenderUI();
 
-        ShowDemoSelector(window);
+        ShowDemoSelector();
 
         for (auto& layer : m_SceneManager)
         {
-            layer->RenderUI(window);
+            layer->RenderUI();
         }
 
-        m_ApplicationBase.OnImGuiRenderOverlay(window);
+        m_ApplicationBase.OnImGuiRenderOverlay();
 
-        m_UIRenderer.Render(window);
+        m_UIRenderer.Render();
     }
 
-    void SceneManager::ShowDemoSelector(Window* window)
+    void SceneManager::ShowDemoSelector()
     {
         ImGui::Begin("DemoWidget");
 
@@ -72,7 +72,7 @@ namespace Graphics {
 
                 if (ImGui::Selectable(layer->GetName().c_str(), isSelected))
                 {
-                    UpdateActiveLayer(window, layer.get());
+                    UpdateActiveLayer(layer.get());
                 }
 
                 if (ImGui::IsItemHovered())
@@ -92,14 +92,14 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void SceneManager::UpdateActiveLayer(Window* window, Layer* nextActiveLayer)
+    void SceneManager::UpdateActiveLayer(Layer* nextActiveLayer)
     {
         if (nextActiveLayer->IsAttached())
             return;
 
-        m_ActiveLayer->Detach(window);
+        m_ActiveLayer->Detach();
         m_ActiveLayer = nextActiveLayer;
-        m_ActiveLayer->Attach(window);
+        m_ActiveLayer->Attach();
     }
 
 }

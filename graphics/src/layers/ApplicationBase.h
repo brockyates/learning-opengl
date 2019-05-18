@@ -14,21 +14,21 @@ namespace Graphics {
     public:
         ApplicationBase(Window* window);
 
-        virtual void RenderScene(Window* window) override;
-        virtual void RenderUI(Window* window) override;
+        virtual void RenderScene() override;
+        virtual void RenderUI() override;
         virtual bool IsAttached() override { return true; }
 
-        void OnImGuiRenderOverlay(Window* window);
+        void OnImGuiRenderOverlay();
 
         bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
-        WindowedSettings InitializeWindowedSettings(Window* window);
-        void HandleInput(Window* window);
+        WindowedSettings InitializeWindowedSettings();
+        void HandleInput();
 
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
-        void ShowMenuBar(Window* window);
-        void ShowMainWindow(Window* window);
+        void ShowMenuBar();
+        void ShowMainWindow();
         void ShowLogWindow();
 
     private:

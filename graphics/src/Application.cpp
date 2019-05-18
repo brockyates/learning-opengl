@@ -16,11 +16,11 @@ namespace Graphics {
 
         while (!window->ShouldClose())
         {
-            sceneManager.RenderScene(window.get());
+            sceneManager.RenderScene();
 
             if (!window->IsFullscreen())
             {
-                sceneManager.RenderUI(window.get());
+                sceneManager.RenderUI();
             }
 
             window->Update();

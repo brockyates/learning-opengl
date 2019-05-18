@@ -16,7 +16,10 @@ namespace Graphics {
         ImGuiRenderer& operator=(ImGuiRenderer&) = default;
 
         void BeginFrame() const;
-        void Render(Window* window);
+        void Render();
+
+    private:
+        Window* m_Window;
     };
 
 }
