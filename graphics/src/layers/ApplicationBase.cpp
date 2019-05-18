@@ -120,7 +120,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    m_IsWindowOpen = false;
+                    glfwSetWindowShouldClose(m_Window->NativeWindow(), GLFW_TRUE);
                 }
                 ImGui::EndMenu();
             }

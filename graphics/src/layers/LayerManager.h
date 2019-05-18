@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ApplicationBase.h"
+#include "imgui/ImGuiRenderer.h"
 #include "Layer.h"
 #include "WindowContext.h"
 
@@ -13,11 +14,13 @@ namespace Graphics {
     {
     public:
         LayerManager(WindowContext* window);
+        ~LayerManager() = default;
 
-        void OnUpdate();
-        void OnImGuiRender();
+        LayerManager(LayerManager&&) = default;
+        LayerManager& operator=(LayerManager&&) = default;
 
-        bool WindowShouldClose() const { return m_ApplicationBase.WindowShouldClose(); }
+        void RenderScene();
+        void RenderUI();
 
     private:
         void ShowDemoSelector();
@@ -29,6 +32,8 @@ namespace Graphics {
 
         std::vector<std::unique_ptr<Layer>> m_LayerManager;
         Layer* m_ActiveLayer;
+
+        ImGuiRenderer m_UIRenderer;
     };
 
 }

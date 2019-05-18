@@ -28,11 +28,12 @@ namespace Graphics {
         , m_LayerManager(MakeLayers(window))
         , m_ApplicationBase(window)
         , m_ActiveLayer(m_LayerManager.front().get())
+        , m_UIRenderer(window)
     {
         m_ActiveLayer->Attach();
     }
 
-    void LayerManager::OnUpdate()
+    void LayerManager::RenderScene()
     {
         if (m_ApplicationBase.HasSceneResolutionChanged())
         {
@@ -45,8 +46,10 @@ namespace Graphics {
         m_ActiveLayer->OnUpdate();
     }
 
-    void LayerManager::OnImGuiRender()
+    void LayerManager::RenderUI()
     {
+        m_UIRenderer.BeginFrame();
+
         m_ApplicationBase.OnImGuiRender();
 
         if (m_Window->Properties.Mode == WindowMode::Fullscreen)
@@ -60,6 +63,8 @@ namespace Graphics {
         }
 
         m_ApplicationBase.OnImGuiRenderOverlay();
+
+        m_UIRenderer.Render(m_Window->Properties);
     }
 
     void LayerManager::ShowDemoSelector()

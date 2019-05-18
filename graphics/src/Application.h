@@ -6,7 +6,7 @@ namespace Graphics
     class Application
     {
     public:
-        void Start();
+        static void Start();
     };
 
 }

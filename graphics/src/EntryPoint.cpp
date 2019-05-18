@@ -8,7 +8,7 @@ int main()
     Graphics::Utils::Log::Init();
 
     {
-        Graphics::Application().Start();
+        Graphics::Application::Start();
     }
 
     return 0;

@@ -9,25 +9,21 @@ namespace Graphics {
 
     void Application::Start()
     {
-        Window window;
-
-        LayerManager layerManager(window.Context());
-        ImGuiRenderer uiRenderer(window.Context());
+        auto window = std::make_unique<Window>();
+        auto layerManager = LayerManager(window->Context());
 
         LOG_INFO("Main application loop started");
 
-        while (!window.ShouldClose() && !layerManager.WindowShouldClose())
+        while (!window->ShouldClose())
         {
-            layerManager.OnUpdate();
+            layerManager.RenderScene();
 
-            if (!window.IsFullscreen())
+            if (!window->IsFullscreen())
             {
-                uiRenderer.BeginFrame();
-                layerManager.OnImGuiRender();
-                uiRenderer.Render(window.Context()->Properties);
+                layerManager.RenderUI();
             }
 
-            window.OnUpdate();
+            window->OnUpdate();
         }
 
         LOG_INFO("Main application loop stopped");

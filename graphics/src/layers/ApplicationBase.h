@@ -22,7 +22,6 @@ namespace Graphics {
 
         void OnImGuiRenderOverlay();
 
-        bool WindowShouldClose() const { return !m_IsWindowOpen; }
         bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
@@ -35,7 +34,6 @@ namespace Graphics {
         void ShowLogWindow();
 
     private:
-        bool m_IsWindowOpen = true;
         bool m_F11Ready = true;
         bool m_WindowStateChange = false;
 
