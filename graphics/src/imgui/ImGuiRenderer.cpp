@@ -3,14 +3,13 @@
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
-#include "Window.h"
 
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 
 namespace Graphics {
 
-    ImGuiRenderer::ImGuiRenderer(WindowContext* context)
+    ImGuiRenderer::ImGuiRenderer(Window* window)
     {
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
@@ -20,7 +19,7 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", context->Properties.Resolution.DefaultFontSize); // Looks good on 1080p
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", window->Context() ->Properties.Resolution.DefaultFontSize);
 
         // Setup Dear ImGui style
         ImGui::StyleColorsClassic();
@@ -34,7 +33,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(context->NativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(window->Context()->NativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 

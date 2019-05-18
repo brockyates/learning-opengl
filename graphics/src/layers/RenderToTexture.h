@@ -3,7 +3,7 @@
 #include "layers/Layer.h"
 #include "ShaderHelpers.h"
 
-#include "WindowContext.h"
+#include "Window.h"
 
 #include <glm/glm.hpp>
 
@@ -14,7 +14,7 @@ namespace Graphics {
     class RenderToTexture : public Layer
     {
     public:
-        RenderToTexture(WindowContext* window);
+        RenderToTexture(Window* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;

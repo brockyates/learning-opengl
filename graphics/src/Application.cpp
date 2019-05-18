@@ -10,7 +10,7 @@ namespace Graphics {
     void Application::Start()
     {
         auto window = std::make_unique<Window>();
-        SceneManager sceneManager(window.get()->Context());
+        SceneManager sceneManager(window.get());
 
         LOG_INFO("Main application loop started");
 

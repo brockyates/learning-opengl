@@ -14,17 +14,17 @@
 
 namespace Graphics {
 
-    WindowedSettings ApplicationBase::InitializeWindowedSettings(const WindowContext* ctx)
+    WindowedSettings ApplicationBase::InitializeWindowedSettings(Window* window)
     {
         int width, height, xpos, ypos;
 
-        glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
-        glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
+        glfwGetWindowSize(window->Context()->NativeWindow(), &width, &height);
+        glfwGetWindowPos(window->Context()->NativeWindow(), &xpos, &ypos);
 
         return { width, height, xpos, ypos };
     }
 
-    ApplicationBase::ApplicationBase(WindowContext* window)
+    ApplicationBase::ApplicationBase(Window* window)
         : Layer(window, "ApplicationBase")
         , m_WindowedSettings(InitializeWindowedSettings(window))
     {}
@@ -33,40 +33,40 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_F11Ready && (m_Window->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_F11Ready && (m_Window->Context()->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
             m_F11Ready = false;
 
-            if (m_Window->Properties.Mode == WindowMode::Fullscreen)
+            if (m_Window->Context()->Properties.Mode == WindowMode::Fullscreen)
             {
-                m_Window->Properties.Mode = WindowMode::Windowed;
-                glfwHideWindow(m_Window->NativeWindow());
-                glfwSetWindowMonitor(m_Window->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
-                glfwShowWindow(m_Window->NativeWindow());
+                m_Window->Context()->Properties.Mode = WindowMode::Windowed;
+                glfwHideWindow(m_Window->Context()->NativeWindow());
+                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(m_Window->Context()->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+                glfwShowWindow(m_Window->Context()->NativeWindow());
 
                 m_WindowStateChange = true;
             }
             else
             {
-                m_Window->Properties.Mode = WindowMode::Fullscreen;
+                m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
 
                 int width, height, xpos, ypos;
 
-                glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
-                glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
+                glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
+                glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
 
                 m_WindowedSettings = { width, height, xpos, ypos };
 
-                glfwSetWindowMonitor(m_Window->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
-                glfwShowWindow(m_Window->NativeWindow());
-                glfwFocusWindow(m_Window->NativeWindow());
+                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
+                glfwShowWindow(m_Window->Context()->NativeWindow());
+                glfwFocusWindow(m_Window->Context()->NativeWindow());
 
                 m_WindowStateChange = true;
             }
         }
 
-        if (m_Window->Input.IsKeyReleased(GLFW_KEY_F11))
+        if (m_Window->Context()->Input.IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
         }
@@ -93,18 +93,18 @@ namespace Graphics {
 
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
-            m_Window->Properties.Mode = WindowMode::Fullscreen;
+            m_Window->Context()->Properties.Mode = WindowMode::Fullscreen;
 
             int width, height, xpos, ypos;
 
-            glfwGetWindowSize(m_Window->NativeWindow(), &width, &height);
-            glfwGetWindowPos(m_Window->NativeWindow(), &xpos, &ypos);
+            glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
+            glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
 
             m_WindowedSettings = { width, height, xpos, ypos };
 
-            glfwSetWindowMonitor(m_Window->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Properties.Resolution.Width, m_Window->Properties.Resolution.Height, GLFW_DONT_CARE);
-            glfwShowWindow(m_Window->NativeWindow());
-            glfwFocusWindow(m_Window->NativeWindow());
+            glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
+            glfwShowWindow(m_Window->Context()->NativeWindow());
+            glfwFocusWindow(m_Window->Context()->NativeWindow());
         }
 
         ImGui::End();
@@ -120,7 +120,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    glfwSetWindowShouldClose(m_Window->NativeWindow(), GLFW_TRUE);
+                    glfwSetWindowShouldClose(m_Window->Context()->NativeWindow(), GLFW_TRUE);
                 }
                 ImGui::EndMenu();
             }
@@ -129,16 +129,16 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Scene Resolution", m_Window->Properties.Resolution.DisplayName.c_str()))
+                if (ImGui::BeginCombo("Scene Resolution", m_Window->Context()->Properties.Resolution.DisplayName.c_str()))
                 {
                     for (const auto& res : WindowConfig::SupportedResolutions)
                     {
-                        bool isSelected = (m_Window->Properties.Resolution == res);
+                        bool isSelected = (m_Window->Context()->Properties.Resolution == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
                             m_WindowStateChange = true;
-                            m_Window->Properties.Resolution = res;
+                            m_Window->Context()->Properties.Resolution = res;
                         }
 
                         if (isSelected)

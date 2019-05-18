@@ -13,7 +13,7 @@ namespace Graphics {
     class SceneManager
     {
     public:
-        SceneManager(WindowContext* window);
+        SceneManager(Window* window);
         ~SceneManager() = default;
 
         SceneManager(SceneManager&&) = default;

@@ -3,7 +3,7 @@
 
 #include "config/WindowConfig.h"
 
-#include "WindowContext.h"
+#include "Window.h"
 #include "WindowProperties.h"
 #include "WindowedSettings.h"
 
@@ -14,7 +14,7 @@ namespace Graphics {
     class ApplicationBase : public Layer
     {
     public:
-        ApplicationBase(WindowContext* window);
+        ApplicationBase(Window* window);
 
         virtual void OnUpdate() override;
         virtual void OnImGuiRender() override;
@@ -25,7 +25,7 @@ namespace Graphics {
         bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
-        WindowedSettings InitializeWindowedSettings(const WindowContext* ctx);
+        WindowedSettings InitializeWindowedSettings(Window* window);
         void HandleInput();
 
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);

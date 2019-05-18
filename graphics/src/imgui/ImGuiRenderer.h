@@ -9,7 +9,7 @@ namespace Graphics {
     class ImGuiRenderer
     {
     public:
-        ImGuiRenderer(WindowContext* context);
+        ImGuiRenderer(Window* window);
         ~ImGuiRenderer();
 
         ImGuiRenderer(ImGuiRenderer&) = default;

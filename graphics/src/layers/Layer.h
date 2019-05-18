@@ -1,14 +1,14 @@
 #pragma once
 #include <GLFW/glfw3.h>
 
-#include "WindowContext.h"
+#include "Window.h"
 
 namespace Graphics {
 
     class Layer
     {
     public:
-        Layer(WindowContext* window, const std::string& name = "Layer");
+        Layer(Window* window, const std::string& name = "Layer");
         virtual ~Layer() = default;
 
         // Layers work with OpenGL global state and may have const members
@@ -32,7 +32,7 @@ namespace Graphics {
 
     protected:
         std::string m_Name;
-        WindowContext* m_Window;
+        Window* m_Window;
     };
 
 }

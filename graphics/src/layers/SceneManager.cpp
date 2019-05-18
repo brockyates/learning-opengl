@@ -1,10 +1,8 @@
 #include "pch.h"
 #include "SceneManager.h"
 
-#include "WindowContext.h"
-
-#include "layers/Layer.h"
 #include "layers/ApplicationBase.h"
+#include "layers/Layer.h"
 #include "layers/RenderToTexture.h"
 
 #include <imgui.h>
@@ -13,7 +11,7 @@ namespace Graphics {
 
     namespace {
 
-        std::vector<std::unique_ptr<Layer>> MakeLayers(WindowContext* window)
+        std::vector<std::unique_ptr<Layer>> MakeLayers(Window* window)
         {
             std::vector<std::unique_ptr<Layer>> layers;
 
@@ -23,7 +21,7 @@ namespace Graphics {
         }
     }
 
-    SceneManager::SceneManager(WindowContext* window)
+    SceneManager::SceneManager(Window* window)
         : m_SceneManager(MakeLayers(window))
         , m_ApplicationBase(window)
         , m_ActiveLayer(m_SceneManager.front().get())
