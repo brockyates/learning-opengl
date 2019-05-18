@@ -14,19 +14,8 @@
 
 namespace Graphics {
 
-    WindowedSettings ApplicationBase::InitializeWindowedSettings()
-    {
-        int width, height, xpos, ypos;
-
-        glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
-        glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
-
-        return { width, height, xpos, ypos };
-    }
-
     ApplicationBase::ApplicationBase(Window* window)
         : Layer(window, "ApplicationBase")
-        , m_WindowedSettings(InitializeWindowedSettings())
     {}
 
     void ApplicationBase::HandleInput()
@@ -41,8 +30,8 @@ namespace Graphics {
             {
                 m_Window->Context()->Properties.Mode = WindowMode::Windowed;
                 glfwHideWindow(m_Window->Context()->NativeWindow());
-                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->Context()->NativeWindow(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+                glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), 0, 0, 0, m_Window->GetWindowedSettings().Width, m_Window->GetWindowedSettings().Height, GLFW_DONT_CARE);
+                glfwSetWindowPos(m_Window->Context()->NativeWindow(), m_Window->GetWindowedSettings().Xpos, m_Window->GetWindowedSettings().Ypos);
                 glfwShowWindow(m_Window->Context()->NativeWindow());
 
                 m_WindowStateChange = true;
@@ -56,7 +45,7 @@ namespace Graphics {
                 glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
                 glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
 
-                m_WindowedSettings = { width, height, xpos, ypos };
+                m_Window->SetWindowedSettings({ width, height, xpos, ypos });  // TODO: Fire event
 
                 glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
                 glfwShowWindow(m_Window->Context()->NativeWindow());
@@ -100,7 +89,7 @@ namespace Graphics {
             glfwGetWindowSize(m_Window->Context()->NativeWindow(), &width, &height);
             glfwGetWindowPos(m_Window->Context()->NativeWindow(), &xpos, &ypos);
 
-            m_WindowedSettings = { width, height, xpos, ypos };
+            m_Window->SetWindowedSettings({ width, height, xpos, ypos }); // TODO: Fire event
 
             glfwSetWindowMonitor(m_Window->Context()->NativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
             glfwShowWindow(m_Window->Context()->NativeWindow());

@@ -23,7 +23,6 @@ namespace Graphics {
         bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
-        WindowedSettings InitializeWindowedSettings();
         void HandleInput();
 
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
@@ -34,8 +33,6 @@ namespace Graphics {
     private:
         bool m_F11Ready = true;
         bool m_WindowStateChange = false;
-
-        WindowedSettings m_WindowedSettings; // TODO: belongs in Window class
     };
 
 }

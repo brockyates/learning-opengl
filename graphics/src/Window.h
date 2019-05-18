@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WindowContext.h"
+#include "WindowedSettings.h"
 
 namespace Graphics {
 
@@ -19,9 +20,15 @@ namespace Graphics {
         int Height() const { return m_Context.Properties.Resolution.Height; }
 
         WindowContext* Context() { return &m_Context; }
+        WindowedSettings GetWindowedSettings() { return m_WindowedSettings; }
+        void SetWindowedSettings(WindowedSettings settings) { m_WindowedSettings = settings; }
+
+    private:
+        WindowedSettings InitializeWindowedSettings();
 
     private:
         WindowContext m_Context;
+        WindowedSettings m_WindowedSettings;
     };
 
 }
