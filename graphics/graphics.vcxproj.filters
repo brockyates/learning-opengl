@@ -40,7 +40,6 @@
     <ClInclude Include="src\layers\Layer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\layers\LayerManager.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
     <ClInclude Include="src\Window.h">
       <Filter>src</Filter>
@@ -59,6 +58,7 @@
       <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\WindowedSettings.h" />
+    <ClInclude Include="src\layers\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -80,7 +80,6 @@
     <ClCompile Include="src\layers\Layer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\layers\LayerManager.cpp" />
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
     <ClCompile Include="src\Window.cpp">
       <Filter>src</Filter>
@@ -94,6 +93,7 @@
     <ClCompile Include="src\layers\ApplicationBase.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\layers\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader">

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "LayerManager.h"
+#include "SceneManager.h"
 
 #include "WindowContext.h"
 
@@ -23,17 +23,17 @@ namespace Graphics {
         }
     }
 
-    LayerManager::LayerManager(WindowContext* window)
+    SceneManager::SceneManager(WindowContext* window)
         : m_Window(window)
-        , m_LayerManager(MakeLayers(window))
+        , m_SceneManager(MakeLayers(window))
         , m_ApplicationBase(window)
-        , m_ActiveLayer(m_LayerManager.front().get())
+        , m_ActiveLayer(m_SceneManager.front().get())
         , m_UIRenderer(window)
     {
         m_ActiveLayer->Attach();
     }
 
-    void LayerManager::RenderScene()
+    void SceneManager::RenderScene()
     {
         if (m_ApplicationBase.HasSceneResolutionChanged())
         {
@@ -46,7 +46,7 @@ namespace Graphics {
         m_ActiveLayer->OnUpdate();
     }
 
-    void LayerManager::RenderUI()
+    void SceneManager::RenderUI()
     {
         m_UIRenderer.BeginFrame();
 
@@ -57,7 +57,7 @@ namespace Graphics {
 
         ShowDemoSelector();
 
-        for (auto& layer : m_LayerManager)
+        for (auto& layer : m_SceneManager)
         {
             layer->OnImGuiRender();
         }
@@ -67,7 +67,7 @@ namespace Graphics {
         m_UIRenderer.Render(m_Window->Properties);
     }
 
-    void LayerManager::ShowDemoSelector()
+    void SceneManager::ShowDemoSelector()
     {
         ImGui::Begin("DemoWidget");
 
@@ -75,7 +75,7 @@ namespace Graphics {
 
         if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
         {
-            for (auto& layer : m_LayerManager)
+            for (auto& layer : m_SceneManager)
             {
                 bool isSelected = (m_ActiveLayer == layer.get());
 
@@ -103,7 +103,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void LayerManager::UpdateActiveLayer(Layer* nextActiveLayer)
+    void SceneManager::UpdateActiveLayer(Layer* nextActiveLayer)
     {
         if (nextActiveLayer->IsAttached())
             return;

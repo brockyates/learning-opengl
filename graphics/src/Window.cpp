@@ -30,7 +30,7 @@ namespace Graphics {
         return m_Context.Properties.Mode == WindowMode::Fullscreen;
     }
 
-    void Window::OnUpdate()
+    void Window::Update()
     {
         glfwSwapBuffers(m_Context.NativeWindow());
         glfwPollEvents();

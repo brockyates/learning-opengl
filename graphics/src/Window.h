@@ -1,7 +1,7 @@
 #pragma once
 
 #include "imgui/ImGuiRenderer.h"
-#include "layers/LayerManager.h"
+#include "layers/SceneManager.h"
 
 namespace Graphics {
 
@@ -11,7 +11,8 @@ namespace Graphics {
         Window();
         ~Window();
 
-        void OnUpdate();
+        void Update();
+
         bool ShouldClose();
         bool IsFullscreen() const;
 

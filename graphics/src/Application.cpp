@@ -2,7 +2,7 @@
 #include "Application.h"
 
 #include "imgui/ImGuiRenderer.h"
-#include "layers/LayerManager.h"
+#include "layers/SceneManager.h"
 #include "Window.h"
 
 namespace Graphics {
@@ -10,20 +10,20 @@ namespace Graphics {
     void Application::Start()
     {
         auto window = std::make_unique<Window>();
-        auto layerManager = LayerManager(window->Context());
+        auto sceneManager = SceneManager(window->Context());
 
         LOG_INFO("Main application loop started");
 
         while (!window->ShouldClose())
         {
-            layerManager.RenderScene();
+            sceneManager.RenderScene();
 
             if (!window->IsFullscreen())
             {
-                layerManager.RenderUI();
+                sceneManager.RenderUI();
             }
 
-            window->OnUpdate();
+            window->Update();
         }
 
         LOG_INFO("Main application loop stopped");

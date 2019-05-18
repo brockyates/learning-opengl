@@ -10,14 +10,14 @@ namespace Graphics {
     class Layer;
     struct WindowProperties;
 
-    class LayerManager
+    class SceneManager
     {
     public:
-        LayerManager(WindowContext* window);
-        ~LayerManager() = default;
+        SceneManager(WindowContext* window);
+        ~SceneManager() = default;
 
-        LayerManager(LayerManager&&) = default;
-        LayerManager& operator=(LayerManager&&) = default;
+        SceneManager(SceneManager&&) = default;
+        SceneManager& operator=(SceneManager&&) = default;
 
         void RenderScene();
         void RenderUI();
@@ -30,7 +30,7 @@ namespace Graphics {
         const WindowContext* m_Window;
         ApplicationBase m_ApplicationBase;
 
-        std::vector<std::unique_ptr<Layer>> m_LayerManager;
+        std::vector<std::unique_ptr<Layer>> m_SceneManager;
         Layer* m_ActiveLayer;
 
         ImGuiRenderer m_UIRenderer;
