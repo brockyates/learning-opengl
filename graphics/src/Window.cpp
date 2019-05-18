@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Window.h"
 
-#include "layers/Layer.h"
 #include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {

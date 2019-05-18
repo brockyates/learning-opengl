@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "ImGuiRenderer.h"
-#include "WindowProperties.h"
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "Window.h"
 
 #include <imgui.h>
 #include <GLFW/glfw3.h>
@@ -53,10 +53,10 @@ namespace Graphics {
         ImGui::NewFrame();
     }
 
-    void ImGuiRenderer::Render(const WindowProperties& windowProperties) const
+    void ImGuiRenderer::Render(Window* window)
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(windowProperties.Resolution.Width), static_cast<float>(windowProperties.Resolution.Height));
+        io.DisplaySize = ImVec2(static_cast<float>(window->Width()), static_cast<float>(window->Height()));
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

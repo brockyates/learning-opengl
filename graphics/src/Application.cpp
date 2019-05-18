@@ -10,7 +10,7 @@ namespace Graphics {
     void Application::Start()
     {
         auto window = std::make_unique<Window>();
-        auto sceneManager = SceneManager(window->Context());
+        SceneManager sceneManager(window.get()->Context());
 
         LOG_INFO("Main application loop started");
 
@@ -20,7 +20,7 @@ namespace Graphics {
 
             if (!window->IsFullscreen())
             {
-                sceneManager.RenderUI();
+                sceneManager.RenderUI(window.get());
             }
 
             window->Update();

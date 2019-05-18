@@ -24,8 +24,7 @@ namespace Graphics {
     }
 
     SceneManager::SceneManager(WindowContext* window)
-        : m_Window(window)
-        , m_SceneManager(MakeLayers(window))
+        : m_SceneManager(MakeLayers(window))
         , m_ApplicationBase(window)
         , m_ActiveLayer(m_SceneManager.front().get())
         , m_UIRenderer(window)
@@ -46,14 +45,13 @@ namespace Graphics {
         m_ActiveLayer->OnUpdate();
     }
 
-    void SceneManager::RenderUI()
+    void SceneManager::RenderUI(Window* window)
     {
         m_UIRenderer.BeginFrame();
 
         m_ApplicationBase.OnImGuiRender();
 
-        if (m_Window->Properties.Mode == WindowMode::Fullscreen)
-            return;
+        //if (m_Window->Properties.Mode == WindowMode::Fullscreen) return;
 
         ShowDemoSelector();
 
@@ -64,7 +62,7 @@ namespace Graphics {
 
         m_ApplicationBase.OnImGuiRenderOverlay();
 
-        m_UIRenderer.Render(m_Window->Properties);
+        m_UIRenderer.Render(window);
     }
 
     void SceneManager::ShowDemoSelector()

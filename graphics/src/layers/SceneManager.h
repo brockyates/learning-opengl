@@ -3,7 +3,7 @@
 #include "ApplicationBase.h"
 #include "imgui/ImGuiRenderer.h"
 #include "Layer.h"
-#include "WindowContext.h"
+#include "Window.h"
 
 namespace Graphics {
 
@@ -20,14 +20,13 @@ namespace Graphics {
         SceneManager& operator=(SceneManager&&) = default;
 
         void RenderScene();
-        void RenderUI();
+        void RenderUI(Window* window);
 
     private:
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        const WindowContext* m_Window;
         ApplicationBase m_ApplicationBase;
 
         std::vector<std::unique_ptr<Layer>> m_SceneManager;

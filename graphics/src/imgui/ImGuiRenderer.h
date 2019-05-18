@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WindowContext.h"
+#include "Window.h"
 
 namespace Graphics {
 
@@ -16,7 +16,7 @@ namespace Graphics {
         ImGuiRenderer& operator=(ImGuiRenderer&) = default;
 
         void BeginFrame() const;
-        void Render(const WindowProperties& windowProperties) const;
+        void Render(Window* window);
     };
 
 }

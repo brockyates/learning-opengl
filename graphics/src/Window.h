@@ -1,7 +1,6 @@
 #pragma once
 
-#include "imgui/ImGuiRenderer.h"
-#include "layers/SceneManager.h"
+#include "WindowContext.h"
 
 namespace Graphics {
 
@@ -15,6 +14,9 @@ namespace Graphics {
 
         bool ShouldClose();
         bool IsFullscreen() const;
+
+        int Width() const { return m_Context.Properties.Resolution.Width; }
+        int Height() const { return m_Context.Properties.Resolution.Height; }
 
         WindowContext* Context() { return &m_Context; }
 
