@@ -46,10 +46,7 @@ namespace Graphics {
     void SceneManager::RenderUI(Window* window)
     {
         m_UIRenderer.BeginFrame();
-
         m_ApplicationBase.RenderUI(window);
-
-        //if (m_Window->Properties.Mode == WindowMode::Fullscreen) return;
 
         ShowDemoSelector(window);
 
@@ -67,8 +64,6 @@ namespace Graphics {
     {
         ImGui::Begin("DemoWidget");
 
-        Layer* nextActiveLayer = m_ActiveLayer;
-
         if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
         {
             for (auto& layer : m_SceneManager)
@@ -77,7 +72,7 @@ namespace Graphics {
 
                 if (ImGui::Selectable(layer->GetName().c_str(), isSelected))
                 {
-                    nextActiveLayer = layer.get();
+                    UpdateActiveLayer(window, layer.get());
                 }
 
                 if (ImGui::IsItemHovered())
@@ -93,8 +88,6 @@ namespace Graphics {
 
             ImGui::EndCombo();
         }
-
-        UpdateActiveLayer(window, nextActiveLayer);
 
         ImGui::End();
     }
