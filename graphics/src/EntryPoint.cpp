@@ -7,8 +7,10 @@ int main()
 {
     Graphics::Utils::Log::Init();
 
+    Graphics::Application application;
+
     {
-        Graphics::Application::Start();
+        application.Start();
     }
 
     return 0;

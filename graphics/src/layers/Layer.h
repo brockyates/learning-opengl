@@ -1,6 +1,7 @@
 #pragma once
 #include <GLFW/glfw3.h>
 
+#include "events/Event.h"
 #include "Window.h"
 
 namespace Graphics {
@@ -21,6 +22,8 @@ namespace Graphics {
         virtual void RenderScene() {}
         virtual void RenderUI() {}
 
+        virtual void OnEvent(Event& event) {};
+
         virtual void Attach() {};
         virtual void Detach() {};
         virtual bool IsAttached() = 0;
@@ -29,6 +32,9 @@ namespace Graphics {
         virtual std::string GetDescription() const { return ""; }
 
         inline const std::string& GetName() const { return m_Name; }
+
+    protected:
+        virtual bool FireEvent(Event& event) { return false; };
 
     protected:
         Window* m_Window;

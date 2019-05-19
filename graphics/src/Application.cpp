@@ -7,26 +7,34 @@
 
 namespace Graphics {
 
+    Application::Application()
+        : m_Window(std::make_unique<Window>())
+        , m_SceneManager(m_Window.get())
+    {
+    }
+
     void Application::Start()
     {
-        auto window = std::make_unique<Window>();
-        SceneManager sceneManager(window.get());
-
         LOG_INFO("Main application loop started");
 
-        while (!window->ShouldClose())
+        while (!m_Window->ShouldClose())
         {
-            sceneManager.RenderScene();
+            m_SceneManager.RenderScene();
 
-            if (!window->IsFullscreen())
+            if (!m_Window->IsFullscreen())
             {
-                sceneManager.RenderUI();
+                m_SceneManager.RenderUI();
             }
 
-            window->Update();
+            m_Window->Update();
         }
 
         LOG_INFO("Main application loop stopped");
+    }
+
+    // Top-level event callback
+    void Application::OnEvent(Event & event)
+    {
     }
 
 }

@@ -58,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="src\WindowedSettings.h" />
     <ClInclude Include="src\layers\SceneManager.h" />
+    <ClInclude Include="src\events\Event.h" />
+    <ClInclude Include="src\events\EventDispatcher.h" />
+    <ClInclude Include="src\events\EventType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
