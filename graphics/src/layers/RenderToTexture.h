@@ -28,8 +28,10 @@ namespace Graphics {
         virtual std::string GetPopupText() const override;
         virtual std::string GetDescription() const override;
 
-        //Events
         virtual void OnEvent(Event& event) override;
+
+    private:
+        //Event handlers
         EventHandler<ChangeResolutionEvent> OnResolutionChange();
 
     private:

@@ -81,7 +81,7 @@ namespace Graphics {
     {
         return [this](ChangeResolutionEvent& event)
         {
-            LOG_TRACE("We are handling a change resolution event");
+            LOG_TRACE("RenderToTexture resolution change handler");
         };
     }
 

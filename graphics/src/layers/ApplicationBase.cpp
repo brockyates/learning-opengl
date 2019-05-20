@@ -2,7 +2,7 @@
 #include "ApplicationBase.h"
 
 #include "config/WindowConfig.h"
-#include "events/ChangeResolutionEvent.h"
+#include "events/EventDispatcher.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "Window.h"
@@ -18,6 +18,14 @@ namespace Graphics {
     ApplicationBase::ApplicationBase(Window* window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "ApplicationBase")
     {}
+
+    EventHandler<ChangeResolutionEvent> ApplicationBase::OnResolutionChange()
+    {
+        return [this](ChangeResolutionEvent& event)
+        {
+            m_Window->SetResolution(event.NewResolution());
+        };
+    }
 
     void ApplicationBase::HandleInput()
     {
@@ -78,6 +86,12 @@ namespace Graphics {
         ShowLogWindow();
     }
 
+    void ApplicationBase::OnEvent(Event & event)
+    {
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+    }
+
     void ApplicationBase::OnImGuiRenderOverlay()
     {
         ImGui::Begin("Scene");
@@ -130,8 +144,7 @@ namespace Graphics {
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
                             m_WindowStateChange = true;
-                            m_Window->SetResolution(res); //TODO: Fire event
-                            FireEvent(ChangeResolutionEvent());
+                            FireEvent(ChangeResolutionEvent(res));
                         }
 
                         if (isSelected)

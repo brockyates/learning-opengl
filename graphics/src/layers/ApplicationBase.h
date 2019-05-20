@@ -1,5 +1,7 @@
 #pragma once
 
+#include "events/ChangeResolutionEvent.h"
+#include "events/Event.h"
 #include "layers/Layer.h"
 
 #include <imgui.h>
@@ -15,13 +17,16 @@ namespace Graphics {
         virtual void RenderUI() override;
         virtual bool IsAttached() override { return true; }
 
-        void OnImGuiRenderOverlay();
+        virtual void OnEvent(Event& event) override;
 
+        void OnImGuiRenderOverlay();
         bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
-        void HandleInput();
+        //Event handlers
+        EventHandler<ChangeResolutionEvent> OnResolutionChange();
 
+        void HandleInput();
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
         void ShowMenuBar();
         void ShowMainWindow();
