@@ -29,6 +29,25 @@ namespace Graphics {
         };
     }
 
+    EventHandler<ChangeToFullscreenEvent> Window::OnChangeToFullscreen()
+    {
+        return [this](ChangeToFullscreenEvent&)
+        {
+            m_Properties.Mode = WindowMode::Fullscreen;
+
+            int width, height, xpos, ypos;
+
+            glfwGetWindowSize(m_Window.get(), &width, &height);
+            glfwGetWindowPos(m_Window.get(), &xpos, &ypos);
+
+            m_WindowedSettings = { width, height, xpos, ypos };
+
+            glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
+            glfwShowWindow(m_Window.get());
+            glfwFocusWindow(m_Window.get());
+        };
+    }
+
     Window::Window()
         : m_Properties(WindowConfig::Properties)
         , m_Window(CreateInitialWindowedGLFWWindow(m_Properties))
@@ -67,6 +86,7 @@ namespace Graphics {
         EventDispatcher dispatcher(event);
 
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
+        dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
     }
 
 }

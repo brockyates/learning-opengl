@@ -1,8 +1,6 @@
 #pragma once
 
-#include "events/ChangeResolutionEvent.h"
-#include "events/ChangeToWindowedEvent.h"
-#include "events/Event.h"
+#include "events/Events.h"
 #include "layers/Layer.h"
 
 #include <imgui.h>

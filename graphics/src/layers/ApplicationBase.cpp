@@ -2,7 +2,6 @@
 #include "ApplicationBase.h"
 
 #include "config/WindowConfig.h"
-#include "events/EventDispatcher.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "Window.h"
@@ -35,25 +34,13 @@ namespace Graphics {
         {
             m_F11Ready = false;
 
-            // TODO: Push all of these GLFW calls to Window class
             if (m_Window->IsFullscreen())
             {
                 FireEvent(ChangeToWindowedEvent());
             }
             else
             {
-                m_Window->SetMode(WindowMode::Fullscreen);
-
-                int width, height, xpos, ypos;
-
-                glfwGetWindowSize(m_Window->GetNativeWindow(), &width, &height);
-                glfwGetWindowPos(m_Window->GetNativeWindow(), &xpos, &ypos);
-
-                m_Window->SetWindowedSettings({ width, height, xpos, ypos });  // TODO: Fire event
-
-                glfwSetWindowMonitor(m_Window->GetNativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-                glfwShowWindow(m_Window->GetNativeWindow());
-                glfwFocusWindow(m_Window->GetNativeWindow());
+                FireEvent(ChangeToFullscreenEvent());
             }
         }
 
@@ -87,21 +74,9 @@ namespace Graphics {
     {
         ImGui::Begin("Scene");
 
-        //TODO: Push all of these GLFW calls to Window class
         if (ImGui::Button("Toggle Fullscreen (F11)"))
         {
-            m_Window->SetMode(WindowMode::Fullscreen);
-
-            int width, height, xpos, ypos;
-
-            glfwGetWindowSize(m_Window->GetNativeWindow(), &width, &height);
-            glfwGetWindowPos(m_Window->GetNativeWindow(), &xpos, &ypos);
-
-            m_Window->SetWindowedSettings({ width, height, xpos, ypos }); // TODO: Fire event
-
-            glfwSetWindowMonitor(m_Window->GetNativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
-            glfwShowWindow(m_Window->GetNativeWindow());
-            glfwFocusWindow(m_Window->GetNativeWindow());
+            FireEvent(ChangeToFullscreenEvent());
         }
 
         ImGui::End();
