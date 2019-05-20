@@ -102,6 +102,7 @@
     <ClInclude Include="src\events\Events.h" />
     <ClInclude Include="src\events\EventType.h" />
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
+    <ClInclude Include="src\events\WindowCloseEvent.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
     <ClInclude Include="src\WindowedSettings.h" />
     <ClInclude Include="src\WindowInput.h" />

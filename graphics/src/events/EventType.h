@@ -7,7 +7,8 @@ namespace Graphics {
         Unknown = 0,
         ChangeResolutionEvent,
         ChangeToWindowedEvent,
-        ChangeToFullscreenEvent
+        ChangeToFullscreenEvent,
+        WindowCloseEvent
     };
 
 }

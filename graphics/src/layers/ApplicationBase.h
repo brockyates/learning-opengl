@@ -16,14 +16,9 @@ namespace Graphics {
         virtual void RenderUI() override;
         virtual bool IsAttached() override { return true; }
 
-        virtual void OnEvent(Event& event) override;
-
         void OnImGuiRenderOverlay();
 
     private:
-        //Event handlers
-        EventHandler<ChangeResolutionEvent> OnResolutionChange();
-
         void HandleInput();
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
         void ShowMenuBar();

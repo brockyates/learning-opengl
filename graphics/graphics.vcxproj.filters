@@ -65,6 +65,7 @@
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
     <ClInclude Include="src\events\Events.h" />
+    <ClInclude Include="src\events\WindowCloseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

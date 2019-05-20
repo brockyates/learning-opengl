@@ -7,3 +7,4 @@
 #include "ChangeResolutionEvent.h"
 #include "ChangeToFullscreenEvent.h"
 #include "ChangeToWindowedEvent.h"
+#include "WindowCloseEvent.h"

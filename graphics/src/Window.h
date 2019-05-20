@@ -41,8 +41,10 @@ namespace Graphics {
         WindowedSettings InitializeWindowedSettings();
 
         //Event handlers
+        EventHandler<ChangeResolutionEvent> OnResolutionChange();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
+        EventHandler<WindowCloseEvent> OnWindowClose();
 
     private:
         WindowProperties m_Properties;

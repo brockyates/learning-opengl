@@ -8,23 +8,13 @@
 #include "WindowMode.h"
 
 #include <imgui.h>
-#include <imgui_internal.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <imgui_internal.h> //Needed to create docking layout presets
 
 namespace Graphics {
 
     ApplicationBase::ApplicationBase(Window* window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "ApplicationBase")
     {}
-
-    EventHandler<ChangeResolutionEvent> ApplicationBase::OnResolutionChange()
-    {
-        return [this](ChangeResolutionEvent& event)
-        {
-            m_Window->SetResolution(event.NewResolution());
-        };
-    }
 
     void ApplicationBase::HandleInput()
     {
@@ -57,17 +47,8 @@ namespace Graphics {
 
     void ApplicationBase::RenderUI()
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
         ShowMainWindow();
         ShowLogWindow();
-    }
-
-    void ApplicationBase::OnEvent(Event & event)
-    {
-        EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
     }
 
     void ApplicationBase::OnImGuiRenderOverlay()
@@ -92,7 +73,7 @@ namespace Graphics {
             {
                 if (ImGui::MenuItem("Exit", "Alt+F4"))
                 {
-                    glfwSetWindowShouldClose(m_Window->GetNativeWindow(), GLFW_TRUE);
+                    FireEvent(WindowCloseEvent());
                 }
                 ImGui::EndMenu();
             }

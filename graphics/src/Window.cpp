@@ -17,6 +17,14 @@ namespace Graphics {
         return { width, height, xpos, ypos };
     }
 
+    EventHandler<ChangeResolutionEvent> Window::OnResolutionChange()
+    {
+        return [this](ChangeResolutionEvent& event)
+        {
+            m_Properties.Resolution = event.NewResolution();
+        };
+    }
+
     EventHandler<ChangeToWindowedEvent> Window::OnChangeToWindowed()
     {
         return [this](ChangeToWindowedEvent& event)
@@ -45,6 +53,14 @@ namespace Graphics {
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(m_Window.get());
             glfwFocusWindow(m_Window.get());
+        };
+    }
+
+    EventHandler<WindowCloseEvent> Window::OnWindowClose()
+    {
+        return [this](WindowCloseEvent& event)
+        {
+            glfwSetWindowShouldClose(m_Window.get(), GLFW_TRUE);
         };
     }
 
@@ -85,8 +101,10 @@ namespace Graphics {
     {
         EventDispatcher dispatcher(event);
 
+        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
         dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
+        dispatcher.Dispatch<WindowCloseEvent>(OnWindowClose());
     }
 
 }
