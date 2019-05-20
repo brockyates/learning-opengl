@@ -28,14 +28,7 @@ namespace Graphics {
         std::string DisplayName() const { return m_Properties.Title; }
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
-        WindowedSettings GetWindowedSettings() { return m_WindowedSettings; }
-
-        GLFWwindow* GetNativeWindow() const { return m_Window.get(); }
-
-        //Setters
-        void SetWindowedSettings(WindowedSettings settings) { m_WindowedSettings = settings; }
-        void SetMode(WindowMode mode) { m_Properties.Mode = mode; }
-        void SetResolution(ResolutionSetting resolution) { m_Properties.Resolution = resolution; }
+        GLFWwindow* GetNativeWindow() { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
         WindowedSettings InitializeWindowedSettings();
