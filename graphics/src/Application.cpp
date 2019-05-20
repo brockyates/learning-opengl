@@ -9,7 +9,7 @@ namespace Graphics {
 
     Application::Application()
         : m_Window(std::make_unique<Window>())
-        , m_SceneManager(m_Window.get(), [this](Event& e) { return OnEvent(e); })
+        , m_SceneManager(m_Window.get(), [this](const Event& e) { return OnEvent(e); })
     {}
 
     void Application::Start()
@@ -32,7 +32,7 @@ namespace Graphics {
     }
 
     // Top-level event callback
-    void Application::OnEvent(Event& event)
+    void Application::OnEvent(const Event& event)
     {
         m_Window->OnEvent(event);
         m_SceneManager.OnEvent(event);

@@ -22,7 +22,7 @@ namespace Graphics {
         virtual void RenderScene() {}
         virtual void RenderUI() {}
 
-        virtual void OnEvent(Event& event) {};
+        virtual void OnEvent(const Event& event) {};
 
         virtual void Attach() {};
         virtual void Detach() {};
@@ -34,7 +34,7 @@ namespace Graphics {
         inline const std::string& GetName() const { return m_Name; }
 
     protected:
-        virtual void FireEvent(Event& event) { m_EventCallback(event); }
+        virtual void FireEvent(const Event& event) { m_EventCallback(event); }
 
     protected:
         Window* m_Window;

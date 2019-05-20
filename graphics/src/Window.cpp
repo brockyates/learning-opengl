@@ -19,7 +19,7 @@ namespace Graphics {
 
     EventHandler<ChangeResolutionEvent> Window::OnResolutionChange()
     {
-        return [this](ChangeResolutionEvent& event)
+        return [this](const ChangeResolutionEvent& event)
         {
             m_Properties.Resolution = event.NewResolution();
         };
@@ -27,7 +27,7 @@ namespace Graphics {
 
     EventHandler<ChangeToWindowedEvent> Window::OnChangeToWindowed()
     {
-        return [this](ChangeToWindowedEvent& event)
+        return [this](const ChangeToWindowedEvent& event)
         {
             m_Properties.Mode = WindowMode::Windowed;
             glfwHideWindow(m_Window.get());
@@ -39,7 +39,7 @@ namespace Graphics {
 
     EventHandler<ChangeToFullscreenEvent> Window::OnChangeToFullscreen()
     {
-        return [this](ChangeToFullscreenEvent&)
+        return [this](const ChangeToFullscreenEvent&)
         {
             m_Properties.Mode = WindowMode::Fullscreen;
 
@@ -58,7 +58,7 @@ namespace Graphics {
 
     EventHandler<WindowCloseEvent> Window::OnWindowClose()
     {
-        return [this](WindowCloseEvent& event)
+        return [this](const WindowCloseEvent& event)
         {
             glfwSetWindowShouldClose(m_Window.get(), GLFW_TRUE);
         };
@@ -97,7 +97,7 @@ namespace Graphics {
         glfwPollEvents();
     }
 
-    void Window::OnEvent(Event& event)
+    void Window::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
 

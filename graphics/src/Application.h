@@ -14,7 +14,7 @@ namespace Graphics
         ~Application() = default;
 
         void Start();
-        void OnEvent(Event& event);
+        void OnEvent(const Event& event);
 
     private:
         std::unique_ptr<Window> m_Window;

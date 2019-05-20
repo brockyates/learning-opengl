@@ -29,7 +29,7 @@ namespace Graphics {
         virtual std::string GetPopupText() const override;
         virtual std::string GetDescription() const override;
 
-        virtual void OnEvent(Event& event) override;
+        virtual void OnEvent(const Event& event) override;
 
     private:
         //Event handlers

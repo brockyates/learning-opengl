@@ -50,7 +50,7 @@ namespace Graphics {
         m_UIRenderer.Render();
     }
 
-    void SceneManager::OnEvent(Event& event)
+    void SceneManager::OnEvent(const Event& event)
     {
         m_ApplicationBase.OnEvent(event);
 

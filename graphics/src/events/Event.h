@@ -4,7 +4,7 @@
 namespace Graphics {
 
     template <typename T>
-    using EventHandler = std::function<void(T&)>;
+    using EventHandler = std::function<void(const T&)>;
 
     class Event
     {

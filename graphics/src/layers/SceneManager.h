@@ -23,7 +23,7 @@ namespace Graphics {
         void RenderScene();
         void RenderUI();
 
-        void OnEvent(Event& event);
+        void OnEvent(const Event& event);
 
     private:
         std::vector<std::unique_ptr<Layer>> SceneManager::MakeLayers(Window* window, EventHandler<Event> eventCallback);

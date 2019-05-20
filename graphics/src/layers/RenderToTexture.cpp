@@ -71,7 +71,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void RenderToTexture::OnEvent(Event& event)
+    void RenderToTexture::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
@@ -80,7 +80,7 @@ namespace Graphics {
 
     EventHandler<ChangeResolutionEvent> RenderToTexture::OnResolutionChange()
     {
-        return [this](ChangeResolutionEvent& event)
+        return [this](const ChangeResolutionEvent& event)
         {
             Detach();
             Attach();
@@ -89,7 +89,7 @@ namespace Graphics {
 
     EventHandler<ChangeToWindowedEvent> RenderToTexture::OnChangeToWindowed()
     {
-        return [this](ChangeToWindowedEvent& event)
+        return [this](const ChangeToWindowedEvent& event)
         {
             Detach();
             Attach();

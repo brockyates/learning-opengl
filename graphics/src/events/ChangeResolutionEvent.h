@@ -19,7 +19,7 @@ namespace Graphics {
             return EventType::ChangeResolutionEvent;
         }
 
-        ResolutionSetting ChangeResolutionEvent::NewResolution() { return m_Resolution; }
+        ResolutionSetting ChangeResolutionEvent::NewResolution() const { return m_Resolution; }
 
     private:
         ResolutionSetting m_Resolution;

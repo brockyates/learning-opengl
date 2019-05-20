@@ -7,7 +7,7 @@ namespace Graphics {
     class EventDispatcher
     {
     public:
-        EventDispatcher(Event& e)
+        EventDispatcher(const Event& e)
             : m_Event(e)
         {}
 
@@ -16,12 +16,12 @@ namespace Graphics {
         {
             if (m_Event.Type() == TEventType::GetStaticType())
             {
-                eventHandler(*static_cast<TEventType*>(&m_Event));
+                eventHandler(*static_cast<const TEventType*>(&m_Event));
             }
         }
 
     private:
-        Event& m_Event;
+        const Event& m_Event;
     };
 
 }

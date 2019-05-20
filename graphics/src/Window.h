@@ -17,7 +17,7 @@ namespace Graphics {
         ~Window();
 
         void Update();
-        void OnEvent(Event& event);
+        void OnEvent(const Event& event);
 
         bool ShouldClose();
         bool IsFullscreen() const;
