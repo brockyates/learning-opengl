@@ -6,7 +6,7 @@
 #include "WindowProperties.h"
 #include "WindowedSettings.h"
 
-#include "events/Events.h"
+#include "events/EventSystem.h"
 
 namespace Graphics {
 
