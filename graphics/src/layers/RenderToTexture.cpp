@@ -75,13 +75,24 @@ namespace Graphics {
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+        dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
     }
 
     EventHandler<ChangeResolutionEvent> RenderToTexture::OnResolutionChange()
     {
         return [this](ChangeResolutionEvent& event)
         {
-            LOG_TRACE("RenderToTexture resolution change handler");
+            Detach();
+            Attach();
+        };
+    }
+
+    EventHandler<ChangeToWindowedEvent> RenderToTexture::OnChangeToWindowed()
+    {
+        return [this](ChangeToWindowedEvent& event)
+        {
+            Detach();
+            Attach();
         };
     }
 

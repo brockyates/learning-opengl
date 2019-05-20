@@ -38,13 +38,7 @@ namespace Graphics {
             // TODO: Push all of these GLFW calls to Window class
             if (m_Window->IsFullscreen())
             {
-                m_Window->SetMode(WindowMode::Windowed); // TODO: Fire event
-                glfwHideWindow(m_Window->GetNativeWindow());
-                glfwSetWindowMonitor(m_Window->GetNativeWindow(), 0, 0, 0, m_Window->GetWindowedSettings().Width, m_Window->GetWindowedSettings().Height, GLFW_DONT_CARE);
-                glfwSetWindowPos(m_Window->GetNativeWindow(), m_Window->GetWindowedSettings().Xpos, m_Window->GetWindowedSettings().Ypos);
-                glfwShowWindow(m_Window->GetNativeWindow());
-
-                m_WindowStateChange = true;
+                FireEvent(ChangeToWindowedEvent());
             }
             else
             {
@@ -60,8 +54,6 @@ namespace Graphics {
                 glfwSetWindowMonitor(m_Window->GetNativeWindow(), glfwGetPrimaryMonitor(), 0, 0, m_Window->Width(), m_Window->Height(), GLFW_DONT_CARE);
                 glfwShowWindow(m_Window->GetNativeWindow());
                 glfwFocusWindow(m_Window->GetNativeWindow());
-
-                m_WindowStateChange = true;
             }
         }
 
@@ -73,7 +65,6 @@ namespace Graphics {
 
     void ApplicationBase::RenderScene()
     {
-        m_WindowStateChange = false;
         HandleInput();
     }
 
@@ -143,7 +134,6 @@ namespace Graphics {
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {
-                            m_WindowStateChange = true;
                             FireEvent(ChangeResolutionEvent(res));
                         }
 

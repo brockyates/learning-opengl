@@ -29,14 +29,7 @@ namespace Graphics {
 
     void SceneManager::RenderScene()
     {
-        if (m_ApplicationBase.HasSceneResolutionChanged())
-        {
-            m_ActiveLayer->Detach();
-            m_ActiveLayer->Attach();
-        }
-
         m_ApplicationBase.RenderScene();
-
         m_ActiveLayer->RenderScene();
     }
 

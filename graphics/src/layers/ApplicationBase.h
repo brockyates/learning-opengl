@@ -1,6 +1,7 @@
 #pragma once
 
 #include "events/ChangeResolutionEvent.h"
+#include "events/ChangeToWindowedEvent.h"
 #include "events/Event.h"
 #include "layers/Layer.h"
 
@@ -20,7 +21,6 @@ namespace Graphics {
         virtual void OnEvent(Event& event) override;
 
         void OnImGuiRenderOverlay();
-        bool HasSceneResolutionChanged() const { return m_WindowStateChange; }
 
     private:
         //Event handlers
@@ -34,7 +34,6 @@ namespace Graphics {
 
     private:
         bool m_F11Ready = true;
-        bool m_WindowStateChange = false;
     };
 
 }

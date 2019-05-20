@@ -6,6 +6,9 @@
 #include "WindowProperties.h"
 #include "WindowedSettings.h"
 
+#include "events/ChangeToWindowedEvent.h"
+#include "events/Event.h"
+
 namespace Graphics {
 
     class Window
@@ -15,6 +18,7 @@ namespace Graphics {
         ~Window();
 
         void Update();
+        void OnEvent(Event& event);
 
         bool ShouldClose();
         bool IsFullscreen() const;
@@ -36,6 +40,9 @@ namespace Graphics {
 
     private:
         WindowedSettings InitializeWindowedSettings();
+
+        //Event handlers
+        EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
 
     private:
         WindowProperties m_Properties;

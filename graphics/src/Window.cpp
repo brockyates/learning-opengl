@@ -2,6 +2,7 @@
 #include "Window.h"
 
 #include "config/WindowConfig.h"
+#include "events/EventDispatcher.h"
 #include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {
@@ -14,6 +15,18 @@ namespace Graphics {
         glfwGetWindowPos(m_Window.get(), &xpos, &ypos);
 
         return { width, height, xpos, ypos };
+    }
+
+    EventHandler<ChangeToWindowedEvent> Window::OnChangeToWindowed()
+    {
+        return [this](ChangeToWindowedEvent& event)
+        {
+            m_Properties.Mode = WindowMode::Windowed;
+            glfwHideWindow(m_Window.get());
+            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
+            glfwSetWindowPos(m_Window.get(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+            glfwShowWindow(m_Window.get());
+        };
     }
 
     Window::Window()
@@ -47,6 +60,13 @@ namespace Graphics {
     {
         glfwSwapBuffers(m_Window.get());
         glfwPollEvents();
+    }
+
+    void Window::OnEvent(Event& event)
+    {
+        EventDispatcher dispatcher(event);
+
+        dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
     }
 
 }

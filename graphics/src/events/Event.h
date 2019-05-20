@@ -1,7 +1,6 @@
 #pragma once
 
 #include "EventType.h"
-
 namespace Graphics {
 
     template <typename T>

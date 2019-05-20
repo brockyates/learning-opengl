@@ -3,6 +3,7 @@
 #include "layers/Layer.h"
 #include "ShaderHelpers.h"
 
+#include "events/ChangeToWindowedEvent.h"
 #include "events/ChangeResolutionEvent.h"
 #include "events/Event.h"
 #include "Window.h"
@@ -33,6 +34,7 @@ namespace Graphics {
     private:
         //Event handlers
         EventHandler<ChangeResolutionEvent> OnResolutionChange();
+        EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
 
     private:
         unsigned int m_ShaderID = 0;

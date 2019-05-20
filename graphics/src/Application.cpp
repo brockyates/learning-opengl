@@ -34,6 +34,7 @@ namespace Graphics {
     // Top-level event callback
     void Application::OnEvent(Event& event)
     {
+        m_Window->OnEvent(event);
         m_SceneManager.OnEvent(event);
     }
 
