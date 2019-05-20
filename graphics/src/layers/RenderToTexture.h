@@ -3,6 +3,7 @@
 #include "layers/Layer.h"
 #include "ShaderHelpers.h"
 
+#include "events/Event.h"
 #include "Window.h"
 
 #include <glm/glm.hpp>
@@ -14,7 +15,7 @@ namespace Graphics {
     class RenderToTexture : public Layer
     {
     public:
-        RenderToTexture(Window* window);
+        RenderToTexture(Window* window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;

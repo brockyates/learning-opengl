@@ -95,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\events\ChangeResolutionEvent.h" />
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\EventDispatcher.h" />
     <ClInclude Include="src\events\EventType.h" />

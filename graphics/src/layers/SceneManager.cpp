@@ -9,22 +9,19 @@
 
 namespace Graphics {
 
-    namespace {
+    std::vector<std::unique_ptr<Layer>> SceneManager::MakeLayers(Window* window, EventHandler<Event> eventCallback)
+    {
+        std::vector<std::unique_ptr<Layer>> layers;
 
-        std::vector<std::unique_ptr<Layer>> MakeLayers(Window* window)
-        {
-            std::vector<std::unique_ptr<Layer>> layers;
+        layers.emplace_back(std::make_unique<RenderToTexture>(window, eventCallback));
 
-            layers.emplace_back(std::make_unique<RenderToTexture>(window));
-
-            return layers;
-        }
+        return layers;
     }
 
-    SceneManager::SceneManager(Window* window)
-        : m_SceneManager(MakeLayers(window))
-        , m_ApplicationBase(window)
-        , m_ActiveLayer(m_SceneManager.front().get())
+    SceneManager::SceneManager(Window* window, EventHandler<Event> eventCallback)
+        : m_Layers(MakeLayers(window, eventCallback))
+        , m_ApplicationBase(window, eventCallback)
+        , m_ActiveLayer(m_Layers.front().get())
         , m_UIRenderer(window)
     {
         m_ActiveLayer->Attach();
@@ -50,7 +47,7 @@ namespace Graphics {
 
         ShowDemoSelector();
 
-        for (auto& layer : m_SceneManager)
+        for (auto& layer : m_Layers)
         {
             layer->RenderUI();
         }
@@ -60,13 +57,21 @@ namespace Graphics {
         m_UIRenderer.Render();
     }
 
+    void SceneManager::OnEvent(Event& event)
+    {
+        for (auto& layer : m_Layers)
+        {
+            layer->OnEvent(event);
+        }
+    }
+
     void SceneManager::ShowDemoSelector()
     {
         ImGui::Begin("DemoWidget");
 
         if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
         {
-            for (auto& layer : m_SceneManager)
+            for (auto& layer : m_Layers)
             {
                 bool isSelected = (m_ActiveLayer == layer.get());
 

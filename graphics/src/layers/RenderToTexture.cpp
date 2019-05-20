@@ -9,8 +9,8 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(Window* window)
-        : Layer(window, "Render to Texture")
+    RenderToTexture::RenderToTexture(Window* window, EventHandler<Event> eventCallback)
+        : Layer(window, eventCallback, "Render to Texture")
     {}
 
     void RenderToTexture::RenderScene()

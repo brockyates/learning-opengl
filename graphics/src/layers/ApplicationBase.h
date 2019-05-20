@@ -9,7 +9,7 @@ namespace Graphics {
     class ApplicationBase : public Layer
     {
     public:
-        ApplicationBase(Window* window);
+        ApplicationBase(Window* window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;

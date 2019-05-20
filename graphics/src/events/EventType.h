@@ -4,7 +4,8 @@ namespace Graphics {
 
     enum class EventType
     {
-        Unknown = 0
+        Unknown = 0,
+        ChangeResolutionEvent
     };
 
 }

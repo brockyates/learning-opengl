@@ -2,6 +2,7 @@
 #include "ApplicationBase.h"
 
 #include "config/WindowConfig.h"
+#include "events/ChangeResolutionEvent.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "Window.h"
@@ -14,8 +15,8 @@
 
 namespace Graphics {
 
-    ApplicationBase::ApplicationBase(Window* window)
-        : Layer(window, "ApplicationBase")
+    ApplicationBase::ApplicationBase(Window* window, EventHandler<Event> eventCallback)
+        : Layer(window, eventCallback, "ApplicationBase")
     {}
 
     void ApplicationBase::HandleInput()
@@ -130,6 +131,7 @@ namespace Graphics {
                         {
                             m_WindowStateChange = true;
                             m_Window->SetResolution(res); //TODO: Fire event
+                            FireEvent(ChangeResolutionEvent());
                         }
 
                         if (isSelected)

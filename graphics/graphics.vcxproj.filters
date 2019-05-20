@@ -61,6 +61,7 @@
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\EventDispatcher.h" />
     <ClInclude Include="src\events\EventType.h" />
+    <ClInclude Include="src\events\ChangeResolutionEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
