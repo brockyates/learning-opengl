@@ -14,7 +14,7 @@ namespace Graphics {
         template <typename TEventType, typename FEventHandler>
         void Dispatch(FEventHandler eventHandler)
         {
-            if (m_Event.GetType() == TEventType::GetStaticType())
+            if (m_Event.Type() == TEventType::GetStaticType())
             {
                 eventHandler(*static_cast<TEventType*>(&m_Event));
             }

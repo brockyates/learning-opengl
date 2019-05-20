@@ -59,6 +59,8 @@ namespace Graphics {
 
     void SceneManager::OnEvent(Event& event)
     {
+        m_ApplicationBase.OnEvent(event);
+
         for (auto& layer : m_Layers)
         {
             layer->OnEvent(event);

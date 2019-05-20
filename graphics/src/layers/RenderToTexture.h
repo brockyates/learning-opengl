@@ -3,6 +3,7 @@
 #include "layers/Layer.h"
 #include "ShaderHelpers.h"
 
+#include "events/ChangeResolutionEvent.h"
 #include "events/Event.h"
 #include "Window.h"
 
@@ -26,6 +27,10 @@ namespace Graphics {
 
         virtual std::string GetPopupText() const override;
         virtual std::string GetDescription() const override;
+
+        //Events
+        virtual void OnEvent(Event& event) override;
+        EventHandler<ChangeResolutionEvent> OnResolutionChange();
 
     private:
         unsigned int m_ShaderID = 0;

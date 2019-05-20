@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "RenderToTexture.h"
-#include "ShaderHelpers.h"
 
+#include "events/EventDispatcher.h"
+#include "ShaderHelpers.h"
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
@@ -68,6 +69,20 @@ namespace Graphics {
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
 
         ImGui::End();
+    }
+
+    void RenderToTexture::OnEvent(Event& event)
+    {
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+    }
+
+    EventHandler<ChangeResolutionEvent> RenderToTexture::OnResolutionChange()
+    {
+        return [this](ChangeResolutionEvent& event)
+        {
+            LOG_TRACE("We are handling a change resolution event");
+        };
     }
 
     void RenderToTexture::Attach()
