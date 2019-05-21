@@ -74,7 +74,7 @@ namespace Graphics {
 
     // Create a windowed GLFW window, half the size of desktop resolution, centered on screen.
     // If the desktop resolution isn't supported, we'll choose 720p as the default window size.
-    SmartGLFWWindow CreateInitialWindowedGLFWWindow(WindowProperties& windowProperties)
+    SmartGLFWWindow CreateGLFWWindow(WindowProperties& windowProperties)
     {
         InitializeGLFW();
         windowProperties.Resolution = GetDesktopResolutionOrDefault();

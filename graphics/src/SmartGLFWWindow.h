@@ -18,6 +18,6 @@ namespace Graphics {
 
     using SmartGLFWWindow = std::unique_ptr<GLFWwindow, DestroyGLFWWin>;
 
-    SmartGLFWWindow CreateInitialWindowedGLFWWindow(WindowProperties& windowProperties);
+    SmartGLFWWindow CreateGLFWWindow(WindowProperties& windowProperties);
 
 }
