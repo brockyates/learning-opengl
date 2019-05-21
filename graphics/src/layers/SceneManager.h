@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ApplicationBase.h"
+#include "BaseLayer.h"
 #include "events/Event.h"
 #include "imgui/ImGuiRenderer.h"
 #include "Layer.h"
@@ -31,7 +31,7 @@ namespace Graphics {
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        ApplicationBase m_ApplicationBase;
+        BaseLayer m_ApplicationBase;
         std::vector<std::unique_ptr<Layer>> m_Layers;
         Layer* m_ActiveLayer;
         ImGuiRenderer m_UIRenderer;

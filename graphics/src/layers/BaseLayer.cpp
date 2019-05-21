@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "ApplicationBase.h"
+#include "BaseLayer.h"
 
 #include "config/WindowDefaults.h"
 #include "imgui/imgui_impl_glfw.h"
@@ -12,11 +12,11 @@
 
 namespace Graphics {
 
-    ApplicationBase::ApplicationBase(Window* window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "ApplicationBase")
+    BaseLayer::BaseLayer(Window* window, EventHandler<Event> eventCallback)
+        : Layer(window, eventCallback, "BaseLayer")
     {}
 
-    void ApplicationBase::HandleInput()
+    void BaseLayer::HandleInput()
     {
         ImGuiIO& io = ImGui::GetIO();
 
@@ -40,18 +40,18 @@ namespace Graphics {
         }
     }
 
-    void ApplicationBase::RenderScene()
+    void BaseLayer::RenderScene()
     {
         HandleInput();
     }
 
-    void ApplicationBase::RenderUI()
+    void BaseLayer::RenderUI()
     {
         ShowMainWindow();
         ShowLogWindow();
     }
 
-    void ApplicationBase::OnImGuiRenderOverlay()
+    void BaseLayer::OnImGuiRenderOverlay()
     {
         ImGui::Begin("Scene");
 
@@ -63,7 +63,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void ApplicationBase::ShowMenuBar()
+    void BaseLayer::ShowMenuBar()
     {
         bool showFullscreenControlsPopup = false;
 
@@ -132,7 +132,7 @@ namespace Graphics {
         }
     }
 
-    void ApplicationBase::LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize)
+    void BaseLayer::LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize)
     {
         ImGui::DockBuilderRemoveNode(dockspaceID);
         ImGuiDockNodeFlags dockSpaceFlags = ImGuiDockNodeFlags_DockSpace;
@@ -149,7 +149,7 @@ namespace Graphics {
         ImGui::DockBuilderFinish(dockspaceID);
     }
 
-    void ApplicationBase::ShowMainWindow()
+    void BaseLayer::ShowMainWindow()
     {
         static bool opt_fullscreen_persistant = true;
         bool opt_fullscreen = opt_fullscreen_persistant;
@@ -196,7 +196,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void ApplicationBase::ShowLogWindow()
+    void BaseLayer::ShowLogWindow()
     {
         ImGui::Begin("Log", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
