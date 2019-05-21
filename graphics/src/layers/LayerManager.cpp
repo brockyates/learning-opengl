@@ -61,13 +61,13 @@ namespace Graphics {
     {
         ImGui::Begin("DemoWidget");
 
-        if (ImGui::BeginCombo("Scene", m_ActiveLayer->GetName().c_str()))
+        if (ImGui::BeginCombo("Scene", m_ActiveLayer->Name().c_str()))
         {
             for (auto& layer : m_Layers)
             {
                 bool isSelected = (m_ActiveLayer == layer.get());
 
-                if (ImGui::Selectable(layer->GetName().c_str(), isSelected))
+                if (ImGui::Selectable(layer->Name().c_str(), isSelected))
                 {
                     UpdateActiveLayer(layer.get());
                 }

@@ -30,8 +30,7 @@ namespace Graphics {
 
         virtual std::string PopupText() const { return ""; }
         virtual std::string Description() const { return ""; }
-
-        inline const std::string& GetName() const { return m_Name; }
+        inline const std::string& Name() const { return m_Name; }
 
     protected:
         virtual void FireEvent(const Event& event) { m_EventCallback(event); }
