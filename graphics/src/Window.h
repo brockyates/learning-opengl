@@ -1,12 +1,11 @@
 #pragma once
 
+#include "events/EventSystem.h"
 #include "ResolutionSetting.h"
 #include "SmartGLFWWindow.h"
 #include "WindowInput.h"
 #include "WindowProperties.h"
 #include "WindowedSetting.h"
-
-#include "events/EventSystem.h"
 
 namespace Graphics {
 
@@ -22,9 +21,9 @@ namespace Graphics {
         bool ShouldClose();
         bool IsFullscreen() const;
 
-        int Width() const { return m_Properties.Resolution.Width; }
-        int Height() const { return m_Properties.Resolution.Height; }
-        float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; }
+        int ResolutionWidth() const { return m_Properties.Resolution.Width; }
+        int ResolutionHeight() const { return m_Properties.Resolution.Height; }
+        float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; } //Used in ImGui initialization
         std::string DisplayName() const { return m_Properties.Title; }
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
