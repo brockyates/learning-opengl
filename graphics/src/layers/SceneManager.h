@@ -31,7 +31,7 @@ namespace Graphics {
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        BaseLayer m_ApplicationBase;
+        BaseLayer m_BaseLayer;
         std::vector<std::unique_ptr<Layer>> m_Layers;
         Layer* m_ActiveLayer;
         ImGuiRenderer m_UIRenderer;

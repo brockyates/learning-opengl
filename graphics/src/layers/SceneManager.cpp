@@ -20,7 +20,7 @@ namespace Graphics {
 
     SceneManager::SceneManager(Window* window, EventHandler<Event> eventCallback)
         : m_Layers(MakeLayers(window, eventCallback))
-        , m_ApplicationBase(window, eventCallback)
+        , m_BaseLayer(window, eventCallback)
         , m_ActiveLayer(m_Layers.front().get())
         , m_UIRenderer(window)
     {
@@ -29,14 +29,14 @@ namespace Graphics {
 
     void SceneManager::RenderScene()
     {
-        m_ApplicationBase.RenderScene();
+        m_BaseLayer.RenderScene();
         m_ActiveLayer->RenderScene();
     }
 
     void SceneManager::RenderUI()
     {
         m_UIRenderer.BeginFrame();
-        m_ApplicationBase.RenderUI();
+        m_BaseLayer.RenderUI();
 
         ShowDemoSelector();
 
@@ -45,14 +45,14 @@ namespace Graphics {
             layer->RenderUI();
         }
 
-        m_ApplicationBase.OnImGuiRenderOverlay();
+        m_BaseLayer.OnImGuiRenderOverlay();
 
         m_UIRenderer.Render();
     }
 
     void SceneManager::OnEvent(const Event& event)
     {
-        m_ApplicationBase.OnEvent(event);
+        m_BaseLayer.OnEvent(event);
 
         for (auto& layer : m_Layers)
         {
