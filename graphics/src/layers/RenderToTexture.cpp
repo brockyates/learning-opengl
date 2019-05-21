@@ -63,7 +63,7 @@ namespace Graphics {
         ImGui::Begin("DemoWidget");
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
-        ImGui::TextWrapped(GetDescription().c_str());
+        ImGui::TextWrapped(Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
@@ -173,12 +173,12 @@ namespace Graphics {
         m_Attached = false;
     }
 
-    std::string RenderToTexture::GetPopupText() const
+    std::string RenderToTexture::PopupText() const
     {
         return "Render to texture and present image in scene window";
     }
 
-    std::string RenderToTexture::GetDescription() const
+    std::string RenderToTexture::Description() const
     {
         return "Render to texture draws a scene to the frame buffer, renders it to a texture, and displays the resulting image in the ImGui scene window.";
     }

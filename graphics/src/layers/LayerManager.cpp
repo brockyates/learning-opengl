@@ -74,7 +74,7 @@ namespace Graphics {
 
                 if (ImGui::IsItemHovered())
                 {
-                    ImGui::SetTooltip(layer->GetPopupText().c_str());
+                    ImGui::SetTooltip(layer->PopupText().c_str());
                 }
 
                 if (isSelected)
