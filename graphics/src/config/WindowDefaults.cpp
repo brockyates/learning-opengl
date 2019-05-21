@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "WindowConfig.h"
+#include "WindowDefaults.h"
 
 namespace Graphics {
 
-    std::vector<ResolutionSetting> WindowConfig::SupportedResolutions =
+    std::vector<ResolutionSetting> WindowDefaults::SupportedResolutions =
     {
         {640,  480,  10.0f,   "640 x 480"},              // 0
         {800,  600,  10.0f,   "800 x 600"},              // 1
@@ -21,9 +21,9 @@ namespace Graphics {
         {3840, 2160, 24.0f,   "3840 x 2160 (4k)"}        // 13
     };
 
-    WindowProperties WindowConfig::Properties{
+    WindowProperties WindowDefaults::Properties{
         "OpenGL Graphics Demo",
-        WindowConfig::SupportedResolutions[3], /* 720p as safe default resolution */
+        WindowDefaults::SupportedResolutions[3], /* 720p as safe default resolution */
         WindowMode::Windowed,
         WindowedSetting(1280, 720, 0, 0)
     };

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ApplicationBase.h"
 
-#include "config/WindowConfig.h"
+#include "config/WindowDefaults.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "Window.h"
@@ -84,7 +84,7 @@ namespace Graphics {
             {
                 if (ImGui::BeginCombo("Scene Resolution", m_Window->Resolution().DisplayName.c_str()))
                 {
-                    for (const auto& res : WindowConfig::SupportedResolutions)
+                    for (const auto& res : WindowDefaults::SupportedResolutions)
                     {
                         bool isSelected = (m_Window->Resolution() == res);
 

@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "Window.h"
 
-#include "config/WindowConfig.h"
+#include "config/WindowDefaults.h"
 #include "events/EventDispatcher.h"
 #include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {
 
     Window::Window()
-        : m_Properties(WindowConfig::Properties)
+        : m_Properties(WindowDefaults::Properties)
         , m_Window(CreateInitialWindowedGLFWWindow(m_Properties))
         , Input(m_Window.get())
     {

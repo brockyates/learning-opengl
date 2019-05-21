@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SmartGLFWWindow.h"
 
-#include "config/WindowConfig.h"
+#include "config/WindowDefaults.h"
 #include "WindowProperties.h"
 
 namespace Graphics {
@@ -57,15 +57,15 @@ namespace Graphics {
         ResolutionSetting GetDesktopResolutionOrDefault()
         {
             const auto mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-            const auto found = std::find_if(std::begin(WindowConfig::SupportedResolutions), std::end(WindowConfig::SupportedResolutions), [mode](const ResolutionSetting& setting)
+            const auto found = std::find_if(std::begin(WindowDefaults::SupportedResolutions), std::end(WindowDefaults::SupportedResolutions), [mode](const ResolutionSetting& setting)
             {
                 return setting.Width == mode->width;
             });
 
-            if(found != std::end(WindowConfig::SupportedResolutions))
+            if(found != std::end(WindowDefaults::SupportedResolutions))
                 return *found;
 
-            const auto defaultResolution = WindowConfig::SupportedResolutions[3]; // 720p as a safe default resolution.
+            const auto defaultResolution = WindowDefaults::SupportedResolutions[3]; // 720p as a safe default resolution.
             return defaultResolution;
         }
 

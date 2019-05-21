@@ -121,7 +121,7 @@
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\SmartGLFWWindow.h" />
-    <ClInclude Include="src\config\WindowConfig.h" />
+    <ClInclude Include="src\config\WindowDefaults.h" />
     <ClInclude Include="src\WindowProperties.h" />
     <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
@@ -144,7 +144,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\config\WindowConfig.cpp" />
+    <ClCompile Include="src\config\WindowDefaults.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader" />

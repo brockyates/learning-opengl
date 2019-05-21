@@ -4,6 +4,8 @@
 #include "layers/SceneManager.h"
 #include "Window.h"
 
+#include <memory>
+
 namespace Graphics
 {
 

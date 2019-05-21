@@ -7,7 +7,7 @@
 
 namespace Graphics {
 
-    struct WindowConfig
+    struct WindowDefaults
     {
         static std::vector<ResolutionSetting> SupportedResolutions;
         static WindowProperties Properties;
