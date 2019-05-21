@@ -28,7 +28,6 @@ namespace Graphics {
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
         const WindowInput& Input() const { return m_Input; }
-
         GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
