@@ -36,8 +36,8 @@ namespace Graphics {
         {
             m_Properties.Mode = WindowMode::Windowed;
             glfwHideWindow(m_Window.get());
-            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_Properties.WindowedProperties.Width, m_Properties.WindowedProperties.Height, GLFW_DONT_CARE);
-            glfwSetWindowPos(m_Window.get(), m_Properties.WindowedProperties.Xpos, m_Properties.WindowedProperties.Ypos);
+            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_Properties.Layout.Width, m_Properties.Layout.Height, GLFW_DONT_CARE);
+            glfwSetWindowPos(m_Window.get(), m_Properties.Layout.Xpos, m_Properties.Layout.Ypos);
             glfwShowWindow(m_Window.get());
         };
     }
@@ -53,7 +53,7 @@ namespace Graphics {
             glfwGetWindowSize(m_Window.get(), &width, &height);
             glfwGetWindowPos(m_Window.get(), &xpos, &ypos);
 
-            m_Properties.WindowedProperties = { width, height, xpos, ypos };
+            m_Properties.Layout = { width, height, xpos, ypos };
 
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(m_Window.get());

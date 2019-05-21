@@ -45,8 +45,8 @@ namespace Graphics {
             if (windowProperties.Mode == WindowMode::Fullscreen)
                 return;
 
-            windowProperties.WindowedProperties.Width = width;
-            windowProperties.WindowedProperties.Height = height;
+            windowProperties.Layout.Width = width;
+            windowProperties.Layout.Height = height;
         });
 
         LOG_GL_INFO(glGetString(GL_RENDERER));
@@ -79,7 +79,7 @@ namespace Graphics {
         InitializeGLFW();
         windowProperties.Resolution = GetDesktopResolutionOrDefault();
 
-        windowProperties.WindowedProperties = WindowLayout(
+        windowProperties.Layout = WindowLayout(
             windowProperties.Resolution.Width / 2,
             windowProperties.Resolution.Height / 2,
             windowProperties.Resolution.Width / 4,
@@ -87,8 +87,8 @@ namespace Graphics {
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
-        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.WindowedProperties.Width, windowProperties.WindowedProperties.Height, windowProperties.Title.c_str(), NULL, NULL));
-        glfwSetWindowPos(window.get(), windowProperties.WindowedProperties.Xpos, windowProperties.WindowedProperties.Ypos);
+        auto window = SmartGLFWWindow(glfwCreateWindow(windowProperties.Layout.Width, windowProperties.Layout.Height, windowProperties.Title.c_str(), NULL, NULL));
+        glfwSetWindowPos(window.get(), windowProperties.Layout.Xpos, windowProperties.Layout.Ypos);
         glfwShowWindow(window.get());
 
         SetWindowContext(window.get(), windowProperties);
