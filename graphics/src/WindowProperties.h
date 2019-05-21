@@ -3,14 +3,14 @@
 
 #include "ResolutionSetting.h"
 #include "WindowMode.h"
-#include "WindowedSetting.h"
+#include "WindowLayout.h"
 
 namespace Graphics
 {
 
     struct WindowProperties
     {
-        WindowProperties(std::string title, ResolutionSetting resolution, WindowMode windowMode, WindowedSetting windowedProperties)
+        WindowProperties(std::string title, ResolutionSetting resolution, WindowMode windowMode, WindowLayout windowedProperties)
             : Title(title)
             , Resolution(resolution)
             , Mode(windowMode)
@@ -20,7 +20,7 @@ namespace Graphics
         std::string Title;
         ResolutionSetting Resolution;
         WindowMode Mode;
-        WindowedSetting WindowedProperties;
+        WindowLayout WindowedProperties;
 
     };
 

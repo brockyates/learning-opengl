@@ -5,7 +5,7 @@
 #include "SmartGLFWWindow.h"
 #include "WindowInput.h"
 #include "WindowProperties.h"
-#include "WindowedSetting.h"
+#include "WindowLayout.h"
 
 namespace Graphics {
 

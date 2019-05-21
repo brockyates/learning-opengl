@@ -104,7 +104,7 @@
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
-    <ClInclude Include="src\WindowedSetting.h" />
+    <ClInclude Include="src\WindowLayout.h" />
     <ClInclude Include="src\WindowInput.h" />
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />

@@ -79,7 +79,7 @@ namespace Graphics {
         InitializeGLFW();
         windowProperties.Resolution = GetDesktopResolutionOrDefault();
 
-        windowProperties.WindowedProperties = WindowedSetting(
+        windowProperties.WindowedProperties = WindowLayout(
             windowProperties.Resolution.Width / 2,
             windowProperties.Resolution.Height / 2,
             windowProperties.Resolution.Width / 4,

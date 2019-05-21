@@ -2,7 +2,6 @@
 #include "Window.h"
 
 #include "config/WindowDefaults.h"
-#include "events/EventDispatcher.h"
 #include "logging/GLDebugMessageCallback.h"
 
 namespace Graphics {
