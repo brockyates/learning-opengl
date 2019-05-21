@@ -9,7 +9,7 @@ namespace Graphics {
     class ImGuiRenderer
     {
     public:
-        ImGuiRenderer(Window* window);
+        ImGuiRenderer(const Window& window);
         ~ImGuiRenderer();
 
         ImGuiRenderer(ImGuiRenderer&) = default;
@@ -19,7 +19,7 @@ namespace Graphics {
         void Render();
 
     private:
-        Window* m_Window;
+        const Window& m_Window;
     };
 
 }

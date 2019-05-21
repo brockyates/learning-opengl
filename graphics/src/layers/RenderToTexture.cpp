@@ -10,7 +10,7 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(Window* window, EventHandler<Event> eventCallback)
+    RenderToTexture::RenderToTexture(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Render to Texture")
     {}
 
@@ -19,7 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        if (!m_Window->IsFullscreen())
+        if (!m_Window.IsFullscreen())
         {
             glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         }
@@ -32,7 +32,7 @@ namespace Graphics {
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glViewport(0, 0, m_Window->ResolutionWidth(), m_Window->ResolutionHeight());
+        glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Release bindings
@@ -107,7 +107,7 @@ namespace Graphics {
 
         glGenTextures(1, &m_RenderedTextureID);
         glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Window->ResolutionWidth(), m_Window->ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Window.ResolutionWidth(), m_Window.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -116,7 +116,7 @@ namespace Graphics {
 
         glGenRenderbuffers(1, &m_RenderBufferID);
         glBindRenderbuffer(GL_RENDERBUFFER, m_RenderBufferID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_Window->ResolutionWidth(), m_Window->ResolutionHeight());
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RenderBufferID);

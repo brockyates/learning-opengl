@@ -27,7 +27,7 @@ namespace Graphics {
         std::string DisplayName() const { return m_Properties.Title; }
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
-        GLFWwindow* GetNativeWindow() { return m_Window.get(); } //Should only be needed for ImGui initialization
+        GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
         //Event handlers

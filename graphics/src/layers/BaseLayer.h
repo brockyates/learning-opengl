@@ -10,7 +10,7 @@ namespace Graphics {
     class BaseLayer : public Layer
     {
     public:
-        BaseLayer(Window* window, EventHandler<Event> eventCallback);
+        BaseLayer(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;

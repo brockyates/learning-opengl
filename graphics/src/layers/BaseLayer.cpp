@@ -12,7 +12,7 @@
 
 namespace Graphics {
 
-    BaseLayer::BaseLayer(Window* window, EventHandler<Event> eventCallback)
+    BaseLayer::BaseLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "BaseLayer")
     {}
 
@@ -20,11 +20,11 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_F11Ready && (m_Window->Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_F11Ready && (m_Window.Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
             m_F11Ready = false;
 
-            if (m_Window->IsFullscreen())
+            if (m_Window.IsFullscreen())
             {
                 FireEvent(ChangeToWindowedEvent());
             }
@@ -34,7 +34,7 @@ namespace Graphics {
             }
         }
 
-        if (m_Window->Input.IsKeyReleased(GLFW_KEY_F11))
+        if (m_Window.Input.IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
         }
@@ -82,11 +82,11 @@ namespace Graphics {
             ImGui::Spacing();
             if (ImGui::BeginMenu("Video"))
             {
-                if (ImGui::BeginCombo("Scene Resolution", m_Window->Resolution().DisplayName.c_str()))
+                if (ImGui::BeginCombo("Scene Resolution", m_Window.Resolution().DisplayName.c_str()))
                 {
                     for (const auto& res : WindowDefaults::SupportedResolutions)
                     {
-                        bool isSelected = (m_Window->Resolution() == res);
+                        bool isSelected = (m_Window.Resolution() == res);
 
                         if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
                         {

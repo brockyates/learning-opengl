@@ -7,7 +7,7 @@ namespace Graphics {
 
     Application::Application()
         : m_Window(std::make_unique<Window>())
-        , m_SceneManager(m_Window.get(), [this](const Event& e) { return OnEvent(e); })
+        , m_SceneManager(*m_Window, [this](const Event& e) { return OnEvent(e); })
     {}
 
     void Application::Start()

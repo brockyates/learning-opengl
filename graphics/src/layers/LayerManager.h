@@ -14,7 +14,7 @@ namespace Graphics {
     class LayerManager
     {
     public:
-        LayerManager(Window* window, EventHandler<Event> eventCallback);
+        LayerManager(const Window& window, EventHandler<Event> eventCallback);
         ~LayerManager() = default;
 
         LayerManager(LayerManager&&) = default;
@@ -26,13 +26,13 @@ namespace Graphics {
         void OnEvent(const Event& event);
 
     private:
-        std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(Window* window, EventHandler<Event> eventCallback);
+        std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback);
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        BaseLayer m_BaseLayer;
         std::vector<std::unique_ptr<Layer>> m_Layers;
+        BaseLayer m_BaseLayer;
         Layer* m_ActiveLayer;
         ImGuiRenderer m_UIRenderer;
     };

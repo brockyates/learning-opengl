@@ -9,7 +9,7 @@ namespace Graphics {
     class Layer
     {
     public:
-        Layer(Window* window, EventHandler<Event> eventCallback, const std::string& name = "Layer");
+        Layer(const Window& window, EventHandler<Event> eventCallback, const std::string& name = "Layer");
         virtual ~Layer() = default;
 
         // Layers work with OpenGL global state and may have const members
@@ -37,7 +37,7 @@ namespace Graphics {
         virtual void FireEvent(const Event& event) { m_EventCallback(event); }
 
     protected:
-        Window* m_Window;
+        const Window& m_Window;
         std::string m_Name;
 
     private:

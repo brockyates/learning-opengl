@@ -9,7 +9,7 @@
 
 namespace Graphics {
 
-    ImGuiRenderer::ImGuiRenderer(Window* window)
+    ImGuiRenderer::ImGuiRenderer(const Window& window)
         : m_Window(window)
     {
         // Setup Dear ImGui context
@@ -20,7 +20,7 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", m_Window->DefaultFontSize());
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", m_Window.DefaultFontSize());
 
         // Setup Dear ImGui style
         ImGui::StyleColorsClassic();
@@ -34,7 +34,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(m_Window->GetNativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(m_Window.GetNativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
@@ -56,7 +56,7 @@ namespace Graphics {
     void ImGuiRenderer::Render()
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(m_Window->ResolutionWidth()), static_cast<float>(m_Window->ResolutionHeight()));
+        io.DisplaySize = ImVec2(static_cast<float>(m_Window.ResolutionWidth()), static_cast<float>(m_Window.ResolutionHeight()));
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

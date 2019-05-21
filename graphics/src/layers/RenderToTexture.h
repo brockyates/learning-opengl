@@ -17,7 +17,7 @@ namespace Graphics {
     class RenderToTexture : public Layer
     {
     public:
-        RenderToTexture(Window* window, EventHandler<Event> eventCallback);
+        RenderToTexture(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;

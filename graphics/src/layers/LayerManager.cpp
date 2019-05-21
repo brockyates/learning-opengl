@@ -9,16 +9,15 @@
 
 namespace Graphics {
 
-    std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(Window* window, EventHandler<Event> eventCallback)
+    std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback)
     {
         std::vector<std::unique_ptr<Layer>> layers;
-
         layers.emplace_back(std::make_unique<RenderToTexture>(window, eventCallback));
 
         return layers;
     }
 
-    LayerManager::LayerManager(Window* window, EventHandler<Event> eventCallback)
+    LayerManager::LayerManager(const Window& window, EventHandler<Event> eventCallback)
         : m_Layers(MakeLayers(window, eventCallback))
         , m_BaseLayer(window, eventCallback)
         , m_ActiveLayer(m_Layers.front().get())
