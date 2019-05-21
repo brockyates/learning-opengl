@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "SceneManager.h"
+#include "LayerManager.h"
 
 #include "layers/BaseLayer.h"
 #include "layers/Layer.h"
@@ -9,7 +9,7 @@
 
 namespace Graphics {
 
-    std::vector<std::unique_ptr<Layer>> SceneManager::MakeLayers(Window* window, EventHandler<Event> eventCallback)
+    std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(Window* window, EventHandler<Event> eventCallback)
     {
         std::vector<std::unique_ptr<Layer>> layers;
 
@@ -18,7 +18,7 @@ namespace Graphics {
         return layers;
     }
 
-    SceneManager::SceneManager(Window* window, EventHandler<Event> eventCallback)
+    LayerManager::LayerManager(Window* window, EventHandler<Event> eventCallback)
         : m_Layers(MakeLayers(window, eventCallback))
         , m_BaseLayer(window, eventCallback)
         , m_ActiveLayer(m_Layers.front().get())
@@ -27,13 +27,13 @@ namespace Graphics {
         m_ActiveLayer->Attach();
     }
 
-    void SceneManager::RenderScene()
+    void LayerManager::RenderScene()
     {
         m_BaseLayer.RenderScene();
         m_ActiveLayer->RenderScene();
     }
 
-    void SceneManager::RenderUI()
+    void LayerManager::RenderUI()
     {
         m_UIRenderer.BeginFrame();
         m_BaseLayer.RenderUI();
@@ -50,7 +50,7 @@ namespace Graphics {
         m_UIRenderer.Render();
     }
 
-    void SceneManager::OnEvent(const Event& event)
+    void LayerManager::OnEvent(const Event& event)
     {
         m_BaseLayer.OnEvent(event);
 
@@ -60,7 +60,7 @@ namespace Graphics {
         }
     }
 
-    void SceneManager::ShowDemoSelector()
+    void LayerManager::ShowDemoSelector()
     {
         ImGui::Begin("DemoWidget");
 
@@ -92,7 +92,7 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void SceneManager::UpdateActiveLayer(Layer* nextActiveLayer)
+    void LayerManager::UpdateActiveLayer(Layer* nextActiveLayer)
     {
         if (nextActiveLayer->IsAttached())
             return;

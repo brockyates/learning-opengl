@@ -11,14 +11,14 @@ namespace Graphics {
     class Layer;
     struct WindowProperties;
 
-    class SceneManager
+    class LayerManager
     {
     public:
-        SceneManager(Window* window, EventHandler<Event> eventCallback);
-        ~SceneManager() = default;
+        LayerManager(Window* window, EventHandler<Event> eventCallback);
+        ~LayerManager() = default;
 
-        SceneManager(SceneManager&&) = default;
-        SceneManager& operator=(SceneManager&&) = default;
+        LayerManager(LayerManager&&) = default;
+        LayerManager& operator=(LayerManager&&) = default;
 
         void RenderScene();
         void RenderUI();
@@ -26,7 +26,7 @@ namespace Graphics {
         void OnEvent(const Event& event);
 
     private:
-        std::vector<std::unique_ptr<Layer>> SceneManager::MakeLayers(Window* window, EventHandler<Event> eventCallback);
+        std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(Window* window, EventHandler<Event> eventCallback);
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);
 

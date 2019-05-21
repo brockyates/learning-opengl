@@ -1,7 +1,7 @@
 #pragma once
 
 #include "events/EventSystem.h"
-#include "layers/SceneManager.h"
+#include "layers/LayerManager.h"
 #include "Window.h"
 
 #include <memory>
@@ -20,7 +20,7 @@ namespace Graphics
 
     private:
         std::unique_ptr<Window> m_Window;
-        SceneManager m_SceneManager;
+        LayerManager m_SceneManager;
     };
 
 }
