@@ -10,10 +10,10 @@ namespace Graphics {
 
     struct WindowProperties;
 
-    class RenderToTexture : public Layer
+    class RenderTargetLayer : public Layer
     {
     public:
-        RenderToTexture(const Window& window, EventHandler<Event> eventCallback);
+        RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;

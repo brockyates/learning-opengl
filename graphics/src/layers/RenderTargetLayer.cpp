@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "RenderToTexture.h"
+#include "RenderTargetLayer.h"
 
 #include "events/EventDispatcher.h"
 #include "ShaderHelpers.h"
@@ -10,11 +10,11 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(const Window& window, EventHandler<Event> eventCallback)
+    RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Render to Texture")
     {}
 
-    void RenderToTexture::RenderScene()
+    void RenderTargetLayer::RenderScene()
     {
         if (!m_Attached)
             return;
@@ -41,7 +41,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void RenderToTexture::RenderUI()
+    void RenderTargetLayer::RenderUI()
     {
         if (!m_Attached)
             return;
@@ -71,14 +71,14 @@ namespace Graphics {
         ImGui::End();
     }
 
-    void RenderToTexture::OnEvent(const Event& event)
+    void RenderTargetLayer::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
     }
 
-    EventHandler<ChangeResolutionEvent> RenderToTexture::OnResolutionChange()
+    EventHandler<ChangeResolutionEvent> RenderTargetLayer::OnResolutionChange()
     {
         return [this](const ChangeResolutionEvent& event)
         {
@@ -90,7 +90,7 @@ namespace Graphics {
         };
     }
 
-    EventHandler<ChangeToWindowedEvent> RenderToTexture::OnChangeToWindowed()
+    EventHandler<ChangeToWindowedEvent> RenderTargetLayer::OnChangeToWindowed()
     {
         return [this](const ChangeToWindowedEvent& event)
         {
@@ -102,11 +102,11 @@ namespace Graphics {
         };
     }
 
-    void RenderToTexture::Attach()
+    void RenderTargetLayer::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching RenderToTexture");
+        LOG_TRACE("Attaching RenderTargetLayer");
 
         glGenFramebuffers(1, &m_FrameBufferID);
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
@@ -159,11 +159,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void RenderToTexture::Detach()
+    void RenderTargetLayer::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching RenderToTexture");
+        LOG_TRACE("Detaching RenderTargetLayer");
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -179,12 +179,12 @@ namespace Graphics {
         m_Attached = false;
     }
 
-    std::string RenderToTexture::PopupText() const
+    std::string RenderTargetLayer::PopupText() const
     {
         return "Render to texture and present image in scene window";
     }
 
-    std::string RenderToTexture::Description() const
+    std::string RenderTargetLayer::Description() const
     {
         return "Render to texture draws a scene to the frame buffer, renders it to a texture, and displays the resulting image in the ImGui scene window.";
     }
