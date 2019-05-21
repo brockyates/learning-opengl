@@ -7,14 +7,20 @@
 
 namespace Graphics {
 
-    WindowedSettings Window::InitializeWindowedSettings()
+    Window::Window()
+        : m_Properties(WindowConfig::Properties)
+        , m_Window(CreateInitialWindowedGLFWWindow(m_Properties))
+        , Input(m_Window.get())
     {
-        int width, height, xpos, ypos;
+#ifdef APP_DEBUG
+        glEnable(GL_DEBUG_OUTPUT);
+        glDebugMessageCallback(GLDebugMessageCallback, 0);
+#endif
+    }
 
-        glfwGetWindowSize(m_Window.get(), &width, &height);
-        glfwGetWindowPos(m_Window.get(), &xpos, &ypos);
-
-        return { width, height, xpos, ypos };
+    Window::~Window()
+    {
+        glfwTerminate();
     }
 
     EventHandler<ChangeResolutionEvent> Window::OnResolutionChange()
@@ -31,8 +37,8 @@ namespace Graphics {
         {
             m_Properties.Mode = WindowMode::Windowed;
             glfwHideWindow(m_Window.get());
-            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_WindowedSettings.Width, m_WindowedSettings.Height, GLFW_DONT_CARE);
-            glfwSetWindowPos(m_Window.get(), m_WindowedSettings.Xpos, m_WindowedSettings.Ypos);
+            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_Properties.WindowedProperties.Width, m_Properties.WindowedProperties.Height, GLFW_DONT_CARE);
+            glfwSetWindowPos(m_Window.get(), m_Properties.WindowedProperties.Xpos, m_Properties.WindowedProperties.Ypos);
             glfwShowWindow(m_Window.get());
         };
     }
@@ -48,7 +54,7 @@ namespace Graphics {
             glfwGetWindowSize(m_Window.get(), &width, &height);
             glfwGetWindowPos(m_Window.get(), &xpos, &ypos);
 
-            m_WindowedSettings = { width, height, xpos, ypos };
+            m_Properties.WindowedProperties = { width, height, xpos, ypos };
 
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(m_Window.get());
@@ -62,23 +68,6 @@ namespace Graphics {
         {
             glfwSetWindowShouldClose(m_Window.get(), GLFW_TRUE);
         };
-    }
-
-    Window::Window()
-        : m_Properties(WindowConfig::Properties)
-        , m_Window(CreateInitialWindowedGLFWWindow(m_Properties))
-        , m_WindowedSettings(InitializeWindowedSettings())
-        , Input(m_Window.get())
-    {
-#ifdef APP_DEBUG
-        glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(GLDebugMessageCallback, 0);
-#endif
-    }
-
-    Window::~Window()
-    {
-        glfwTerminate();
     }
 
     bool Window::ShouldClose()

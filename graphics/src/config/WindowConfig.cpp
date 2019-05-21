@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "WindowConfig.h"
-#include "WindowProperties.h"
 
 namespace Graphics {
 
@@ -25,7 +24,8 @@ namespace Graphics {
     WindowProperties WindowConfig::Properties{
         "OpenGL Graphics Demo",
         WindowConfig::SupportedResolutions[3], /* 720p as safe default resolution */
-        WindowMode::Windowed
+        WindowMode::Windowed,
+        WindowedSetting(1280, 720, 0, 0)
     };
 
 }

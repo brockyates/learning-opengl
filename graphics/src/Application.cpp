@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Application.h"
 
-#include "imgui/ImGuiRenderer.h"
-#include "layers/SceneManager.h"
 #include "Window.h"
 
 namespace Graphics {
@@ -31,7 +29,7 @@ namespace Graphics {
         LOG_INFO("Main application loop stopped");
     }
 
-    // Top-level event callback
+    // Top-level event handler
     void Application::OnEvent(const Event& event)
     {
         m_Window->OnEvent(event);

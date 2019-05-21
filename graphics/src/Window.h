@@ -4,7 +4,7 @@
 #include "SmartGLFWWindow.h"
 #include "WindowInput.h"
 #include "WindowProperties.h"
-#include "WindowedSettings.h"
+#include "WindowedSetting.h"
 
 #include "events/EventSystem.h"
 
@@ -31,8 +31,6 @@ namespace Graphics {
         GLFWwindow* GetNativeWindow() { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
-        WindowedSettings InitializeWindowedSettings();
-
         //Event handlers
         EventHandler<ChangeResolutionEvent> OnResolutionChange();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
@@ -42,7 +40,6 @@ namespace Graphics {
     private:
         WindowProperties m_Properties;
         SmartGLFWWindow m_Window;
-        WindowedSettings m_WindowedSettings;
 
     public:
         WindowInput Input;

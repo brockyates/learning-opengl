@@ -2,9 +2,9 @@
 
 namespace Graphics {
 
-    struct WindowedSettings
+    struct WindowedSetting
     {
-        WindowedSettings(int width, int  height, int  xpos, int  ypos)
+        WindowedSetting(int width, int  height, int  xpos, int  ypos)
             : Width(width)
             , Height(height)
             , Xpos(xpos)
@@ -13,7 +13,6 @@ namespace Graphics {
 
         int Width;
         int Height;
-
         int Xpos;
         int Ypos;
     };

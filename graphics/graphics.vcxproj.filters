@@ -56,7 +56,6 @@
     <ClInclude Include="src\layers\ApplicationBase.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindowedSettings.h" />
     <ClInclude Include="src\layers\SceneManager.h" />
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\EventDispatcher.h" />
@@ -66,6 +65,7 @@
     <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
     <ClInclude Include="src\events\EventSystem.h" />
+    <ClInclude Include="src\WindowedSetting.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
