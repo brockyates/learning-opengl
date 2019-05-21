@@ -103,6 +103,7 @@
     <ClInclude Include="src\events\EventType.h" />
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
     <ClInclude Include="src\WindowLayout.h" />
     <ClInclude Include="src\WindowInput.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />

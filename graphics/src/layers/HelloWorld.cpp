@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "RenderToTexture.h"
+#include "HelloWorld.h"
 
 #include "events/EventDispatcher.h"
 #include "ShaderHelpers.h"
@@ -10,11 +10,11 @@
 
 namespace Graphics {
 
-    RenderToTexture::RenderToTexture(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Render to Texture")
+    HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
+        : Layer(window, eventCallback, "Hello World")
     {}
 
-    void RenderToTexture::RenderScene()
+    void HelloWorld::RenderScene()
     {
         if (!m_Attached)
             return;
@@ -41,7 +41,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void RenderToTexture::RenderUI()
+    void HelloWorld::RenderUI()
     {
         if (!m_Attached)
             return;
@@ -66,19 +66,18 @@ namespace Graphics {
         ImGui::TextWrapped(Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
-        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
 
         ImGui::End();
     }
 
-    void RenderToTexture::OnEvent(const Event& event)
+    void HelloWorld::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
     }
 
-    EventHandler<ChangeResolutionEvent> RenderToTexture::OnResolutionChange()
+    EventHandler<ChangeResolutionEvent> HelloWorld::OnResolutionChange()
     {
         return [this](const ChangeResolutionEvent& event)
         {
@@ -90,7 +89,7 @@ namespace Graphics {
         };
     }
 
-    EventHandler<ChangeToWindowedEvent> RenderToTexture::OnChangeToWindowed()
+    EventHandler<ChangeToWindowedEvent> HelloWorld::OnChangeToWindowed()
     {
         return [this](const ChangeToWindowedEvent& event)
         {
@@ -102,11 +101,11 @@ namespace Graphics {
         };
     }
 
-    void RenderToTexture::Attach()
+    void HelloWorld::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching RenderToTexture");
+        LOG_TRACE("Attaching HelloWorld");
 
         glGenFramebuffers(1, &m_FrameBufferID);
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
@@ -159,11 +158,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void RenderToTexture::Detach()
+    void HelloWorld::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching RenderToTexture");
+        LOG_TRACE("Detaching HelloWorld");
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -179,14 +178,14 @@ namespace Graphics {
         m_Attached = false;
     }
 
-    std::string RenderToTexture::PopupText() const
+    std::string HelloWorld::PopupText() const
     {
-        return "Render to texture and present image in scene window";
+        return "Draws triangle on minimal window";
     }
 
-    std::string RenderToTexture::Description() const
+    std::string HelloWorld::Description() const
     {
-        return "Render to texture draws a scene to the frame buffer, renders it to a texture, and displays the resulting image in the ImGui scene window.";
+        return "Hello World is a minimal demo. Draws a triangle on the window, and exposes no UI controls.";
     }
 
 }

@@ -66,6 +66,7 @@
       <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\layers\LayerManager.h" />
+    <ClInclude Include="src\layers\HelloWorld.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -101,6 +102,7 @@
       <Filter>src\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\layers\LayerManager.cpp" />
+    <ClCompile Include="src\layers\HelloWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader">

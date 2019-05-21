@@ -4,6 +4,7 @@
 #include "layers/BaseLayer.h"
 #include "layers/Layer.h"
 #include "layers/RenderToTexture.h"
+#include "layers/HelloWorld.h"
 
 #include <imgui.h>
 
@@ -13,6 +14,7 @@ namespace Graphics {
     {
         std::vector<std::unique_ptr<Layer>> layers;
         layers.emplace_back(std::make_unique<RenderToTexture>(window, eventCallback));
+        layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
 
         return layers;
     }
@@ -38,10 +40,7 @@ namespace Graphics {
         m_BaseLayer.RenderUI();
         ShowDemoSelector();
 
-        for (auto& layer : m_Layers)
-        {
-            layer->RenderUI();
-        }
+        m_ActiveLayer->RenderUI();
 
         m_BaseLayer.OnImGuiRenderOverlay();
         m_UIRenderer.Render();
