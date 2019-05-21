@@ -1,11 +1,7 @@
 #pragma once
 
+#include "events/EventSystem.h"
 #include "layers/Layer.h"
-#include "ShaderHelpers.h"
-
-#include "events/ChangeToWindowedEvent.h"
-#include "events/ChangeResolutionEvent.h"
-#include "events/Event.h"
 #include "Window.h"
 
 #include <glm/glm.hpp>
@@ -37,10 +33,13 @@ namespace Graphics {
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
 
     private:
+        //OpenGL state
+        unsigned int m_FrameBufferID = 0;
+        unsigned int m_RenderedTextureID = 0;
+        unsigned int m_RenderBufferID = 0;
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
-        bool m_Attached = false;
 
         glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
 
@@ -52,9 +51,7 @@ namespace Graphics {
         };
 
     private:
-        unsigned int m_FrameBufferID = 0;
-        unsigned int m_RenderedTextureID = 0;
-        unsigned int m_RenderBufferID = 0;
+        bool m_Attached = false;
     };
 
 }
