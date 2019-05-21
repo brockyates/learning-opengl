@@ -36,7 +36,6 @@ namespace Graphics {
     {
         m_UIRenderer.BeginFrame();
         m_BaseLayer.RenderUI();
-
         ShowDemoSelector();
 
         for (auto& layer : m_Layers)
@@ -45,7 +44,6 @@ namespace Graphics {
         }
 
         m_BaseLayer.OnImGuiRenderOverlay();
-
         m_UIRenderer.Render();
     }
 

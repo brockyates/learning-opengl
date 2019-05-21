@@ -22,7 +22,6 @@ namespace Graphics {
 
         void RenderScene();
         void RenderUI();
-
         void OnEvent(const Event& event);
 
     private:
