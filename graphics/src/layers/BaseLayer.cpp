@@ -2,10 +2,7 @@
 #include "BaseLayer.h"
 
 #include "config/WindowDefaults.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
 #include "Window.h"
-#include "WindowMode.h"
 
 #include <imgui.h>
 #include <imgui_internal.h> //Needed to create docking layout presets
@@ -84,13 +81,13 @@ namespace Graphics {
             {
                 if (ImGui::BeginCombo("Scene Resolution", m_Window.Resolution().DisplayName.c_str()))
                 {
-                    for (const auto& res : WindowDefaults::SupportedResolutions)
+                    for (const auto& resolution : WindowDefaults::SupportedResolutions)
                     {
-                        bool isSelected = (m_Window.Resolution() == res);
+                        bool isSelected = (m_Window.Resolution() == resolution);
 
-                        if (ImGui::Selectable(res.DisplayName.c_str(), isSelected))
+                        if (ImGui::Selectable(resolution.DisplayName.c_str(), isSelected))
                         {
-                            FireEvent(ChangeResolutionEvent(res));
+                            FireEvent(ChangeResolutionEvent(resolution));
                         }
 
                         if (isSelected)
@@ -151,42 +148,32 @@ namespace Graphics {
 
     void BaseLayer::ShowMainWindow()
     {
-        static bool opt_fullscreen_persistant = true;
-        bool opt_fullscreen = opt_fullscreen_persistant;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
-
         ImVec2 dockSize;
 
         // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
         // because it would be confusing to have two docking targets within each others.
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-        if (opt_fullscreen)
-        {
-            ImGuiViewport* viewport = ImGui::GetMainViewport();
-            ImGui::SetNextWindowPos(viewport->Pos);
-            ImGui::SetNextWindowSize(viewport->Size);
-            dockSize = viewport->Size;
-            ImGui::SetNextWindowViewport(viewport->ID);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-            window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-        }
+        auto viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->Pos);
+        ImGui::SetNextWindowSize(viewport->Size);
+        dockSize = viewport->Size;
+        ImGui::SetNextWindowViewport(viewport->ID);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+        window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::Begin("MainDockspaceWindow", 0, window_flags);
-        ImGui::PopStyleVar();
+        ImGui::PopStyleVar(3);
 
-        if (opt_fullscreen)
-            ImGui::PopStyleVar(2);
-
-        // DockSpace
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
         {
             ImGuiID dockspace_id = ImGui::GetID("MainDockspace");
 
-            if (ImGui::DockBuilderGetNode(dockspace_id) == NULL)
+            if (ImGui::DockBuilderGetNode(dockspace_id) == NULL) // Create default DockSpace on first run
                 LayoutPreset(dockspace_id, dockSize);
 
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
