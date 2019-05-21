@@ -27,6 +27,8 @@ namespace Graphics {
         std::string DisplayName() const { return m_Properties.Title; }
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
+        const WindowInput& Input() const { return m_Input; }
+
         GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
@@ -39,9 +41,7 @@ namespace Graphics {
     private:
         WindowProperties m_Properties;
         SmartGLFWWindow m_Window;
-
-    public:
-        WindowInput Input;
+        WindowInput m_Input;
     };
 
 }

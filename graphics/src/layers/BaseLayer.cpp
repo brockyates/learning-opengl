@@ -20,7 +20,7 @@ namespace Graphics {
     {
         ImGuiIO& io = ImGui::GetIO();
 
-        if (m_F11Ready && (m_Window.Input.IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_F11Ready && (m_Window.Input().IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
         {
             m_F11Ready = false;
 
@@ -34,7 +34,7 @@ namespace Graphics {
             }
         }
 
-        if (m_Window.Input.IsKeyReleased(GLFW_KEY_F11))
+        if (m_Window.Input().IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
         }

@@ -9,7 +9,7 @@ namespace Graphics {
     Window::Window()
         : m_Properties(WindowDefaults::Properties)
         , m_Window(CreateInitialWindowedGLFWWindow(m_Properties))
-        , Input(m_Window.get())
+        , m_Input(m_Window.get())
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
