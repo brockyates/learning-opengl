@@ -7,7 +7,7 @@ namespace Graphics {
 
     Application::Application()
         : m_Window(std::make_unique<Window>())
-        , m_SceneManager(*m_Window, [this](const Event& e) { return OnEvent(e); })
+        , m_LayerManager(*m_Window, [this](const Event& e) { return OnEvent(e); })
     {}
 
     void Application::Start()
@@ -16,11 +16,11 @@ namespace Graphics {
 
         while (!m_Window->ShouldClose())
         {
-            m_SceneManager.RenderScene();
+            m_LayerManager.RenderScene();
 
             if (!m_Window->IsFullscreen())
             {
-                m_SceneManager.RenderUI();
+                m_LayerManager.RenderUI();
             }
 
             m_Window->Update();
@@ -33,7 +33,7 @@ namespace Graphics {
     void Application::OnEvent(const Event& event)
     {
         m_Window->OnEvent(event);
-        m_SceneManager.OnEvent(event);
+        m_LayerManager.OnEvent(event);
     }
 
 }

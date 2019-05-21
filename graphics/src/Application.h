@@ -20,7 +20,7 @@ namespace Graphics
 
     private:
         std::unique_ptr<Window> m_Window;
-        LayerManager m_SceneManager;
+        LayerManager m_LayerManager;
     };
 
 }
