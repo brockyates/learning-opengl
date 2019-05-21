@@ -41,6 +41,7 @@ namespace Graphics {
         {
             WindowProperties& windowProperties = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
+            // We only need to maintain window properties in Windowed mode
             if (windowProperties.Mode == WindowMode::Fullscreen)
                 return;
 
@@ -56,14 +57,14 @@ namespace Graphics {
 
         ResolutionSetting GetDesktopResolutionOrDefault()
         {
-            const auto mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-            const auto found = std::find_if(std::begin(WindowDefaults::SupportedResolutions), std::end(WindowDefaults::SupportedResolutions), [mode](const ResolutionSetting& setting)
+            const auto videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+            const auto foundSupportedResolution = std::find_if(std::begin(WindowDefaults::SupportedResolutions), std::end(WindowDefaults::SupportedResolutions), [videoMode](const ResolutionSetting& setting)
             {
-                return setting.Width == mode->width;
+                return setting.Width == videoMode->width;
             });
 
-            if(found != std::end(WindowDefaults::SupportedResolutions))
-                return *found;
+            if(foundSupportedResolution != std::end(WindowDefaults::SupportedResolutions))
+                return *foundSupportedResolution;
 
             const auto defaultResolution = WindowDefaults::SupportedResolutions[3]; // 720p as a safe default resolution.
             return defaultResolution;
