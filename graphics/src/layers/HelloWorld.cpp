@@ -81,8 +81,11 @@ namespace Graphics {
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+        //Release bindings
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
 
         m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
@@ -97,9 +100,8 @@ namespace Graphics {
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glBindTexture(GL_TEXTURE_2D, 0);
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
 
         glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);

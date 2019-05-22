@@ -43,9 +43,18 @@ namespace Graphics {
 
         std::vector<Vertex1> m_Vertexes =
         {
-            glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
-            glm::vec4{ 1.0f, -1.0f, 0.0f, 1.0f },
-            glm::vec4{-1.0f, -1.0f, 0.0f, 1.0f },
+            {
+                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f }, //Position
+                glm::vec4{ 1.0f,  0.0f, 0.0f, 1.0f }, //Color
+            },
+            {
+                glm::vec4{ 1.0f, -1.0f, 0.0f, 1.0f },
+                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
+            },
+            {
+                glm::vec4{-1.0f, -1.0f, 0.0f, 1.0f },
+                glm::vec4{ 0.0f,  0.0f, 1.0f, 1.0f },
+            }
         };
 
     private:

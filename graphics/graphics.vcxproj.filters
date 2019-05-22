@@ -117,6 +117,8 @@
     <None Include="res\shaders\Minimal_Vertex.shader">
       <Filter>res\shaders</Filter>
     </None>
+    <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
+    <None Include="res\shaders\HelloWorldFiddle_Vertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\fonts\Consolas.ttf" />

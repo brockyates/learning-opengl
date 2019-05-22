@@ -155,6 +155,8 @@
     <ClCompile Include="src\config\WindowDefaults.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
+    <None Include="res\shaders\HelloWorldFiddle_Vertex.shader" />
     <None Include="res\shaders\Minimal_Fragment.shader" />
     <None Include="res\shaders\Minimal_Vertex.shader" />
   </ItemGroup>
