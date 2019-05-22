@@ -78,9 +78,11 @@ namespace Graphics {
         glBindVertexArray(m_VertexArrayID);
         glGenBuffers(1, &m_VertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * Vertex1::VertexByteSize, &m_Vertexes[0], GL_STATIC_DRAW);
+
+        //Vertex Position
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(0, Vertex1::ElementsPerPosition, Vertex1::PositionType, GL_FALSE, 0, 0);
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);

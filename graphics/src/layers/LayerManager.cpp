@@ -25,7 +25,7 @@ namespace Graphics {
         : m_Layers(MakeLayers(window, eventCallback))
         , m_BaseLayer(window, eventCallback)
         , m_RenderTarget(window, eventCallback)
-        , m_ActiveLayer(m_Layers.front().get())
+        , m_ActiveLayer(m_Layers[1].get())
         , m_UIRenderer(window)
     {
         m_ActiveLayer->Attach();

@@ -2,6 +2,7 @@
 
 #include "events/EventSystem.h"
 #include "layers/Layer.h"
+#include "types/Vertex1.h"
 #include "Window.h"
 
 #include <glm/glm.hpp>
@@ -40,11 +41,11 @@ namespace Graphics {
 
         glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
 
-        std::vector<float> m_Vertexes =
+        std::vector<Vertex1> m_Vertexes =
         {
-             0.0f,  1.0f,
-             1.0f, -1.0f,
-            -1.0f, -1.0f,
+            glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
+            glm::vec4{ 1.0f, -1.0f, 0.0f, 1.0f },
+            glm::vec4{-1.0f, -1.0f, 0.0f, 1.0f },
         };
 
     private:
