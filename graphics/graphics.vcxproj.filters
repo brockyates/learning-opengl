@@ -69,6 +69,7 @@
     <ClInclude Include="src\layers\RenderTargetLayer.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
+    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -105,6 +106,7 @@
     <ClCompile Include="src\layers\LayerManager.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\RenderTargetLayer.cpp" />
+    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader">

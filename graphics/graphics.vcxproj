@@ -104,6 +104,7 @@
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\HelloWorld.cpp" />
+    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
     <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />

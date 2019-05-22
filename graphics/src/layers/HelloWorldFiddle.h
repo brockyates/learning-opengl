@@ -10,10 +10,10 @@ namespace Graphics {
 
     struct WindowProperties;
 
-    class HelloWorld : public Layer
+    class HelloWorldFiddle : public Layer
     {
     public:
-        HelloWorld(const Window& window, EventHandler<Event> eventCallback);
+        HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;
@@ -37,6 +37,8 @@ namespace Graphics {
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
+
+        glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
 
         std::vector<float> m_Vertexes =
         {

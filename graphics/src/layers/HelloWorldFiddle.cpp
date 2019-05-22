@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "HelloWorld.h"
+#include "HelloWorldFiddle.h"
 
 #include "events/EventDispatcher.h"
 #include "ShaderHelpers.h"
@@ -10,11 +10,11 @@
 
 namespace Graphics {
 
-    HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Hello World")
+    HelloWorldFiddle::HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback)
+        : Layer(window, eventCallback, "Hello World Fiddle")
     {}
 
-    void HelloWorld::RenderScene()
+    void HelloWorldFiddle::RenderScene()
     {
         if (!m_Attached)
             return;
@@ -26,7 +26,7 @@ namespace Graphics {
         glUseProgram(m_ShaderID);
 
         // Draw
-        glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+        glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
@@ -38,7 +38,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void HelloWorld::RenderUI()
+    void HelloWorldFiddle::RenderUI()
     {
         if (!m_Attached)
             return;
@@ -49,17 +49,18 @@ namespace Graphics {
         ImGui::TextWrapped(Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
+        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
 
         ImGui::End();
     }
 
-    void HelloWorld::OnEvent(const Event& event)
+    void HelloWorldFiddle::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
     }
 
-    EventHandler<RenderTargetChangedEvent> HelloWorld::OnRenderTargetChanged()
+    EventHandler<RenderTargetChangedEvent> HelloWorldFiddle::OnRenderTargetChanged()
     {
         return [this](const RenderTargetChangedEvent& event)
         {
@@ -67,11 +68,11 @@ namespace Graphics {
         };
     }
 
-    void HelloWorld::Attach()
+    void HelloWorldFiddle::Attach()
     {
         if (m_Attached) return;
 
-        LOG_TRACE("Attaching HelloWorld");
+        LOG_TRACE("Attaching HelloWorldFiddle");
 
         glGenVertexArrays(1, &m_VertexArrayID);
         glBindVertexArray(m_VertexArrayID);
@@ -89,11 +90,11 @@ namespace Graphics {
         m_Attached = true;
     }
 
-    void HelloWorld::Detach()
+    void HelloWorldFiddle::Detach()
     {
         if (!m_Attached) return;
 
-        LOG_TRACE("Detaching HelloWorld");
+        LOG_TRACE("Detaching HelloWorldFiddle");
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -107,14 +108,14 @@ namespace Graphics {
         m_Attached = false;
     }
 
-    std::string HelloWorld::PopupText() const
+    std::string HelloWorldFiddle::PopupText() const
     {
-        return "Draws triangle on minimal window";
+        return "Hello World, but with some UI controls";
     }
 
-    std::string HelloWorld::Description() const
+    std::string HelloWorldFiddle::Description() const
     {
-        return "Hello World is a minimal demo. Draws a triangle on the window, and exposes no UI controls.";
+        return "Very basic demo that allows you to fiddle with simple parameters like color, vertex position, and draw mode.";
     }
 
 }
