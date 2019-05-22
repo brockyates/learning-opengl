@@ -2,9 +2,10 @@
 #include "LayerManager.h"
 
 #include "layers/BaseLayer.h"
-#include "layers/Layer.h"
-#include "layers/RenderTargetLayer.h"
 #include "layers/HelloWorld.h"
+#include "layers/Layer.h"
+#include "layers/PassthroughLayer.h"
+#include "layers/RenderTargetLayer.h"
 
 #include <imgui.h>
 
@@ -13,7 +14,6 @@ namespace Graphics {
     std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback)
     {
         std::vector<std::unique_ptr<Layer>> layers;
-        layers.emplace_back(std::make_unique<RenderTargetLayer>(window, eventCallback));
         layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
 
         return layers;
@@ -22,6 +22,7 @@ namespace Graphics {
     LayerManager::LayerManager(const Window& window, EventHandler<Event> eventCallback)
         : m_Layers(MakeLayers(window, eventCallback))
         , m_BaseLayer(window, eventCallback)
+        , m_RenderTarget(window, eventCallback)
         , m_ActiveLayer(m_Layers.front().get())
         , m_UIRenderer(window)
     {
@@ -31,6 +32,8 @@ namespace Graphics {
     void LayerManager::RenderScene()
     {
         m_BaseLayer.RenderScene();
+        m_RenderTarget.RenderScene();
+
         m_ActiveLayer->RenderScene();
     }
 
@@ -38,6 +41,7 @@ namespace Graphics {
     {
         m_UIRenderer.BeginFrame();
         m_BaseLayer.RenderUI();
+        m_RenderTarget.RenderUI();
         ShowDemoSelector();
 
         m_ActiveLayer->RenderUI();
@@ -49,6 +53,7 @@ namespace Graphics {
     void LayerManager::OnEvent(const Event& event)
     {
         m_BaseLayer.OnEvent(event);
+        m_RenderTarget.OnEvent(event);
 
         for (auto& layer : m_Layers)
         {

@@ -67,6 +67,8 @@
     <ClInclude Include="src\layers\LayerManager.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\layers\RenderTargetLayer.h" />
+    <ClInclude Include="src\layers\PassthroughLayer.h" />
+    <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

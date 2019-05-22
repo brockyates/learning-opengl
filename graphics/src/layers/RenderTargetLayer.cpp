@@ -12,40 +12,18 @@ namespace Graphics {
 
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Render to Texture")
-    {}
-
-    void RenderTargetLayer::RenderScene()
     {
-        if (!m_Attached)
-            return;
+        Attach();
+        FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+    }
 
-        if (!m_Window.IsFullscreen())
-        {
-            glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
-        }
-
-        // Bindings
-        glBindVertexArray(m_VertexArrayID);
-        glUseProgram(m_ShaderID);
-
-        // Draw
-        glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        // Release bindings
-        glUseProgram(0);
-        glBindVertexArray(0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    RenderTargetLayer::~RenderTargetLayer()
+    {
+        Detach();
     }
 
     void RenderTargetLayer::RenderUI()
     {
-        if (!m_Attached)
-            return;
-
         ImGui::Begin("Scene");
 
         ImVec2 pos = ImGui::GetCursorScreenPos();
@@ -59,57 +37,22 @@ namespace Graphics {
             ImVec2(1, 0));
 
         ImGui::End();
-
-        ImGui::Begin("DemoWidget");
-
-        ImGui::Dummy(ImVec2(0.0f, 20.0f));
-        ImGui::TextWrapped(Description().c_str());
-        ImGui::Dummy(ImVec2(0.0f, 20.0f));
-        ImGui::Separator();
-        ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
-
-        ImGui::End();
     }
 
-    void RenderTargetLayer::OnEvent(const Event& event)
+    void RenderTargetLayer::OnEvent(const Event & event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+        dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
-    }
-
-    EventHandler<ChangeResolutionEvent> RenderTargetLayer::OnResolutionChange()
-    {
-        return [this](const ChangeResolutionEvent& event)
-        {
-            if (!m_Attached)
-                return;
-
-            Detach();
-            Attach();
-        };
-    }
-
-    EventHandler<ChangeToWindowedEvent> RenderTargetLayer::OnChangeToWindowed()
-    {
-        return [this](const ChangeToWindowedEvent& event)
-        {
-            if (!m_Attached)
-                return;
-
-            Detach();
-            Attach();
-        };
+        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
     }
 
     void RenderTargetLayer::Attach()
     {
-        if (m_Attached) return;
-
         LOG_TRACE("Attaching RenderTargetLayer");
 
-        glGenFramebuffers(1, &m_FrameBufferID);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
+        glGenFramebuffers(1, &m_WindowedRenderTargetID);
+        glBindFramebuffer(GL_FRAMEBUFFER, m_WindowedRenderTargetID);
 
         glGenTextures(1, &m_RenderedTextureID);
         glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
@@ -142,27 +85,10 @@ namespace Graphics {
         }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        glGenVertexArrays(1, &m_VertexArrayID);
-        glBindVertexArray(m_VertexArrayID);
-        glGenBuffers(1, &m_VertexBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
-
-        m_Attached = true;
     }
 
     void RenderTargetLayer::Detach()
     {
-        if (!m_Attached) return;
-
         LOG_TRACE("Detaching RenderTargetLayer");
 
         glBindVertexArray(0);
@@ -172,21 +98,33 @@ namespace Graphics {
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        glDeleteProgram(m_ShaderID);
-        glDeleteBuffers(1, &m_VertexBufferID);
-        glDeleteFramebuffers(1, &m_FrameBufferID);
-
-        m_Attached = false;
+        glDeleteFramebuffers(1, &m_WindowedRenderTargetID);
     }
 
-    std::string RenderTargetLayer::PopupText() const
+    EventHandler<ChangeToFullscreenEvent> RenderTargetLayer::OnChangeToFullscreen()
     {
-        return "Render to texture and present image in scene window";
+        return [this](const ChangeToFullscreenEvent& event)
+        {
+            FireEvent(RenderTargetChangedEvent(m_FullscreenRenderTargetID));
+        };
     }
 
-    std::string RenderTargetLayer::Description() const
+    EventHandler<ChangeToWindowedEvent> RenderTargetLayer::OnChangeToWindowed()
     {
-        return "Render to texture draws a scene to the frame buffer, renders it to a texture, and displays the resulting image in the ImGui scene window.";
+        return [this](const ChangeToWindowedEvent& event)
+        {
+            FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+        };
+    }
+
+    EventHandler<ChangeResolutionEvent> RenderTargetLayer::OnResolutionChange()
+    {
+        return [this](const ChangeResolutionEvent& event)
+        {
+            Detach();
+            Attach();
+            FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+        };
     }
 
 }

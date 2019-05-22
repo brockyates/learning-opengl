@@ -102,7 +102,9 @@
     <ClInclude Include="src\events\EventSystem.h" />
     <ClInclude Include="src\events\EventType.h" />
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
+    <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
     <ClInclude Include="src\WindowLayout.h" />

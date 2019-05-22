@@ -19,10 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        if (!m_Window.IsFullscreen())
-        {
-            glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
-        }
+        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
 
         // Bindings
         glBindVertexArray(m_VertexArrayID);
@@ -46,20 +43,6 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        ImGui::Begin("Scene");
-
-        ImVec2 pos = ImGui::GetCursorScreenPos();
-        auto size = ImGui::GetContentRegionAvail();
-
-        ImGui::GetWindowDrawList()->AddImage(
-            (void *)(intptr_t)m_RenderedTextureID,
-            ImVec2(ImGui::GetCursorScreenPos()),
-            ImVec2(ImGui::GetCursorScreenPos().x + size.x, ImGui::GetCursorScreenPos().y + size.y),
-            ImVec2(0, 1),
-            ImVec2(1, 0));
-
-        ImGui::End();
-
         ImGui::Begin("DemoWidget");
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
@@ -73,31 +56,14 @@ namespace Graphics {
     void HelloWorld::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
-        dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
+        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
     }
 
-    EventHandler<ChangeResolutionEvent> HelloWorld::OnResolutionChange()
+    EventHandler<RenderTargetChangedEvent> HelloWorld::OnRenderTargetChanged()
     {
-        return [this](const ChangeResolutionEvent& event)
+        return [this](const RenderTargetChangedEvent& event)
         {
-            if (!m_Attached)
-                return;
-
-            Detach();
-            Attach();
-        };
-    }
-
-    EventHandler<ChangeToWindowedEvent> HelloWorld::OnChangeToWindowed()
-    {
-        return [this](const ChangeToWindowedEvent& event)
-        {
-            if (!m_Attached)
-                return;
-
-            Detach();
-            Attach();
+            m_FrameBufferID = event.NextRenderTargetID();
         };
     }
 
@@ -106,41 +72,6 @@ namespace Graphics {
         if (m_Attached) return;
 
         LOG_TRACE("Attaching HelloWorld");
-
-        glGenFramebuffers(1, &m_FrameBufferID);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
-
-        glGenTextures(1, &m_RenderedTextureID);
-        glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Window.ResolutionWidth(), m_Window.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_RenderedTextureID, 0);
-
-        glGenRenderbuffers(1, &m_RenderBufferID);
-        glBindRenderbuffer(GL_RENDERBUFFER, m_RenderBufferID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RenderBufferID);
-
-        const unsigned int frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-        if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
-        {
-            LOG_GL_ERROR([&]() {
-                std::stringstream ss;
-                ss << "Framebuffer status error. Status: " << std::hex << frameBufferStatus;
-                return ss.str();
-            }());
-        }
-        else
-        {
-            LOG_GL_TRACE("Framebuffer complete");
-        }
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glGenVertexArrays(1, &m_VertexArrayID);
         glBindVertexArray(m_VertexArrayID);
@@ -169,11 +100,9 @@ namespace Graphics {
 
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glDeleteProgram(m_ShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);
-        glDeleteFramebuffers(1, &m_FrameBufferID);
 
         m_Attached = false;
     }

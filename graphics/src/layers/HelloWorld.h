@@ -20,7 +20,7 @@ namespace Graphics {
 
         virtual void Attach() override;
         virtual void Detach() override;
-        virtual bool IsAttached() override { return m_Attached; }
+        virtual bool IsAttached() const override { return m_Attached; }
 
         virtual std::string PopupText() const override;
         virtual std::string Description() const override;
@@ -29,14 +29,11 @@ namespace Graphics {
 
     private:
         //Event handlers
-        EventHandler<ChangeResolutionEvent> OnResolutionChange();
-        EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
+        EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
     private:
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
-        unsigned int m_RenderedTextureID = 0;
-        unsigned int m_RenderBufferID = 0;
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;

@@ -4,6 +4,7 @@
 #include "events/Event.h"
 #include "imgui/ImGuiRenderer.h"
 #include "Layer.h"
+#include "RenderTargetLayer.h"
 #include "Window.h"
 
 namespace Graphics {
@@ -32,6 +33,8 @@ namespace Graphics {
     private:
         std::vector<std::unique_ptr<Layer>> m_Layers;
         BaseLayer m_BaseLayer;
+        RenderTargetLayer m_RenderTarget;
+
         Layer* m_ActiveLayer;
         ImGuiRenderer m_UIRenderer;
     };

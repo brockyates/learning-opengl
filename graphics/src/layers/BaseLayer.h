@@ -14,7 +14,7 @@ namespace Graphics {
 
         virtual void RenderScene() override;
         virtual void RenderUI() override;
-        virtual bool IsAttached() override { return true; }
+        virtual bool IsAttached() const override { return true; }
 
         void OnImGuiRenderOverlay();
 

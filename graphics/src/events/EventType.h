@@ -8,7 +8,8 @@ namespace Graphics {
         ChangeResolutionEvent,
         ChangeToWindowedEvent,
         ChangeToFullscreenEvent,
-        WindowCloseEvent
+        WindowCloseEvent,
+        RenderTargetChanged
     };
 
 }

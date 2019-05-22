@@ -26,7 +26,7 @@ namespace Graphics {
 
         virtual void Attach() {};
         virtual void Detach() {};
-        virtual bool IsAttached() = 0;
+        virtual bool IsAttached() const = 0;
 
         virtual std::string PopupText() const { return ""; }
         virtual std::string Description() const { return ""; }

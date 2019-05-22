@@ -8,3 +8,4 @@
 #include "ChangeToFullscreenEvent.h"
 #include "ChangeToWindowedEvent.h"
 #include "WindowCloseEvent.h"
+#include "RenderTargetChangedEvent.h"
