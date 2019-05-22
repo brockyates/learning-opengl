@@ -17,6 +17,8 @@ namespace Graphics {
         HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
+        void UpdateVertexColors();
+
         virtual void RenderUI() override;
 
         virtual void Attach() override;
@@ -40,6 +42,9 @@ namespace Graphics {
         unsigned int m_VertexBufferID = 0;
 
         glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
+        glm::vec4 m_Vertex1Color = { 1.0f, 0.0f, 0.0f, 1.0f };
+        glm::vec4 m_Vertex2Color = { 0.0f, 1.0f, 0.0f, 1.0f };
+        glm::vec4 m_Vertex3Color = { 0.0f, 0.0f, 1.0f, 1.0f };
 
         std::vector<Vertex1> m_Vertexes =
         {

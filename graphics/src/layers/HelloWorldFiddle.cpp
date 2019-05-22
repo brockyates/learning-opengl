@@ -19,6 +19,8 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
+        UpdateVertexColors();
+
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
 
         // Bindings
@@ -38,6 +40,24 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
+    void HelloWorldFiddle::UpdateVertexColors()
+    {
+        m_Vertexes[0].Color = m_Vertex1Color;
+        m_Vertexes[1].Color = m_Vertex2Color;
+        m_Vertexes[2].Color = m_Vertex3Color;
+
+        unsigned int bufferOffset = 0;
+
+        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+
+        glBufferSubData(GL_ARRAY_BUFFER,
+            bufferOffset,
+            std::size(m_Vertexes) * Vertex1::VertexByteSize,
+            &m_Vertexes[0]);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
     void HelloWorldFiddle::RenderUI()
     {
         if (!m_Attached)
@@ -50,6 +70,10 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
+        ImGui::Separator();
+        ImGui::ColorEdit4("Vertex 1", &m_Vertex1Color[0]);
+        ImGui::ColorEdit4("Vertex 2", &m_Vertex2Color[0]);
+        ImGui::ColorEdit4("Vertex 3", &m_Vertex3Color[0]);
 
         ImGui::End();
     }
