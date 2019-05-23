@@ -8,5 +8,6 @@ out vec4 fragmentColor;
 void main()
 {
     gl_Position = position;
+    gl_PointSize = 30.0f;
     fragmentColor = color;
 };

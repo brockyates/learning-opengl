@@ -11,15 +11,19 @@ namespace Graphics {
 
     struct WindowProperties;
 
+    struct DrawMode
+    {
+        int Mode;
+        unsigned int NumVertexes;
+        std::string DisplayName;
+    };
+
     class HelloWorldFiddle : public Layer
     {
     public:
         HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback);
 
         virtual void RenderScene() override;
-
-        void UpdateVertexes();
-
         virtual void RenderUI() override;
 
         virtual void Attach() override;
@@ -35,6 +39,9 @@ namespace Graphics {
         //Event handlers
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
+        void UpdateVertexes();
+        void ChangeDrawMode(const DrawMode& nextMode);
+
     private:
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
@@ -43,7 +50,7 @@ namespace Graphics {
         unsigned int m_VertexBufferID = 0;
         unsigned int m_IndexBufferID = 0;
 
-        glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
+        glm::vec4 m_ClearColor = { 0.15f, 0.15f, 0.15f, 1.0f };
 
         glm::vec4 m_Vertex1Color = { 1.0f, 0.0f, 0.0f, 1.0f };
         glm::vec4 m_Vertex2Color = { 0.0f, 1.0f, 0.0f, 1.0f };
@@ -70,9 +77,18 @@ namespace Graphics {
         };
 
         std::vector<unsigned int> m_TriangleIndexes = { 0, 1, 2 };
+        std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
 
     private:
         bool m_Attached = false;
+
+        std::unordered_map<int, DrawMode> m_DrawModes{
+            { GL_TRIANGLES, {GL_TRIANGLES, 3, "Triangles" }},
+            { GL_LINES,     {GL_LINES,     6, "Lines"     }},
+            { GL_POINTS,    {GL_POINTS,    3, "Points"    }}
+        };
+
+        DrawMode m_DrawMode = m_DrawModes[GL_TRIANGLES];
     };
 
 }

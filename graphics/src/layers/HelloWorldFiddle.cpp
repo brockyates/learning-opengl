@@ -31,7 +31,7 @@ namespace Graphics {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+        glDrawElements(m_DrawMode.Mode, m_DrawMode.NumVertexes, GL_UNSIGNED_INT, 0);
 
         // Release bindings
         glUseProgram(0);
@@ -50,7 +50,6 @@ namespace Graphics {
         m_Vertexes[2].Position = { m_Vertex3Pos[0], m_Vertex3Pos[1], 0.0f, 1.0f };
 
         unsigned int bufferOffset = 0;
-
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 
         glBufferSubData(GL_ARRAY_BUFFER,
@@ -61,6 +60,31 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    void HelloWorldFiddle::ChangeDrawMode(const DrawMode& nextMode)
+    {
+        m_DrawMode = nextMode;
+
+        unsigned int bufferOffset = 0;
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+
+        if (nextMode.Mode == GL_LINES)
+        {
+            glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
+                bufferOffset,
+                sizeof(m_LineIndexes),
+                &m_LineIndexes[0]);
+        }
+        else
+        {
+            glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
+                bufferOffset,
+                sizeof(m_TriangleIndexes),
+                &m_TriangleIndexes[0]);
+        }
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
+
     void HelloWorldFiddle::RenderUI()
     {
         if (!m_Attached)
@@ -68,8 +92,32 @@ namespace Graphics {
 
         ImGui::Begin("DemoWidget");
 
+        ImGui::Separator();
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::TextWrapped(Description().c_str());
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Separator();
+
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        if (ImGui::BeginCombo("Draw Mode", m_DrawMode.DisplayName.c_str()))
+        {
+            for (const auto& mode : m_DrawModes)
+            {
+                bool isSelected = (m_DrawMode.Mode == mode.first);
+
+                if (ImGui::Selectable(mode.second.DisplayName.c_str(), isSelected))
+                {
+                    ChangeDrawMode(mode.second);
+                }
+
+                if (isSelected)
+                {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+
+            ImGui::EndCombo();
+        }
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Text("Color Controls");
@@ -109,6 +157,11 @@ namespace Graphics {
 
         LOG_TRACE("Attaching HelloWorldFiddle");
 
+        //Layer settings
+        glEnable(GL_PROGRAM_POINT_SIZE);
+        glLineWidth(20.0f);
+
+        //Buffer setup
         glGenVertexArrays(1, &m_VertexArrayID);
         glBindVertexArray(m_VertexArrayID);
         glGenBuffers(1, &m_VertexBufferID);
@@ -145,6 +198,9 @@ namespace Graphics {
 
         LOG_TRACE("Detaching HelloWorldFiddle");
 
+        glDisable(GL_PROGRAM_POINT_SIZE);
+        glLineWidth(1.0f);
+
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);
@@ -163,7 +219,7 @@ namespace Graphics {
 
     std::string HelloWorldFiddle::Description() const
     {
-        return "Very basic demo that allows you to fiddle with color and vertex position.";
+        return "Very basic demo that allows you to fiddle with color, vertex position, and draw mode.";
     }
 
 }
