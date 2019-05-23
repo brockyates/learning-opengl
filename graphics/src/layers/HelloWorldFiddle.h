@@ -41,6 +41,7 @@ namespace Graphics {
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
+        unsigned int m_IndexBufferID = 0;
 
         glm::vec4 m_ClearColor = { 0.5f, 0.5f, 0.5f, 1.0f };
 
@@ -67,6 +68,8 @@ namespace Graphics {
                 glm::vec4{ 0.0f,  0.0f, 1.0f, 1.0f },
             }
         };
+
+        std::vector<unsigned int> m_TriangleIndexes = { 0, 1, 2 };
 
     private:
         bool m_Attached = false;

@@ -21,9 +21,8 @@ namespace Graphics {
 
         UpdateVertexes();
 
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
-
         // Bindings
+        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
 
@@ -32,7 +31,7 @@ namespace Graphics {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
         // Release bindings
         glUseProgram(0);
@@ -116,6 +115,10 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
         glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * (Vertex1::VertexByteSize), &m_Vertexes[0], GL_STATIC_DRAW);
 
+        glGenBuffers(1, &m_IndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_TriangleIndexes), &m_TriangleIndexes[0], GL_STATIC_DRAW);
+
         //Vertex Position
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, Vertex1::ElementsPerPosition, Vertex1::PositionType, GL_FALSE, Vertex1::VertexByteSize, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
@@ -127,6 +130,7 @@ namespace Graphics {
         //Release Bindings
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
