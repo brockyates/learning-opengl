@@ -27,6 +27,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
+        glUniform1f(m_PointsizeLocation, m_PointSize);
 
         // Draw
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
@@ -148,6 +149,7 @@ namespace Graphics {
             ImGui::Dummy(ImVec2(0.0f, 20.0f));
             ImGui::Text("Point Controls");
             ImGui::Separator();
+            ImGui::SliderFloat("Point Size", &m_PointSize, 1.0f, 100.0f);
         }
 
         ImGui::End();
@@ -204,6 +206,7 @@ namespace Graphics {
         glDisableVertexAttribArray(1);
 
         m_ShaderID = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
+        m_PointsizeLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
 
         m_Attached = true;
     }

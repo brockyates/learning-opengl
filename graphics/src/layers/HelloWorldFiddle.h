@@ -91,6 +91,9 @@ namespace Graphics {
         DrawMode m_DrawMode = m_DrawModes[GL_TRIANGLES];
 
         float m_LineWidth = 5.0f;
+        float m_PointSize = 30.0f;
+
+        unsigned int m_PointsizeLocation = 0;
     };
 
 }
