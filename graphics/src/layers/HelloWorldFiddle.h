@@ -89,6 +89,8 @@ namespace Graphics {
         };
 
         DrawMode m_DrawMode = m_DrawModes[GL_TRIANGLES];
+
+        float m_LineWidth = 5.0f;
     };
 
 }

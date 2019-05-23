@@ -21,6 +21,8 @@ namespace Graphics {
 
         UpdateVertexes();
 
+        glLineWidth(m_LineWidth);
+
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
@@ -134,6 +136,20 @@ namespace Graphics {
         ImGui::SliderFloat2("Vertex 2", &m_Vertex2Pos[0], -1.0f, 1.0f);
         ImGui::SliderFloat2("Vertex 3", &m_Vertex3Pos[0], -1.0f, 1.0f);
 
+        if (m_DrawMode.Mode == GL_LINES)
+        {
+            ImGui::Dummy(ImVec2(0.0f, 20.0f));
+            ImGui::Text("Line Controls");
+            ImGui::Separator();
+            ImGui::SliderFloat("Line Width", &m_LineWidth, 1.0f, 10.0f);
+        }
+        if (m_DrawMode.Mode == GL_POINTS)
+        {
+            ImGui::Dummy(ImVec2(0.0f, 20.0f));
+            ImGui::Text("Point Controls");
+            ImGui::Separator();
+        }
+
         ImGui::End();
     }
 
@@ -159,7 +175,7 @@ namespace Graphics {
 
         //Layer settings
         glEnable(GL_PROGRAM_POINT_SIZE);
-        glLineWidth(20.0f);
+        glLineWidth(m_LineWidth);
 
         //Buffer setup
         glGenVertexArrays(1, &m_VertexArrayID);
