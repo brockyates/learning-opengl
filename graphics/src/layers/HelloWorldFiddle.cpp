@@ -19,7 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
-        UpdateVertexColors();
+        UpdateVertexes();
 
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
 
@@ -40,11 +40,15 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void HelloWorldFiddle::UpdateVertexColors()
+    void HelloWorldFiddle::UpdateVertexes()
     {
         m_Vertexes[0].Color = m_Vertex1Color;
         m_Vertexes[1].Color = m_Vertex2Color;
         m_Vertexes[2].Color = m_Vertex3Color;
+
+        m_Vertexes[0].Position = { m_Vertex1Pos[0], m_Vertex1Pos[1], 0.0f, 1.0f };
+        m_Vertexes[1].Position = { m_Vertex2Pos[0], m_Vertex2Pos[1], 0.0f, 1.0f };
+        m_Vertexes[2].Position = { m_Vertex3Pos[0], m_Vertex3Pos[1], 0.0f, 1.0f };
 
         unsigned int bufferOffset = 0;
 
@@ -67,13 +71,21 @@ namespace Graphics {
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::TextWrapped(Description().c_str());
+
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Text("Color Controls");
         ImGui::Separator();
         ImGui::ColorEdit4("glClearColor", &m_ClearColor[0]);
-        ImGui::Separator();
         ImGui::ColorEdit4("Vertex 1", &m_Vertex1Color[0]);
         ImGui::ColorEdit4("Vertex 2", &m_Vertex2Color[0]);
         ImGui::ColorEdit4("Vertex 3", &m_Vertex3Color[0]);
+
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Text("Position Controls");
+        ImGui::Separator();
+        ImGui::SliderFloat2("Vertex 1", &m_Vertex1Pos[0], -1.0f, 1.0f);
+        ImGui::SliderFloat2("Vertex 2", &m_Vertex2Pos[0], -1.0f, 1.0f);
+        ImGui::SliderFloat2("Vertex 3", &m_Vertex3Pos[0], -1.0f, 1.0f);
 
         ImGui::End();
     }
@@ -147,7 +159,7 @@ namespace Graphics {
 
     std::string HelloWorldFiddle::Description() const
     {
-        return "Very basic demo that allows you to fiddle with simple parameters like color, vertex position, and draw mode.";
+        return "Very basic demo that allows you to fiddle with color and vertex position.";
     }
 
 }
