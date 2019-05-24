@@ -20,6 +20,9 @@ namespace Graphics {
 
     private:
         void HandleInput();
+        void HandleFullscreenInput();
+        void HandleWindowedInput();
+
         void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
         void ShowMenuBar();
         void ShowMainWindow();
@@ -27,6 +30,7 @@ namespace Graphics {
 
     private:
         bool m_F11Ready = true;
+        bool m_EscReady = true;
     };
 
 }

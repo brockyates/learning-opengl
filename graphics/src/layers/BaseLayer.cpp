@@ -15,25 +15,47 @@ namespace Graphics {
 
     void BaseLayer::HandleInput()
     {
-        ImGuiIO& io = ImGui::GetIO();
-
-        if (m_F11Ready && (m_Window.Input().IsKeyPressed(GLFW_KEY_F11) || ImGui::IsKeyPressed(GLFW_KEY_F11)))
+        if (m_Window.IsFullscreen())
         {
-            m_F11Ready = false;
-
-            if (m_Window.IsFullscreen())
-            {
-                FireEvent(ChangeToWindowedEvent());
-            }
-            else
-            {
-                FireEvent(ChangeToFullscreenEvent());
-            }
+            HandleFullscreenInput();
+        }
+        else
+        {
+            HandleWindowedInput();
         }
 
         if (m_Window.Input().IsKeyReleased(GLFW_KEY_F11))
         {
             m_F11Ready = true;
+        }
+
+        if (m_Window.Input().IsKeyReleased(GLFW_KEY_ESCAPE))
+        {
+            m_EscReady = true;
+        }
+    }
+
+    void BaseLayer::HandleFullscreenInput()
+    {
+        if (m_F11Ready && (m_Window.Input().IsKeyPressed(GLFW_KEY_F11)))
+        {
+            m_F11Ready = false;
+            FireEvent(ChangeToWindowedEvent());
+        }
+
+        if (m_EscReady && (m_Window.Input().IsKeyPressed(GLFW_KEY_ESCAPE)))
+        {
+            m_EscReady = false;
+            FireEvent(ChangeToWindowedEvent());
+        }
+    }
+
+    void BaseLayer::HandleWindowedInput()
+    {
+        if (m_F11Ready && (m_Window.Input().IsKeyPressed(GLFW_KEY_F11)))
+        {
+            m_F11Ready = false;
+            FireEvent(ChangeToFullscreenEvent());
         }
     }
 
