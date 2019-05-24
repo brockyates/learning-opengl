@@ -4,6 +4,7 @@
 #include "layers/Layer.h"
 #include "ModelGenerator.h"
 #include "models/Model.h"
+#include "Time.h"
 #include "types/Vertex1.h"
 #include "Window.h"
 
@@ -44,10 +45,14 @@ namespace Graphics {
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
         void UpdateVertexes();
+        void UpdateTiming();
+        void SetNextVertexPositions();
         void ChangeDrawMode(const DrawMode& nextMode);
 
     private:
         bool m_Attached = false;
+        double m_LastTime = Time::Get();
+        double m_DeltaTime = 0;
 
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
@@ -72,6 +77,11 @@ namespace Graphics {
         //Buffer data
         std::unique_ptr<Model> m_TriangleModel = ModelGenerator::MakeTriangle();
         std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
+
+        //Animation parameters
+        bool m_AnimationEnabled = true;
+        float m_VertexMoveSpeed = 0.5f;
+        int m_VertexYDirection = 1;
     };
 
 }

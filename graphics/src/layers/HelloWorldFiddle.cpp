@@ -19,6 +19,7 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
+        UpdateTiming();
         UpdateVertexes();
 
         glLineWidth(m_LineWidth);
@@ -45,6 +46,11 @@ namespace Graphics {
 
     void HelloWorldFiddle::UpdateVertexes()
     {
+        if (m_AnimationEnabled)
+        {
+            SetNextVertexPositions();
+        }
+
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 
         const unsigned int bufferOffset = 0;
@@ -54,6 +60,37 @@ namespace Graphics {
             &m_TriangleModel->Vertexes[0]);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    void HelloWorldFiddle::UpdateTiming()
+    {
+        double nextTime = Time::Get();
+        m_DeltaTime = static_cast<float>(nextTime - m_LastTime);
+        m_LastTime = nextTime;
+    }
+
+    void HelloWorldFiddle::SetNextVertexPositions()
+    {
+        auto m_VertexYPos = m_TriangleModel->Vertexes[0].Position[1];
+
+        if (m_VertexYDirection == 1)
+        {
+            m_VertexYPos += m_VertexMoveSpeed * static_cast<float>(m_DeltaTime);
+            if (m_TriangleModel->Vertexes[0].Position[1] >= 1.0f)
+            {
+                m_VertexYDirection = 0;
+            }
+        }
+        else
+        {
+            m_VertexYPos -= m_VertexMoveSpeed * static_cast<float>(m_DeltaTime);
+            if (m_TriangleModel->Vertexes[0].Position[1] <= -1.0f)
+            {
+                m_VertexYDirection = 1;
+            }
+        }
+
+        m_TriangleModel->Vertexes[0].Position[1] = m_VertexYPos;
     }
 
     void HelloWorldFiddle::ChangeDrawMode(const DrawMode& nextMode)
