@@ -107,6 +107,9 @@
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
+    <ClInclude Include="src\ModelGenerator.h" />
+    <ClInclude Include="src\models\Model.h" />
+    <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
     <ClInclude Include="src\types\Vertex1.h" />
     <ClInclude Include="src\WindowLayout.h" />

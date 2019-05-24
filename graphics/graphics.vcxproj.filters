@@ -71,6 +71,9 @@
     <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\types\Vertex1.h" />
+    <ClInclude Include="src\models\Triangle.h" />
+    <ClInclude Include="src\ModelGenerator.h" />
+    <ClInclude Include="src\models\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

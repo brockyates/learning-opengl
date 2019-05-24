@@ -9,6 +9,8 @@ namespace Graphics {
     class Event
     {
     public:
+        virtual ~Event() {};
+
         virtual EventType Type() const = 0;
     };
 

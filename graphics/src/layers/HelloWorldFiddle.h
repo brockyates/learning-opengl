@@ -2,6 +2,8 @@
 
 #include "events/EventSystem.h"
 #include "layers/Layer.h"
+#include "ModelGenerator.h"
+#include "models/Model.h"
 #include "types/Vertex1.h"
 #include "Window.h"
 
@@ -52,29 +54,15 @@ namespace Graphics {
 
         glm::vec4 m_ClearColor = { 0.15f, 0.15f, 0.15f, 1.0f };
 
-        glm::vec4 m_Vertex1Color = { 1.0f, 0.0f, 0.0f, 1.0f };
-        glm::vec4 m_Vertex2Color = { 0.0f, 1.0f, 0.0f, 1.0f };
-        glm::vec4 m_Vertex3Color = { 0.0f, 0.0f, 1.0f, 1.0f };
+        std::unique_ptr<Model> m_Model = ModelGenerator::MakeTriangle();
+
+        glm::vec4 m_Vertex1Color = m_Model->Vertexes[0].Color;
+        glm::vec4 m_Vertex2Color = m_Model->Vertexes[1].Color;
+        glm::vec4 m_Vertex3Color = m_Model->Vertexes[2].Color;
 
         glm::vec2 m_Vertex1Pos = { 0.0f,  1.0f };
         glm::vec2 m_Vertex2Pos = { 1.0f, -1.0f };
         glm::vec2 m_Vertex3Pos = {-1.0f, -1.0f };
-
-        std::vector<Vertex1> m_Vertexes =
-        {
-            {
-                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f }, //Position
-                glm::vec4{ 1.0f,  0.0f, 0.0f, 1.0f }, //Color
-            },
-            {
-                glm::vec4{ 1.0f, -1.0f, 0.0f, 1.0f },
-                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
-            },
-            {
-                glm::vec4{-1.0f, -1.0f, 0.0f, 1.0f },
-                glm::vec4{ 0.0f,  0.0f, 1.0f, 1.0f },
-            }
-        };
 
         std::vector<unsigned int> m_TriangleIndexes = { 0, 1, 2 };
         std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };

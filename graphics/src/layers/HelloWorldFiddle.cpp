@@ -44,21 +44,21 @@ namespace Graphics {
 
     void HelloWorldFiddle::UpdateVertexes()
     {
-        m_Vertexes[0].Color = m_Vertex1Color;
-        m_Vertexes[1].Color = m_Vertex2Color;
-        m_Vertexes[2].Color = m_Vertex3Color;
+        m_Model->Vertexes[0].Color = m_Vertex1Color;
+        m_Model->Vertexes[1].Color = m_Vertex2Color;
+        m_Model->Vertexes[2].Color = m_Vertex3Color;
 
-        m_Vertexes[0].Position = { m_Vertex1Pos[0], m_Vertex1Pos[1], 0.0f, 1.0f };
-        m_Vertexes[1].Position = { m_Vertex2Pos[0], m_Vertex2Pos[1], 0.0f, 1.0f };
-        m_Vertexes[2].Position = { m_Vertex3Pos[0], m_Vertex3Pos[1], 0.0f, 1.0f };
+        m_Model->Vertexes[0].Position = { m_Vertex1Pos[0], m_Vertex1Pos[1], 0.0f, 1.0f };
+        m_Model->Vertexes[1].Position = { m_Vertex2Pos[0], m_Vertex2Pos[1], 0.0f, 1.0f };
+        m_Model->Vertexes[2].Position = { m_Vertex3Pos[0], m_Vertex3Pos[1], 0.0f, 1.0f };
 
         unsigned int bufferOffset = 0;
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 
         glBufferSubData(GL_ARRAY_BUFFER,
             bufferOffset,
-            std::size(m_Vertexes) * Vertex1::VertexByteSize,
-            &m_Vertexes[0]);
+            std::size(m_Model->Vertexes) * Vertex1::VertexByteSize,
+            &m_Model->Vertexes[0]);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
@@ -184,7 +184,7 @@ namespace Graphics {
         glBindVertexArray(m_VertexArrayID);
         glGenBuffers(1, &m_VertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * (Vertex1::VertexByteSize), &m_Vertexes[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, std::size(m_Model->Vertexes) * (Vertex1::VertexByteSize), &m_Model->Vertexes[0], GL_STATIC_DRAW);
 
         glGenBuffers(1, &m_IndexBufferID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
