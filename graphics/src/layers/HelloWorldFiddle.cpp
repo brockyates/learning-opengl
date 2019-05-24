@@ -37,6 +37,7 @@ namespace Graphics {
         glDrawElements(m_DrawMode.Mode, m_DrawMode.NumVertexes, GL_UNSIGNED_INT, 0);
 
         // Release bindings
+        glLineWidth(1.0f);
         glUseProgram(0);
         glBindVertexArray(0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -44,12 +45,12 @@ namespace Graphics {
 
     void HelloWorldFiddle::UpdateVertexes()
     {
-        unsigned int bufferOffset = 0;
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 
+        const unsigned int bufferOffset = 0;
         glBufferSubData(GL_ARRAY_BUFFER,
             bufferOffset,
-            std::size(m_TriangleModel->Vertexes) * Vertex1::VertexByteSize,
+            m_TriangleModel->VertexDataByteSize(),
             &m_TriangleModel->Vertexes[0]);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -59,21 +60,21 @@ namespace Graphics {
     {
         m_DrawMode = nextMode;
 
-        unsigned int bufferOffset = 0;
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
 
+        const unsigned int bufferOffset = 0;
         if (nextMode.Mode == GL_LINES)
         {
             glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
                 bufferOffset,
-                sizeof(m_LineIndexes),
+                std::size(m_LineIndexes) * sizeof(unsigned int),
                 &m_LineIndexes[0]);
         }
         else
         {
             glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
                 bufferOffset,
-                sizeof(m_TriangleModel->Indexes),
+                m_TriangleModel->IndexDataByteSize(),
                 &m_TriangleModel->Indexes[0]);
         }
 
@@ -127,7 +128,7 @@ namespace Graphics {
         ImGui::Separator();
 
         /*
-        SliderFloat2 takes a the address of an array of two floats as the second argument.
+        SliderFloat2 takes the address of an array of two floats as the second argument.
         Position is an array of 4 floats, but this works because SliderFloat2 only requires that it can index 2 elements in the array.
         */
         ImGui::SliderFloat2("Vertex 1", &m_TriangleModel->Vertexes[0].Position[0], -1.0f, 1.0f);
@@ -181,11 +182,14 @@ namespace Graphics {
         glBindVertexArray(m_VertexArrayID);
         glGenBuffers(1, &m_VertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_TriangleModel->Vertexes) * (Vertex1::VertexByteSize), &m_TriangleModel->Vertexes[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, m_TriangleModel->VertexDataByteSize(), &m_TriangleModel->Vertexes[0], GL_STATIC_DRAW);
 
         glGenBuffers(1, &m_IndexBufferID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_TriangleModel->Indexes), &m_TriangleModel->Indexes[0], GL_STATIC_DRAW);
+
+        //Allocate a buffer that can hold the larger of the two index buffers, in this case the line indexes are larger than the triangle indexes.
+        const auto indexBufferByteSize = std::size(m_LineIndexes) * sizeof(unsigned int);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferByteSize, &m_TriangleModel->Indexes[0], GL_STATIC_DRAW);
 
         //Vertex Position
         glEnableVertexAttribArray(0);

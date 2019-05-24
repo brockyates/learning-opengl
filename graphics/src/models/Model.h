@@ -16,6 +16,16 @@ namespace Graphics {
 
         virtual ~Model() {};
 
+        unsigned int VertexDataByteSize() const
+        {
+            return static_cast<unsigned int>(std::size(Vertexes)) * Vertex1::VertexByteSize;
+        }
+
+        unsigned int IndexDataByteSize() const
+        {
+            return static_cast<unsigned int>(std::size(Indexes)) * sizeof(unsigned int);
+        }
+
         std::vector<Vertex1> Vertexes;
         std::vector<unsigned int> Indexes;
     };
