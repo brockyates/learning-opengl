@@ -13,13 +13,6 @@ namespace Graphics {
 
     struct WindowProperties;
 
-    struct DrawMode
-    {
-        int Mode;
-        unsigned int NumVertexes;
-        std::string DisplayName;
-    };
-
     class HelloWorldFiddle : public Layer
     {
     public:
@@ -38,6 +31,15 @@ namespace Graphics {
         virtual void OnEvent(const Event& event) override;
 
     private:
+        //This struct is only meaningful in the context of this demo, I don't want it to exist outside of HelloWorldFiddle.
+        struct DrawMode
+        {
+            int Mode;
+            unsigned int NumVertexes;
+            std::string DisplayName;
+        };
+
+    private:
         //Event handlers
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
@@ -45,29 +47,19 @@ namespace Graphics {
         void ChangeDrawMode(const DrawMode& nextMode);
 
     private:
+        bool m_Attached = false;
+
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
         unsigned int m_IndexBufferID = 0;
+        unsigned int m_PointsizeUniformLocation = 0;
 
         glm::vec4 m_ClearColor = { 0.15f, 0.15f, 0.15f, 1.0f };
-
-        std::unique_ptr<Model> m_Model = ModelGenerator::MakeTriangle();
-
-        glm::vec4 m_Vertex1Color = m_Model->Vertexes[0].Color;
-        glm::vec4 m_Vertex2Color = m_Model->Vertexes[1].Color;
-        glm::vec4 m_Vertex3Color = m_Model->Vertexes[2].Color;
-
-        glm::vec2 m_Vertex1Pos = { 0.0f,  1.0f };
-        glm::vec2 m_Vertex2Pos = { 1.0f, -1.0f };
-        glm::vec2 m_Vertex3Pos = {-1.0f, -1.0f };
-
-        std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
-
-    private:
-        bool m_Attached = false;
+        float m_LineWidth = 5.0f;
+        float m_PointSize = 30.0f;
 
         std::unordered_map<int, DrawMode> m_DrawModes{
             { GL_TRIANGLES, {GL_TRIANGLES, 3, "Triangles" }},
@@ -77,10 +69,9 @@ namespace Graphics {
 
         DrawMode m_DrawMode = m_DrawModes[GL_TRIANGLES];
 
-        float m_LineWidth = 5.0f;
-        float m_PointSize = 30.0f;
-
-        unsigned int m_PointsizeUniformLocation = 0;
+        //Buffer data
+        std::unique_ptr<Model> m_TriangleModel = ModelGenerator::MakeTriangle();
+        std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
     };
 
 }
