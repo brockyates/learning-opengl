@@ -64,7 +64,6 @@ namespace Graphics {
         glm::vec2 m_Vertex2Pos = { 1.0f, -1.0f };
         glm::vec2 m_Vertex3Pos = {-1.0f, -1.0f };
 
-        std::vector<unsigned int> m_TriangleIndexes = { 0, 1, 2 };
         std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
 
     private:
@@ -81,7 +80,7 @@ namespace Graphics {
         float m_LineWidth = 5.0f;
         float m_PointSize = 30.0f;
 
-        unsigned int m_PointsizeLocation = 0;
+        unsigned int m_PointsizeUniformLocation = 0;
     };
 
 }

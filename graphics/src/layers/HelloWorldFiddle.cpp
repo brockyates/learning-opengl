@@ -27,7 +27,7 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
-        glUniform1f(m_PointsizeLocation, m_PointSize);
+        glUniform1f(m_PointsizeUniformLocation, m_PointSize);
 
         // Draw
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
@@ -81,8 +81,8 @@ namespace Graphics {
         {
             glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
                 bufferOffset,
-                sizeof(m_TriangleIndexes),
-                &m_TriangleIndexes[0]);
+                sizeof(m_Model->Indexes),
+                &m_Model->Indexes[0]);
         }
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -188,7 +188,7 @@ namespace Graphics {
 
         glGenBuffers(1, &m_IndexBufferID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_TriangleIndexes), &m_TriangleIndexes[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_Model->Indexes), &m_Model->Indexes[0], GL_STATIC_DRAW);
 
         //Vertex Position
         glEnableVertexAttribArray(0);
@@ -206,7 +206,7 @@ namespace Graphics {
         glDisableVertexAttribArray(1);
 
         m_ShaderID = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
-        m_PointsizeLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
+        m_PointsizeUniformLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
 
         m_Attached = true;
     }
