@@ -2,6 +2,7 @@
 #include "LayerManager.h"
 
 #include "layers/BaseLayer.h"
+#include "layers/CircleDemo.h"
 #include "layers/HelloWorld.h"
 #include "layers/HelloWorldFiddle.h"
 #include "layers/Layer.h"
@@ -17,6 +18,7 @@ namespace Graphics {
         std::vector<std::unique_ptr<Layer>> layers;
         layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
         layers.emplace_back(std::make_unique<HelloWorldFiddle>(window, eventCallback));
+        layers.emplace_back(std::make_unique<CircleDemo>(window, eventCallback));
 
         return layers;
     }
@@ -25,7 +27,7 @@ namespace Graphics {
         : m_Layers(MakeLayers(window, eventCallback))
         , m_BaseLayer(window, eventCallback)
         , m_RenderTarget(window, eventCallback)
-        , m_ActiveLayer(m_Layers[1].get())
+        , m_ActiveLayer(m_Layers[2].get())
         , m_UIRenderer(window)
     {
         m_ActiveLayer->Attach();

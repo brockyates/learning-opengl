@@ -104,6 +104,7 @@
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\layers\CircleDemo.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="src\WindowMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
