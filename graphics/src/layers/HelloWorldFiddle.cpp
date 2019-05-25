@@ -62,7 +62,7 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void HelloWorldFiddle::UpdateVertex(glm::vec4 & vertex, glm::vec4& direction)
+    void HelloWorldFiddle::UpdateVertex(glm::vec4& vertex, glm::vec4& direction)
     {
         const auto velocity= m_VertexMoveSpeed * direction;
 
@@ -175,6 +175,12 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Text("Position Controls");
         ImGui::Separator();
+        if (ImGui::Button("Reset"))
+        {
+            m_TriangleModel->Vertexes[0].Position = {  0.0f,  1.0f, 0.0f, 1.0f };
+            m_TriangleModel->Vertexes[1].Position = {  1.0f, -1.0f, 0.0f, 1.0f };
+            m_TriangleModel->Vertexes[2].Position = { -1.0f, -1.0f, 0.0f, 1.0f };
+        }
 
         /*
         SliderFloat2 takes the address of an array of two floats as the second argument.
@@ -184,6 +190,7 @@ namespace Graphics {
         ImGui::SliderFloat2("Vertex 2", &m_TriangleModel->Vertexes[1].Position[0], -1.0f, 1.0f);
         ImGui::SliderFloat2("Vertex 3", &m_TriangleModel->Vertexes[2].Position[0], -1.0f, 1.0f);
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Checkbox("Animation Enabled", &m_AnimationEnabled);
         ImGui::SliderFloat("Animation Speed", &m_VertexMoveSpeed, 0.0f, 5.0f);
 
         if (m_DrawMode.Mode == GL_LINES)

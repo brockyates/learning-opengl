@@ -80,7 +80,7 @@ namespace Graphics {
         std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
 
         //Animation parameters
-        bool m_AnimationEnabled = true;
+        bool m_AnimationEnabled = false;
         float m_VertexMoveSpeed = 0.5f;
 
         glm::vec4 m_Vertex1Direction = {  0.3f, -0.7f, 0.0f, 0.0f };
