@@ -130,6 +130,15 @@ namespace Graphics {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
+    glm::vec4 HelloWorldFiddle::GetRandomVertexDirection() const
+    {
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::uniform_real_distribution<> dist(-1.0f, 1.0f);
+
+        return { dist(rng), dist(rng), 0.0f, 0.0f };
+    }
+
     void HelloWorldFiddle::RenderUI()
     {
         if (!m_Attached)
@@ -181,6 +190,9 @@ namespace Graphics {
             m_TriangleModel->Vertexes[0].Position = {  0.0f,  1.0f, 0.0f, 1.0f };
             m_TriangleModel->Vertexes[1].Position = {  1.0f, -1.0f, 0.0f, 1.0f };
             m_TriangleModel->Vertexes[2].Position = { -1.0f, -1.0f, 0.0f, 1.0f };
+            m_Vertex1Direction = GetRandomVertexDirection();
+            m_Vertex2Direction = GetRandomVertexDirection();
+            m_Vertex3Direction = GetRandomVertexDirection();
         }
 
         /*
