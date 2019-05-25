@@ -52,6 +52,7 @@ namespace Graphics {
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(m_Window.get());
             glfwFocusWindow(m_Window.get());
+            glfwSwapInterval(1);
         };
     }
 
