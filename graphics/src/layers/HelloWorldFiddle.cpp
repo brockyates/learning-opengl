@@ -93,7 +93,7 @@ namespace Graphics {
 
     void HelloWorldFiddle::UpdateTiming()
     {
-        double nextTime = Time::Get();
+        double nextTime = Timer::Get();
         m_DeltaTime = static_cast<float>(nextTime - m_LastTime);
         m_LastTime = nextTime;
     }

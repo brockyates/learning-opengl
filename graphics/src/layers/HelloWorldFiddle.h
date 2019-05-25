@@ -4,7 +4,7 @@
 #include "layers/Layer.h"
 #include "ModelGenerator.h"
 #include "models/Model.h"
-#include "Time.h"
+#include "Timer.h"
 #include "types/Vertex1.h"
 #include "Window.h"
 
@@ -52,7 +52,7 @@ namespace Graphics {
 
     private:
         bool m_Attached = false;
-        double m_LastTime = Time::Get();
+        double m_LastTime = Timer::Get();
         double m_DeltaTime = 0;
 
         //OpenGL state

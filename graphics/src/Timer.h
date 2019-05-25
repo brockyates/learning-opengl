@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    class Time
+    class Timer
     {
     public:
         static double Get() { return glfwGetTime(); }

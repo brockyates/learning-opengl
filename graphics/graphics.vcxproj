@@ -111,7 +111,7 @@
     <ClInclude Include="src\models\Model.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
-    <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\types\Vertex1.h" />
     <ClInclude Include="src\WindowLayout.h" />
     <ClInclude Include="src\WindowInput.h" />

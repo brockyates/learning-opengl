@@ -74,7 +74,7 @@
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\ModelGenerator.h" />
     <ClInclude Include="src\models\Model.h" />
-    <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
