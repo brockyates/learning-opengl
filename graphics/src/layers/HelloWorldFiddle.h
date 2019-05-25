@@ -44,12 +44,23 @@ namespace Graphics {
         //Event handlers
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
+    private:
+        //Scene rendering
         void UpdateVertexes();
         void UpdateVertex(glm::vec4& vertex, glm::vec4& direction);
         void UpdateTiming();
         void SetNextVertexPositions();
         void ChangeDrawMode(const DrawMode& nextMode);
         glm::vec4 GetRandomVertexDirection() const;
+
+    private:
+        //UI Rendering
+        void DrawDescription() const;
+        void DrawModeSelector();
+        void DrawColorControls();
+        void DrawPositionControls();
+        void DrawLineControls();
+        void DrawPointControls();
 
     private:
         bool m_Attached = false;

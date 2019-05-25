@@ -139,19 +139,17 @@ namespace Graphics {
         return { dist(rng), dist(rng), 0.0f, 0.0f };
     }
 
-    void HelloWorldFiddle::RenderUI()
+    void HelloWorldFiddle::DrawDescription() const
     {
-        if (!m_Attached)
-            return;
-
-        ImGui::Begin("DemoWidget");
-
         ImGui::Separator();
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::TextWrapped(Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
+    }
 
+    void HelloWorldFiddle::DrawModeSelector()
+    {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         if (ImGui::BeginCombo("Draw Mode", m_DrawMode.DisplayName.c_str()))
         {
@@ -172,7 +170,10 @@ namespace Graphics {
 
             ImGui::EndCombo();
         }
+    }
 
+    void HelloWorldFiddle::DrawColorControls()
+    {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Text("Color Controls");
         ImGui::Separator();
@@ -180,15 +181,18 @@ namespace Graphics {
         ImGui::ColorEdit4("Vertex 1", &m_TriangleModel->Vertexes[0].Color[0]);
         ImGui::ColorEdit4("Vertex 2", &m_TriangleModel->Vertexes[1].Color[0]);
         ImGui::ColorEdit4("Vertex 3", &m_TriangleModel->Vertexes[2].Color[0]);
+    }
 
+    void HelloWorldFiddle::DrawPositionControls()
+    {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Text("Position Controls");
         ImGui::Separator();
         if (ImGui::Button("Reset"))
         {
             m_AnimationEnabled = false;
-            m_TriangleModel->Vertexes[0].Position = {  0.0f,  1.0f, 0.0f, 1.0f };
-            m_TriangleModel->Vertexes[1].Position = {  1.0f, -1.0f, 0.0f, 1.0f };
+            m_TriangleModel->Vertexes[0].Position = { 0.0f,  1.0f, 0.0f, 1.0f };
+            m_TriangleModel->Vertexes[1].Position = { 1.0f, -1.0f, 0.0f, 1.0f };
             m_TriangleModel->Vertexes[2].Position = { -1.0f, -1.0f, 0.0f, 1.0f };
             m_Vertex1Direction = GetRandomVertexDirection();
             m_Vertex2Direction = GetRandomVertexDirection();
@@ -205,20 +209,43 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Checkbox("Animation", &m_AnimationEnabled);
         ImGui::SliderFloat("Speed", &m_VertexMoveSpeed, 0.0f, 5.0f);
+    }
+
+    void HelloWorldFiddle::DrawLineControls()
+    {
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Text("Line Controls");
+        ImGui::Separator();
+        ImGui::SliderFloat("Line Width", &m_LineWidth, 1.0f, 10.0f);
+    }
+
+    void HelloWorldFiddle::DrawPointControls()
+    {
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::Text("Point Controls");
+        ImGui::Separator();
+        ImGui::SliderFloat("Point Size", &m_PointSize, 1.0f, 100.0f);
+    }
+
+    void HelloWorldFiddle::RenderUI()
+    {
+        if (!m_Attached)
+            return;
+
+        ImGui::Begin("DemoWidget");
+
+        DrawDescription();
+        DrawModeSelector();
+        DrawColorControls();
+        DrawPositionControls();
 
         if (m_DrawMode.Mode == GL_LINES)
         {
-            ImGui::Dummy(ImVec2(0.0f, 20.0f));
-            ImGui::Text("Line Controls");
-            ImGui::Separator();
-            ImGui::SliderFloat("Line Width", &m_LineWidth, 1.0f, 10.0f);
+            DrawLineControls();
         }
         if (m_DrawMode.Mode == GL_POINTS)
         {
-            ImGui::Dummy(ImVec2(0.0f, 20.0f));
-            ImGui::Text("Point Controls");
-            ImGui::Separator();
-            ImGui::SliderFloat("Point Size", &m_PointSize, 1.0f, 100.0f);
+            DrawPointControls();
         }
 
         ImGui::End();
