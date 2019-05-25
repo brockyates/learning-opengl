@@ -62,6 +62,35 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    void HelloWorldFiddle::UpdateVertex(glm::vec4 & vertex, glm::vec4& direction)
+    {
+        const auto velocity= m_VertexMoveSpeed * direction;
+
+        vertex += static_cast<float>(m_DeltaTime) * velocity;
+
+        if (vertex.x < -1.0f)
+        {
+            vertex.x = -1.0f;
+            direction.x *= -1.0f;
+        }
+        else if (vertex.x > 1.0f)
+        {
+            vertex.x = 1.0f;
+            direction.x *= -1.0f;
+        }
+
+        if (vertex.y < -1.0f)
+        {
+            vertex.y = -1.0f;
+            direction.y *= -1.0f;
+        }
+        else if (vertex.y > 1.0f)
+        {
+            vertex.y = 1.0f;
+            direction.y *= -1.0f;
+        }
+    }
+
     void HelloWorldFiddle::UpdateTiming()
     {
         double nextTime = Time::Get();
@@ -71,26 +100,9 @@ namespace Graphics {
 
     void HelloWorldFiddle::SetNextVertexPositions()
     {
-        auto m_VertexYPos = m_TriangleModel->Vertexes[0].Position[1];
-
-        if (m_VertexYDirection == 1)
-        {
-            m_VertexYPos += m_VertexMoveSpeed * static_cast<float>(m_DeltaTime);
-            if (m_TriangleModel->Vertexes[0].Position[1] >= 1.0f)
-            {
-                m_VertexYDirection = 0;
-            }
-        }
-        else
-        {
-            m_VertexYPos -= m_VertexMoveSpeed * static_cast<float>(m_DeltaTime);
-            if (m_TriangleModel->Vertexes[0].Position[1] <= -1.0f)
-            {
-                m_VertexYDirection = 1;
-            }
-        }
-
-        m_TriangleModel->Vertexes[0].Position[1] = m_VertexYPos;
+        UpdateVertex(m_TriangleModel->Vertexes[0].Position, m_Vertex1Direction);
+        UpdateVertex(m_TriangleModel->Vertexes[1].Position, m_Vertex2Direction);
+        UpdateVertex(m_TriangleModel->Vertexes[2].Position, m_Vertex3Direction);
     }
 
     void HelloWorldFiddle::ChangeDrawMode(const DrawMode& nextMode)
@@ -171,6 +183,8 @@ namespace Graphics {
         ImGui::SliderFloat2("Vertex 1", &m_TriangleModel->Vertexes[0].Position[0], -1.0f, 1.0f);
         ImGui::SliderFloat2("Vertex 2", &m_TriangleModel->Vertexes[1].Position[0], -1.0f, 1.0f);
         ImGui::SliderFloat2("Vertex 3", &m_TriangleModel->Vertexes[2].Position[0], -1.0f, 1.0f);
+        ImGui::Dummy(ImVec2(0.0f, 20.0f));
+        ImGui::SliderFloat("Animation Speed", &m_VertexMoveSpeed, 0.0f, 5.0f);
 
         if (m_DrawMode.Mode == GL_LINES)
         {

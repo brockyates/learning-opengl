@@ -45,6 +45,7 @@ namespace Graphics {
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
         void UpdateVertexes();
+        void UpdateVertex(glm::vec4& vertex, glm::vec4& direction);
         void UpdateTiming();
         void SetNextVertexPositions();
         void ChangeDrawMode(const DrawMode& nextMode);
@@ -81,7 +82,10 @@ namespace Graphics {
         //Animation parameters
         bool m_AnimationEnabled = true;
         float m_VertexMoveSpeed = 0.5f;
-        int m_VertexYDirection = 1;
+
+        glm::vec4 m_Vertex1Direction = {  0.3f, -0.7f, 0.0f, 0.0f };
+        glm::vec4 m_Vertex2Direction = {  0.1f, -0.5f, 0.0f, 0.0f };
+        glm::vec4 m_Vertex3Direction = { -0.9f,  0.3f, 0.0f, 0.0f };
     };
 
 }

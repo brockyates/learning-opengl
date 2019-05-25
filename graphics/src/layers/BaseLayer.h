@@ -29,6 +29,7 @@ namespace Graphics {
         void ShowLogWindow();
 
     private:
+        //Input handling
         bool m_F11Ready = true;
         bool m_EscReady = true;
     };
