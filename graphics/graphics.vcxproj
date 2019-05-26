@@ -109,6 +109,7 @@
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\ModelGenerator.h" />
+    <ClInclude Include="src\models\Circle.h" />
     <ClInclude Include="src\models\Model.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
+    <ClCompile Include="src\models\Circle.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
     <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
@@ -161,6 +163,8 @@
     <ClCompile Include="src\config\WindowDefaults.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\CircleDemo_Fragment.shader" />
+    <None Include="res\shaders\CircleDemo_Vertex.shader" />
     <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
     <None Include="res\shaders\HelloWorldFiddle_Vertex.shader" />
     <None Include="res\shaders\Minimal_Fragment.shader" />

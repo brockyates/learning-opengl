@@ -23,13 +23,14 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
+        glUniform1f(m_PointsizeUniformLocation, 30.0f);
 
         // Draw
-        glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
 
         // Release bindings
         glUseProgram(0);
@@ -72,21 +73,37 @@ namespace Graphics {
 
         LOG_TRACE("Attaching CircleDemo");
 
+        //Layer settings
+        glEnable(GL_PROGRAM_POINT_SIZE);
+
+        //Buffer setup
         glGenVertexArrays(1, &m_VertexArrayID);
         glBindVertexArray(m_VertexArrayID);
         glGenBuffers(1, &m_VertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, m_CircleModel->VertexDataByteSize(), &m_CircleModel->Vertexes[0], GL_STATIC_DRAW);
+
+        glGenBuffers(1, &m_IndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_CircleModel->IndexDataByteSize(), &m_CircleModel->Indexes[0], GL_STATIC_DRAW);
+
+        //Vertex Position
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(0, Vertex1::ElementsPerPosition, Vertex1::PositionType, GL_FALSE, Vertex1::VertexByteSize, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
+
+        //Vertex Color
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, Vertex1::ElementsPerColor, Vertex1::ColorType, GL_FALSE, Vertex1::VertexByteSize, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
 
         //Release bindings
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        m_ShaderID = CreateShader("res/shaders/CircleDemo_Vertex.shader", "res/shaders/CircleDemo_Fragment.shader");
+        m_PointsizeUniformLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
 
         m_Attached = true;
     }
@@ -97,8 +114,11 @@ namespace Graphics {
 
         LOG_TRACE("Detaching CircleDemo");
 
+        glDisable(GL_PROGRAM_POINT_SIZE);
+
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 

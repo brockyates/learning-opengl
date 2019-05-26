@@ -26,6 +26,11 @@ namespace Graphics {
             return static_cast<unsigned int>(std::size(Indexes)) * sizeof(unsigned int);
         }
 
+        unsigned int NumIndexes() const
+        {
+            return static_cast<unsigned int>(std::size(Indexes));
+        }
+
         std::vector<Vertex1> Vertexes;
         std::vector<unsigned int> Indexes;
     };

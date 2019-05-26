@@ -2,6 +2,9 @@
 
 #include "events/EventSystem.h"
 #include "layers/Layer.h"
+#include "ModelGenerator.h"
+#include "models/Model.h"
+#include "types/Vertex1.h"
 #include "Window.h"
 
 #include <glm/glm.hpp>
@@ -32,21 +35,18 @@ namespace Graphics {
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
     private:
+        bool m_Attached = false;
+
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
         unsigned int m_ShaderID = 0;
         unsigned int m_VertexArrayID = 0;
+        unsigned int m_IndexBufferID = 0;
         unsigned int m_VertexBufferID = 0;
+        unsigned int m_PointsizeUniformLocation = 0;
 
-        std::vector<float> m_Vertexes =
-        {
-             0.0f,  1.0f,
-             1.0f, -1.0f,
-            -1.0f, -1.0f,
-        };
-
-    private:
-        bool m_Attached = false;
+        //Buffer data
+        std::unique_ptr<Model> m_CircleModel = ModelGenerator::MakeCircle();
     };
 
 }

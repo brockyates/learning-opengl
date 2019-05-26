@@ -26,7 +26,7 @@ namespace Graphics {
         glUseProgram(m_ShaderID);
 
         // Draw
-        glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
