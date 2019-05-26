@@ -127,8 +127,10 @@
     </None>
     <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
     <None Include="res\shaders\HelloWorldFiddle_Vertex.shader" />
-    <None Include="res\shaders\CircleDemo_Fragment.shader" />
-    <None Include="res\shaders\CircleDemo_Vertex.shader" />
+    <None Include="res\shaders\CircleDemo_PointFragment.shader" />
+    <None Include="res\shaders\CircleDemo_PointVertex.shader" />
+    <None Include="res\shaders\CircleDemo_TriangleFragment.shader" />
+    <None Include="res\shaders\CircleDemo_TriangleVertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\fonts\Consolas.ttf" />

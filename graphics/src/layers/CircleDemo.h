@@ -3,7 +3,7 @@
 #include "events/EventSystem.h"
 #include "layers/Layer.h"
 #include "ModelGenerator.h"
-#include "models/Model.h"
+#include "models/Circle.h"
 #include "Timer.h"
 #include "types/Vertex1.h"
 #include "Window.h"
@@ -42,26 +42,36 @@ namespace Graphics {
         void AnimateSides();
 
     private:
+        unsigned int m_MaxSides = 50;
+        unsigned int m_Sides = m_MaxSides;
+        unsigned int m_NextSides = m_MaxSides;
+        std::unique_ptr<Circle> m_CircleModel = std::make_unique<Circle>(m_Sides);
+
         bool m_Attached = false;
         double m_LastTime = Timer::Get();
         double m_DeltaTime = 0.0;
         double m_TimeSinceLastChange = 0.0;
         float m_AnimationInterval = 0.5;
-        bool m_SidesIncreasing = true;
-        unsigned int m_MaxSides = 50;
+        bool m_SidesIncreasing = false;
+        bool m_AnimationEnabled = false;
 
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
-        unsigned int m_ShaderID = 0;
-        unsigned int m_VertexArrayID = 0;
-        unsigned int m_IndexBufferID = 0;
-        unsigned int m_VertexBufferID = 0;
-        unsigned int m_PointsizeUniformLocation = 0;
 
-        //Buffer data
-        unsigned int m_Sides = 3;
-        unsigned int m_NextSides = 3;
-        std::unique_ptr<Model> m_CircleModel = ModelGenerator::MakeCircle(m_Sides);
+        unsigned int m_TriangleShaderID = 0;
+        unsigned int m_PointShaderID = 0;
+
+        unsigned int m_VertexArrayID = 0;
+        unsigned int m_VertexBufferID = 0;
+
+        unsigned int m_PointSizeUniformLocation = 0;
+        unsigned int m_PointColorUniformLocation = 0;
+
+        unsigned int m_TriangleIndexBufferID = 0;
+        unsigned int m_PointIndexBufferID = 0;
+        unsigned int m_LineIndexBufferID = 0;
+
+        unsigned int m_NumLineIndexes = 0;
     };
 
 }

@@ -26,20 +26,50 @@ namespace Graphics {
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
-        glUseProgram(m_ShaderID);
-        glUniform1f(m_PointsizeUniformLocation, 30.0f);
 
         // Draw
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
+        
+        glUseProgram(m_TriangleShaderID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
+
+        glUseProgram(m_PointShaderID);
+        glUniform1f(m_PointSizeUniformLocation, 30.0f);
+        glUniform4fv(m_PointColorUniformLocation, 1, &glm::vec4{ 0.0f, 0.0f, 1.0f, 1.0f }[0]);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
+        glDrawElements(GL_POINTS, static_cast<unsigned int>(std::size(m_CircleModel->Vertexes)), GL_UNSIGNED_INT, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
+        glDrawElements(GL_LINES, m_NumLineIndexes, GL_UNSIGNED_INT, 0);
 
         // Release bindings
         glUseProgram(0);
         glBindVertexArray(0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    namespace {
+
+        // Helper to display a little (?) mark which shows a tooltip when hovered.
+        static void HelpMarker(const char* desc)
+        {
+            ImGui::TextDisabled("(?)");
+            if (ImGui::IsItemHovered())
+            {
+                ImGui::BeginTooltip();
+                ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+                ImGui::TextUnformatted(desc);
+                ImGui::PopTextWrapPos();
+                ImGui::EndTooltip();
+            }
+        }
+
     }
 
     void CircleDemo::RenderUI()
@@ -54,7 +84,19 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
 
-        ImGui::SliderInt("Sides", &static_cast<int>(m_NextSides), 3, m_MaxSides);
+        ImGui::Checkbox("Animation", &m_AnimationEnabled);
+        ImGui::InputInt("Sides", &static_cast<int>(m_NextSides), 1, 5);
+
+        if (m_NextSides > m_MaxSides)
+        {
+            m_NextSides = m_MaxSides;
+        }
+        if (m_NextSides < 3)
+        {
+            m_NextSides = 3;
+        }
+
+        ImGui::SameLine(); HelpMarker("CTRL + Click to enter value");
         ImGui::SliderFloat("Interval", &m_AnimationInterval, 0.0f, 1.0f);
 
         ImGui::End();
@@ -84,17 +126,56 @@ namespace Graphics {
 
     void CircleDemo::UpdateSides()
     {
-        if (m_NextSides != m_Sides)
-        {
-            Detach();
-            m_Sides = m_NextSides;
-            m_CircleModel = ModelGenerator::MakeCircle(m_Sides);
-            Attach();
-        }
+        if (m_NextSides == m_Sides)
+            return;
+
+        m_Sides = m_NextSides;
+        m_CircleModel = std::make_unique<Circle>(m_Sides);
+
+        const unsigned int bufferOffset = 0;
+
+        const auto pointIndexes = m_CircleModel->MakeIndexesForPointDrawMode(m_Sides);
+        const auto pointIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
+
+        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
+        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
+        m_NumLineIndexes = std::size(lineIndexes);
+
+        //Update vertex buffer
+        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+        glBufferSubData(GL_ARRAY_BUFFER,
+            bufferOffset,
+            m_CircleModel->VertexDataByteSize(),
+            &m_CircleModel->Vertexes[0]);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        //Update index buffers
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
+        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
+            bufferOffset,
+            m_CircleModel->IndexDataByteSize(),
+            &m_CircleModel->Indexes[0]);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
+        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
+            bufferOffset,
+            pointIndexByteSize,
+            &pointIndexes[0]);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
+        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
+            bufferOffset,
+            lineIndexByteSize,
+            &lineIndexes[0]);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
     void CircleDemo::AnimateSides()
     {
+        if (!m_AnimationEnabled)
+            return;
+
         if (m_TimeSinceLastChange > m_AnimationInterval)
         {
             m_TimeSinceLastChange = 0.0;
@@ -142,9 +223,22 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
         glBufferData(GL_ARRAY_BUFFER, m_CircleModel->VertexDataByteSize(), &m_CircleModel->Vertexes[0], GL_STATIC_DRAW);
 
-        glGenBuffers(1, &m_IndexBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+        glGenBuffers(1, &m_TriangleIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_CircleModel->IndexDataByteSize(), &m_CircleModel->Indexes[0], GL_STATIC_DRAW);
+
+        const auto pointIndexes = m_CircleModel->MakeIndexesForPointDrawMode(m_Sides);
+        const auto pointIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
+        glGenBuffers(1, &m_PointIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, pointIndexByteSize, &pointIndexes[0], GL_STATIC_DRAW);
+
+        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
+        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
+        m_NumLineIndexes = std::size(lineIndexes);
+        glGenBuffers(1, &m_LineIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, lineIndexByteSize, &lineIndexes[0], GL_STATIC_DRAW);
 
         //Vertex Position
         glEnableVertexAttribArray(0);
@@ -161,8 +255,11 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        m_ShaderID = CreateShader("res/shaders/CircleDemo_Vertex.shader", "res/shaders/CircleDemo_Fragment.shader");
-        m_PointsizeUniformLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
+        m_TriangleShaderID = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+
+        m_PointShaderID = CreateShader("res/shaders/CircleDemo_PointVertex.shader", "res/shaders/CircleDemo_PointFragment.shader");
+        m_PointSizeUniformLocation = glGetUniformLocation(m_PointShaderID, "u_PointSize");
+        m_PointColorUniformLocation = glGetUniformLocation(m_PointShaderID, "u_PointColor");
 
         m_Attached = true;
     }
@@ -181,7 +278,8 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        glDeleteProgram(m_ShaderID);
+        glDeleteProgram(m_TriangleShaderID);
+        glDeleteProgram(m_PointShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);
 
         m_Attached = false;

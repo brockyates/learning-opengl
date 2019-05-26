@@ -55,4 +55,38 @@ namespace Graphics {
         return indexes;
     }
 
+    std::vector<unsigned int> Circle::MakeIndexesForPointDrawMode(unsigned int numSides) const
+    {
+        std::vector<unsigned int> indexes;
+        indexes.reserve(numSides + 1);
+
+        for (auto i = 0u; i < numSides + 1; i++)
+        {
+            indexes.emplace_back(i);
+        }
+
+        return indexes;
+    }
+
+    std::vector<unsigned int> Circle::MakeIndexesForLineDrawMode(unsigned int numSides) const
+    {
+        std::vector<unsigned int> indexes;
+        indexes.reserve(numSides * 4);
+
+        for (auto i = 0u; i < numSides - 1; i++)
+        {
+            indexes.emplace_back(0);
+            indexes.emplace_back(i+1);
+            indexes.emplace_back(i+1);
+            indexes.emplace_back(i+2);
+        }
+
+        indexes.emplace_back(0);
+        indexes.emplace_back(numSides);
+        indexes.emplace_back(numSides);
+        indexes.emplace_back(1);
+
+        return indexes;
+    }
+
 }
