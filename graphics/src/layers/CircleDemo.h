@@ -4,6 +4,7 @@
 #include "layers/Layer.h"
 #include "ModelGenerator.h"
 #include "models/Model.h"
+#include "Timer.h"
 #include "types/Vertex1.h"
 #include "Window.h"
 
@@ -35,7 +36,19 @@ namespace Graphics {
         EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
 
     private:
+        //Scene rendering
+        void UpdateTiming();
+        void UpdateSides();
+        void AnimateSides();
+
+    private:
         bool m_Attached = false;
+        double m_LastTime = Timer::Get();
+        double m_DeltaTime = 0.0;
+        double m_TimeSinceLastChange = 0.0;
+        float m_AnimationInterval = 0.5;
+        bool m_SidesIncreasing = true;
+        unsigned int m_MaxSides = 50;
 
         //OpenGL state
         unsigned int m_FrameBufferID = 0;
@@ -46,7 +59,9 @@ namespace Graphics {
         unsigned int m_PointsizeUniformLocation = 0;
 
         //Buffer data
-        std::unique_ptr<Model> m_CircleModel = ModelGenerator::MakeCircle();
+        unsigned int m_Sides = 3;
+        unsigned int m_NextSides = 3;
+        std::unique_ptr<Model> m_CircleModel = ModelGenerator::MakeCircle(m_Sides);
     };
 
 }

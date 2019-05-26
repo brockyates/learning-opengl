@@ -19,6 +19,10 @@ namespace Graphics {
         if (!m_Attached)
             return;
 
+        UpdateTiming();
+        AnimateSides();
+        UpdateSides();
+
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
@@ -50,6 +54,9 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
 
+        ImGui::SliderInt("Sides", &static_cast<int>(m_NextSides), 3, m_MaxSides);
+        ImGui::SliderFloat("Interval", &m_AnimationInterval, 0.0f, 1.0f);
+
         ImGui::End();
     }
 
@@ -65,6 +72,58 @@ namespace Graphics {
         {
             m_FrameBufferID = event.NextRenderTargetID();
         };
+    }
+
+    void CircleDemo::UpdateTiming()
+    {
+        double nextTime = Timer::Get();
+        m_DeltaTime = static_cast<float>(nextTime - m_LastTime);
+        m_LastTime = nextTime;
+        m_TimeSinceLastChange += m_DeltaTime;
+    }
+
+    void CircleDemo::UpdateSides()
+    {
+        if (m_NextSides != m_Sides)
+        {
+            Detach();
+            m_Sides = m_NextSides;
+            m_CircleModel = ModelGenerator::MakeCircle(m_Sides);
+            Attach();
+        }
+    }
+
+    void CircleDemo::AnimateSides()
+    {
+        if (m_TimeSinceLastChange > m_AnimationInterval)
+        {
+            m_TimeSinceLastChange = 0.0;
+
+            if (m_SidesIncreasing)
+            {
+                if (m_Sides == m_MaxSides)
+                {
+                    m_SidesIncreasing = false;
+                    --m_NextSides;
+                }
+                else
+                {
+                    ++m_NextSides;
+                }
+            }
+            if (!m_SidesIncreasing)
+            {
+                if (m_Sides == 3)
+                {
+                    m_SidesIncreasing = true;
+                    ++m_NextSides;
+                }
+                else
+                {
+                    --m_NextSides;
+                }
+            }
+        }
     }
 
     void CircleDemo::Attach()

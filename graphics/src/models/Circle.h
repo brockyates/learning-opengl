@@ -12,11 +12,11 @@ namespace Graphics {
     struct Circle : public Model
     {
     public:
-        Circle();
+        Circle(unsigned int numSides = 3);
 
     private:
-        std::vector<Vertex1> MakeVertexes() const;
-        std::vector<unsigned int> MakeIndexes() const;
+        std::vector<Vertex1> MakeVertexes(unsigned int numSides) const;
+        std::vector<unsigned int> MakeIndexesForTriangleDrawMode(unsigned int numSides) const;
     };
 
 }

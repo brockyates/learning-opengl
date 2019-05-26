@@ -1,45 +1,58 @@
 #include "pch.h"
 #include "Circle.h"
 
+#include <glm/gtc/constants.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 namespace Graphics {
 
-    Circle::Circle()
-        : Model(MakeVertexes(), MakeIndexes())
+    Circle::Circle(unsigned int numSides)
+        : Model(MakeVertexes(numSides), MakeIndexesForTriangleDrawMode(numSides))
     {}
 
-    std::vector<Vertex1> Circle::MakeVertexes() const
+    std::vector<Vertex1> Circle::MakeVertexes(unsigned int numSides) const
     {
-        return
+        const auto defaultColor = glm::vec4{ 1.0f, 1.0f, 1.0f, 1.0f };
+        const auto origin = glm::vec4{ 0.0f, 0.0f, 0.0f, 1.0f };
+        const auto basePoint = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+        const auto angle = 2.0f * glm::pi<float>() / static_cast<float>(numSides);
+
+        std::vector<Vertex1> vertexes;
+        vertexes.reserve(numSides);
+
+        vertexes.emplace_back(origin, defaultColor);
+        vertexes.emplace_back(basePoint, defaultColor);
+
+        glm::vec3 rotationAxis(0.0f, 0.0f, 1.0f);
+
+        for (auto i = 1u; i < numSides; i++) //Note the loop index starts at 1.
         {
-            {
-                glm::vec4{ 0.0f,  0.0f, 0.0f, 1.0f }, //Position
-                glm::vec4{ 1.0f,  1.0f, 1.0f, 1.0f }, //Color
-            },
-            {
-                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
-                glm::vec4{ 1.0f,  0.0f, 0.0f, 1.0f },
-            },
-            {
-                glm::vec4{ 1.0f, -1.0f, 0.0f, 1.0f },
-                glm::vec4{ 0.0f,  1.0f, 0.0f, 1.0f },
-            },
-            {
-                glm::vec4{-1.0f, -1.0f, 0.0f, 1.0f },
-                glm::vec4{ 0.0f,  0.0f, 1.0f, 1.0f },
-            }
-        };
+            glm::mat4 transform = glm::rotate(glm::mat4(1.0f), i*angle, rotationAxis);
+            glm::vec4 newPoint = transform * basePoint;
+
+            vertexes.emplace_back(newPoint, defaultColor);
+        }
+
+        return vertexes;
     }
 
-    std::vector<unsigned int> Circle::MakeIndexes() const
+    std::vector<unsigned int> Circle::MakeIndexesForTriangleDrawMode(unsigned int numSides) const
     {
-        return
+        std::vector<unsigned int> indexes;
+        indexes.reserve(3 * numSides);
+
+        for (auto i = 0u; i < numSides - 1; i++)
         {
-            {
-                2, 0, 1,
-                3, 0, 2,
-                1, 0, 3,
-            }
+            indexes.emplace_back(i + 2);
+            indexes.emplace_back(0);
+            indexes.emplace_back(i + 1);
         };
+
+        indexes.emplace_back(1);
+        indexes.emplace_back(0);
+        indexes.emplace_back(numSides);
+
+        return indexes;
     }
 
 }
