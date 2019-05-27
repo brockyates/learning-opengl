@@ -134,7 +134,7 @@ namespace Graphics {
 
         const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
-        m_NumLineIndexes = std::size(lineIndexes);
+        m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
 
         //Update vertex buffer
         glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
@@ -218,7 +218,7 @@ namespace Graphics {
 
         const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
-        m_NumLineIndexes = std::size(lineIndexes);
+        m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
         glGenBuffers(1, &m_LineIndexBufferID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, lineIndexByteSize, &lineIndexes[0], GL_STATIC_DRAW);
