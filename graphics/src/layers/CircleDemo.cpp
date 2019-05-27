@@ -23,6 +23,8 @@ namespace Graphics {
         AnimateSides();
         UpdateSides();
 
+        glLineWidth(3.0f);
+
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
         glBindVertexArray(m_VertexArrayID);
@@ -37,17 +39,13 @@ namespace Graphics {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
 
-        glUseProgram(m_PointShaderID);
-        glUniform1f(m_PointSizeUniformLocation, 30.0f);
-        glUniform4fv(m_PointColorUniformLocation, 1, &glm::vec4{ 0.0f, 0.0f, 1.0f, 1.0f }[0]);
-        
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
-        glDrawElements(GL_POINTS, static_cast<unsigned int>(std::size(m_CircleModel->Vertexes)), GL_UNSIGNED_INT, 0);
-
+        glUseProgram(m_LineShaderID);
+        glUniform4fv(m_LineColorUniformLocation, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
         glDrawElements(GL_LINES, m_NumLineIndexes, GL_UNSIGNED_INT, 0);
 
         // Release bindings
+        glLineWidth(1.0f);
         glUseProgram(0);
         glBindVertexArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -134,11 +132,8 @@ namespace Graphics {
 
         const unsigned int bufferOffset = 0;
 
-        const auto pointIndexes = m_CircleModel->MakeIndexesForPointDrawMode(m_Sides);
-        const auto pointIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
-
         const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
-        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
+        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
         m_NumLineIndexes = std::size(lineIndexes);
 
         //Update vertex buffer
@@ -155,12 +150,6 @@ namespace Graphics {
             bufferOffset,
             m_CircleModel->IndexDataByteSize(),
             &m_CircleModel->Indexes[0]);
-        
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
-        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
-            bufferOffset,
-            pointIndexByteSize,
-            &pointIndexes[0]);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
@@ -227,12 +216,6 @@ namespace Graphics {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_CircleModel->IndexDataByteSize(), &m_CircleModel->Indexes[0], GL_STATIC_DRAW);
 
-        const auto pointIndexes = m_CircleModel->MakeIndexesForPointDrawMode(m_Sides);
-        const auto pointIndexByteSize = static_cast<unsigned int>(std::size(pointIndexes)) * sizeof(unsigned int);
-        glGenBuffers(1, &m_PointIndexBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PointIndexBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, pointIndexByteSize, &pointIndexes[0], GL_STATIC_DRAW);
-
         const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
         m_NumLineIndexes = std::size(lineIndexes);
@@ -257,9 +240,8 @@ namespace Graphics {
 
         m_TriangleShaderID = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
 
-        m_PointShaderID = CreateShader("res/shaders/CircleDemo_PointVertex.shader", "res/shaders/CircleDemo_PointFragment.shader");
-        m_PointSizeUniformLocation = glGetUniformLocation(m_PointShaderID, "u_PointSize");
-        m_PointColorUniformLocation = glGetUniformLocation(m_PointShaderID, "u_PointColor");
+        m_LineShaderID = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        m_LineColorUniformLocation = glGetUniformLocation(m_LineShaderID, "u_PointColor");
 
         m_Attached = true;
     }
@@ -279,7 +261,7 @@ namespace Graphics {
         glDisableVertexAttribArray(1);
 
         glDeleteProgram(m_TriangleShaderID);
-        glDeleteProgram(m_PointShaderID);
+        glDeleteProgram(m_LineShaderID);
         glDeleteBuffers(1, &m_VertexBufferID);
 
         m_Attached = false;

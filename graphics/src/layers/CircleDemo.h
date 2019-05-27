@@ -59,16 +59,14 @@ namespace Graphics {
         unsigned int m_FrameBufferID = 0;
 
         unsigned int m_TriangleShaderID = 0;
-        unsigned int m_PointShaderID = 0;
+        unsigned int m_LineShaderID = 0;
 
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
 
-        unsigned int m_PointSizeUniformLocation = 0;
-        unsigned int m_PointColorUniformLocation = 0;
+        unsigned int m_LineColorUniformLocation = 0;
 
         unsigned int m_TriangleIndexBufferID = 0;
-        unsigned int m_PointIndexBufferID = 0;
         unsigned int m_LineIndexBufferID = 0;
 
         unsigned int m_NumLineIndexes = 0;

@@ -163,8 +163,8 @@
     <ClCompile Include="src\config\WindowDefaults.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\CircleDemo_PointFragment.shader" />
-    <None Include="res\shaders\CircleDemo_PointVertex.shader" />
+    <None Include="res\shaders\CircleDemo_LineFragment.shader" />
+    <None Include="res\shaders\CircleDemo_LineVertex.shader" />
     <None Include="res\shaders\CircleDemo_TriangleFragment.shader" />
     <None Include="res\shaders\CircleDemo_TriangleVertex.shader" />
     <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
