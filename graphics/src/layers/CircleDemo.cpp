@@ -6,6 +6,7 @@
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
+#include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
 namespace Graphics {
@@ -36,13 +37,18 @@ namespace Graphics {
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
         
         glUseProgram(m_TriangleShaderID);
+
+        float aspect = 16.0f / 9.0f;
+        glm::mat4 proj = glm::ortho(-1.0f * aspect, 1.0f * aspect, -1.0f, 1.0f);
+        glUniformMatrix4fv(m_ProjMatrixUniformLocation, 1, GL_FALSE, &proj[0][0]);
+
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
 
         glUseProgram(m_LineShaderID);
         glUniform4fv(m_LineColorUniformLocation, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
-        glDrawElements(GL_LINES, m_NumLineIndexes, GL_UNSIGNED_INT, 0);
+        //glDrawElements(GL_LINES, m_NumLineIndexes, GL_UNSIGNED_INT, 0);
 
         // Release bindings
         glLineWidth(1.0f);
@@ -239,6 +245,7 @@ namespace Graphics {
         glDisableVertexAttribArray(1);
 
         m_TriangleShaderID = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        m_ProjMatrixUniformLocation = glGetUniformLocation(m_TriangleShaderID, "u_Proj");
 
         m_LineShaderID = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
         m_LineColorUniformLocation = glGetUniformLocation(m_LineShaderID, "u_PointColor");
