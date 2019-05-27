@@ -71,6 +71,8 @@ namespace Graphics {
         unsigned int m_LineIndexBufferID = 0;
 
         unsigned int m_NumLineIndexes = 0;
+
+        float m_Aspect = 1.0f;
     };
 
 }
