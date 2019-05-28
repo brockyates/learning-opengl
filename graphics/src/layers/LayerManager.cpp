@@ -17,8 +17,8 @@ namespace Graphics {
     {
         std::vector<std::unique_ptr<Layer>> layers;
         layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
-        layers.emplace_back(std::make_unique<HelloWorldFiddle>(window, eventCallback));
         layers.emplace_back(std::make_unique<CircleDemo>(window, eventCallback));
+        layers.emplace_back(std::make_unique<HelloWorldFiddle>(window, eventCallback));
 
         return layers;
     }

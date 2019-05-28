@@ -68,14 +68,13 @@ namespace Graphics {
 
         unsigned int m_TriangleProjMatrixUniformLocation = 0;
         unsigned int m_LineProjMatrixUniformLocation = 0;
-        unsigned int m_LineColorUniformLocation = 0;        
+        unsigned int m_LineColorUniformLocation = 0;
 
         unsigned int m_TriangleIndexBufferID = 0;
         unsigned int m_LineIndexBufferID = 0;
 
         unsigned int m_NumLineIndexes = 0;
 
-        float m_Aspect = 1.0f;
         glm::mat4 m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
     };
 

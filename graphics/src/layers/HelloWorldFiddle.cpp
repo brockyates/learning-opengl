@@ -29,6 +29,7 @@ namespace Graphics {
         glBindVertexArray(m_VertexArrayID);
         glUseProgram(m_ShaderID);
         glUniform1f(m_PointsizeUniformLocation, m_PointSize);
+        glUniformMatrix4fv(m_ProjMatrixUniformLocation, 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
 
         // Draw
         glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
@@ -255,6 +256,7 @@ namespace Graphics {
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
+        dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
 
     EventHandler<RenderTargetChangedEvent> HelloWorldFiddle::OnRenderTargetChanged()
@@ -262,6 +264,22 @@ namespace Graphics {
         return [this](const RenderTargetChangedEvent& event)
         {
             m_FrameBufferID = event.NextRenderTargetID();
+        };
+    }
+
+    EventHandler<AspectRatioChangeEvent> HelloWorldFiddle::OnAspectRatioChange()
+    {
+        return [this](const AspectRatioChangeEvent& event)
+        {
+            //Case: scene window's width < height
+            if (event.NewAspectRatio() < 1.0f)
+            {
+                m_ProjectionMatrix = glm::ortho(-1.0f, 1.0f, -1.0f / m_Window.AspectRatio(), 1.0f / m_Window.AspectRatio());
+                return;
+            }
+
+            //Case: scene window's width > height
+            m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
         };
     }
 
@@ -306,6 +324,7 @@ namespace Graphics {
 
         m_ShaderID = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
         m_PointsizeUniformLocation = glGetUniformLocation(m_ShaderID, "u_Pointsize");
+        m_ProjMatrixUniformLocation = glGetUniformLocation(m_ShaderID, "u_Proj");
 
         m_Attached = true;
     }
