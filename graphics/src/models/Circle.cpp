@@ -18,8 +18,7 @@ namespace Graphics {
         const auto angle = 2.0f * glm::pi<float>() / static_cast<float>(numSides);
 
         std::vector<Vertex1> vertexes;
-        vertexes.reserve(numSides);
-
+        vertexes.reserve(numSides + 1);
         vertexes.emplace_back(origin, defaultColor);
         vertexes.emplace_back(basePoint, defaultColor);
 
@@ -28,9 +27,9 @@ namespace Graphics {
         for (auto i = 1u; i < numSides; i++) //Note the loop index starts at 1.
         {
             glm::mat4 transform = glm::rotate(glm::mat4(1.0f), i*angle, rotationAxis);
-            glm::vec4 newPoint = transform * basePoint;
+            glm::vec4 nextPoint = transform * basePoint;
 
-            vertexes.emplace_back(newPoint, defaultColor);
+            vertexes.emplace_back(nextPoint, defaultColor);
         }
 
         return vertexes;
@@ -43,9 +42,9 @@ namespace Graphics {
 
         for (auto i = 0u; i < numSides - 1; i++)
         {
-            indexes.emplace_back(i + 2);
+            indexes.emplace_back(i+2);
             indexes.emplace_back(0);
-            indexes.emplace_back(i + 1);
+            indexes.emplace_back(i+1);
         };
 
         indexes.emplace_back(1);
@@ -58,7 +57,7 @@ namespace Graphics {
     std::vector<unsigned int> Circle::MakeIndexesForPointDrawMode(unsigned int numSides) const
     {
         std::vector<unsigned int> indexes;
-        indexes.reserve(numSides + 1);
+        indexes.reserve(numSides+1);
 
         for (auto i = 0u; i < numSides + 1; i++)
         {
