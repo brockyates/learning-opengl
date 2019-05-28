@@ -86,7 +86,7 @@ namespace Graphics {
         ImGui::Separator();
 
         ImGui::Checkbox("Animation", &m_AnimationEnabled);
-        ImGui::InputInt("Sides", &static_cast<int>(m_NextSides), 1, 5);
+        ImGui::InputInt("Sides", &m_NextSides, 1, 5);
 
         if (m_NextSides > m_MaxSides)
         {

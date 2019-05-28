@@ -44,9 +44,9 @@ namespace Graphics {
         void AnimateSides();
 
     private:
-        unsigned int m_MaxSides = 50;
-        unsigned int m_Sides = m_MaxSides;
-        unsigned int m_NextSides = m_MaxSides;
+        int m_MaxSides = 50;
+        int m_Sides = m_MaxSides;
+        int m_NextSides = m_MaxSides; 
         std::unique_ptr<Circle> m_CircleModel = std::make_unique<Circle>(m_Sides);
 
         bool m_Attached = false;
