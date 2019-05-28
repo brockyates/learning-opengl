@@ -55,6 +55,8 @@ namespace Graphics {
         return [this](const ChangeToFullscreenEvent&)
         {
             m_Properties.Mode = WindowMode::Fullscreen;
+            m_Properties.AspectRatio = static_cast<float>(m_Properties.Resolution.Width) / static_cast<float>(m_Properties.Resolution.Height);
+
             glfwGetWindowSize(m_Window.get(), &m_Properties.Layout.Width, &m_Properties.Layout.Height);
             glfwGetWindowPos(m_Window.get(), &m_Properties.Layout.Xpos, &m_Properties.Layout.Ypos);
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
