@@ -26,6 +26,7 @@ namespace Graphics {
     {
         return [this](const AspectRatioChangeEvent& event)
         {
+            LOG_TRACE("HANDLING");
             m_Properties.AspectRatio = event.NewAspectRatio();
         };
     }

@@ -2,6 +2,7 @@
 #include "RenderTargetLayer.h"
 
 #include "events/EventDispatcher.h"
+#include "MathHelpers.h"
 #include "ShaderHelpers.h"
 #include "WindowProperties.h"
 
@@ -12,6 +13,7 @@ namespace Graphics {
 
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Render to Texture")
+        , m_AspectRatio(window.AspectRatio())
     {
         Attach();
         FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
@@ -24,12 +26,9 @@ namespace Graphics {
 
     void RenderTargetLayer::RenderUI()
     {
+        HandleAspectRatioChange();
+
         ImGui::Begin("Scene");
-
-        const auto sceneDimensions = ImGui::GetWindowSize();
-        const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
-        FireEvent(AspectRatioChangeEvent(newAspectRatio));
-
         ImVec2 pos = ImGui::GetCursorScreenPos();
         auto size = ImGui::GetContentRegionAvail();
 
@@ -39,7 +38,6 @@ namespace Graphics {
             ImVec2(ImGui::GetCursorScreenPos().x + size.x, ImGui::GetCursorScreenPos().y + size.y),
             ImVec2(0, 1),
             ImVec2(1, 0));
-
         ImGui::End();
     }
 
@@ -103,6 +101,21 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glDeleteFramebuffers(1, &m_WindowedRenderTargetID);
+    }
+
+    void RenderTargetLayer::HandleAspectRatioChange()
+    {
+        ImGui::Begin("Scene");
+
+        const auto sceneDimensions = ImGui::GetWindowSize();
+        const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
+        if (!AreSame(m_AspectRatio, newAspectRatio, 0.001f))
+        {
+            m_AspectRatio = newAspectRatio;
+            FireEvent(AspectRatioChangeEvent(newAspectRatio));
+        }
+
+        ImGui::End();
     }
 
     EventHandler<ChangeToFullscreenEvent> RenderTargetLayer::OnChangeToFullscreen()

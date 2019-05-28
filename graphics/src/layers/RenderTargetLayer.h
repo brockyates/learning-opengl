@@ -23,6 +23,8 @@ namespace Graphics {
         virtual void Attach() override;
         virtual void Detach() override;
 
+        void HandleAspectRatioChange();
+
     private:
         //Event handlers
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
@@ -36,6 +38,8 @@ namespace Graphics {
 
         unsigned int m_RenderedTextureID = 0;
         unsigned int m_RenderBufferID = 0;
+
+        float m_AspectRatio = 0.0f;
     };
 
 }

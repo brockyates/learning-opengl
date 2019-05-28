@@ -109,6 +109,7 @@
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
+    <ClInclude Include="src\MathHelpers.h" />
     <ClInclude Include="src\ModelGenerator.h" />
     <ClInclude Include="src\models\Circle.h" />
     <ClInclude Include="src\models\Model.h" />
