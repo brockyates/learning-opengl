@@ -6,10 +6,11 @@
 
 namespace Graphics {
 
-    Window::Window()
+    Window::Window(EventHandler<Event> eventCallback)
         : m_Properties(WindowDefaults::Properties)
         , m_Window(CreateGLFWWindow(m_Properties))
         , m_Input(m_Window.get())
+        , m_EventCallback(eventCallback)
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
@@ -47,6 +48,8 @@ namespace Graphics {
             glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_Properties.Layout.Width, m_Properties.Layout.Height, GLFW_DONT_CARE);
             glfwSetWindowPos(m_Window.get(), m_Properties.Layout.Xpos, m_Properties.Layout.Ypos);
             glfwShowWindow(m_Window.get());
+
+            FireEvent(AspectRatioChangeEvent(m_Properties.Layout.WindowedAspectRatio));
         };
     }
 
@@ -55,14 +58,15 @@ namespace Graphics {
         return [this](const ChangeToFullscreenEvent&)
         {
             m_Properties.Mode = WindowMode::Fullscreen;
-            m_Properties.AspectRatio = static_cast<float>(m_Properties.Resolution.Width) / static_cast<float>(m_Properties.Resolution.Height);
-
             glfwGetWindowSize(m_Window.get(), &m_Properties.Layout.Width, &m_Properties.Layout.Height);
             glfwGetWindowPos(m_Window.get(), &m_Properties.Layout.Xpos, &m_Properties.Layout.Ypos);
             glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(m_Window.get());
             glfwFocusWindow(m_Window.get());
             glfwSwapInterval(1);
+
+            m_Properties.Layout.WindowedAspectRatio = m_Properties.AspectRatio;
+            FireEvent(AspectRatioChangeEvent(static_cast<float>(m_Properties.Resolution.Width) / static_cast<float>(m_Properties.Resolution.Height)));
         };
     }
 

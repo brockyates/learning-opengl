@@ -9,6 +9,7 @@
 #include "Window.h"
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Graphics {
 
@@ -33,7 +34,8 @@ namespace Graphics {
 
     private:
         //Event handlers
-        EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
+        EventHandler<RenderTargetChangedEvent> OnRenderTargetChange();
+        EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
 
     private:
         //Scene rendering
@@ -73,6 +75,7 @@ namespace Graphics {
         unsigned int m_NumLineIndexes = 0;
 
         float m_Aspect = 1.0f;
+        glm::mat4 m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
     };
 
 }

@@ -23,7 +23,7 @@ namespace Graphics {
         "OpenGL Graphics Demo",
         WindowDefaults::SupportedResolutions[2], /* 720p as safe default resolution */
         WindowMode::Windowed,
-        WindowLayout(1280, 720, 0, 0)
+        WindowLayout(1280, 720, 0, 0, 1280.0f / 720.0f)
     };
 
 }

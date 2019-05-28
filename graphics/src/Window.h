@@ -12,7 +12,7 @@ namespace Graphics {
     class Window
     {
     public:
-        Window();
+        Window(EventHandler<Event> eventCallback);
         ~Window();
 
         void Update();
@@ -34,6 +34,8 @@ namespace Graphics {
 
     private:
         //Event handlers
+        void FireEvent(const Event& event) { m_EventCallback(event); }
+
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
         EventHandler<ChangeResolutionEvent> OnResolutionChange();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
@@ -44,6 +46,7 @@ namespace Graphics {
         WindowProperties m_Properties;
         SmartGLFWWindow m_Window;
         WindowInput m_Input;
+        EventHandler<Event> m_EventCallback;
     };
 
 }

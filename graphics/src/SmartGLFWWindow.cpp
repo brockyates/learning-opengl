@@ -83,7 +83,8 @@ namespace Graphics {
             windowProperties.Resolution.Width / 2,
             windowProperties.Resolution.Height / 2,
             windowProperties.Resolution.Width / 4,
-            windowProperties.Resolution.Height / 4);
+            windowProperties.Resolution.Height / 4,
+            static_cast<float>(windowProperties.Resolution.Width) / static_cast<float>(windowProperties.Resolution.Height));
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 

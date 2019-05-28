@@ -6,7 +6,6 @@
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
-#include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
 namespace Graphics {
@@ -37,15 +36,7 @@ namespace Graphics {
         glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
         
         glUseProgram(m_TriangleShaderID);
-
-        auto ar = m_Window.AspectRatio();
-        glm::mat4 proj = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
-        if (ar < 1.0f)
-        {
-            proj = glm::ortho(-1.0f, 1.0f, -1.0f / m_Window.AspectRatio(), 1.0f / m_Window.AspectRatio());
-        }
-
-        glUniformMatrix4fv(m_ProjMatrixUniformLocation, 1, GL_FALSE, &proj[0][0]);
+        glUniformMatrix4fv(m_ProjMatrixUniformLocation, 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
@@ -114,14 +105,31 @@ namespace Graphics {
     void CircleDemo::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
+        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChange());
+        dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
 
-    EventHandler<RenderTargetChangedEvent> CircleDemo::OnRenderTargetChanged()
+    EventHandler<RenderTargetChangedEvent> CircleDemo::OnRenderTargetChange()
     {
         return [this](const RenderTargetChangedEvent& event)
         {
             m_FrameBufferID = event.NextRenderTargetID();
+        };
+    }
+
+    EventHandler<AspectRatioChangeEvent> CircleDemo::OnAspectRatioChange()
+    {
+        return [this](const AspectRatioChangeEvent& event)
+        {
+            //Case: scene window's width < height
+            if (event.NewAspectRatio() < 1.0f)
+            {
+                m_ProjectionMatrix = glm::ortho(-1.0f, 1.0f, -1.0f / m_Window.AspectRatio(), 1.0f / m_Window.AspectRatio());
+                return;
+            }
+
+            //Case: scene window's width > height
+            m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
         };
     }
 
