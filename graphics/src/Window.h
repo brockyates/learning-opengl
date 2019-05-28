@@ -23,6 +23,8 @@ namespace Graphics {
 
         int ResolutionWidth() const { return m_Properties.Resolution.Width; }
         int ResolutionHeight() const { return m_Properties.Resolution.Height; }
+        float AspectRatio() const { return m_Properties.AspectRatio; }
+
         float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; } //Used in ImGui initialization
         std::string DisplayName() const { return m_Properties.Title; }
         ResolutionSetting Resolution() const { return m_Properties.Resolution; }
@@ -32,6 +34,7 @@ namespace Graphics {
 
     private:
         //Event handlers
+        EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
         EventHandler<ChangeResolutionEvent> OnResolutionChange();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();

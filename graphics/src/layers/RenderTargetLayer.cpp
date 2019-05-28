@@ -26,6 +26,10 @@ namespace Graphics {
     {
         ImGui::Begin("Scene");
 
+        const auto sceneDimensions = ImGui::GetWindowSize();
+        const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
+        FireEvent(AspectRatioChangeEvent(newAspectRatio));
+
         ImVec2 pos = ImGui::GetCursorScreenPos();
         auto size = ImGui::GetContentRegionAvail();
 

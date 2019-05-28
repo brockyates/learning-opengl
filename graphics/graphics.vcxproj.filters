@@ -77,6 +77,7 @@
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\layers\CircleDemo.h" />
     <ClInclude Include="src\models\Circle.h" />
+    <ClInclude Include="src\events\AspectRatioChangeEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

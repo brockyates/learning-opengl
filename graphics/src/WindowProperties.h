@@ -15,12 +15,14 @@ namespace Graphics
             , Resolution(resolution)
             , Mode(windowMode)
             , Layout(layout)
+            , AspectRatio(static_cast<float>(resolution.Width) / static_cast<float>(resolution.Height))
         {}
 
         std::string Title;
         ResolutionSetting Resolution;
         WindowMode Mode;
         WindowLayout Layout;
+        float AspectRatio;
     };
 
 }

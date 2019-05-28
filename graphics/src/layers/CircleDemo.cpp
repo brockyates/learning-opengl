@@ -38,7 +38,13 @@ namespace Graphics {
         
         glUseProgram(m_TriangleShaderID);
 
-        glm::mat4 proj = glm::ortho(-1.0f * m_Aspect, 1.0f * m_Aspect, -1.0f, 1.0f);
+        auto ar = m_Window.AspectRatio();
+        glm::mat4 proj = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
+        if (ar < 1.0f)
+        {
+            proj = glm::ortho(-1.0f, 1.0f, -1.0f / m_Window.AspectRatio(), 1.0f / m_Window.AspectRatio());
+        }
+
         glUniformMatrix4fv(m_ProjMatrixUniformLocation, 1, GL_FALSE, &proj[0][0]);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
@@ -79,12 +85,6 @@ namespace Graphics {
     {
         if (!m_Attached)
             return;
-
-
-        ImGui::Begin("Scene");
-        const auto sceneDimensions = ImGui::GetWindowSize();
-        m_Aspect = sceneDimensions.x / sceneDimensions.y;
-        ImGui::End();
 
         ImGui::Begin("DemoWidget");
 

@@ -9,7 +9,8 @@ namespace Graphics {
         ChangeToWindowedEvent,
         ChangeToFullscreenEvent,
         WindowCloseEvent,
-        RenderTargetChanged
+        RenderTargetChanged,
+        AspectRatioChange
     };
 
 }

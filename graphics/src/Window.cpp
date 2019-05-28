@@ -22,6 +22,14 @@ namespace Graphics {
         glfwTerminate();
     }
 
+    EventHandler<AspectRatioChangeEvent> Window::OnAspectRatioChange()
+    {
+        return [this](const AspectRatioChangeEvent& event)
+        {
+            m_Properties.AspectRatio = event.NewAspectRatio();
+        };
+    }
+
     EventHandler<ChangeResolutionEvent> Window::OnResolutionChange()
     {
         return [this](const ChangeResolutionEvent& event)
@@ -88,6 +96,7 @@ namespace Graphics {
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
         dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
         dispatcher.Dispatch<WindowCloseEvent>(OnWindowClose());
+        dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
 
 }
