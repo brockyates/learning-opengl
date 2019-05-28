@@ -2,12 +2,13 @@
 
 layout(location = 0) in vec4 position;
 
-uniform vec4 u_PointColor;
+uniform mat4 u_Proj;
+uniform vec4 u_LineColor;
 
 out vec4 fragmentColor;
 
 void main()
 {
-    gl_Position = position;
-    fragmentColor = u_PointColor;
+    gl_Position = u_Proj * position;
+    fragmentColor = u_LineColor;
 };

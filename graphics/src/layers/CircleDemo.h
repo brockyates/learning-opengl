@@ -66,8 +66,9 @@ namespace Graphics {
         unsigned int m_VertexArrayID = 0;
         unsigned int m_VertexBufferID = 0;
 
-        unsigned int m_LineColorUniformLocation = 0;
-        unsigned int m_ProjMatrixUniformLocation = 0;
+        unsigned int m_TriangleProjMatrixUniformLocation = 0;
+        unsigned int m_LineProjMatrixUniformLocation = 0;
+        unsigned int m_LineColorUniformLocation = 0;        
 
         unsigned int m_TriangleIndexBufferID = 0;
         unsigned int m_LineIndexBufferID = 0;
