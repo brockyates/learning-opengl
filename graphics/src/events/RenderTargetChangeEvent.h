@@ -4,10 +4,10 @@
 
 namespace Graphics {
 
-    class RenderTargetChangedEvent : public Event
+    class RenderTargetChangeEvent : public Event
     {
     public:
-        RenderTargetChangedEvent(unsigned int nextRenderTargetID)
+        RenderTargetChangeEvent(unsigned int nextRenderTargetID)
             : m_NextRenderTargetID(nextRenderTargetID)
         {}
 
@@ -18,7 +18,7 @@ namespace Graphics {
             return EventType::RenderTargetChanged;
         }
 
-        unsigned int RenderTargetChangedEvent::NextRenderTargetID() const { return m_NextRenderTargetID; }
+        unsigned int RenderTargetChangeEvent::NextRenderTargetID() const { return m_NextRenderTargetID; }
 
     private:
         unsigned int m_NextRenderTargetID;

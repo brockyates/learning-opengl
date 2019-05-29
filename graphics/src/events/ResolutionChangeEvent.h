@@ -5,10 +5,10 @@
 
 namespace Graphics {
 
-    class ChangeResolutionEvent : public Event
+    class ResolutionChangeEvent : public Event
     {
     public:
-        ChangeResolutionEvent(ResolutionSetting resolution)
+        ResolutionChangeEvent(ResolutionSetting resolution)
             : m_Resolution(resolution)
         {}
 
@@ -16,10 +16,10 @@ namespace Graphics {
 
         static EventType GetStaticType()
         {
-            return EventType::ChangeResolutionEvent;
+            return EventType::ResolutionChangeEvent;
         }
 
-        ResolutionSetting ChangeResolutionEvent::NewResolution() const { return m_Resolution; }
+        ResolutionSetting ResolutionChangeEvent::NewResolution() const { return m_Resolution; }
 
     private:
         ResolutionSetting m_Resolution;

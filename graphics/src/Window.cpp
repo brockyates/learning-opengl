@@ -31,9 +31,9 @@ namespace Graphics {
         };
     }
 
-    EventHandler<ChangeResolutionEvent> Window::OnResolutionChange()
+    EventHandler<ResolutionChangeEvent> Window::OnResolutionChange()
     {
-        return [this](const ChangeResolutionEvent& event)
+        return [this](const ResolutionChangeEvent& event)
         {
             m_Properties.Resolution = event.NewResolution();
         };
@@ -98,7 +98,7 @@ namespace Graphics {
     {
         EventDispatcher dispatcher(event);
 
-        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+        dispatcher.Dispatch<ResolutionChangeEvent>(OnResolutionChange());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
         dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
         dispatcher.Dispatch<WindowCloseEvent>(OnWindowClose());

@@ -54,7 +54,6 @@
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\EventDispatcher.h" />
     <ClInclude Include="src\events\EventType.h" />
-    <ClInclude Include="src\events\ChangeResolutionEvent.h" />
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
@@ -68,7 +67,6 @@
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\layers\RenderTargetLayer.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
-    <ClInclude Include="src\events\RenderTargetChangedEvent.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
     <ClInclude Include="src\types\Vertex1.h" />
     <ClInclude Include="src\models\Triangle.h" />
@@ -79,6 +77,8 @@
     <ClInclude Include="src\models\Circle.h" />
     <ClInclude Include="src\events\AspectRatioChangeEvent.h" />
     <ClInclude Include="src\MathHelpers.h" />
+    <ClInclude Include="src\events\ResolutionChangeEvent.h" />
+    <ClInclude Include="src\events\RenderTargetChangeEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

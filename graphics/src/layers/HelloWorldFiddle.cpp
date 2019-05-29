@@ -255,13 +255,13 @@ namespace Graphics {
     void HelloWorldFiddle::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
+        dispatcher.Dispatch<RenderTargetChangeEvent>(OnRenderTargetChanged());
         dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
 
-    EventHandler<RenderTargetChangedEvent> HelloWorldFiddle::OnRenderTargetChanged()
+    EventHandler<RenderTargetChangeEvent> HelloWorldFiddle::OnRenderTargetChanged()
     {
-        return [this](const RenderTargetChangedEvent& event)
+        return [this](const RenderTargetChangeEvent& event)
         {
             m_FrameBufferID = event.NextRenderTargetID();
         };

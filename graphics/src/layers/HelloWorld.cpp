@@ -56,12 +56,12 @@ namespace Graphics {
     void HelloWorld::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChanged());
+        dispatcher.Dispatch<RenderTargetChangeEvent>(OnRenderTargetChanged());
     }
 
-    EventHandler<RenderTargetChangedEvent> HelloWorld::OnRenderTargetChanged()
+    EventHandler<RenderTargetChangeEvent> HelloWorld::OnRenderTargetChanged()
     {
-        return [this](const RenderTargetChangedEvent& event)
+        return [this](const RenderTargetChangeEvent& event)
         {
             m_FrameBufferID = event.NextRenderTargetID();
         };

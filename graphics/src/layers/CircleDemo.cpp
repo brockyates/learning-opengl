@@ -106,13 +106,13 @@ namespace Graphics {
     void CircleDemo::OnEvent(const Event& event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<RenderTargetChangedEvent>(OnRenderTargetChange());
+        dispatcher.Dispatch<RenderTargetChangeEvent>(OnRenderTargetChange());
         dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
 
-    EventHandler<RenderTargetChangedEvent> CircleDemo::OnRenderTargetChange()
+    EventHandler<RenderTargetChangeEvent> CircleDemo::OnRenderTargetChange()
     {
-        return [this](const RenderTargetChangedEvent& event)
+        return [this](const RenderTargetChangeEvent& event)
         {
             m_FrameBufferID = event.NextRenderTargetID();
         };

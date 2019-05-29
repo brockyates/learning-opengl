@@ -29,7 +29,7 @@ namespace Graphics {
 
     private:
         //Event handlers
-        EventHandler<RenderTargetChangedEvent> OnRenderTargetChanged();
+        EventHandler<RenderTargetChangeEvent> OnRenderTargetChanged();
 
     private:
         //OpenGL state

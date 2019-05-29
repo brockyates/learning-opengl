@@ -16,7 +16,7 @@ namespace Graphics {
         , m_AspectRatio(window.AspectRatio())
     {
         Attach();
-        FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+        FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
     }
 
     RenderTargetLayer::~RenderTargetLayer()
@@ -46,7 +46,7 @@ namespace Graphics {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<ChangeToFullscreenEvent>(OnChangeToFullscreen());
         dispatcher.Dispatch<ChangeToWindowedEvent>(OnChangeToWindowed());
-        dispatcher.Dispatch<ChangeResolutionEvent>(OnResolutionChange());
+        dispatcher.Dispatch<ResolutionChangeEvent>(OnResolutionChange());
     }
 
     void RenderTargetLayer::Attach()
@@ -122,7 +122,7 @@ namespace Graphics {
     {
         return [this](const ChangeToFullscreenEvent& event)
         {
-            FireEvent(RenderTargetChangedEvent(m_FullscreenRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(m_FullscreenRenderTargetID));
         };
     }
 
@@ -130,17 +130,17 @@ namespace Graphics {
     {
         return [this](const ChangeToWindowedEvent& event)
         {
-            FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
         };
     }
 
-    EventHandler<ChangeResolutionEvent> RenderTargetLayer::OnResolutionChange()
+    EventHandler<ResolutionChangeEvent> RenderTargetLayer::OnResolutionChange()
     {
-        return [this](const ChangeResolutionEvent& event)
+        return [this](const ResolutionChangeEvent& event)
         {
             Detach();
             Attach();
-            FireEvent(RenderTargetChangedEvent(m_WindowedRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
         };
     }
 

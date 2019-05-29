@@ -109,7 +109,7 @@ namespace Graphics {
 
                         if (ImGui::Selectable(resolution.DisplayName.c_str(), isSelected))
                         {
-                            FireEvent(ChangeResolutionEvent(resolution));
+                            FireEvent(ResolutionChangeEvent(resolution));
                         }
 
                         if (isSelected)

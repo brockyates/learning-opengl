@@ -37,7 +37,7 @@ namespace Graphics {
         void FireEvent(const Event& event) { m_EventCallback(event); }
 
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
-        EventHandler<ChangeResolutionEvent> OnResolutionChange();
+        EventHandler<ResolutionChangeEvent> OnResolutionChange();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
         EventHandler<WindowCloseEvent> OnWindowClose();

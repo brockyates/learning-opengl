@@ -34,7 +34,7 @@ namespace Graphics {
 
     private:
         //Event handlers
-        EventHandler<RenderTargetChangedEvent> OnRenderTargetChange();
+        EventHandler<RenderTargetChangeEvent> OnRenderTargetChange();
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
 
     private:

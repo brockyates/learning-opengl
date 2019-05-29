@@ -29,7 +29,7 @@ namespace Graphics {
         //Event handlers
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
-        EventHandler<ChangeResolutionEvent> OnResolutionChange();
+        EventHandler<ResolutionChangeEvent> OnResolutionChange();
 
     private:
         //OpenGL state
