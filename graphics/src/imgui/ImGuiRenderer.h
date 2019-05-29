@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Window.h"
-
 namespace Graphics {
 
-    struct WindowProperties;
+    class Window;
 
     class ImGuiRenderer
     {

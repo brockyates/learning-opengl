@@ -3,10 +3,14 @@
 
 #include "events/EventDispatcher.h"
 #include "logging/Log.h"
+#include "ModelGenerator.h"
 #include "ShaderHelpers.h"
+#include "Timer.h"
 #include "WindowProperties.h"
+#include "Window.h"
 
 #include <glad/glad.h>
+#include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
 #include <random>
@@ -15,6 +19,15 @@ namespace Graphics {
 
     HelloWorldFiddle::HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Hello World Fiddle")
+        , m_LastTime(Timer::Get())
+        , m_TriangleModel(ModelGenerator::MakeTriangle())
+        , m_DrawModes({
+            { GL_TRIANGLES, {GL_TRIANGLES, 3, "Triangles" }},
+            { GL_LINES,     {GL_LINES,     6, "Lines"     }},
+            { GL_POINTS,    {GL_POINTS,    3, "Points"    }}
+            })
+        , m_DrawMode(m_DrawModes[GL_TRIANGLES])
+        , m_ProjectionMatrix(glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f))
     {}
 
     void HelloWorldFiddle::RenderScene()

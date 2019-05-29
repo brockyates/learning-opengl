@@ -1,16 +1,11 @@
 #pragma once
 
 #include "BaseLayer.h"
-#include "events/Event.h"
-#include "imgui/ImGuiRenderer.h"
-#include "Layer.h"
 #include "RenderTargetLayer.h"
-#include "Window.h"
+
+#include "imgui/ImGuiRenderer.h"
 
 namespace Graphics {
-
-    class Layer;
-    struct WindowProperties;
 
     class LayerManager
     {

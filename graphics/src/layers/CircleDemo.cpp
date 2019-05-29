@@ -3,15 +3,21 @@
 
 #include "events/EventDispatcher.h"
 #include "logging/Log.h"
+#include "models/Circle.h"
 #include "ShaderHelpers.h"
+#include "Timer.h"
 #include "WindowProperties.h"
+#include "Window.h"
 
+#include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
 namespace Graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Circle Demo")
+        , m_LastTime(Timer::Get())
+        , m_ProjectionMatrix(glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f))
     {}
 
     void CircleDemo::RenderScene()

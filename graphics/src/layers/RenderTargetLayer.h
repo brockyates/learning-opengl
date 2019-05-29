@@ -1,14 +1,13 @@
 #pragma once
 
+#include "events/Event.h"
 #include "events/ChangeToFullscreenEvent.h"
 #include "events/ChangeToWindowedEvent.h"
 #include "events/ResolutionChangeEvent.h"
+
 #include "layers/Layer.h"
-#include "Window.h"
 
 namespace Graphics {
-
-    struct WindowProperties;
 
     class RenderTargetLayer : public Layer
     {

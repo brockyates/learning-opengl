@@ -2,19 +2,15 @@
 
 #include "events/AspectRatioChangeEvent.h"
 #include "events/RenderTargetChangeEvent.h"
+
 #include "layers/Layer.h"
-#include "ModelGenerator.h"
-#include "models/Model.h"
-#include "Timer.h"
-#include "types/Vertex1.h"
-#include "Window.h"
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 namespace Graphics {
 
     struct WindowProperties;
+    class Model;
 
     class HelloWorldFiddle : public Layer
     {
@@ -67,7 +63,7 @@ namespace Graphics {
 
     private:
         bool m_Attached = false;
-        double m_LastTime = Timer::Get();
+        double m_LastTime;
         double m_DeltaTime = 0;
 
         //OpenGL state
@@ -82,16 +78,11 @@ namespace Graphics {
         float m_LineWidth = 5.0f;
         float m_PointSize = 30.0f;
 
-        std::unordered_map<int, DrawMode> m_DrawModes{
-            { GL_TRIANGLES, {GL_TRIANGLES, 3, "Triangles" }},
-            { GL_LINES,     {GL_LINES,     6, "Lines"     }},
-            { GL_POINTS,    {GL_POINTS,    3, "Points"    }}
-        };
-
-        DrawMode m_DrawMode = m_DrawModes[GL_TRIANGLES];
+        std::unordered_map<int, DrawMode> m_DrawModes;
+        DrawMode m_DrawMode;
 
         //Buffer data
-        std::unique_ptr<Model> m_TriangleModel = ModelGenerator::MakeTriangle();
+        std::unique_ptr<Model> m_TriangleModel;
         std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
 
         //Animation parameters
@@ -102,7 +93,7 @@ namespace Graphics {
         glm::vec4 m_Vertex2Direction = GetRandomVertexDirection();
         glm::vec4 m_Vertex3Direction = GetRandomVertexDirection();
 
-        glm::mat4 m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
+        glm::mat4 m_ProjectionMatrix;
         unsigned int m_ProjMatrixUniformLocation = 0;
     };
 

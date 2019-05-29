@@ -1,10 +1,8 @@
 #pragma once
 
 #include "events/RenderTargetChangeEvent.h"
-#include "layers/Layer.h"
-#include "Window.h"
 
-#include <glm/glm.hpp>
+#include "layers/Layer.h"
 
 namespace Graphics {
 

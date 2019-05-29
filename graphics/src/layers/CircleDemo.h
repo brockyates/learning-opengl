@@ -2,16 +2,14 @@
 
 #include "events/RenderTargetChangeEvent.h"
 #include "events/AspectRatioChangeEvent.h"
+
 #include "layers/Layer.h"
-#include "models/Circle.h"
-#include "Timer.h"
-#include "Window.h"
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 namespace Graphics {
 
+    struct Circle;
     struct WindowProperties;
 
     class CircleDemo : public Layer
@@ -48,11 +46,11 @@ namespace Graphics {
         bool m_AnimationEnabled = false;
 
         std::unique_ptr<Circle> m_CircleModel = std::make_unique<Circle>(m_Sides);
-        glm::mat4 m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
+        glm::mat4 m_ProjectionMatrix;
 
         //Layer state
         bool m_Attached = false;
-        double m_LastTime = Timer::Get();
+        double m_LastTime;
         double m_DeltaTime = 0.0;
 
         //OpenGL state

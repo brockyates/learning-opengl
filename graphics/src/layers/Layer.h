@@ -1,10 +1,10 @@
 #pragma once
-#include <GLFW/glfw3.h>
 
 #include "events/Event.h"
-#include "Window.h"
 
 namespace Graphics {
+
+    class Window;
 
     class Layer
     {
