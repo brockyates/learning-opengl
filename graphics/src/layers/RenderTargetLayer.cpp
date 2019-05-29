@@ -5,9 +5,9 @@
 #include "events/RenderTargetChangeEvent.h"
 
 #include "logging/Log.h"
+
 #include "MathHelpers.h"
 #include "ShaderHelpers.h"
-#include "WindowProperties.h"
 #include "Window.h"
 
 #include <glad/glad.h>

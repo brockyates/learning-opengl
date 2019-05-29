@@ -130,6 +130,7 @@
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\WindowLayout.cpp" />
     <ClCompile Include="src\WindowProperties.cpp" />
+    <ClCompile Include="src\layers\PassthroughLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader">

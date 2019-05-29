@@ -2,9 +2,10 @@
 #include "HelloWorld.h"
 
 #include "events/EventDispatcher.h"
+
 #include "logging/Log.h"
+
 #include "ShaderHelpers.h"
-#include "WindowProperties.h"
 #include "Window.h"
 
 #include <glad/glad.h>

@@ -1,11 +1,15 @@
 #pragma once
 
+#include "events/Event.h"
+
 #include "BaseLayer.h"
 #include "RenderTargetLayer.h"
 
 #include "imgui/ImGuiRenderer.h"
 
 namespace Graphics {
+
+    class Window;
 
     class LayerManager
     {

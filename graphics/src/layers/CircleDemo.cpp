@@ -2,11 +2,13 @@
 #include "CircleDemo.h"
 
 #include "events/EventDispatcher.h"
+
 #include "logging/Log.h"
+
 #include "models/Circle.h"
+
 #include "ShaderHelpers.h"
 #include "Timer.h"
-#include "WindowProperties.h"
 #include "Window.h"
 
 #include <glad/glad.h>

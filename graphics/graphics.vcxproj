@@ -147,6 +147,7 @@
     <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
+    <ClCompile Include="src\layers\PassthroughLayer.cpp" />
     <ClCompile Include="src\MathHelpers.cpp" />
     <ClCompile Include="src\ModelGenerator.cpp" />
     <ClCompile Include="src\models\Circle.cpp" />

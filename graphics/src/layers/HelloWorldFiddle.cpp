@@ -2,11 +2,12 @@
 #include "HelloWorldFiddle.h"
 
 #include "events/EventDispatcher.h"
+
 #include "logging/Log.h"
+
 #include "ModelGenerator.h"
 #include "ShaderHelpers.h"
 #include "Timer.h"
-#include "WindowProperties.h"
 #include "Window.h"
 
 #include <glad/glad.h>

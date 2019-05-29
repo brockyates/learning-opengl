@@ -3,7 +3,9 @@
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+
 #include "logging/Log.h"
+
 #include "Window.h"
 
 #include <imgui.h>

@@ -9,7 +9,12 @@
 #include "layers/PassthroughLayer.h"
 #include "layers/RenderTargetLayer.h"
 
+#include "Window.h"
+
 #include <imgui.h>
+
+#include <memory>
+#include <vector>
 
 namespace Graphics {
 

@@ -1,10 +1,14 @@
 #pragma once
 
+#include "events/Event.h"
+
 #include "layers/Layer.h"
 
 #include <imgui.h>
 
 namespace Graphics {
+
+    class Window;
 
     class BaseLayer : public Layer
     {

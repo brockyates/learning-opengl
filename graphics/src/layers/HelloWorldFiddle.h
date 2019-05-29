@@ -1,5 +1,6 @@
 #pragma once
 
+#include "events/Event.h"
 #include "events/AspectRatioChangeEvent.h"
 #include "events/RenderTargetChangeEvent.h"
 
@@ -11,6 +12,7 @@ namespace Graphics {
 
     struct WindowProperties;
     class Model;
+    class Window;
 
     class HelloWorldFiddle : public Layer
     {

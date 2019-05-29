@@ -2,7 +2,9 @@
 #include "BaseLayer.h"
 
 #include "config/WindowDefaults.h"
+
 #include "logging/Log.h"
+
 #include "Window.h"
 
 #include <imgui_internal.h> //Needed to create docking layout presets

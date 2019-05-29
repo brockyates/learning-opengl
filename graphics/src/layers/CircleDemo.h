@@ -1,5 +1,6 @@
 #pragma once
 
+#include "events/Event.h"
 #include "events/RenderTargetChangeEvent.h"
 #include "events/AspectRatioChangeEvent.h"
 
@@ -10,7 +11,7 @@
 namespace Graphics {
 
     struct Circle;
-    struct WindowProperties;
+    class Window;
 
     class CircleDemo : public Layer
     {

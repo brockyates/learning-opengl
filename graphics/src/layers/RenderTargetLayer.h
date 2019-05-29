@@ -9,6 +9,8 @@
 
 namespace Graphics {
 
+    class Window;
+
     class RenderTargetLayer : public Layer
     {
     public:
