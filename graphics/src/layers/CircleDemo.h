@@ -37,16 +37,16 @@ namespace Graphics {
         void UpdateSides();
         void AnimateSides();
 
-        constexpr static int m_MaxSides = 50;
-        int m_Sides = m_MaxSides;
-        int m_NextSides = m_MaxSides;
+        constexpr static int m_MaxVertexes = 50;
+        int m_VertexCount = m_MaxVertexes;
+        int m_NextVertexes = m_MaxVertexes;
         unsigned int m_NumLineIndexes = 0;
         double m_TimeSinceLastChange = 0.0;
         float m_AnimationInterval = 0.5;
         bool m_SidesIncreasing = false;
         bool m_AnimationEnabled = false;
 
-        std::unique_ptr<Circle> m_CircleModel = std::make_unique<Circle>(m_Sides);
+        std::unique_ptr<Circle> m_CircleModel;
         glm::mat4 m_ProjectionMatrix;
 
         //Layer state

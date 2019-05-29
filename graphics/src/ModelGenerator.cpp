@@ -8,9 +8,9 @@ namespace Graphics {
         return std::make_unique<Triangle>();
     }
 
-    std::unique_ptr<Model> ModelGenerator::MakeCircle(unsigned int numSides)
+    std::unique_ptr<Model> ModelGenerator::MakeCircle(unsigned int numVertexes)
     {
-        return std::make_unique<Circle>(numSides);
+        return std::make_unique<Circle>(numVertexes);
     }
 
 }

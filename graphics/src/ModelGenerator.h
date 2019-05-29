@@ -12,7 +12,7 @@ namespace Graphics {
     {
     public:
         static std::unique_ptr<Model> MakeTriangle();
-        static std::unique_ptr<Model> MakeCircle(unsigned int numSides);
+        static std::unique_ptr<Model> MakeCircle(unsigned int numVertexes);
     };
 
 }

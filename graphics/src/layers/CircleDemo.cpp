@@ -21,6 +21,7 @@ namespace Graphics {
         : Layer(window, eventCallback, "Circle Demo")
         , m_LastTime(Timer::Get())
         , m_ProjectionMatrix(glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f))
+        , m_CircleModel(std::make_unique<Circle>(m_VertexCount))
     {}
 
     void CircleDemo::RenderScene()
@@ -95,15 +96,15 @@ namespace Graphics {
         ImGui::Separator();
 
         ImGui::Checkbox("Animation", &m_AnimationEnabled);
-        ImGui::InputInt("Sides", &m_NextSides, 1, 5);
+        ImGui::InputInt("Vertex Count", &m_NextVertexes, 1, 5);
 
-        if (m_NextSides > m_MaxSides)
+        if (m_NextVertexes > m_MaxVertexes)
         {
-            m_NextSides = m_MaxSides;
+            m_NextVertexes = m_MaxVertexes;
         }
-        if (m_NextSides < 3)
+        if (m_NextVertexes < 4)
         {
-            m_NextSides = 3;
+            m_NextVertexes = 4;
         }
 
         ImGui::SameLine(); HelpMarker("CTRL + Click to enter value");
@@ -153,15 +154,15 @@ namespace Graphics {
 
     void CircleDemo::UpdateSides()
     {
-        if (m_NextSides == m_Sides)
+        if (m_NextVertexes == m_VertexCount)
             return;
 
-        m_Sides = m_NextSides;
-        m_CircleModel = std::make_unique<Circle>(m_Sides);
+        m_VertexCount = m_NextVertexes;
+        m_CircleModel = std::make_unique<Circle>(m_VertexCount);
 
         const unsigned int bufferOffset = 0;
 
-        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
+        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_VertexCount);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
         m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
 
@@ -200,26 +201,26 @@ namespace Graphics {
 
             if (m_SidesIncreasing)
             {
-                if (m_Sides == m_MaxSides)
+                if (m_VertexCount == m_MaxVertexes)
                 {
                     m_SidesIncreasing = false;
-                    --m_NextSides;
+                    --m_NextVertexes;
                 }
                 else
                 {
-                    ++m_NextSides;
+                    ++m_NextVertexes;
                 }
             }
             if (!m_SidesIncreasing)
             {
-                if (m_Sides == 3)
+                if (m_VertexCount == 3)
                 {
                     m_SidesIncreasing = true;
-                    ++m_NextSides;
+                    ++m_NextVertexes;
                 }
                 else
                 {
-                    --m_NextSides;
+                    --m_NextVertexes;
                 }
             }
         }
@@ -245,7 +246,7 @@ namespace Graphics {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_CircleModel->IndexDataByteSize(), &m_CircleModel->Indexes[0], GL_STATIC_DRAW);
 
-        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_Sides);
+        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_VertexCount);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
         m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
         glGenBuffers(1, &m_LineIndexBufferID);
