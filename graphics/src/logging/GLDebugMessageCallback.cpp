@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "GLDebugMessageCallback.h"
 
+#include "GlobalMacros.h"
+#include "Log.h"
+
+#include <ctime>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+
 namespace Graphics {
 
     namespace {

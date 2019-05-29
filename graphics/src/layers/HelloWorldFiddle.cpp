@@ -2,11 +2,14 @@
 #include "HelloWorldFiddle.h"
 
 #include "events/EventDispatcher.h"
+#include "logging/Log.h"
 #include "ShaderHelpers.h"
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
 #include <imgui.h>
+
+#include <random>
 
 namespace Graphics {
 

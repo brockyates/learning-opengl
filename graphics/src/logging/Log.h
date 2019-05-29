@@ -1,6 +1,9 @@
 #pragma once
 #include "spdlog/spdlog.h"
 
+#include <memory>
+#include <sstream>
+
 namespace Graphics { namespace Utils {
 
     class Log

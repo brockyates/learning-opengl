@@ -7,18 +7,12 @@ namespace Graphics {
     class AspectRatioChangeEvent : public Event
     {
     public:
-        AspectRatioChangeEvent(float aspectRatio)
-            : m_AspectRatio(aspectRatio)
-        {}
+        AspectRatioChangeEvent(float aspectRatio);
 
-        virtual EventType Type() const override { return GetStaticType(); }
+        virtual EventType Type() const override;
+        static EventType GetStaticType();
 
-        static EventType GetStaticType()
-        {
-            return EventType::AspectRatioChange;
-        }
-
-        float AspectRatioChangeEvent::NewAspectRatio() const { return m_AspectRatio; }
+        float AspectRatioChangeEvent::NewAspectRatio() const;
 
     private:
         float m_AspectRatio;

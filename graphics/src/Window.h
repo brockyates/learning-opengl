@@ -1,6 +1,11 @@
 #pragma once
 
-#include "events/EventSystem.h"
+#include "events/AspectRatioChangeEvent.h"
+#include "events/ChangeToFullscreenEvent.h"
+#include "events/ChangeToWindowedEvent.h"
+#include "events/ResolutionChangeEvent.h"
+#include "events/WindowCloseEvent.h"
+
 #include "ResolutionSetting.h"
 #include "SmartGLFWWindow.h"
 #include "WindowInput.h"

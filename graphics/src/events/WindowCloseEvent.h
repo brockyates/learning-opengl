@@ -7,15 +7,10 @@ namespace Graphics {
     class WindowCloseEvent : public Event
     {
     public:
-        WindowCloseEvent()
-        {}
+        WindowCloseEvent();
 
-        virtual EventType Type() const override { return GetStaticType(); }
-
-        static EventType GetStaticType()
-        {
-            return EventType::WindowCloseEvent;
-        }
+        virtual EventType Type() const override;
+        static EventType GetStaticType();
     };
 
 }

@@ -2,12 +2,17 @@
 #include "RenderTargetLayer.h"
 
 #include "events/EventDispatcher.h"
+#include "events/RenderTargetChangeEvent.h"
+
+#include "logging/Log.h"
 #include "MathHelpers.h"
 #include "ShaderHelpers.h"
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
 #include <imgui.h>
+
+#include <sstream>
 
 namespace Graphics {
 

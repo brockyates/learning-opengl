@@ -7,15 +7,10 @@ namespace Graphics {
     class ChangeToWindowedEvent : public Event
     {
     public:
-        ChangeToWindowedEvent()
-        {}
+        ChangeToWindowedEvent();
 
-        virtual EventType Type() const override { return GetStaticType(); }
-
-        static EventType GetStaticType()
-        {
-            return EventType::ChangeToWindowedEvent;
-        }
+        virtual EventType Type() const override;
+        static EventType GetStaticType();
     };
 
 }

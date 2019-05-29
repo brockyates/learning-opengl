@@ -2,6 +2,8 @@
 #include "SmartGLFWWindow.h"
 
 #include "config/WindowDefaults.h"
+#include "GlobalMacros.h"
+#include "logging/Log.h"
 #include "WindowProperties.h"
 
 namespace Graphics {

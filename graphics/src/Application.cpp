@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "logging/Log.h"
 #include "Window.h"
 
 namespace Graphics {

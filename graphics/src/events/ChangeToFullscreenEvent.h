@@ -7,15 +7,10 @@ namespace Graphics {
     class ChangeToFullscreenEvent : public Event
     {
     public:
-        ChangeToFullscreenEvent()
-        {}
+        ChangeToFullscreenEvent();
 
-        virtual EventType Type() const override { return GetStaticType(); }
-
-        static EventType GetStaticType()
-        {
-            return EventType::ChangeToFullscreenEvent;
-        }
+        virtual EventType Type() const override;
+        static EventType GetStaticType();
     };
 
 }

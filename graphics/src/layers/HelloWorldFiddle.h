@@ -1,6 +1,7 @@
 #pragma once
 
-#include "events/EventSystem.h"
+#include "events/AspectRatioChangeEvent.h"
+#include "events/RenderTargetChangeEvent.h"
 #include "layers/Layer.h"
 #include "ModelGenerator.h"
 #include "models/Model.h"

@@ -7,18 +7,12 @@ namespace Graphics {
     class RenderTargetChangeEvent : public Event
     {
     public:
-        RenderTargetChangeEvent(unsigned int nextRenderTargetID)
-            : m_NextRenderTargetID(nextRenderTargetID)
-        {}
+        RenderTargetChangeEvent(unsigned int nextRenderTargetID);
 
-        virtual EventType Type() const override { return GetStaticType(); }
+        virtual EventType Type() const override;
+        static EventType GetStaticType();
 
-        static EventType GetStaticType()
-        {
-            return EventType::RenderTargetChanged;
-        }
-
-        unsigned int RenderTargetChangeEvent::NextRenderTargetID() const { return m_NextRenderTargetID; }
+        unsigned int RenderTargetChangeEvent::NextRenderTargetID() const;
 
     private:
         unsigned int m_NextRenderTargetID;

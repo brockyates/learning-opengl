@@ -1,5 +1,7 @@
 #include "pch.h"
+
 #include "Application.h"
+#include "logging/Log.h"
 
 //Hide console window
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")

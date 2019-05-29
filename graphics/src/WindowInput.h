@@ -2,6 +2,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include <utility>
+
 namespace Graphics {
 
     class WindowInput

@@ -1,7 +1,10 @@
 #pragma once
 
-#include "EventType.h"
+#include <functional>
+
 namespace Graphics {
+
+    enum class EventType;
 
     template <typename T>
     using EventHandler = std::function<void(const T&)>;

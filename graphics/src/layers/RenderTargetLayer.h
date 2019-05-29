@@ -1,6 +1,8 @@
 #pragma once
 
-#include "events/EventSystem.h"
+#include "events/ChangeToFullscreenEvent.h"
+#include "events/ChangeToWindowedEvent.h"
+#include "events/ResolutionChangeEvent.h"
 #include "layers/Layer.h"
 #include "Window.h"
 

@@ -2,9 +2,9 @@
 #include "BaseLayer.h"
 
 #include "config/WindowDefaults.h"
+#include "logging/Log.h"
 #include "Window.h"
 
-#include <imgui.h>
 #include <imgui_internal.h> //Needed to create docking layout presets
 
 namespace Graphics {
@@ -117,10 +117,8 @@ namespace Graphics {
                             ImGui::SetItemDefaultFocus();
                         }
                     }
-
                     ImGui::EndCombo();
                 }
-
                 ImGui::EndMenu();
             }
             ImGui::Spacing();
