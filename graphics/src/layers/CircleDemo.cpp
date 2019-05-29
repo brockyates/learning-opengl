@@ -9,6 +9,7 @@
 #include "WindowProperties.h"
 #include "Window.h"
 
+#include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 

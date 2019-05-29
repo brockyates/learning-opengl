@@ -1,9 +1,6 @@
 #pragma once
 
 #include "Model.h"
-#include "types/Vertex1.h"
-
-#include <glm/glm.hpp>
 
 #include <vector>
 

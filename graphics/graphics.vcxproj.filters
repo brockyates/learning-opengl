@@ -124,6 +124,12 @@
     <ClCompile Include="src\events\ChangeToWindowedEvent.cpp" />
     <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
     <ClCompile Include="src\events\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\models\Triangle.cpp" />
+    <ClCompile Include="src\MathHelpers.cpp" />
+    <ClCompile Include="src\ModelGenerator.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\WindowLayout.cpp" />
+    <ClCompile Include="src\WindowProperties.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Minimal_Fragment.shader">

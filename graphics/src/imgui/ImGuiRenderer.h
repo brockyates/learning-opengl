@@ -1,8 +1,8 @@
 #pragma once
 
-namespace Graphics {
+#include "Window.h"
 
-    class Window;
+namespace Graphics {
 
     class ImGuiRenderer
     {

@@ -147,7 +147,11 @@
     <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
+    <ClCompile Include="src\MathHelpers.cpp" />
+    <ClCompile Include="src\ModelGenerator.cpp" />
     <ClCompile Include="src\models\Circle.cpp" />
+    <ClCompile Include="src\models\Triangle.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
     <ClCompile Include="src\WindowInput.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
@@ -168,6 +172,8 @@
     </ClCompile>
     <ClCompile Include="src\SmartGLFWWindow.cpp" />
     <ClCompile Include="src\config\WindowDefaults.cpp" />
+    <ClCompile Include="src\WindowLayout.cpp" />
+    <ClCompile Include="src\WindowProperties.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\CircleDemo_LineFragment.shader" />

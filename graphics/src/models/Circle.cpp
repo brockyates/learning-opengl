@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Circle.h"
 
+#include "types/Vertex1.h"
+
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 

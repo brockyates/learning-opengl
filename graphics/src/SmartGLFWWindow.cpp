@@ -6,6 +6,8 @@
 #include "logging/Log.h"
 #include "WindowProperties.h"
 
+#include <glad/glad.h>
+
 namespace Graphics {
 
     void InitializeGLFW()
