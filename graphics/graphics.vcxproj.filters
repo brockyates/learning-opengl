@@ -4,11 +4,17 @@
     <Filter Include="res">
       <UniqueIdentifier>{4FA5880B-BBAE-887C-442A-9F7CB032947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\fonts">
+      <UniqueIdentifier>{E81E0011-5489-B487-9DC7-652D097192DC}</UniqueIdentifier>
+    </Filter>
     <Filter Include="res\shaders">
       <UniqueIdentifier>{4841F028-B4F6-681E-3DEB-62F5A99F5F22}</UniqueIdentifier>
     </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\config">
+      <UniqueIdentifier>{B2454354-9EFD-84A1-0705-5EFDF3DB1F92}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\events">
       <UniqueIdentifier>{91766759-7D2E-A9A6-E635-8202D20C4497}</UniqueIdentifier>
@@ -16,8 +22,17 @@
     <Filter Include="src\imgui">
       <UniqueIdentifier>{57A665B5-C310-1A2C-0C4F-CBD178F8F780}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\layers">
+      <UniqueIdentifier>{6C614A68-5819-8CB5-C120-6511ADF726A6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\logging">
       <UniqueIdentifier>{E300FA90-4FB6-7286-D8AA-6C5D445F698A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\models">
+      <UniqueIdentifier>{605C916B-4C14-D3B8-B51B-AC14A1F26DA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\types">
+      <UniqueIdentifier>{B16C33B6-1DD7-E72C-6615-99D2D2BEC581}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,57 +42,123 @@
     <ClInclude Include="src\GlobalMacros.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\MathHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModelGenerator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResolutionSetting.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SmartGLFWWindow.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Timer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowInput.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowLayout.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowMode.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowProperties.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\WindowDefaults.h">
+      <Filter>src\config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\AspectRatioChangeEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\ChangeToFullscreenEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\ChangeToWindowedEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\Event.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\EventDispatcher.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\EventType.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\RenderTargetChangeEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\ResolutionChangeEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\WindowCloseEvent.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\ImGuiRenderer.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_impl_glfw.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_impl_opengl3.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\BaseLayer.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\CircleDemo.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\HelloWorld.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\HelloWorldFiddle.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\Layer.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\LayerManager.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\PassthroughLayer.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\RenderTargetLayer.h">
+      <Filter>src\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logging\GLDebugMessageCallback.h">
+      <Filter>src\logging</Filter>
+    </ClInclude>
     <ClInclude Include="src\logging\Log.h">
       <Filter>src\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\Circle.h">
+      <Filter>src\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\Model.h">
+      <Filter>src\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\models\Triangle.h">
+      <Filter>src\models</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\imgui\ImGuiRenderer.h" />
-    <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
-    <ClInclude Include="src\layers\Layer.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\types\Vertex1.h">
+      <Filter>src\types</Filter>
     </ClInclude>
-    <ClInclude Include="src\SmartGLFWWindow.h" />
-    <ClInclude Include="src\Window.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowProperties.h" />
-    <ClInclude Include="src\ShaderHelpers.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowMode.h" />
-    <ClInclude Include="src\WindowInput.h" />
-    <ClInclude Include="src\ResolutionSetting.h" />
-    <ClInclude Include="src\events\Event.h" />
-    <ClInclude Include="src\events\EventDispatcher.h" />
-    <ClInclude Include="src\events\EventType.h" />
-    <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
-    <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
-    <ClInclude Include="src\events\WindowCloseEvent.h" />
-    <ClInclude Include="src\config\WindowDefaults.h" />
-    <ClInclude Include="src\WindowLayout.h" />
-    <ClInclude Include="src\layers\BaseLayer.h">
-      <Filter>src\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\layers\HelloWorld.h" />
-    <ClInclude Include="src\layers\RenderTargetLayer.h" />
-    <ClInclude Include="src\layers\PassthroughLayer.h" />
-    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
-    <ClInclude Include="src\types\Vertex1.h" />
-    <ClInclude Include="src\models\Triangle.h" />
-    <ClInclude Include="src\ModelGenerator.h" />
-    <ClInclude Include="src\models\Model.h" />
-    <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\layers\CircleDemo.h" />
-    <ClInclude Include="src\models\Circle.h" />
-    <ClInclude Include="src\events\AspectRatioChangeEvent.h" />
-    <ClInclude Include="src\MathHelpers.h" />
-    <ClInclude Include="src\events\ResolutionChangeEvent.h" />
-    <ClInclude Include="src\events\RenderTargetChangeEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -86,67 +167,134 @@
     <ClCompile Include="src\EntryPoint.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\logging\Log.cpp">
-      <Filter>src\logging</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pch.cpp">
+    <ClCompile Include="src\MathHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
-    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
-    <ClCompile Include="src\layers\Layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\Window.cpp">
+    <ClCompile Include="src\ModelGenerator.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\ShaderHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\WindowInput.cpp" />
-    <ClCompile Include="src\config\WindowDefaults.cpp" />
-    <ClCompile Include="src\layers\BaseLayer.cpp">
+    <ClCompile Include="src\SmartGLFWWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Timer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowInput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowLayout.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowProperties.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\WindowDefaults.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\AspectRatioChangeEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\ChangeToFullScreenEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\ChangeToWindowedEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\RenderTargetChangeEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\ResolutionChangeEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\WindowCloseEvent.cpp">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\ImGuiRenderer.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\layers\HelloWorld.cpp" />
-    <ClCompile Include="src\layers\RenderTargetLayer.cpp" />
-    <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
-    <ClCompile Include="src\types\Vertex1.cpp" />
-    <ClCompile Include="src\layers\CircleDemo.cpp" />
-    <ClCompile Include="src\models\Circle.cpp" />
-    <ClCompile Include="src\events\RenderTargetChangeEvent.cpp" />
-    <ClCompile Include="src\events\AspectRatioChangeEvent.cpp" />
-    <ClCompile Include="src\events\ChangeToFullScreenEvent.cpp" />
-    <ClCompile Include="src\events\ChangeToWindowedEvent.cpp" />
-    <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
-    <ClCompile Include="src\events\WindowCloseEvent.cpp" />
-    <ClCompile Include="src\models\Triangle.cpp" />
-    <ClCompile Include="src\MathHelpers.cpp" />
-    <ClCompile Include="src\ModelGenerator.cpp" />
-    <ClCompile Include="src\Timer.cpp" />
-    <ClCompile Include="src\WindowLayout.cpp" />
-    <ClCompile Include="src\WindowProperties.cpp" />
-    <ClCompile Include="src\layers\PassthroughLayer.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\BaseLayer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\CircleDemo.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\HelloWorld.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\HelloWorldFiddle.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\Layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\LayerManager.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\PassthroughLayer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\layers\RenderTargetLayer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\logging\GLDebugMessageCallback.cpp">
+      <Filter>src\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="src\logging\Log.cpp">
+      <Filter>src\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\Circle.cpp">
+      <Filter>src\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\Triangle.cpp">
+      <Filter>src\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\types\Vertex1.cpp">
+      <Filter>src\types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="imgui.ini" />
+    <None Include="res\fonts\Consolas.ttf">
+      <Filter>res\fonts</Filter>
+    </None>
+    <None Include="res\shaders\CircleDemo_LineFragment.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\CircleDemo_LineVertex.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\CircleDemo_TriangleFragment.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\CircleDemo_TriangleVertex.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\HelloWorldFiddle_Fragment.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\HelloWorldFiddle_Vertex.shader">
+      <Filter>res\shaders</Filter>
+    </None>
     <None Include="res\shaders\Minimal_Fragment.shader">
       <Filter>res\shaders</Filter>
     </None>
     <None Include="res\shaders\Minimal_Vertex.shader">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\HelloWorldFiddle_Fragment.shader" />
-    <None Include="res\shaders\HelloWorldFiddle_Vertex.shader" />
-    <None Include="res\shaders\CircleDemo_TriangleFragment.shader" />
-    <None Include="res\shaders\CircleDemo_TriangleVertex.shader" />
-    <None Include="res\shaders\CircleDemo_LineVertex.shader" />
-    <None Include="res\shaders\CircleDemo_LineFragment.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="res\fonts\Consolas.ttf" />
   </ItemGroup>
 </Project>

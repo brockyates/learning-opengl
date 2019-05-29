@@ -67,7 +67,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -88,95 +88,97 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\GlobalMacros.h" />
+    <ClInclude Include="src\MathHelpers.h" />
+    <ClInclude Include="src\ModelGenerator.h" />
+    <ClInclude Include="src\ResolutionSetting.h" />
+    <ClInclude Include="src\ShaderHelpers.h" />
+    <ClInclude Include="src\SmartGLFWWindow.h" />
+    <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\WindowInput.h" />
+    <ClInclude Include="src\WindowLayout.h" />
+    <ClInclude Include="src\WindowMode.h" />
+    <ClInclude Include="src\WindowProperties.h" />
+    <ClInclude Include="src\config\WindowDefaults.h" />
     <ClInclude Include="src\events\AspectRatioChangeEvent.h" />
-    <ClInclude Include="src\events\ResolutionChangeEvent.h" />
     <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
+    <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\Event.h" />
     <ClInclude Include="src\events\EventDispatcher.h" />
     <ClInclude Include="src\events\EventType.h" />
-    <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
     <ClInclude Include="src\events\RenderTargetChangeEvent.h" />
+    <ClInclude Include="src\events\ResolutionChangeEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\imgui\ImGuiRenderer.h" />
+    <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\layers\BaseLayer.h" />
     <ClInclude Include="src\layers\CircleDemo.h" />
-    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
-    <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
-    <ClInclude Include="src\MathHelpers.h" />
-    <ClInclude Include="src\ModelGenerator.h" />
+    <ClInclude Include="src\layers\HelloWorldFiddle.h" />
+    <ClInclude Include="src\layers\Layer.h" />
+    <ClInclude Include="src\layers\LayerManager.h" />
+    <ClInclude Include="src\layers\PassthroughLayer.h" />
+    <ClInclude Include="src\layers\RenderTargetLayer.h" />
+    <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
+    <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\models\Circle.h" />
     <ClInclude Include="src\models\Model.h" />
     <ClInclude Include="src\models\Triangle.h" />
-    <ClInclude Include="src\ResolutionSetting.h" />
-    <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\types\Vertex1.h" />
-    <ClInclude Include="src\WindowLayout.h" />
-    <ClInclude Include="src\WindowInput.h" />
-    <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\layers\RenderTargetLayer.h" />
-    <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
-    <ClInclude Include="src\layers\LayerManager.h" />
-    <ClInclude Include="src\imgui\ImGuiRenderer.h" />
-    <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\GlobalMacros.h" />
-    <ClInclude Include="src\layers\Layer.h" />
-    <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\ShaderHelpers.h" />
-    <ClInclude Include="src\layers\BaseLayer.h" />
-    <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\SmartGLFWWindow.h" />
-    <ClInclude Include="src\config\WindowDefaults.h" />
-    <ClInclude Include="src\WindowProperties.h" />
-    <ClInclude Include="src\WindowMode.h" />
+    <ClInclude Include="src\types\Vertex1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\EntryPoint.cpp" />
+    <ClCompile Include="src\MathHelpers.cpp" />
+    <ClCompile Include="src\ModelGenerator.cpp" />
+    <ClCompile Include="src\ShaderHelpers.cpp" />
+    <ClCompile Include="src\SmartGLFWWindow.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\WindowInput.cpp" />
+    <ClCompile Include="src\WindowLayout.cpp" />
+    <ClCompile Include="src\WindowProperties.cpp" />
+    <ClCompile Include="src\config\WindowDefaults.cpp" />
     <ClCompile Include="src\events\AspectRatioChangeEvent.cpp" />
     <ClCompile Include="src\events\ChangeToFullScreenEvent.cpp" />
     <ClCompile Include="src\events\ChangeToWindowedEvent.cpp" />
     <ClCompile Include="src\events\RenderTargetChangeEvent.cpp" />
     <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
     <ClCompile Include="src\events\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />
+    <ClCompile Include="src\layers\Layer.cpp" />
+    <ClCompile Include="src\layers\LayerManager.cpp" />
     <ClCompile Include="src\layers\PassthroughLayer.cpp" />
-    <ClCompile Include="src\MathHelpers.cpp" />
-    <ClCompile Include="src\ModelGenerator.cpp" />
-    <ClCompile Include="src\models\Circle.cpp" />
-    <ClCompile Include="src\models\Triangle.cpp" />
-    <ClCompile Include="src\Timer.cpp" />
-    <ClCompile Include="src\types\Vertex1.cpp" />
-    <ClCompile Include="src\WindowInput.cpp" />
-    <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\layers\RenderTargetLayer.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
-    <ClCompile Include="src\layers\LayerManager.cpp" />
-    <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
-    <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\EntryPoint.cpp" />
-    <ClCompile Include="src\layers\Layer.cpp" />
-    <ClCompile Include="src\Window.cpp" />
-    <ClCompile Include="src\ShaderHelpers.cpp" />
-    <ClCompile Include="src\layers\BaseLayer.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
+    <ClCompile Include="src\models\Circle.cpp" />
+    <ClCompile Include="src\models\Triangle.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\config\WindowDefaults.cpp" />
-    <ClCompile Include="src\WindowLayout.cpp" />
-    <ClCompile Include="src\WindowProperties.cpp" />
+    <ClCompile Include="src\types\Vertex1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="imgui.ini" />
+    <None Include="res\fonts\Consolas.ttf" />
     <None Include="res\shaders\CircleDemo_LineFragment.shader" />
     <None Include="res\shaders\CircleDemo_LineVertex.shader" />
     <None Include="res\shaders\CircleDemo_TriangleFragment.shader" />
@@ -196,9 +198,6 @@
     <ProjectReference Include="..\vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="res\fonts\Consolas.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,7 +23,7 @@ include "vendor/Glad"
 include "vendor/imgui"
 
 project "Graphics"
-    location "Graphics"
+    location "graphics"
     kind "ConsoleApp"
     language "C++"
     staticruntime "on"
@@ -75,6 +75,48 @@ project "Graphics"
         {
             "GLFW_INCLUDE_NONE"
         }
+
+    filter "configurations:Debug"
+        defines "APP_DEBUG"
+        runtime "Debug"
+        symbols "On"
+
+    filter "configurations:Release"
+        defines "APP_RELEASE"
+        runtime "Release"
+        optimize "On"
+
+project "Graphics.UnitTests"
+    location "graphics.unittests"
+    kind "ConsoleApp"
+    language "C++"
+    staticruntime "on"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "pch.h"
+    pchsource "Graphics.UnitTests/src/pch.cpp"
+
+    files
+    {
+        "%{prj.name}/src/**",
+    }
+
+    links 
+    { 
+        "Graphics"
+    }
+
+    defines
+    {
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        staticruntime "On"
+        systemversion "latest"
 
     filter "configurations:Debug"
         defines "APP_DEBUG"
