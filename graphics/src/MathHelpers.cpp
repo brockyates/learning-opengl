@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MathHelpers.h"
 
-#include <cmath.>
+#include <cmath>
 
 namespace Graphics {
 

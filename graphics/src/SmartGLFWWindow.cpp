@@ -2,8 +2,9 @@
 #include "SmartGLFWWindow.h"
 
 #include "config/WindowDefaults.h"
-#include "GlobalMacros.h"
 #include "logging/Log.h"
+
+#include "GlobalMacros.h"
 #include "WindowProperties.h"
 
 #include <glad/glad.h>

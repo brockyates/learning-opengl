@@ -2,6 +2,7 @@
 #include "ShaderHelpers.h"
 
 #include "logging/Log.h"
+
 #include "Window.h"
 
 #include <glad/glad.h>
