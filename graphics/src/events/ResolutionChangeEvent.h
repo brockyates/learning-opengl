@@ -10,10 +10,10 @@ namespace Graphics {
     public:
         ResolutionChangeEvent(ResolutionSetting resolution);
 
-        virtual EventType Type() const override;
+        [[nodiscard]] virtual EventType Type() const override;
         static EventType GetStaticType();
 
-        ResolutionSetting ResolutionChangeEvent::NewResolution() const;
+        [[nodiscard]] ResolutionSetting ResolutionChangeEvent::NewResolution() const;
 
     private:
         ResolutionSetting m_Resolution;

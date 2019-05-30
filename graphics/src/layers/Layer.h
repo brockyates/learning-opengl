@@ -26,11 +26,11 @@ namespace Graphics {
 
         virtual void Attach() {};
         virtual void Detach() {};
-        virtual bool IsAttached() const = 0;
+        [[nodiscard]] virtual bool IsAttached() const = 0;
 
-        virtual std::string PopupText() const { return ""; }
-        virtual std::string Description() const { return ""; }
-        inline const std::string& Name() const { return m_Name; }
+        [[nodiscard]] virtual std::string PopupText() const { return ""; }
+        [[nodiscard]] virtual std::string Description() const { return ""; }
+        [[nodiscard]] inline const std::string& Name() const { return m_Name; }
 
     protected:
         virtual void FireEvent(const Event& event) { m_EventCallback(event); }

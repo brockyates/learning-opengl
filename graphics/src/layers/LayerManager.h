@@ -21,7 +21,7 @@ namespace Graphics
         void OnEvent(const Event& event);
 
     private:
-        std::vector<std::unique_ptr<Layer>> MakeLayers(const Window& window,
+        [[nodiscard]] std::vector<std::unique_ptr<Layer>> MakeLayers(const Window& window,
                                                        const EventHandler<Event>& eventCallback) const;
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);

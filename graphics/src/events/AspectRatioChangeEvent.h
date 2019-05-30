@@ -9,10 +9,10 @@ namespace Graphics {
     public:
         AspectRatioChangeEvent(float aspectRatio);
 
-        virtual EventType Type() const override;
+        [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
 
-        float AspectRatioChangeEvent::NewAspectRatio() const;
+        [[nodiscard]] float NewAspectRatio() const;
 
     private:
         float m_AspectRatio;

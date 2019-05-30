@@ -17,17 +17,17 @@ namespace Graphics {
 
         virtual ~Model() {};
 
-        unsigned int VertexDataByteSize() const
+        [[nodiscard]] unsigned int VertexDataByteSize() const
         {
             return static_cast<unsigned int>(std::size(Vertexes)) * Vertex1::VertexByteSize;
         }
 
-        unsigned int IndexDataByteSize() const
+        [[nodiscard]] unsigned int IndexDataByteSize() const
         {
             return static_cast<unsigned int>(std::size(Indexes)) * sizeof(unsigned int);
         }
 
-        unsigned int NumIndexes() const
+        [[nodiscard]] unsigned int NumIndexes() const
         {
             return static_cast<unsigned int>(std::size(Indexes));
         }

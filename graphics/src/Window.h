@@ -23,18 +23,18 @@ namespace Graphics {
         void OnEvent(const Event&);
 
         bool ShouldClose();
-        bool IsFullscreen() const;
+        [[nodiscard]] bool IsFullscreen() const;
 
-        int ResolutionWidth() const { return m_Properties.Resolution.Width; }
-        int ResolutionHeight() const { return m_Properties.Resolution.Height; }
-        float AspectRatio() const { return m_Properties.AspectRatio; }
+        [[nodiscard]] int ResolutionWidth() const { return m_Properties.Resolution.Width; }
+        [[nodiscard]] int ResolutionHeight() const { return m_Properties.Resolution.Height; }
+        [[nodiscard]] float AspectRatio() const { return m_Properties.AspectRatio; }
 
-        float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; } //Used in ImGui initialization
-        std::string DisplayName() const { return m_Properties.Title; }
-        ResolutionSetting Resolution() const { return m_Properties.Resolution; }
+        [[nodiscard]] float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; } //Used in ImGui initialization
+        [[nodiscard]] std::string DisplayName() const { return m_Properties.Title; }
+        [[nodiscard]] ResolutionSetting Resolution() const { return m_Properties.Resolution; }
 
-        const WindowInput& Input() const { return m_Input; }
-        GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
+        [[nodiscard]] const WindowInput& Input() const { return m_Input; }
+        [[nodiscard]] GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
 
     private:
         //Event handlers

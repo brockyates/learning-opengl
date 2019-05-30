@@ -9,7 +9,7 @@ namespace Graphics {
     public:
         ChangeToFullscreenEvent();
 
-        virtual EventType Type() const override;
+        [[nodiscard]] virtual EventType Type() const override;
         static EventType GetStaticType();
     };
 

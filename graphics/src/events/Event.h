@@ -14,7 +14,7 @@ namespace Graphics {
     public:
         virtual ~Event() {};
 
-        virtual EventType Type() const = 0;
+        [[nodiscard]] virtual EventType Type() const = 0;
     };
 
 }

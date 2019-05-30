@@ -22,7 +22,7 @@ namespace Graphics {
         virtual void OnEvent(const Event& event) override;
 
     private:
-        virtual bool IsAttached() const override { return true; }
+        [[nodiscard]] virtual bool IsAttached() const override { return true; }
         virtual void Attach() override;
         virtual void Detach() override;
 

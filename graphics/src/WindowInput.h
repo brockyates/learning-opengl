@@ -14,11 +14,11 @@ namespace Graphics {
         WindowInput(WindowInput&&) = default;
         WindowInput& operator=(WindowInput&&) = default;
 
-        bool IsKeyPressed(int keycode) const;
-        bool IsKeyReleased(int keycode) const;
+        [[nodiscard]] bool IsKeyPressed(int keycode) const;
+        [[nodiscard]] bool IsKeyReleased(int keycode) const;
 
-        bool IsMouseButtonPressed(int button) const;
-        std::pair<float, float> GetMousePosition() const;
+        [[nodiscard]] bool IsMouseButtonPressed(int button) const;
+        [[nodiscard]] std::pair<float, float> GetMousePosition() const;
 
     private:
         GLFWwindow* m_Window;

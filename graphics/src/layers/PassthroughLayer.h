@@ -14,7 +14,7 @@ namespace Graphics {
     public:
         PassthroughLayer(const Window& window, EventHandler<Event> eventCallback);
 
-        virtual bool IsAttached() const override;
+        [[nodiscard]] virtual bool IsAttached() const override;
     };
 
 }

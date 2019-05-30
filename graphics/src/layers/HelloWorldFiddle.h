@@ -24,10 +24,10 @@ namespace Graphics {
 
         virtual void Attach() override;
         virtual void Detach() override;
-        virtual bool IsAttached() const override { return m_Attached; }
+        [[nodiscard]] virtual bool IsAttached() const override { return m_Attached; }
 
-        virtual std::string PopupText() const override;
-        virtual std::string Description() const override;
+        [[nodiscard]] virtual std::string PopupText() const override;
+        [[nodiscard]] virtual std::string Description() const override;
 
         virtual void OnEvent(const Event& event) override;
 
@@ -52,7 +52,7 @@ namespace Graphics {
         void UpdateTiming();
         void SetNextVertexPositions();
         void ChangeDrawMode(const DrawMode& nextMode);
-        glm::vec4 GetRandomVertexDirection() const;
+        [[nodiscard]] glm::vec4 GetRandomVertexDirection() const;
 
     private:
         //UI Rendering
