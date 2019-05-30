@@ -14,11 +14,12 @@
 #include <imgui.h>
 
 #include <sstream>
+#include <utility>
 
 namespace Graphics {
 
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Render to Texture")
+        : Layer(window, std::move(eventCallback), "Render to Texture")
         , m_AspectRatio(window.AspectRatio())
     {
         Attach();

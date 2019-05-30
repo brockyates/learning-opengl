@@ -6,7 +6,6 @@
 #include "layers/HelloWorld.h"
 #include "layers/HelloWorldFiddle.h"
 #include "layers/Layer.h"
-#include "layers/PassthroughLayer.h"
 #include "layers/RenderTargetLayer.h"
 
 #include "Window.h"
@@ -16,9 +15,10 @@
 #include <memory>
 #include <vector>
 
-namespace Graphics {
-
-    std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback)
+namespace Graphics
+{
+    std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window,
+                                                                 const EventHandler<Event>& eventCallback) const
     {
         std::vector<std::unique_ptr<Layer>> layers;
         layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
@@ -28,43 +28,43 @@ namespace Graphics {
         return layers;
     }
 
-    LayerManager::LayerManager(const Window& window, EventHandler<Event> eventCallback)
-        : m_Layers(MakeLayers(window, eventCallback))
-        , m_BaseLayer(window, eventCallback)
-        , m_RenderTarget(window, eventCallback)
-        , m_ActiveLayer(m_Layers[2].get())
-        , m_UIRenderer(window)
+    LayerManager::LayerManager(const Window& window, const EventHandler<Event>& eventCallback)
+        : layers_(MakeLayers(window, eventCallback))
+          , baseLayer_(window, eventCallback)
+          , renderTarget_(window, eventCallback)
+          , activeLayer_(layers_[2].get())
+          , uiRenderer_(window)
     {
-        m_ActiveLayer->Attach();
+        activeLayer_->Attach();
     }
 
     void LayerManager::RenderScene()
     {
-        m_BaseLayer.RenderScene();
-        m_RenderTarget.RenderScene();
+        baseLayer_.RenderScene();
+        renderTarget_.RenderScene();
 
-        m_ActiveLayer->RenderScene();
+        activeLayer_->RenderScene();
     }
 
-    void LayerManager::RenderUI()
+    void LayerManager::RenderUi()
     {
-        m_UIRenderer.BeginFrame();
-        m_BaseLayer.RenderUI();
-        m_RenderTarget.RenderUI();
+        uiRenderer_.BeginFrame();
+        baseLayer_.RenderUI();
+        renderTarget_.RenderUI();
         ShowDemoSelector();
 
-        m_ActiveLayer->RenderUI();
+        activeLayer_->RenderUI();
 
-        m_BaseLayer.OnImGuiRenderOverlay();
-        m_UIRenderer.Render();
+        baseLayer_.OnImGuiRenderOverlay();
+        uiRenderer_.Render();
     }
 
     void LayerManager::OnEvent(const Event& event)
     {
-        m_BaseLayer.OnEvent(event);
-        m_RenderTarget.OnEvent(event);
+        baseLayer_.OnEvent(event);
+        renderTarget_.OnEvent(event);
 
-        for (auto& layer : m_Layers)
+        for (auto& layer : layers_)
         {
             layer->OnEvent(event);
         }
@@ -74,11 +74,11 @@ namespace Graphics {
     {
         ImGui::Begin("DemoWidget");
 
-        if (ImGui::BeginCombo("Scene", m_ActiveLayer->Name().c_str()))
+        if (ImGui::BeginCombo("Scene", activeLayer_->Name().c_str()))
         {
-            for (auto& layer : m_Layers)
+            for (auto& layer : layers_)
             {
-                bool isSelected = (m_ActiveLayer == layer.get());
+                bool isSelected = (activeLayer_ == layer.get());
 
                 if (ImGui::Selectable(layer->Name().c_str(), isSelected))
                 {
@@ -107,9 +107,8 @@ namespace Graphics {
         if (nextActiveLayer->IsAttached())
             return;
 
-        m_ActiveLayer->Detach();
-        m_ActiveLayer = nextActiveLayer;
-        m_ActiveLayer->Attach();
+        activeLayer_->Detach();
+        activeLayer_ = nextActiveLayer;
+        activeLayer_->Attach();
     }
-
 }

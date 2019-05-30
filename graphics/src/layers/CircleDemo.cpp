@@ -14,12 +14,13 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <utility>
 #include <imgui.h>
 
 namespace Graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Circle Demo")
+        : Layer(window, std::move(eventCallback), "Circle Demo")
         , m_LastTime(Timer::Get())
         , m_ProjectionMatrix(glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f))
         , m_CircleModel(std::make_unique<Circle>(m_VertexCount))

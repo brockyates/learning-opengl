@@ -2,6 +2,7 @@
 
 #include "types/Vertex1.h"
 
+#include <utility>
 #include <vector>
 
 namespace Graphics {
@@ -10,8 +11,8 @@ namespace Graphics {
     {
     public:
         Model(std::vector<Vertex1> vertexes, std::vector<unsigned int> indexes)
-            : Vertexes(vertexes)
-            , Indexes(indexes)
+            : Vertexes(std::move(vertexes))
+            , Indexes(std::move(indexes))
         {}
 
         virtual ~Model() {};

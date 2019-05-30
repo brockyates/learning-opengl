@@ -7,35 +7,31 @@
 
 #include "imgui/ImGuiRenderer.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window;
 
     class LayerManager
     {
     public:
-        LayerManager(const Window& window, EventHandler<Event> eventCallback);
-        ~LayerManager() = default;
-
-        LayerManager(LayerManager&&) = default;
-        LayerManager& operator=(LayerManager&&) = default;
+        LayerManager(const Window& window, const EventHandler<Event>& eventCallback);
 
         void RenderScene();
-        void RenderUI();
+        void RenderUi();
         void OnEvent(const Event& event);
 
     private:
-        std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback);
+        std::vector<std::unique_ptr<Layer>> MakeLayers(const Window& window,
+                                                       const EventHandler<Event>& eventCallback) const;
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* activeLayer);
 
     private:
-        std::vector<std::unique_ptr<Layer>> m_Layers;
-        BaseLayer m_BaseLayer;
-        RenderTargetLayer m_RenderTarget;
+        std::vector<std::unique_ptr<Layer>> layers_;
+        BaseLayer baseLayer_;
+        RenderTargetLayer renderTarget_;
 
-        Layer* m_ActiveLayer;
-        ImGuiRenderer m_UIRenderer;
+        Layer* activeLayer_;
+        ImGuiRenderer uiRenderer_;
     };
-
 }

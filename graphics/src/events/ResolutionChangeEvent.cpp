@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "ResolutionChangeEvent.h"
+#include <utility>
 
 #include "EventType.h"
 
 namespace Graphics {
 
     ResolutionChangeEvent::ResolutionChangeEvent(ResolutionSetting resolution)
-        : m_Resolution(resolution)
+        : m_Resolution(std::move(resolution))
     {}
 
     EventType ResolutionChangeEvent::Type() const

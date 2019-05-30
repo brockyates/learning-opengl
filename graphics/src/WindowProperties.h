@@ -11,7 +11,7 @@ namespace Graphics
 
     struct WindowProperties
     {
-        WindowProperties(std::string title, ResolutionSetting resolution, WindowMode windowMode, WindowLayout layout);
+        WindowProperties(std::string title, const ResolutionSetting& resolution, WindowMode windowMode, WindowLayout layout);
 
         std::string Title;
         ResolutionSetting Resolution;

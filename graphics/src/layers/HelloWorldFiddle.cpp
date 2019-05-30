@@ -15,11 +15,12 @@
 #include <imgui.h>
 
 #include <random>
+#include <utility>
 
 namespace Graphics {
 
     HelloWorldFiddle::HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Hello World Fiddle")
+        : Layer(window, std::move(eventCallback), "Hello World Fiddle")
         , m_LastTime(Timer::Get())
         , m_TriangleModel(ModelGenerator::MakeTriangle())
         , m_DrawModes({

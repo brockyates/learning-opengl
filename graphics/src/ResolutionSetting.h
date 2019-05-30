@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <utility>
 
 namespace Graphics {
 
@@ -10,7 +11,7 @@ namespace Graphics {
             : Width(width)
             , Height(height)
             , DefaultFontSize(defaultFontSize)
-            , DisplayName(displayName)
+            , DisplayName(std::move(displayName))
         {}
 
         bool operator==(const ResolutionSetting& other)

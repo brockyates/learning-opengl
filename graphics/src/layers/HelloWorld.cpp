@@ -10,11 +10,12 @@
 
 #include <glad/glad.h>
 #include <imgui.h>
+#include <utility>
 
 namespace Graphics {
 
     HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
-        : Layer(window, eventCallback, "Hello World")
+        : Layer(window, std::move(eventCallback), "Hello World")
     {}
 
     void HelloWorld::RenderScene()

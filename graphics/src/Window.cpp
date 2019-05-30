@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Window.h"
+#include <utility>
 
 #include "config/WindowDefaults.h"
 
@@ -13,7 +14,7 @@ namespace Graphics {
         : m_Properties(WindowDefaults::Properties)
         , m_Window(CreateGLFWWindow(m_Properties))
         , m_Input(m_Window.get())
-        , m_EventCallback(eventCallback)
+        , m_EventCallback(std::move(eventCallback))
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);

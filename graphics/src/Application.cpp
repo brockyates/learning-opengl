@@ -22,7 +22,7 @@ namespace Graphics {
 
             if (!m_Window->IsFullscreen())
             {
-                m_LayerManager.RenderUI();
+                m_LayerManager.RenderUi();
             }
 
             m_Window->Update();
