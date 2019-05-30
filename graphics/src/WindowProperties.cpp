@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WindowProperties.h"
 
-namespace graphics {
+namespace Graphics {
 
     WindowProperties::WindowProperties(std::string title, ResolutionSetting resolution, WindowMode windowMode, WindowLayout layout)
         : Title(title)

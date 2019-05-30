@@ -8,7 +8,7 @@
 
 #include <glm/glm.hpp>
 
-namespace graphics {
+namespace Graphics {
 
     struct Circle;
     class Window;

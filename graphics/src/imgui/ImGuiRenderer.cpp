@@ -11,7 +11,7 @@
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 
-namespace graphics {
+namespace Graphics {
 
     ImGuiRenderer::ImGuiRenderer(const Window& window)
         : m_Window(window)

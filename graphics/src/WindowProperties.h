@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace graphics
+namespace Graphics
 {
 
     struct WindowProperties

@@ -9,8 +9,8 @@
 
 int main()
 {
-    graphics::utils::Log::Init();
-    graphics::Application().Start();
+    Graphics::Utils::Log::Init();
+    Graphics::Application().Start();
 
     return 0;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace graphics {
+namespace Graphics {
 
     enum class WindowMode
     {

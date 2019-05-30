@@ -8,7 +8,7 @@
 
 #include <glm/glm.hpp>
 
-namespace graphics {
+namespace Graphics {
 
     struct WindowProperties;
     class Model;

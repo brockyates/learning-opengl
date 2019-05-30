@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace graphics {
+namespace Graphics {
 
     struct WindowDefaults
     {

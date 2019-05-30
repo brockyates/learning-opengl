@@ -6,7 +6,7 @@
 
 #include <imgui.h>
 
-namespace graphics {
+namespace Graphics {
 
     class Window;
 

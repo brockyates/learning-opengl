@@ -16,7 +16,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
-namespace graphics {
+namespace Graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Circle Demo")

@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace graphics {
+namespace Graphics {
 
     class WindowCloseEvent : public Event
     {

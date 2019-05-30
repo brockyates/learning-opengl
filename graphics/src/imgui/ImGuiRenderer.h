@@ -2,7 +2,7 @@
 
 #include "Window.h"
 
-namespace graphics {
+namespace Graphics {
 
     class ImGuiRenderer
     {

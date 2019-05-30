@@ -2,7 +2,7 @@
 
 #include <functional>
 
-namespace graphics {
+namespace Graphics {
 
     enum class EventType;
 

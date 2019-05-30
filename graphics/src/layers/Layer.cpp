@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Layer.h"
 
-namespace graphics {
+namespace Graphics {
 
     Layer::Layer(const Window& window, EventHandler<Event> eventCallback, const std::string& name)
         : m_Window(window)

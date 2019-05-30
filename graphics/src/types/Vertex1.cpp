@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 
-namespace graphics {
+namespace Graphics {
 
     const unsigned int Vertex1::VertexByteSize = sizeof(Position) + sizeof(Color);
 

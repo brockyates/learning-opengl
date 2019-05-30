@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WindowLayout.h"
 
-namespace graphics {
+namespace Graphics {
 
     WindowLayout::WindowLayout(int width, int  height, int  xpos, int  ypos, float aspectRatio)
         : Width(width)

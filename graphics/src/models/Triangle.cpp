@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-namespace graphics {
+namespace Graphics {
 
     Triangle::Triangle()
         : Model(

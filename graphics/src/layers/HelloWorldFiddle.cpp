@@ -16,7 +16,7 @@
 
 #include <random>
 
-namespace graphics {
+namespace Graphics {
 
     HelloWorldFiddle::HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Hello World Fiddle")

@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-namespace graphics {
+namespace Graphics {
 
     bool AreSame(float a, float b, float epsilon)
     {

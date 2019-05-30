@@ -16,7 +16,7 @@
 #include <memory>
 #include <vector>
 
-namespace graphics {
+namespace Graphics {
 
     std::vector<std::unique_ptr<Layer>> LayerManager::MakeLayers(const Window& window, EventHandler<Event> eventCallback)
     {

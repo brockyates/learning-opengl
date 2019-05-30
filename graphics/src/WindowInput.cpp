@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WindowInput.h"
 
-namespace graphics {
+namespace Graphics {
 
     WindowInput::WindowInput(GLFWwindow* window)
         : m_Window(window)

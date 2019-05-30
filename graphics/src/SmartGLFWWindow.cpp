@@ -9,7 +9,7 @@
 
 #include <glad/glad.h>
 
-namespace graphics {
+namespace Graphics {
 
     void InitializeGLFW()
     {

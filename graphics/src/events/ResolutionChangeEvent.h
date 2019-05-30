@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "ResolutionSetting.h"
 
-namespace graphics {
+namespace Graphics {
 
     class ResolutionChangeEvent : public Event
     {

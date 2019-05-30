@@ -4,7 +4,7 @@
 
 #include <utility>
 
-namespace graphics {
+namespace Graphics {
 
     class WindowInput
     {

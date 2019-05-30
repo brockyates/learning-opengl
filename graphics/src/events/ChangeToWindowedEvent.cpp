@@ -3,7 +3,7 @@
 
 #include "EventType.h"
 
-namespace graphics {
+namespace Graphics {
 
     ChangeToWindowedEvent::ChangeToWindowedEvent()
     {}

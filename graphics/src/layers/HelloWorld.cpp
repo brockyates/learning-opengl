@@ -11,7 +11,7 @@
 #include <glad/glad.h>
 #include <imgui.h>
 
-namespace graphics {
+namespace Graphics {
 
     HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Hello World")

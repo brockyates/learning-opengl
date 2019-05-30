@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace graphics {
+namespace Graphics {
 
     class ModelGenerator
     {

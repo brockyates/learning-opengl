@@ -11,7 +11,7 @@
 #include "WindowInput.h"
 #include "WindowProperties.h"
 
-namespace graphics {
+namespace Graphics {
 
     class Window
     {

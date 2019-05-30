@@ -3,7 +3,7 @@
 
 #include "Window.h"
 
-namespace graphics {
+namespace Graphics {
 
     PassthroughLayer::PassthroughLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Passthrough")

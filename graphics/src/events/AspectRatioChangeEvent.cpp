@@ -3,7 +3,7 @@
 
 #include "EventType.h"
 
-namespace graphics {
+namespace Graphics {
 
     AspectRatioChangeEvent::AspectRatioChangeEvent(float aspectRatio)
         : m_AspectRatio(aspectRatio)

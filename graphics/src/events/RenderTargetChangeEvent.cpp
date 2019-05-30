@@ -3,7 +3,7 @@
 
 #include "EventType.h"
 
-namespace graphics {
+namespace Graphics {
 
     RenderTargetChangeEvent::RenderTargetChangeEvent(unsigned int nextRenderTargetID)
         : m_NextRenderTargetID(nextRenderTargetID)

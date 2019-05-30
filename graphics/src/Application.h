@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace graphics
+namespace Graphics
 {
 
     class Application
