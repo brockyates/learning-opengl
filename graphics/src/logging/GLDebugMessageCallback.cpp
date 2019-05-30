@@ -30,13 +30,13 @@ namespace Graphics {
     }
 
     void GLAPIENTRY
-        GLDebugMessageCallback(GLenum source,
-            GLenum type,
-            GLuint id,
-            GLenum severity,
-            GLsizei length,
-            const GLchar* message,
-            const void* userParam)
+        GLDebugMessageCallback(GLenum /*source*/,
+                               GLenum type,
+                               GLuint /*id*/,
+                               GLenum severity,
+                               GLsizei /*length*/,
+                               const GLchar* message,
+                               const void* /*userParam*/)
     {
         std::stringstream ss;
         ss << "OpenGL Debug Callback: " << type << " type=" << std::hex << type << ", severity=" << std::hex << severity << ", message: " << message;

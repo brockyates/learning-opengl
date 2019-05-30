@@ -44,7 +44,7 @@ namespace Graphics {
 
     EventHandler<ChangeToWindowedEvent> Window::OnChangeToWindowed()
     {
-        return [this](const ChangeToWindowedEvent& event)
+        return [this](const ChangeToWindowedEvent&)
         {
             m_Properties.Mode = WindowMode::Windowed;
             glfwHideWindow(m_Window.get());
@@ -75,7 +75,7 @@ namespace Graphics {
 
     EventHandler<WindowCloseEvent> Window::OnWindowClose()
     {
-        return [this](const WindowCloseEvent& event)
+        return [this](const WindowCloseEvent&)
         {
             glfwSetWindowShouldClose(m_Window.get(), GLFW_TRUE);
         };

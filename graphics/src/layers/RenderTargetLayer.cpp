@@ -126,7 +126,7 @@ namespace Graphics {
 
     EventHandler<ChangeToFullscreenEvent> RenderTargetLayer::OnChangeToFullscreen()
     {
-        return [this](const ChangeToFullscreenEvent& event)
+        return [this](const ChangeToFullscreenEvent&)
         {
             FireEvent(RenderTargetChangeEvent(m_FullscreenRenderTargetID));
         };
@@ -134,7 +134,7 @@ namespace Graphics {
 
     EventHandler<ChangeToWindowedEvent> RenderTargetLayer::OnChangeToWindowed()
     {
-        return [this](const ChangeToWindowedEvent& event)
+        return [this](const ChangeToWindowedEvent&)
         {
             FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
         };
@@ -142,7 +142,7 @@ namespace Graphics {
 
     EventHandler<ResolutionChangeEvent> RenderTargetLayer::OnResolutionChange()
     {
-        return [this](const ResolutionChangeEvent& event)
+        return [this](const ResolutionChangeEvent&)
         {
             Detach();
             Attach();

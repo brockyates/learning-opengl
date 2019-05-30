@@ -27,12 +27,18 @@ project "Graphics"
     kind "ConsoleApp"
     language "C++"
     staticruntime "on"
+    warnings "Extra"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "pch.h"
     pchsource "Graphics/src/pch.cpp"
+
+    flags
+    {
+        "FatalWarnings"
+    }
 
     files
     {
@@ -70,6 +76,7 @@ project "Graphics"
         cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
+        kind "WindowedApp"
 
         defines
         {
@@ -91,12 +98,18 @@ project "Graphics.UnitTests"
     kind "ConsoleApp"
     language "C++"
     staticruntime "on"
+    warnings "Extra"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "pch.h"
     pchsource "Graphics.UnitTests/src/pch.cpp"
+
+    flags
+    {
+        "FatalWarnings"
+    }
 
     files
     {

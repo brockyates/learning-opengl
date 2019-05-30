@@ -22,7 +22,7 @@ namespace Graphics {
         virtual void RenderScene() {}
         virtual void RenderUI() {}
 
-        virtual void OnEvent(const Event& event) {};
+        virtual void OnEvent(const Event&) {};
 
         virtual void Attach() {};
         virtual void Detach() {};
