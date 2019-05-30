@@ -11,14 +11,14 @@
 namespace Graphics {
 
     Window::Window(EventHandler<Event> eventCallback)
-        : m_Properties(WindowDefaults::Properties)
-        , m_Window(CreateGLFWWindow(m_Properties))
-        , m_Input(m_Window.get())
-        , m_EventCallback(std::move(eventCallback))
+        : properties_(WindowDefaults::Properties)
+        , window_(CreateGLFWWindow(properties_))
+        , input_(window_.get())
+        , eventCallback_(std::move(eventCallback))
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(GLDebugMessageCallback, 0);
+        glDebugMessageCallback(GLDebugMessageCallback, nullptr);
 #endif
     }
 
@@ -31,7 +31,7 @@ namespace Graphics {
     {
         return [this](const AspectRatioChangeEvent& event)
         {
-            m_Properties.AspectRatio = event.NewAspectRatio();
+            properties_.AspectRatio = event.NewAspectRatio();
         };
     }
 
@@ -39,7 +39,7 @@ namespace Graphics {
     {
         return [this](const ResolutionChangeEvent& event)
         {
-            m_Properties.Resolution = event.NewResolution();
+            properties_.Resolution = event.NewResolution();
         };
     }
 
@@ -47,13 +47,13 @@ namespace Graphics {
     {
         return [this](const ChangeToWindowedEvent&)
         {
-            m_Properties.Mode = WindowMode::Windowed;
-            glfwHideWindow(m_Window.get());
-            glfwSetWindowMonitor(m_Window.get(), 0, 0, 0, m_Properties.Layout.Width, m_Properties.Layout.Height, GLFW_DONT_CARE);
-            glfwSetWindowPos(m_Window.get(), m_Properties.Layout.Xpos, m_Properties.Layout.Ypos);
-            glfwShowWindow(m_Window.get());
+            properties_.Mode = WindowMode::Windowed;
+            glfwHideWindow(window_.get());
+            glfwSetWindowMonitor(window_.get(), nullptr, 0, 0, properties_.Layout.Width, properties_.Layout.Height, GLFW_DONT_CARE);
+            glfwSetWindowPos(window_.get(), properties_.Layout.Xpos, properties_.Layout.Ypos);
+            glfwShowWindow(window_.get());
 
-            FireEvent(AspectRatioChangeEvent(m_Properties.Layout.WindowedAspectRatio));
+            FireEvent(AspectRatioChangeEvent(properties_.Layout.WindowedAspectRatio));
         };
     }
 
@@ -61,16 +61,16 @@ namespace Graphics {
     {
         return [this](const ChangeToFullscreenEvent&)
         {
-            m_Properties.Mode = WindowMode::Fullscreen;
-            glfwGetWindowSize(m_Window.get(), &m_Properties.Layout.Width, &m_Properties.Layout.Height);
-            glfwGetWindowPos(m_Window.get(), &m_Properties.Layout.Xpos, &m_Properties.Layout.Ypos);
-            glfwSetWindowMonitor(m_Window.get(), glfwGetPrimaryMonitor(), 0, 0, m_Properties.Resolution.Width, m_Properties.Resolution.Height, GLFW_DONT_CARE);
-            glfwShowWindow(m_Window.get());
-            glfwFocusWindow(m_Window.get());
+            properties_.Mode = WindowMode::Fullscreen;
+            glfwGetWindowSize(window_.get(), &properties_.Layout.Width, &properties_.Layout.Height);
+            glfwGetWindowPos(window_.get(), &properties_.Layout.Xpos, &properties_.Layout.Ypos);
+            glfwSetWindowMonitor(window_.get(), glfwGetPrimaryMonitor(), 0, 0, properties_.Resolution.Width, properties_.Resolution.Height, GLFW_DONT_CARE);
+            glfwShowWindow(window_.get());
+            glfwFocusWindow(window_.get());
             glfwSwapInterval(1);
 
-            m_Properties.Layout.WindowedAspectRatio = m_Properties.AspectRatio;
-            FireEvent(AspectRatioChangeEvent(static_cast<float>(m_Properties.Resolution.Width) / static_cast<float>(m_Properties.Resolution.Height)));
+            properties_.Layout.WindowedAspectRatio = properties_.AspectRatio;
+            FireEvent(AspectRatioChangeEvent(static_cast<float>(properties_.Resolution.Width) / static_cast<float>(properties_.Resolution.Height)));
         };
     }
 
@@ -78,23 +78,23 @@ namespace Graphics {
     {
         return [this](const WindowCloseEvent&)
         {
-            glfwSetWindowShouldClose(m_Window.get(), GLFW_TRUE);
+            glfwSetWindowShouldClose(window_.get(), GLFW_TRUE);
         };
     }
 
-    bool Window::ShouldClose()
+    bool Window::ShouldClose() const
     {
-        return glfwWindowShouldClose(m_Window.get());
+        return glfwWindowShouldClose(window_.get());
     }
 
     bool Window::IsFullscreen() const
     {
-        return m_Properties.Mode == WindowMode::Fullscreen;
+        return properties_.Mode == WindowMode::Fullscreen;
     }
 
-    void Window::Update()
+    void Window::Update() const
     {
-        glfwSwapBuffers(m_Window.get());
+        glfwSwapBuffers(window_.get());
         glfwPollEvents();
     }
 

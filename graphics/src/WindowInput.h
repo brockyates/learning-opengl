@@ -9,10 +9,7 @@ namespace Graphics {
     class WindowInput
     {
     public:
-        WindowInput(GLFWwindow* window);
-
-        WindowInput(WindowInput&&) = default;
-        WindowInput& operator=(WindowInput&&) = default;
+        explicit WindowInput(GLFWwindow* window);
 
         [[nodiscard]] bool IsKeyPressed(int keycode) const;
         [[nodiscard]] bool IsKeyReleased(int keycode) const;
@@ -21,7 +18,7 @@ namespace Graphics {
         [[nodiscard]] std::pair<float, float> GetMousePosition() const;
 
     private:
-        GLFWwindow* m_Window;
+        GLFWwindow* window_;
     };
 
 }

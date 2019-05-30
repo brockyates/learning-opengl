@@ -11,34 +11,43 @@
 #include "WindowInput.h"
 #include "WindowProperties.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window
     {
     public:
-        Window(EventHandler<Event> eventCallback);
-        ~Window();
+        explicit Window(EventHandler<Event> eventCallback);
 
-        void Update();
+        ~Window();
+        Window(const Window&) = delete;
+        Window& operator=(const Window&) = delete;
+        Window(Window&&) = default;
+        Window& operator=(Window&&) = default;
+
+        void Update() const;
         void OnEvent(const Event&);
 
-        bool ShouldClose();
+        [[nodiscard]] bool ShouldClose() const;
         [[nodiscard]] bool IsFullscreen() const;
 
-        [[nodiscard]] int ResolutionWidth() const { return m_Properties.Resolution.Width; }
-        [[nodiscard]] int ResolutionHeight() const { return m_Properties.Resolution.Height; }
-        [[nodiscard]] float AspectRatio() const { return m_Properties.AspectRatio; }
+        [[nodiscard]] int ResolutionWidth() const { return properties_.Resolution.Width; }
+        [[nodiscard]] int ResolutionHeight() const { return properties_.Resolution.Height; }
+        [[nodiscard]] float AspectRatio() const { return properties_.AspectRatio; }
 
-        [[nodiscard]] float DefaultFontSize() const { return m_Properties.Resolution.DefaultFontSize; } //Used in ImGui initialization
-        [[nodiscard]] std::string DisplayName() const { return m_Properties.Title; }
-        [[nodiscard]] ResolutionSetting Resolution() const { return m_Properties.Resolution; }
+        //Used in ImGui initialization
+        [[nodiscard]] float DefaultFontSize() const { return properties_.Resolution.DefaultFontSize; }
 
-        [[nodiscard]] const WindowInput& Input() const { return m_Input; }
-        [[nodiscard]] GLFWwindow* GetNativeWindow() const { return m_Window.get(); } //Should only be needed for ImGui initialization
+        [[nodiscard]] std::string DisplayName() const { return properties_.Title; }
+        [[nodiscard]] ResolutionSetting Resolution() const { return properties_.Resolution; }
+
+        [[nodiscard]] const WindowInput& Input() const { return input_; }
+
+        //Should only be needed for ImGui initialization
+        [[nodiscard]] GLFWwindow* GetNativeWindow() const { return window_.get(); }
 
     private:
         //Event handlers
-        void FireEvent(const Event& event) { m_EventCallback(event); }
+        void FireEvent(const Event& event) const { eventCallback_(event); }
 
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
         EventHandler<ResolutionChangeEvent> OnResolutionChange();
@@ -47,10 +56,9 @@ namespace Graphics {
         EventHandler<WindowCloseEvent> OnWindowClose();
 
     private:
-        WindowProperties m_Properties;
-        SmartGLFWWindow m_Window;
-        WindowInput m_Input;
-        EventHandler<Event> m_EventCallback;
+        WindowProperties properties_;
+        SmartGLFWWindow window_;
+        WindowInput input_;
+        EventHandler<Event> eventCallback_;
     };
-
 }

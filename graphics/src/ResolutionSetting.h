@@ -20,8 +20,8 @@ namespace Graphics {
                 && Height == other.Height;
         }
 
-        unsigned int Width;
-        unsigned int Height;
+        int Width;
+        int Height;
 
         float DefaultFontSize; // I haven't implemented font-scaling in the GUI, so I try to pick an appropriate default size for each resolution.
         std::string DisplayName;

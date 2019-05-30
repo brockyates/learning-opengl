@@ -65,7 +65,7 @@ namespace Graphics {
             const auto videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
             const auto foundSupportedResolution = std::find_if(std::begin(WindowDefaults::SupportedResolutions), std::end(WindowDefaults::SupportedResolutions), [videoMode](const ResolutionSetting& setting)
             {
-                return setting.Width == static_cast<unsigned int>(videoMode->width);
+                return setting.Width == videoMode->width;
             });
 
             if(foundSupportedResolution != std::end(WindowDefaults::SupportedResolutions))

@@ -4,24 +4,24 @@
 namespace Graphics {
 
     WindowInput::WindowInput(GLFWwindow* window)
-        : m_Window(window)
+        : window_(window)
     {}
 
     bool WindowInput::IsKeyPressed(int keycode) const
     {
-        const auto keyboardState = glfwGetKey(m_Window, keycode);
+        const auto keyboardState = glfwGetKey(window_, keycode);
         return keyboardState == GLFW_PRESS || keyboardState == GLFW_REPEAT;
     }
 
     bool WindowInput::IsKeyReleased(int keycode) const
     {
-        const auto keyboardState = glfwGetKey(m_Window, keycode);
+        const auto keyboardState = glfwGetKey(window_, keycode);
         return keyboardState == GLFW_RELEASE;
     }
 
     bool WindowInput::IsMouseButtonPressed(int button) const
     {
-        const auto mouseState = glfwGetMouseButton(m_Window, button);
+        const auto mouseState = glfwGetMouseButton(window_, button);
         return mouseState == GLFW_PRESS;
     }
 
@@ -30,7 +30,7 @@ namespace Graphics {
         double mousePositionX;
         double mousePositionY;
 
-        glfwGetCursorPos(m_Window, &mousePositionX, &mousePositionY);
+        glfwGetCursorPos(window_, &mousePositionX, &mousePositionY);
         return { static_cast<float>(mousePositionX), static_cast<float>(mousePositionY) };
     }
 
