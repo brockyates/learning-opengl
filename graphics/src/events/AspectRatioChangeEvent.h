@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace Graphics {
+namespace graphics {
 
     class AspectRatioChangeEvent : public Event
     {

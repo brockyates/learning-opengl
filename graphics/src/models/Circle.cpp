@@ -6,7 +6,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Graphics {
+namespace graphics {
 
     Circle::Circle(unsigned int numVertexes)
         : Model(MakeVertexes(numVertexes), MakeIndexesForTriangleDrawMode(numVertexes))

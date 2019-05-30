@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace Graphics {
+namespace graphics {
 
     void GLAPIENTRY GLDebugMessageCallback(GLenum source,
                                            GLenum type,

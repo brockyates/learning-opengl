@@ -3,7 +3,7 @@
 
 #include "EventType.h"
 
-namespace Graphics {
+namespace graphics {
 
     WindowCloseEvent::WindowCloseEvent()
     {}

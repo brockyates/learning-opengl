@@ -3,7 +3,7 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Graphics {
+namespace graphics {
 
     double Timer::Get() { return glfwGetTime(); }
 

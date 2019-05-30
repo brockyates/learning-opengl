@@ -5,7 +5,7 @@
 
 #include "Window.h"
 
-namespace Graphics {
+namespace graphics {
 
     Application::Application()
         : m_Window(std::make_unique<Window>([this](const Event& e) { return OnEvent(e); }))

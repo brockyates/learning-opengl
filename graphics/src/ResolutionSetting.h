@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Graphics {
+namespace graphics {
 
     struct ResolutionSetting
     {

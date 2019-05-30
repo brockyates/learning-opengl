@@ -7,7 +7,7 @@
 
 #include "logging/GLDebugMessageCallback.h"
 
-namespace Graphics {
+namespace graphics {
 
     Window::Window(EventHandler<Event> eventCallback)
         : m_Properties(WindowDefaults::Properties)

@@ -12,10 +12,11 @@
 #include "Window.h"
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 
-namespace Graphics {
+namespace graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Circle Demo")

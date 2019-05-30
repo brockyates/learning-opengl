@@ -2,7 +2,7 @@
 
 #include "events/Event.h"
 
-namespace Graphics {
+namespace graphics {
 
     class Window;
 

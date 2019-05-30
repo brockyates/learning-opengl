@@ -7,7 +7,7 @@
 
 #include "imgui/ImGuiRenderer.h"
 
-namespace Graphics {
+namespace graphics {
 
     class Window;
 

@@ -2,7 +2,7 @@
 
 #include "Model.h"
 
-namespace Graphics {
+namespace graphics {
 
     struct Triangle : public Model
     {

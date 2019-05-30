@@ -15,7 +15,7 @@
 
 #include <sstream>
 
-namespace Graphics {
+namespace graphics {
 
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "Render to Texture")

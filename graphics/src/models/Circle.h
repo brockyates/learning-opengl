@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace Graphics {
+namespace graphics {
 
     struct Circle : public Model
     {

@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace Graphics {
+namespace graphics {
 
     struct Vertex1
     {

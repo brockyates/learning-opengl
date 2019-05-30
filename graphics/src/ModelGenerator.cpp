@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ModelGenerator.h"
 
-namespace Graphics {
+namespace graphics {
 
     std::unique_ptr<Model> ModelGenerator::MakeTriangle()
     {

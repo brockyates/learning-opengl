@@ -7,7 +7,7 @@
 
 #include "layers/Layer.h"
 
-namespace Graphics {
+namespace graphics {
 
     class Window;
 

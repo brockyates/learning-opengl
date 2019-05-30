@@ -3,7 +3,7 @@
 
 #include "EventType.h"
 
-namespace Graphics {
+namespace graphics {
 
     ResolutionChangeEvent::ResolutionChangeEvent(ResolutionSetting resolution)
         : m_Resolution(resolution)

@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace Graphics {
+namespace graphics {
 
     namespace {
 

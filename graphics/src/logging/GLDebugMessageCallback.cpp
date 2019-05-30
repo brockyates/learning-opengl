@@ -10,7 +10,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace Graphics {
+namespace graphics {
 
     namespace {
 
@@ -24,7 +24,7 @@ namespace Graphics {
 
             std::filesystem::create_directory("../bin/logs");
             std::ofstream file(ss.str(), std::ios::binary);
-            file << Graphics::Utils::Log::GetLogStream().str();
+            file << graphics::utils::Log::GetLogStream().str();
         }
 
     }

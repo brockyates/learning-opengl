@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WindowDefaults.h"
 
-namespace Graphics {
+namespace graphics {
 
     std::vector<ResolutionSetting> WindowDefaults::SupportedResolutions =
     {

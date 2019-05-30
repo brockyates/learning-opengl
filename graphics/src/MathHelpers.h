@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Graphics {
+namespace graphics {
 
     bool AreSame(float a, float b, float epsilon);
 

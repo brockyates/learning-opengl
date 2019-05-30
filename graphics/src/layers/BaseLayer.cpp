@@ -9,7 +9,7 @@
 
 #include <imgui_internal.h> //Needed to create docking layout presets
 
-namespace Graphics {
+namespace graphics {
 
     BaseLayer::BaseLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, eventCallback, "BaseLayer")
@@ -209,7 +209,7 @@ namespace Graphics {
     {
         ImGui::Begin("Log", 0, ImGuiWindowFlags_HorizontalScrollbar);
             
-            const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
+            const auto& logString = graphics::utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());
             ImGui::SetScrollHereY(1.0f);
 

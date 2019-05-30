@@ -4,7 +4,7 @@
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/sinks/ostream_sink.h>
 
-namespace Graphics { namespace Utils {
+namespace graphics { namespace utils {
 
     std::shared_ptr<spdlog::logger> Log::s_Logger;
     std::shared_ptr<spdlog::logger> Log::s_OpenGLLogger;

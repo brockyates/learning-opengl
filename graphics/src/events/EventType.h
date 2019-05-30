@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Graphics {
+namespace graphics {
 
     enum class EventType
     {
