@@ -12,7 +12,7 @@ namespace Graphics {
     class Event
     {
     public:
-        virtual ~Event() {};
+        virtual ~Event() = default;;
 
         [[nodiscard]] virtual EventType Type() const = 0;
     };

@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    class WindowCloseEvent : public Event
+    class WindowCloseEvent final : public Event
     {
     public:
         WindowCloseEvent();

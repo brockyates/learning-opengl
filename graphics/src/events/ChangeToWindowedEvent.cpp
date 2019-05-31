@@ -6,7 +6,7 @@
 namespace Graphics {
 
     ChangeToWindowedEvent::ChangeToWindowedEvent()
-    {}
+    = default;
 
     EventType ChangeToWindowedEvent::Type() const
     {

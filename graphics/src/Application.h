@@ -11,14 +11,13 @@ namespace Graphics
     {
     public:
         Application();
-        ~Application() = default;
 
         void Start();
         void OnEvent(const Event& event);
 
     private:
-        std::unique_ptr<Window> m_Window;
-        LayerManager m_LayerManager;
+        std::unique_ptr<Window> window_;
+        LayerManager layerManager_;
     };
 
 }

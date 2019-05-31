@@ -8,24 +8,24 @@
 namespace Graphics {
 
     Application::Application()
-        : m_Window(std::make_unique<Window>([this](const Event& e) { return OnEvent(e); }))
-        , m_LayerManager(*m_Window, [this](const Event& e) { return OnEvent(e); })
+        : window_(std::make_unique<Window>([this](const Event& e) { return OnEvent(e); }))
+        , layerManager_(*window_, [this](const Event& e) { return OnEvent(e); })
     {}
 
     void Application::Start()
     {
         LOG_INFO("Main application loop started");
 
-        while (!m_Window->ShouldClose())
+        while (!window_->ShouldClose())
         {
-            m_LayerManager.RenderScene();
+            layerManager_.RenderScene();
 
-            if (!m_Window->IsFullscreen())
+            if (!window_->IsFullscreen())
             {
-                m_LayerManager.RenderUi();
+                layerManager_.RenderUi();
             }
 
-            m_Window->Update();
+            window_->Update();
         }
 
         LOG_INFO("Main application loop stopped");
@@ -34,8 +34,8 @@ namespace Graphics {
     // Top-level event handler
     void Application::OnEvent(const Event& event)
     {
-        m_Window->OnEvent(event);
-        m_LayerManager.OnEvent(event);
+        window_->OnEvent(event);
+        layerManager_.OnEvent(event);
     }
 
 }

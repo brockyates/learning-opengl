@@ -15,7 +15,7 @@ namespace Graphics {
             , Indexes(std::move(indexes))
         {}
 
-        virtual ~Model() {};
+        virtual ~Model() = default;;
 
         [[nodiscard]] unsigned int VertexDataByteSize() const
         {

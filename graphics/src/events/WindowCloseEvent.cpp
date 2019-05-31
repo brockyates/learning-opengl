@@ -6,7 +6,7 @@
 namespace Graphics {
 
     WindowCloseEvent::WindowCloseEvent()
-    {}
+    = default;
 
     EventType WindowCloseEvent::Type() const
     {

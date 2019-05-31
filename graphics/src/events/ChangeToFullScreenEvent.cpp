@@ -6,7 +6,7 @@
 namespace Graphics {
 
     ChangeToFullscreenEvent::ChangeToFullscreenEvent()
-    {}
+    = default;
 
     EventType ChangeToFullscreenEvent::Type() const
     {
