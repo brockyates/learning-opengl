@@ -9,7 +9,7 @@ namespace Graphics {
     public:
         WindowCloseEvent();
 
-        [[nodiscard]] virtual EventType Type() const override;
+        [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
     };
 

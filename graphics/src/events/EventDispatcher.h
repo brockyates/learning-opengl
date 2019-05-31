@@ -7,21 +7,21 @@ namespace Graphics {
     class EventDispatcher
     {
     public:
-        EventDispatcher(const Event& e)
-            : m_Event(e)
+        explicit EventDispatcher(const Event& e)
+            : event_(e)
         {}
 
         template <typename TEventType, typename FEventHandler>
         void Dispatch(FEventHandler eventHandler)
         {
-            if (m_Event.Type() == TEventType::GetStaticType())
+            if (event_.Type() == TEventType::GetStaticType())
             {
-                eventHandler(*static_cast<const TEventType*>(&m_Event));
+                eventHandler(*static_cast<const TEventType*>(&event_));
             }
         }
 
     private:
-        const Event& m_Event;
+        const Event& event_;
     };
 
 }

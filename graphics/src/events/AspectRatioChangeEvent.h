@@ -4,10 +4,10 @@
 
 namespace Graphics {
 
-    class AspectRatioChangeEvent : public Event
+    class AspectRatioChangeEvent final : public Event
     {
     public:
-        AspectRatioChangeEvent(float aspectRatio);
+        explicit AspectRatioChangeEvent(float aspectRatio);
 
         [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
@@ -15,7 +15,7 @@ namespace Graphics {
         [[nodiscard]] float NewAspectRatio() const;
 
     private:
-        float m_AspectRatio;
+        float aspectRatio_;
     };
 
 }

@@ -5,8 +5,8 @@
 
 namespace Graphics {
 
-    AspectRatioChangeEvent::AspectRatioChangeEvent(float aspectRatio)
-        : m_AspectRatio(aspectRatio)
+    AspectRatioChangeEvent::AspectRatioChangeEvent(const float aspectRatio)
+        : aspectRatio_(aspectRatio)
     {}
 
     EventType AspectRatioChangeEvent::Type() const
@@ -21,7 +21,7 @@ namespace Graphics {
 
     float AspectRatioChangeEvent::NewAspectRatio() const
     {
-        return m_AspectRatio;
+        return aspectRatio_;
     }
 
 }

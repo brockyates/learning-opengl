@@ -5,8 +5,8 @@
 
 namespace Graphics {
 
-    RenderTargetChangeEvent::RenderTargetChangeEvent(unsigned int nextRenderTargetID)
-        : m_NextRenderTargetID(nextRenderTargetID)
+    RenderTargetChangeEvent::RenderTargetChangeEvent(unsigned int nextRenderTargetId)
+        : nextRenderTargetId_(nextRenderTargetId)
     {}
 
     EventType RenderTargetChangeEvent::Type() const
@@ -19,9 +19,9 @@ namespace Graphics {
         return EventType::RenderTargetChanged;
     }
 
-    unsigned int RenderTargetChangeEvent::NextRenderTargetID() const
+    unsigned int RenderTargetChangeEvent::NextRenderTargetId() const
     {
-        return m_NextRenderTargetID;
+        return nextRenderTargetId_;
     }
 
 }

@@ -281,7 +281,7 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            m_FrameBufferID = event.NextRenderTargetID();
+            m_FrameBufferID = event.NextRenderTargetId();
         };
     }
 

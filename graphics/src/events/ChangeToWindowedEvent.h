@@ -4,12 +4,12 @@
 
 namespace Graphics {
 
-    class ChangeToWindowedEvent : public Event
+    class ChangeToWindowedEvent final : public Event
     {
     public:
         ChangeToWindowedEvent();
 
-        [[nodiscard]] virtual EventType Type() const override;
+        [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
     };
 

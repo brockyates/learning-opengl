@@ -7,7 +7,7 @@
 namespace Graphics {
 
     ResolutionChangeEvent::ResolutionChangeEvent(ResolutionSetting resolution)
-        : m_Resolution(std::move(resolution))
+        : resolution_(std::move(resolution))
     {}
 
     EventType ResolutionChangeEvent::Type() const
@@ -22,7 +22,7 @@ namespace Graphics {
 
     ResolutionSetting ResolutionChangeEvent::NewResolution() const
     {
-        return m_Resolution;
+        return resolution_;
     }
 
 }

@@ -5,18 +5,18 @@
 
 namespace Graphics {
 
-    class ResolutionChangeEvent : public Event
+    class ResolutionChangeEvent final : public Event
     {
     public:
-        ResolutionChangeEvent(ResolutionSetting resolution);
+        explicit ResolutionChangeEvent(ResolutionSetting resolution);
 
-        [[nodiscard]] virtual EventType Type() const override;
+        [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
 
-        [[nodiscard]] ResolutionSetting ResolutionChangeEvent::NewResolution() const;
+        [[nodiscard]] ResolutionSetting NewResolution() const;
 
     private:
-        ResolutionSetting m_Resolution;
+        ResolutionSetting resolution_;
     };
 
 }
