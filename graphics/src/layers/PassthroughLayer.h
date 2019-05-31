@@ -9,12 +9,12 @@ namespace Graphics {
     class Window;
 
     //Used for testing and development if you need a no-op layer
-    class PassthroughLayer : public Layer
+    class PassthroughLayer final : public Layer
     {
     public:
         PassthroughLayer(const Window& window, EventHandler<Event> eventCallback);
 
-        [[nodiscard]] virtual bool IsAttached() const override;
+        [[nodiscard]] bool IsAttached() const override;
     };
 
 }

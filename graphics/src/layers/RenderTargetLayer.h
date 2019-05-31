@@ -11,20 +11,26 @@ namespace Graphics {
 
     class Window;
 
-    class RenderTargetLayer : public Layer
+    class RenderTargetLayer final : public Layer
     {
     public:
         RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback);
-        virtual ~RenderTargetLayer() override;
+        ~RenderTargetLayer() override;
 
-        virtual void RenderUI() override;
+        RenderTargetLayer(const RenderTargetLayer&) = delete;
+        RenderTargetLayer(RenderTargetLayer&&) = delete;
 
-        virtual void OnEvent(const Event& event) override;
+        RenderTargetLayer& operator=(const RenderTargetLayer&) = delete;
+        RenderTargetLayer& operator=(RenderTargetLayer&&) = delete;
+
+        void RenderUi() override;
+
+        void OnEvent(const Event& event) override;
 
     private:
-        [[nodiscard]] virtual bool IsAttached() const override { return true; }
-        virtual void Attach() override;
-        virtual void Detach() override;
+        [[nodiscard]] bool IsAttached() const override { return true; }
+        void Attach() override;
+        void Detach() override;
 
         void HandleAspectRatioChange();
 
@@ -36,13 +42,13 @@ namespace Graphics {
 
     private:
         //OpenGL state
-        unsigned int m_WindowedRenderTargetID = 0;
-        unsigned int m_FullscreenRenderTargetID = 0;
+        unsigned int windowedRenderTargetId_ = 0;
+        unsigned int fullscreenRenderTargetId_ = 0;
 
-        unsigned int m_RenderedTextureID = 0;
-        unsigned int m_RenderBufferID = 0;
+        unsigned int renderedTextureId_ = 0;
+        unsigned int renderBufferId_ = 0;
 
-        float m_AspectRatio = 0.0f;
+        float aspectRatio_ = 0.0f;
     };
 
 }

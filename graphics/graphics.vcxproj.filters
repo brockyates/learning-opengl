@@ -159,6 +159,7 @@
     <ClInclude Include="src\types\Vertex1.h">
       <Filter>src\types</Filter>
     </ClInclude>
+    <ClInclude Include="src\imgui\ImGuiHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -266,6 +267,7 @@
     <ClCompile Include="src\types\Vertex1.cpp">
       <Filter>src\types</Filter>
     </ClCompile>
+    <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

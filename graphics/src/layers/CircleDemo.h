@@ -4,6 +4,8 @@
 #include "events/RenderTargetChangeEvent.h"
 #include "events/AspectRatioChangeEvent.h"
 
+#include "models/Circle.h"
+
 #include "layers/Layer.h"
 
 #include <glm/glm.hpp>
@@ -13,19 +15,19 @@ namespace Graphics {
     struct Circle;
     class Window;
 
-    class CircleDemo : public Layer
+    class CircleDemo final : public Layer
     {
     public:
         CircleDemo(const Window& window, EventHandler<Event> eventCallback);
 
-        virtual void RenderScene() override;
-        virtual void RenderUI() override;
-        virtual void OnEvent(const Event& event) override;
-        virtual void Attach() override;
-        virtual void Detach() override;
-        [[nodiscard]] virtual bool IsAttached() const override { return m_Attached; }
-        [[nodiscard]] virtual std::string PopupText() const override;
-        [[nodiscard]] virtual std::string Description() const override;
+        void RenderScene() override;
+        void RenderUi() override;
+        void OnEvent(const Event& event) override;
+        void Attach() override;
+        void Detach() override;
+        [[nodiscard]] bool IsAttached() const override { return attached_; }
+        [[nodiscard]] std::string PopupText() const override;
+        [[nodiscard]] std::string Description() const override;
 
     private:
         //Event handlers
@@ -37,34 +39,34 @@ namespace Graphics {
         void UpdateSides();
         void AnimateSides();
 
-        constexpr static int m_MaxVertexes = 50;
-        int m_VertexCount = m_MaxVertexes;
-        int m_NextVertexes = m_MaxVertexes;
-        unsigned int m_NumLineIndexes = 0;
-        double m_TimeSinceLastChange = 0.0;
-        float m_AnimationInterval = 0.5;
-        bool m_SidesIncreasing = false;
-        bool m_AnimationEnabled = false;
+        constexpr static int MAX_VERTEXES = 50;
+        int vertexCount_ = MAX_VERTEXES;
+        int nextVertexes_ = MAX_VERTEXES;
+        unsigned int numLineIndexes_ = 0;
+        double timeSinceLastChange_ = 0.0;
+        float animationInterval_ = 0.5;
+        bool sidesIncreasing_ = false;
+        bool animationEnabled_ = false;
 
-        std::unique_ptr<Circle> m_CircleModel;
-        glm::mat4 m_ProjectionMatrix;
+        std::unique_ptr<Circle> circleModel_;
+        glm::mat4 projectionMatrix_;
 
         //Layer state
-        bool m_Attached = false;
-        double m_LastTime;
-        double m_DeltaTime = 0.0;
+        bool attached_ = false;
+        double lastTime_;
+        double deltaTime_ = 0.0;
 
         //OpenGL state
-        unsigned int m_FrameBufferID = 0;
-        unsigned int m_TriangleShaderID = 0;
-        unsigned int m_LineShaderID = 0;
-        unsigned int m_VertexArrayID = 0;
-        unsigned int m_VertexBufferID = 0;
-        unsigned int m_TriangleIndexBufferID = 0;
-        unsigned int m_LineIndexBufferID = 0;
-        unsigned int m_TriangleProjMatrixUniformLocation = 0;
-        unsigned int m_LineProjMatrixUniformLocation = 0;
-        unsigned int m_LineColorUniformLocation = 0;
+        unsigned int frameBufferId_ = 0;
+        unsigned int triangleShaderId_ = 0;
+        unsigned int lineShaderId_ = 0;
+        unsigned int vertexArrayId_ = 0;
+        unsigned int vertexBufferId_ = 0;
+        unsigned int triangleIndexBufferId_ = 0;
+        unsigned int lineIndexBufferId_ = 0;
+        unsigned int triangleProjMatrixUniformLocation_ = 0;
+        unsigned int lineProjMatrixUniformLocation_ = 0;
+        unsigned int lineColorUniformLocation_ = 0;
     };
 
 }

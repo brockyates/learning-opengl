@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GlobalMacros.h" />
+    <ClInclude Include="src\imgui\ImGuiHelpers.h" />
     <ClInclude Include="src\MathHelpers.h" />
     <ClInclude Include="src\ModelGenerator.h" />
     <ClInclude Include="src\ResolutionSetting.h" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
+    <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
     <ClCompile Include="src\MathHelpers.cpp" />
     <ClCompile Include="src\ModelGenerator.cpp" />
     <ClCompile Include="src\ShaderHelpers.cpp" />

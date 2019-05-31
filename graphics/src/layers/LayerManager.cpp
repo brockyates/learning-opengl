@@ -48,12 +48,12 @@ namespace Graphics
 
     void LayerManager::RenderUi()
     {
-        uiRenderer_.BeginFrame();
-        baseLayer_.RenderUI();
-        renderTarget_.RenderUI();
+        ImGuiRenderer::BeginFrame();
+        baseLayer_.RenderUi();
+        renderTarget_.RenderUi();
         ShowDemoSelector();
 
-        activeLayer_->RenderUI();
+        activeLayer_->RenderUi();
 
         baseLayer_.OnImGuiRenderOverlay();
         uiRenderer_.Render();
@@ -78,7 +78,7 @@ namespace Graphics
         {
             for (auto& layer : layers_)
             {
-                bool isSelected = (activeLayer_ == layer.get());
+                const auto isSelected = (activeLayer_ == layer.get());
 
                 if (ImGui::Selectable(layer->Name().c_str(), isSelected))
                 {
@@ -87,7 +87,7 @@ namespace Graphics
 
                 if (ImGui::IsItemHovered())
                 {
-                    ImGui::SetTooltip(layer->PopupText().c_str());
+                    ImGui::SetTooltip("%s", layer->PopupText().c_str());
                 }
 
                 if (isSelected)

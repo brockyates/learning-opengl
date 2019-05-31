@@ -10,43 +10,41 @@ namespace Graphics {
 
     class Window;
 
-    class HelloWorld : public Layer
+    class HelloWorld final : public Layer
     {
     public:
         HelloWorld(const Window& window, EventHandler<Event> eventCallback);
 
-        virtual void RenderScene() override;
-        virtual void RenderUI() override;
+        void RenderScene() override;
+        void RenderUi() override;
 
-        virtual void Attach() override;
-        virtual void Detach() override;
-        [[nodiscard]] virtual bool IsAttached() const override { return m_Attached; }
+        void Attach() override;
+        void Detach() override;
+        [[nodiscard]] bool IsAttached() const override { return attached_; }
 
-        [[nodiscard]] virtual std::string PopupText() const override;
-        [[nodiscard]] virtual std::string Description() const override;
+        [[nodiscard]] std::string PopupText() const override;
+        [[nodiscard]] std::string Description() const override;
 
-        virtual void OnEvent(const Event& event) override;
+        void OnEvent(const Event& event) override;
 
     private:
         //Event handlers
         EventHandler<RenderTargetChangeEvent> OnRenderTargetChanged();
 
-    private:
         //OpenGL state
-        unsigned int m_FrameBufferID = 0;
-        unsigned int m_ShaderID = 0;
-        unsigned int m_VertexArrayID = 0;
-        unsigned int m_VertexBufferID = 0;
+        unsigned int frameBufferId_ = 0;
+        unsigned int shaderId_ = 0;
+        unsigned int vertexArrayId_ = 0;
+        unsigned int vertexBufferId_ = 0;
 
-        std::vector<float> m_Vertexes =
+        std::vector<float> vertexes_ =
         {
              0.0f,  1.0f,
              1.0f, -1.0f,
             -1.0f, -1.0f,
         };
 
-    private:
-        bool m_Attached = false;
+        bool attached_ = false;
     };
 
 }

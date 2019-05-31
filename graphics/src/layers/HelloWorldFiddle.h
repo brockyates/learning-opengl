@@ -6,37 +6,38 @@
 
 #include "layers/Layer.h"
 
+#include "models/Model.h"
+
 #include <glm/glm.hpp>
 
 namespace Graphics {
 
     struct WindowProperties;
-    class Model;
     class Window;
 
-    class HelloWorldFiddle : public Layer
+    class HelloWorldFiddle final : public Layer
     {
     public:
         HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback);
 
-        virtual void RenderScene() override;
-        virtual void RenderUI() override;
+        void RenderScene() override;
+        void RenderUi() override;
 
-        virtual void Attach() override;
-        virtual void Detach() override;
-        [[nodiscard]] virtual bool IsAttached() const override { return m_Attached; }
+        void Attach() override;
+        void Detach() override;
+        [[nodiscard]] bool IsAttached() const override { return attached_; }
 
-        [[nodiscard]] virtual std::string PopupText() const override;
-        [[nodiscard]] virtual std::string Description() const override;
+        [[nodiscard]] std::string PopupText() const override;
+        [[nodiscard]] std::string Description() const override;
 
-        virtual void OnEvent(const Event& event) override;
+        void OnEvent(const Event& event) override;
 
     private:
         //This struct is only meaningful in the context of this demo, I don't want it to exist outside of HelloWorldFiddle.
         struct DrawMode
         {
-            int Mode;
-            unsigned int NumVertexes;
+            int Mode{};
+            unsigned int NumVertexes{};
             std::string DisplayName;
         };
 
@@ -48,11 +49,11 @@ namespace Graphics {
     private:
         //Scene rendering
         void UpdateVertexes();
-        void UpdateVertex(glm::vec4& vertex, glm::vec4& direction);
+        void UpdateVertex(glm::vec4& vertex, glm::vec4& direction) const;
         void UpdateTiming();
         void SetNextVertexPositions();
         void ChangeDrawMode(const DrawMode& nextMode);
-        [[nodiscard]] glm::vec4 GetRandomVertexDirection() const;
+        [[nodiscard]] static glm::vec4 GetRandomVertexDirection();
 
     private:
         //UI Rendering
@@ -64,39 +65,39 @@ namespace Graphics {
         void DrawPointControls();
 
     private:
-        bool m_Attached = false;
-        double m_LastTime;
-        double m_DeltaTime = 0;
+        bool attached_ = false;
+        double lastTime_;
+        double deltaTime_ = 0;
 
         //OpenGL state
-        unsigned int m_FrameBufferID = 0;
-        unsigned int m_ShaderID = 0;
-        unsigned int m_VertexArrayID = 0;
-        unsigned int m_VertexBufferID = 0;
-        unsigned int m_IndexBufferID = 0;
-        unsigned int m_PointsizeUniformLocation = 0;
+        unsigned int frameBufferId_ = 0;
+        unsigned int shaderId_ = 0;
+        unsigned int vertexArrayId_ = 0;
+        unsigned int vertexBufferId_ = 0;
+        unsigned int indexBufferId_ = 0;
+        unsigned int pointSizeUniformLocation_ = 0;
 
-        glm::vec4 m_ClearColor = { 0.15f, 0.15f, 0.15f, 1.0f };
-        float m_LineWidth = 5.0f;
-        float m_PointSize = 30.0f;
+        glm::vec4 clearColor_ = { 0.15f, 0.15f, 0.15f, 1.0f };
+        float lineWidth_ = 5.0f;
+        float pointSize_ = 30.0f;
 
-        std::unordered_map<int, DrawMode> m_DrawModes;
-        DrawMode m_DrawMode;
+        std::unordered_map<int, DrawMode> drawModes_;
+        DrawMode drawMode_;
 
         //Buffer data
-        std::unique_ptr<Model> m_TriangleModel;
-        std::vector<unsigned int> m_LineIndexes = { 0, 1, 1, 2, 2, 0 };
+        std::unique_ptr<Model> triangleModel_;
+        std::vector<unsigned int> lineIndexes_ = { 0, 1, 1, 2, 2, 0 };
 
         //Animation parameters
-        bool m_AnimationEnabled = false;
-        float m_VertexMoveSpeed = 0.5f;
+        bool animationEnabled_ = false;
+        float vertexMoveSpeed_ = 0.5f;
 
-        glm::vec4 m_Vertex1Direction = GetRandomVertexDirection();
-        glm::vec4 m_Vertex2Direction = GetRandomVertexDirection();
-        glm::vec4 m_Vertex3Direction = GetRandomVertexDirection();
+        glm::vec4 vertex1Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
+        glm::vec4 vertex2Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
+        glm::vec4 vertex3Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
 
-        glm::mat4 m_ProjectionMatrix;
-        unsigned int m_ProjMatrixUniformLocation = 0;
+        glm::mat4 projectionMatrix_;
+        unsigned int projMatrixUniformLocation_ = 0;
     };
 
 }

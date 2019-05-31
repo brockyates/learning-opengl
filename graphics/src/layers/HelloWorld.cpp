@@ -20,20 +20,20 @@ namespace Graphics {
 
     void HelloWorld::RenderScene()
     {
-        if (!m_Attached)
+        if (!attached_)
             return;
 
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
+        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
 
         // Bindings
-        glBindVertexArray(m_VertexArrayID);
-        glUseProgram(m_ShaderID);
+        glBindVertexArray(vertexArrayId_);
+        glUseProgram(shaderId_);
 
         // Draw
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
+        glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Release bindings
@@ -42,9 +42,9 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void HelloWorld::RenderUI()
+    void HelloWorld::RenderUi()
     {
-        if (!m_Attached)
+        if (!attached_)
             return;
 
         ImGui::Begin("DemoWidget");
@@ -67,23 +67,23 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            m_FrameBufferID = event.NextRenderTargetId();
+            frameBufferId_ = event.NextRenderTargetId();
         };
     }
 
     void HelloWorld::Attach()
     {
-        if (m_Attached) return;
+        if (attached_) return;
 
         LOG_TRACE("Attaching HelloWorld");
 
-        glGenVertexArrays(1, &m_VertexArrayID);
-        glBindVertexArray(m_VertexArrayID);
-        glGenBuffers(1, &m_VertexBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, std::size(m_Vertexes) * sizeof(float), &m_Vertexes[0], GL_STATIC_DRAW);
+        glGenVertexArrays(1, &vertexArrayId_);
+        glBindVertexArray(vertexArrayId_);
+        glGenBuffers(1, &vertexBufferId_);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
+        glBufferData(GL_ARRAY_BUFFER, std::size(vertexes_) * sizeof(float), &vertexes_[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 
         //Release bindings
         glBindVertexArray(0);
@@ -91,14 +91,14 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        m_ShaderID = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        shaderId_ = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
-        m_Attached = true;
+        attached_ = true;
     }
 
     void HelloWorld::Detach()
     {
-        if (!m_Attached) return;
+        if (!attached_) return;
 
         LOG_TRACE("Detaching HelloWorld");
 
@@ -107,10 +107,10 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        glDeleteProgram(m_ShaderID);
-        glDeleteBuffers(1, &m_VertexBufferID);
+        glDeleteProgram(shaderId_);
+        glDeleteBuffers(1, &vertexBufferId_);
 
-        m_Attached = false;
+        attached_ = false;
     }
 
     std::string HelloWorld::PopupText() const

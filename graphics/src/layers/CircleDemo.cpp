@@ -3,6 +3,8 @@
 
 #include "events/EventDispatcher.h"
 
+#include "imgui/ImGuiHelpers.h"
+
 #include "logging/Log.h"
 
 #include "models/Circle.h"
@@ -21,14 +23,14 @@ namespace Graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Circle Demo")
-        , m_LastTime(Timer::Get())
-        , m_ProjectionMatrix(glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f))
-        , m_CircleModel(std::make_unique<Circle>(m_VertexCount))
+        , circleModel_(std::make_unique<Circle>(vertexCount_))
+        , projectionMatrix_(glm::ortho(-1.0f * window_.AspectRatio(), 1.0f * window_.AspectRatio(), -1.0f, 1.0f))
+        , lastTime_(Timer::Get())
     {}
 
     void CircleDemo::RenderScene()
     {
-        if (!m_Attached)
+        if (!attached_)
             return;
 
         UpdateTiming();
@@ -38,26 +40,26 @@ namespace Graphics {
         glLineWidth(3.0f);
 
         // Bindings
-        glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBufferID);
-        glBindVertexArray(m_VertexArrayID);
+        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
+        glBindVertexArray(vertexArrayId_);
 
         // Draw
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glViewport(0, 0, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
+        glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         
-        glUseProgram(m_TriangleShaderID);
-        glUniformMatrix4fv(m_TriangleProjMatrixUniformLocation, 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUseProgram(triangleShaderId_);
+        glUniformMatrix4fv(triangleProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
-        glDrawElements(GL_TRIANGLES, m_CircleModel->NumIndexes(), GL_UNSIGNED_INT, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
+        glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
 
-        glUseProgram(m_LineShaderID);
-        glUniformMatrix4fv(m_LineProjMatrixUniformLocation, 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniform4fv(m_LineColorUniformLocation, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
-        glDrawElements(GL_LINES, m_NumLineIndexes, GL_UNSIGNED_INT, 0);
+        glUseProgram(lineShaderId_);
+        glUniformMatrix4fv(lineProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
+        glUniform4fv(lineColorUniformLocation_, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
+        glDrawElements(GL_LINES, numLineIndexes_, GL_UNSIGNED_INT, nullptr);
 
         // Release bindings
         glLineWidth(1.0f);
@@ -67,50 +69,32 @@ namespace Graphics {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    namespace {
-
-        // Helper to display a little (?) mark which shows a tooltip when hovered.
-        static void HelpMarker(const char* desc)
-        {
-            ImGui::TextDisabled("(?)");
-            if (ImGui::IsItemHovered())
-            {
-                ImGui::BeginTooltip();
-                ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-                ImGui::TextUnformatted(desc);
-                ImGui::PopTextWrapPos();
-                ImGui::EndTooltip();
-            }
-        }
-
-    }
-
-    void CircleDemo::RenderUI()
+    void CircleDemo::RenderUi()
     {
-        if (!m_Attached)
+        if (!attached_)
             return;
 
         ImGui::Begin("DemoWidget");
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
-        ImGui::TextWrapped(Description().c_str());
+        ImGui::TextWrapped("%s", Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
 
-        ImGui::Checkbox("Animation", &m_AnimationEnabled);
-        ImGui::InputInt("Vertex Count", &m_NextVertexes, 1, 5);
+        ImGui::Checkbox("Animation", &animationEnabled_);
+        ImGui::InputInt("Vertex Count", &nextVertexes_, 1, 5);
 
-        if (m_NextVertexes > m_MaxVertexes)
+        if (nextVertexes_ > MAX_VERTEXES)
         {
-            m_NextVertexes = m_MaxVertexes;
+            nextVertexes_ = MAX_VERTEXES;
         }
-        if (m_NextVertexes < 4)
+        if (nextVertexes_ < 4)
         {
-            m_NextVertexes = 4;
+            nextVertexes_ = 4;
         }
 
-        ImGui::SameLine(); HelpMarker("CTRL + Click to enter value");
-        ImGui::SliderFloat("Interval", &m_AnimationInterval, 0.0f, 1.0f);
+        ImGui::SameLine(); HELP_MARKER("CTRL + Click to enter value");
+        ImGui::SliderFloat("Interval", &animationInterval_, 0.0f, 1.0f);
 
         ImGui::End();
     }
@@ -126,7 +110,7 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            m_FrameBufferID = event.NextRenderTargetId();
+            frameBufferId_ = event.NextRenderTargetId();
         };
     }
 
@@ -137,53 +121,53 @@ namespace Graphics {
             //Case: scene window's width < height
             if (event.NewAspectRatio() < 1.0f)
             {
-                m_ProjectionMatrix = glm::ortho(-1.0f, 1.0f, -1.0f / m_Window.AspectRatio(), 1.0f / m_Window.AspectRatio());
+                projectionMatrix_ = glm::ortho(-1.0f, 1.0f, -1.0f / window_.AspectRatio(), 1.0f / window_.AspectRatio());
                 return;
             }
 
             //Case: scene window's width > height
-            m_ProjectionMatrix = glm::ortho(-1.0f * m_Window.AspectRatio(), 1.0f * m_Window.AspectRatio(), -1.0f, 1.0f);
+            projectionMatrix_ = glm::ortho(-1.0f * window_.AspectRatio(), 1.0f * window_.AspectRatio(), -1.0f, 1.0f);
         };
     }
 
     void CircleDemo::UpdateTiming()
     {
-        double nextTime = Timer::Get();
-        m_DeltaTime = static_cast<float>(nextTime - m_LastTime);
-        m_LastTime = nextTime;
-        m_TimeSinceLastChange += m_DeltaTime;
+        const auto nextTime = Timer::Get();
+        deltaTime_ = static_cast<float>(nextTime - lastTime_);
+        lastTime_ = nextTime;
+        timeSinceLastChange_ += deltaTime_;
     }
 
     void CircleDemo::UpdateSides()
     {
-        if (m_NextVertexes == m_VertexCount)
+        if (nextVertexes_ == vertexCount_)
             return;
 
-        m_VertexCount = m_NextVertexes;
-        m_CircleModel = std::make_unique<Circle>(m_VertexCount);
+        vertexCount_ = nextVertexes_;
+        circleModel_ = std::make_unique<Circle>(vertexCount_);
 
         const unsigned int bufferOffset = 0;
 
-        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_VertexCount);
+        const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
-        m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
+        numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
 
         //Update vertex buffer
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
         glBufferSubData(GL_ARRAY_BUFFER,
             bufferOffset,
-            m_CircleModel->VertexDataByteSize(),
-            &m_CircleModel->Vertexes[0]);
+            circleModel_->VertexDataByteSize(),
+            &circleModel_->Vertexes[0]);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         //Update index buffers
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
             bufferOffset,
-            m_CircleModel->IndexDataByteSize(),
-            &m_CircleModel->Indexes[0]);
+            circleModel_->IndexDataByteSize(),
+            &circleModel_->Indexes[0]);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
             bufferOffset,
             lineIndexByteSize,
@@ -194,35 +178,35 @@ namespace Graphics {
 
     void CircleDemo::AnimateSides()
     {
-        if (!m_AnimationEnabled)
+        if (!animationEnabled_)
             return;
 
-        if (m_TimeSinceLastChange > m_AnimationInterval)
+        if (timeSinceLastChange_ > animationInterval_)
         {
-            m_TimeSinceLastChange = 0.0;
+            timeSinceLastChange_ = 0.0;
 
-            if (m_SidesIncreasing)
+            if (sidesIncreasing_)
             {
-                if (m_VertexCount == m_MaxVertexes)
+                if (vertexCount_ == MAX_VERTEXES)
                 {
-                    m_SidesIncreasing = false;
-                    --m_NextVertexes;
+                    sidesIncreasing_ = false;
+                    --nextVertexes_;
                 }
                 else
                 {
-                    ++m_NextVertexes;
+                    ++nextVertexes_;
                 }
             }
-            if (!m_SidesIncreasing)
+            if (!sidesIncreasing_)
             {
-                if (m_VertexCount == 3)
+                if (vertexCount_ == 3)
                 {
-                    m_SidesIncreasing = true;
-                    ++m_NextVertexes;
+                    sidesIncreasing_ = true;
+                    ++nextVertexes_;
                 }
                 else
                 {
-                    --m_NextVertexes;
+                    --nextVertexes_;
                 }
             }
         }
@@ -230,7 +214,7 @@ namespace Graphics {
 
     void CircleDemo::Attach()
     {
-        if (m_Attached) return;
+        if (attached_) return;
 
         LOG_TRACE("Attaching CircleDemo");
 
@@ -238,21 +222,21 @@ namespace Graphics {
         glEnable(GL_PROGRAM_POINT_SIZE);
 
         //Buffer setup
-        glGenVertexArrays(1, &m_VertexArrayID);
-        glBindVertexArray(m_VertexArrayID);
-        glGenBuffers(1, &m_VertexBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, m_CircleModel->VertexDataByteSize(), &m_CircleModel->Vertexes[0], GL_STATIC_DRAW);
+        glGenVertexArrays(1, &vertexArrayId_);
+        glBindVertexArray(vertexArrayId_);
+        glGenBuffers(1, &vertexBufferId_);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
+        glBufferData(GL_ARRAY_BUFFER, circleModel_->VertexDataByteSize(), &circleModel_->Vertexes[0], GL_STATIC_DRAW);
 
-        glGenBuffers(1, &m_TriangleIndexBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TriangleIndexBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_CircleModel->IndexDataByteSize(), &m_CircleModel->Indexes[0], GL_STATIC_DRAW);
+        glGenBuffers(1, &triangleIndexBufferId_);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, circleModel_->IndexDataByteSize(), &circleModel_->Indexes[0], GL_STATIC_DRAW);
 
-        const auto lineIndexes = m_CircleModel->MakeIndexesForLineDrawMode(m_VertexCount);
+        const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
-        m_NumLineIndexes = static_cast<unsigned int>(std::size(lineIndexes));
-        glGenBuffers(1, &m_LineIndexBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_LineIndexBufferID);
+        numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
+        glGenBuffers(1, &lineIndexBufferId_);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, lineIndexByteSize, &lineIndexes[0], GL_STATIC_DRAW);
 
         //Vertex Position
@@ -270,19 +254,19 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        m_TriangleShaderID = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
-        m_TriangleProjMatrixUniformLocation = glGetUniformLocation(m_TriangleShaderID, "u_Proj");
+        triangleShaderId_ = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_, "u_Proj");
 
-        m_LineShaderID = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
-        m_LineColorUniformLocation = glGetUniformLocation(m_LineShaderID, "u_LineColor");
-        m_LineProjMatrixUniformLocation = glGetUniformLocation(m_LineShaderID, "u_Proj");
+        lineShaderId_ = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        lineColorUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_LineColor");
+        lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_Proj");
 
-        m_Attached = true;
+        attached_ = true;
     }
 
     void CircleDemo::Detach()
     {
-        if (!m_Attached) return;
+        if (!attached_) return;
 
         LOG_TRACE("Detaching CircleDemo");
 
@@ -294,11 +278,11 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        glDeleteProgram(m_TriangleShaderID);
-        glDeleteProgram(m_LineShaderID);
-        glDeleteBuffers(1, &m_VertexBufferID);
+        glDeleteProgram(triangleShaderId_);
+        glDeleteProgram(lineShaderId_);
+        glDeleteBuffers(1, &vertexBufferId_);
 
-        m_Attached = false;
+        attached_ = false;
     }
 
     std::string CircleDemo::PopupText() const

@@ -10,14 +10,14 @@ namespace Graphics {
 
     class Window;
 
-    class BaseLayer : public Layer
+    class BaseLayer final : public Layer
     {
     public:
         BaseLayer(const Window& window, EventHandler<Event> eventCallback);
 
-        virtual void RenderScene() override;
-        virtual void RenderUI() override;
-        [[nodiscard]] virtual bool IsAttached() const override { return true; }
+        void RenderScene() override;
+        void RenderUi() override;
+        [[nodiscard]] bool IsAttached() const override { return true; }
 
         void OnImGuiRenderOverlay();
 
@@ -26,15 +26,15 @@ namespace Graphics {
         void HandleFullscreenInput();
         void HandleWindowedInput();
 
-        void LayoutPreset(ImGuiID dockspaceID, ImVec2 dockSize);
+        static void LayoutPreset(ImGuiID dockspaceId, ImVec2 dockSize);
         void ShowMenuBar();
         void ShowMainWindow();
-        void ShowLogWindow();
+        void ShowLogWindow() const;
 
     private:
         //Input handling
-        bool m_F11Ready = true;
-        bool m_EscReady = true;
+        bool f11Ready_ = true;
+        bool escReady_ = true;
     };
 
 }

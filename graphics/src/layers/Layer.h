@@ -9,18 +9,19 @@ namespace Graphics {
     class Layer
     {
     public:
-        Layer(const Window& window, EventHandler<Event> eventCallback, const std::string& name = "Layer");
+        Layer(const Window& window, EventHandler<Event> eventCallback, std::string name = "Layer");
         virtual ~Layer() = default;
 
         // Layers work with OpenGL global state and may have const members
         // I prefer that they're non-copyable, non-movable.
         Layer(Layer&) = delete;
         Layer(Layer&&) = delete;
+
         Layer& operator=(Layer&) = delete;
         Layer& operator=(Layer&&) = delete;
 
         virtual void RenderScene() {}
-        virtual void RenderUI() {}
+        virtual void RenderUi() {}
 
         virtual void OnEvent(const Event&) {};
 
@@ -30,17 +31,16 @@ namespace Graphics {
 
         [[nodiscard]] virtual std::string PopupText() const { return ""; }
         [[nodiscard]] virtual std::string Description() const { return ""; }
-        [[nodiscard]] inline const std::string& Name() const { return m_Name; }
+        [[nodiscard]] const std::string& Name() const { return name_; }
 
     protected:
-        virtual void FireEvent(const Event& event) { m_EventCallback(event); }
+        virtual void FireEvent(const Event& event) { eventCallback_(event); }
 
-    protected:
-        const Window& m_Window;
-        std::string m_Name;
+        const Window& window_;
+        std::string name_;
 
     private:
-        EventHandler<Event> m_EventCallback; //Private because we want the subclass to interface with FireEvent
+        EventHandler<Event> eventCallback_; //Private because we want the subclass to interface with FireEvent
     };
 
 }

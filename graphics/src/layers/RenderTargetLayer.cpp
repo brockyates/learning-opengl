@@ -7,7 +7,6 @@
 #include "logging/Log.h"
 
 #include "MathHelpers.h"
-#include "ShaderHelpers.h"
 #include "Window.h"
 
 #include <glad/glad.h>
@@ -20,10 +19,10 @@ namespace Graphics {
 
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Render to Texture")
-        , m_AspectRatio(window.AspectRatio())
+        , aspectRatio_(window.AspectRatio())
     {
         Attach();
-        FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
+        Layer::FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
     }
 
     RenderTargetLayer::~RenderTargetLayer()
@@ -31,18 +30,18 @@ namespace Graphics {
         Detach();
     }
 
-    void RenderTargetLayer::RenderUI()
+    void RenderTargetLayer::RenderUi()
     {
         HandleAspectRatioChange();
 
         ImGui::Begin("Scene");
-        ImVec2 pos = ImGui::GetCursorScreenPos();
-        auto size = ImGui::GetContentRegionAvail();
+        const auto scenePosition = ImGui::GetCursorScreenPos();
+        const auto sceneSize = ImGui::GetContentRegionAvail();
 
         ImGui::GetWindowDrawList()->AddImage(
-            (void *)(intptr_t)m_RenderedTextureID,
-            ImVec2(ImGui::GetCursorScreenPos()),
-            ImVec2(ImGui::GetCursorScreenPos().x + size.x, ImGui::GetCursorScreenPos().y + size.y),
+            reinterpret_cast<void *>(static_cast<intptr_t>(renderedTextureId_)),
+            ImVec2(scenePosition),
+            ImVec2(scenePosition.x + sceneSize.x, scenePosition.y + sceneSize.y),
             ImVec2(0, 1),
             ImVec2(1, 0));
         ImGui::End();
@@ -60,24 +59,24 @@ namespace Graphics {
     {
         LOG_TRACE("Attaching RenderTargetLayer");
 
-        glGenFramebuffers(1, &m_WindowedRenderTargetID);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_WindowedRenderTargetID);
+        glGenFramebuffers(1, &windowedRenderTargetId_);
+        glBindFramebuffer(GL_FRAMEBUFFER, windowedRenderTargetId_);
 
-        glGenTextures(1, &m_RenderedTextureID);
-        glBindTexture(GL_TEXTURE_2D, m_RenderedTextureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Window.ResolutionWidth(), m_Window.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glGenTextures(1, &renderedTextureId_);
+        glBindTexture(GL_TEXTURE_2D, renderedTextureId_);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window_.ResolutionWidth(), window_.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_RenderedTextureID, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTextureId_, 0);
 
-        glGenRenderbuffers(1, &m_RenderBufferID);
-        glBindRenderbuffer(GL_RENDERBUFFER, m_RenderBufferID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_Window.ResolutionWidth(), m_Window.ResolutionHeight());
+        glGenRenderbuffers(1, &renderBufferId_);
+        glBindRenderbuffer(GL_RENDERBUFFER, renderBufferId_);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_.ResolutionWidth(), window_.ResolutionHeight());
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RenderBufferID);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBufferId_);
 
         const unsigned int frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
@@ -107,7 +106,7 @@ namespace Graphics {
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        glDeleteFramebuffers(1, &m_WindowedRenderTargetID);
+        glDeleteFramebuffers(1, &windowedRenderTargetId_);
     }
 
     void RenderTargetLayer::HandleAspectRatioChange()
@@ -116,9 +115,9 @@ namespace Graphics {
 
         const auto sceneDimensions = ImGui::GetWindowSize();
         const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
-        if (!AreSame(m_AspectRatio, newAspectRatio, 0.001f))
+        if (!AreSame(aspectRatio_, newAspectRatio, 0.001f))
         {
-            m_AspectRatio = newAspectRatio;
+            aspectRatio_ = newAspectRatio;
             FireEvent(AspectRatioChangeEvent(newAspectRatio));
         }
 
@@ -129,7 +128,7 @@ namespace Graphics {
     {
         return [this](const ChangeToFullscreenEvent&)
         {
-            FireEvent(RenderTargetChangeEvent(m_FullscreenRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(fullscreenRenderTargetId_));
         };
     }
 
@@ -137,7 +136,7 @@ namespace Graphics {
     {
         return [this](const ChangeToWindowedEvent&)
         {
-            FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
         };
     }
 
@@ -147,7 +146,7 @@ namespace Graphics {
         {
             Detach();
             Attach();
-            FireEvent(RenderTargetChangeEvent(m_WindowedRenderTargetID));
+            FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
         };
     }
 
