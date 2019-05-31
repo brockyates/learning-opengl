@@ -14,23 +14,23 @@
 namespace Graphics {
 
     ImGuiRenderer::ImGuiRenderer(const Window& window)
-        : m_Window(window)
+        : window_(window)
     {
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        auto& io = ImGui::GetIO(); (void)io;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", m_Window.DefaultFontSize());
+        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", window_.DefaultFontSize());
 
         // Setup Dear ImGui style
         ImGui::StyleColorsClassic();
 
         // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-        ImGuiStyle& style = ImGui::GetStyle();
+        auto& style = ImGui::GetStyle();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
             style.WindowRounding = 0.0f;
@@ -38,7 +38,7 @@ namespace Graphics {
         }
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(m_Window.GetNativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(window_.GetNativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
@@ -50,27 +50,27 @@ namespace Graphics {
         LOG_TRACE("ImGuiRenderer::Shutdown");
     }
 
-    void ImGuiRenderer::BeginFrame() const
+    void ImGuiRenderer::BeginFrame()
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
-    void ImGuiRenderer::Render()
+    void ImGuiRenderer::Render() const
     {
-        ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(m_Window.ResolutionWidth()), static_cast<float>(m_Window.ResolutionHeight()));
+        auto& io = ImGui::GetIO();
+        io.DisplaySize = ImVec2(static_cast<float>(window_.ResolutionWidth()), static_cast<float>(window_.ResolutionHeight()));
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
-            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            const auto backupCurrentContext = glfwGetCurrentContext();
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(backup_current_context);
+            glfwMakeContextCurrent(backupCurrentContext);
         }
     }
 

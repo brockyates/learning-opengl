@@ -7,17 +7,20 @@ namespace Graphics {
     class ImGuiRenderer
     {
     public:
-        ImGuiRenderer(const Window& window);
+        explicit ImGuiRenderer(const Window& window);
         ~ImGuiRenderer();
 
-        ImGuiRenderer(ImGuiRenderer&) = default;
-        ImGuiRenderer& operator=(ImGuiRenderer&) = default;
+        ImGuiRenderer(const ImGuiRenderer&) = default;
+        ImGuiRenderer(ImGuiRenderer&&) = default;
 
-        void BeginFrame() const;
-        void Render();
+        ImGuiRenderer& operator=(const ImGuiRenderer&) = delete;
+        ImGuiRenderer& operator=(ImGuiRenderer&&) = delete;
+
+        static void BeginFrame();
+        void Render() const;
 
     private:
-        const Window& m_Window;
+        const Window& window_;
     };
 
 }
