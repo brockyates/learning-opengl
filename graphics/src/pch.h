@@ -13,7 +13,7 @@
 #include <memory>
 #include <random>
 #include <sstream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>

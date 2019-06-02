@@ -7,14 +7,14 @@ namespace Graphics {
 
     struct ResolutionSetting
     {
-        ResolutionSetting(unsigned int width, unsigned int height, float defaultFontSize, std::string displayName)
+        ResolutionSetting(const int width, const int height, const float defaultFontSize, std::string displayName)
             : Width(width)
             , Height(height)
             , DefaultFontSize(defaultFontSize)
             , DisplayName(std::move(displayName))
         {}
 
-        bool operator==(const ResolutionSetting& other)
+        bool operator==(const ResolutionSetting& other) const
         {
             return Width == other.Width
                 && Height == other.Height;
