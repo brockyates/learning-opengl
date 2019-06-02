@@ -9,7 +9,7 @@
 #ifdef APP_ENABLE_ASSERTS
     
     template <typename T, typename... Ts>
-    void APP_ASSERT(T x, Ts... args)
+    constexpr void APP_ASSERT(T x, Ts... args)
     {
         if (!(x))
         {
