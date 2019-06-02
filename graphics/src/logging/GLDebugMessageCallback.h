@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    void GLAPIENTRY GLDebugMessageCallback(GLenum source,
+    void GLAPIENTRY GL_DEBUG_MESSAGE_CALLBACK(GLenum source,
                                            GLenum type,
                                            GLuint id,
                                            GLenum severity,

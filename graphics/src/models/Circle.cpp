@@ -3,16 +3,15 @@
 
 #include "types/Vertex1.h"
 
-#include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Graphics {
 
-    Circle::Circle(unsigned int numVertexes)
+    Circle::Circle(const unsigned int numVertexes)
         : Model(MakeVertexes(numVertexes), MakeIndexesForTriangleDrawMode(numVertexes))
     {}
 
-    std::vector<Vertex1> Circle::MakeVertexes(unsigned int numVertexes) const
+    std::vector<Vertex1> Circle::MakeVertexes(const unsigned int numVertexes) const
     {
         const auto defaultColor = glm::vec4{ 1.0f, 1.0f, 1.0f, 1.0f };
         const auto origin = glm::vec4{ 0.0f, 0.0f, 0.0f, 1.0f };
@@ -24,7 +23,7 @@ namespace Graphics {
         vertexes.emplace_back(origin, defaultColor);
         vertexes.emplace_back(basePoint, defaultColor);
 
-        glm::vec3 rotationAxis(0.0f, 0.0f, 1.0f);
+        const glm::vec3 rotationAxis(0.0f, 0.0f, 1.0f);
 
         for (auto i = 1u; i < numVertexes - 1; i++) //Note the loop index starts at 1.
         {
@@ -37,7 +36,7 @@ namespace Graphics {
         return vertexes;
     }
 
-    std::vector<unsigned int> Circle::MakeIndexesForTriangleDrawMode(unsigned int numVertexes) const
+    std::vector<unsigned int> Circle::MakeIndexesForTriangleDrawMode(const unsigned int numVertexes)
     {
         std::vector<unsigned int> indexes;
         indexes.reserve(3 * (numVertexes - 1));
@@ -56,7 +55,7 @@ namespace Graphics {
         return indexes;
     }
 
-    std::vector<unsigned int> Circle::MakeIndexesForLineDrawMode(unsigned int numVertexes) const
+    std::vector<unsigned int> Circle::MakeIndexesForLineDrawMode(const unsigned int numVertexes)
     {
         std::vector<unsigned int> indexes;
         indexes.reserve((numVertexes - 1) * 4);

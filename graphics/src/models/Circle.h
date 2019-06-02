@@ -6,16 +6,15 @@
 
 namespace Graphics {
 
-    struct Circle : public Model
+    struct Circle final : Model
     {
-    public:
-        Circle(unsigned int numVertexes = 4);
+        explicit Circle(unsigned int numVertexes = 4);
 
-        [[nodiscard]] std::vector<unsigned int> MakeIndexesForLineDrawMode(unsigned int numVertexes) const;
+        [[nodiscard]] static std::vector<unsigned int> MakeIndexesForLineDrawMode(unsigned int numVertexes);
 
     private:
         [[nodiscard]] std::vector<Vertex1> MakeVertexes(unsigned int numVertexes) const;
-        [[nodiscard]] std::vector<unsigned int> MakeIndexesForTriangleDrawMode(unsigned int numVertexes) const;
+        [[nodiscard]] static std::vector<unsigned int> MakeIndexesForTriangleDrawMode(unsigned int numVertexes);
     };
 
 }

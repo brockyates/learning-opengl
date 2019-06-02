@@ -1,4 +1,8 @@
 #include "pch.h"
+
+#include "models/Circle.h"
+#include "models/Triangle.h"
+
 #include "ModelGenerator.h"
 
 namespace Graphics {

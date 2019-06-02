@@ -11,10 +11,10 @@ namespace Graphics { namespace Utils {
     public:
         static void Init();
 
-        inline static std::shared_ptr<spdlog::logger>& GetLogger() { return s_Logger; }
-        inline static std::shared_ptr<spdlog::logger>& GetOpenGLLogger() { return s_OpenGLLogger; }
+        static std::shared_ptr<spdlog::logger>& GetLogger() { return s_Logger; }
+        static std::shared_ptr<spdlog::logger>& GetOpenGLLogger() { return s_OpenGLLogger; }
 
-        inline static const std::ostringstream& GetLogStream() { return s_LogStream; }
+        static const std::ostringstream& GetLogStream() { return s_LogStream; }
 
     private:
         static std::shared_ptr<spdlog::logger> s_Logger;

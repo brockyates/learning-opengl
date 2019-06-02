@@ -254,10 +254,10 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        triangleShaderId_ = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        triangleShaderId_ = CREATE_SHADER("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
         triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_, "u_Proj");
 
-        lineShaderId_ = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        lineShaderId_ = CREATE_SHADER("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
         lineColorUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_LineColor");
         lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_Proj");
 

@@ -12,7 +12,14 @@ namespace Graphics {
     class Event
     {
     public:
-        virtual ~Event() = default;;
+        Event() = default;
+        virtual ~Event() = default;
+
+        Event(const Event&) = default;
+        Event(Event&&) = default;
+
+        Event& operator=(const Event&) = default;
+        Event& operator=(Event&&) = default;
 
         [[nodiscard]] virtual EventType Type() const = 0;
     };

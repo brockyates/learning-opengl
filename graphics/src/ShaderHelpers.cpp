@@ -3,8 +3,6 @@
 
 #include "logging/Log.h"
 
-#include "Window.h"
-
 #include <glad/glad.h>
 
 #include <fstream>
@@ -14,9 +12,9 @@ namespace Graphics {
 
     namespace {
 
-        std::string Parse(const std::string& filePath)
+        std::string PARSE(const std::string& filePath)
         {
-            std::ifstream shaderFile(filePath);
+            const std::ifstream shaderFile(filePath);
 
             if (shaderFile.fail()) {
                 LOG_ERROR([&]()
@@ -46,7 +44,7 @@ namespace Graphics {
             {
                 int msgLength = 0;
                 glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &msgLength);
-                auto msg = (char*)alloca(msgLength * sizeof(char));
+                const auto msg = static_cast<char*>(alloca(msgLength * sizeof(char)));
                 glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg);
 
                 LOG_GL_ERROR([&]()
@@ -64,7 +62,7 @@ namespace Graphics {
         }
     }
 
-    unsigned int CreateShader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+    unsigned int CREATE_SHADER(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
     {
         LOG_GL_TRACE([&]()
         {
@@ -74,8 +72,8 @@ namespace Graphics {
         }());
 
         const auto program = glCreateProgram();
-        const auto vertexShader = Compile(GL_VERTEX_SHADER, Parse(vertexShaderPath));
-        const auto fragmentShader = Compile(GL_FRAGMENT_SHADER, Parse(fragmentShaderPath));
+        const auto vertexShader = Compile(GL_VERTEX_SHADER, PARSE(vertexShaderPath));
+        const auto fragmentShader = Compile(GL_FRAGMENT_SHADER, PARSE(fragmentShaderPath));
 
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);

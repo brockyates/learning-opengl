@@ -7,14 +7,13 @@
 #include <ctime>
 #include <filesystem>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
 namespace Graphics {
 
     namespace {
 
-        void WriteLogToFile()
+        void WRITE_LOG_TO_FILE()
         {
             const auto t = std::time(nullptr);
             const auto utcTime = *std::gmtime(&t);
@@ -24,16 +23,16 @@ namespace Graphics {
 
             std::filesystem::create_directory("../bin/logs");
             std::ofstream file(ss.str(), std::ios::binary);
-            file << Graphics::Utils::Log::GetLogStream().str();
+            file << Utils::Log::GetLogStream().str();
         }
 
     }
 
     void GLAPIENTRY
-        GLDebugMessageCallback(GLenum /*source*/,
-                               GLenum type,
+        GL_DEBUG_MESSAGE_CALLBACK(GLenum /*source*/,
+                                  const GLenum type,
                                GLuint /*id*/,
-                               GLenum severity,
+                                  const GLenum severity,
                                GLsizei /*length*/,
                                const GLchar* message,
                                const void* /*userParam*/)
@@ -45,7 +44,7 @@ namespace Graphics {
             return;
 
         LOG_GL_ERROR(ss.str());
-        WriteLogToFile(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
+        WRITE_LOG_TO_FILE(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
 
         APP_ASSERT(false, "Exiting due to OpenGL error");
     }

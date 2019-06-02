@@ -1,8 +1,6 @@
 #pragma once
 
 #include "models/Model.h"
-#include "models/Triangle.h"
-#include "models/Circle.h"
 
 #include <memory>
 

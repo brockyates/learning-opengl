@@ -50,7 +50,7 @@ namespace Graphics {
         ImGui::Begin("DemoWidget");
 
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
-        ImGui::TextWrapped(Description().c_str());
+        ImGui::TextWrapped("%s", Description().c_str());
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Separator();
 
@@ -91,7 +91,7 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        shaderId_ = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        shaderId_ = CREATE_SHADER("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
         attached_ = true;
     }

@@ -340,7 +340,7 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        shaderId_ = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
+        shaderId_ = CREATE_SHADER("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
         pointSizeUniformLocation_ = glGetUniformLocation(shaderId_, "u_PointSize");
         projMatrixUniformLocation_ = glGetUniformLocation(shaderId_, "u_Proj");
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "events/Event.h"
-#include "events/ChangeToFullscreenEvent.h"
 #include "events/RenderTargetChangeEvent.h"
 
 #include "layers/Layer.h"

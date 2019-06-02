@@ -18,7 +18,7 @@ namespace Graphics {
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(GLDebugMessageCallback, nullptr);
+        glDebugMessageCallback(GL_DEBUG_MESSAGE_CALLBACK, nullptr);
 #endif
     }
 
