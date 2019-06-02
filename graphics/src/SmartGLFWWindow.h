@@ -8,15 +8,16 @@ namespace Graphics {
 
     struct WindowProperties;
 
-    struct DestroyGLFWWin {
+    struct DestroyGlfwWin {
 
-        void operator()(GLFWwindow* ptr) {
+        void operator()(GLFWwindow* ptr) const
+        {
             glfwDestroyWindow(ptr);
         }
     };
 
-    using SmartGLFWWindow = std::unique_ptr<GLFWwindow, DestroyGLFWWin>;
+    using SmartGlfwWindow = std::unique_ptr<GLFWwindow, DestroyGlfwWin>;
 
-    SmartGLFWWindow CreateGLFWWindow(WindowProperties& windowProperties);
+    SmartGlfwWindow CREATE_GLFW_WINDOW(WindowProperties& windowProperties);
 
 }

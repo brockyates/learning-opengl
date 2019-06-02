@@ -83,13 +83,13 @@ namespace Graphics {
         {
             LOG_GL_ERROR([&]() {
                 std::stringstream ss;
-                ss << "Framebuffer status error. Status: " << std::hex << frameBufferStatus;
+                ss << "Frame buffer status error. Status: " << std::hex << frameBufferStatus;
                 return ss.str();
             }());
         }
         else
         {
-            LOG_GL_TRACE("Framebuffer complete");
+            LOG_GL_TRACE("Frame buffer complete");
         }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

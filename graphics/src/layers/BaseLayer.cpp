@@ -173,7 +173,7 @@ namespace Graphics {
     {
         static ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_None;
 
-        // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
+        // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dock-able into,
         // because it would be confusing to have two docking targets within each others.
         auto windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
         const auto viewport = ImGui::GetMainViewport();
@@ -187,7 +187,7 @@ namespace Graphics {
         windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
         windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
-        ImGui::Begin("MainDockspaceWindow", 0, windowFlags);
+        ImGui::Begin("MainDockspaceWindow", nullptr, windowFlags);
         ImGui::PopStyleVar(3);
 
         auto& io = ImGui::GetIO();

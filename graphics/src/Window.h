@@ -57,7 +57,7 @@ namespace Graphics
 
     private:
         WindowProperties properties_;
-        SmartGLFWWindow window_;
+        SmartGlfwWindow window_;
         WindowInput input_;
         EventHandler<Event> eventCallback_;
     };

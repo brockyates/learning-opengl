@@ -4,12 +4,12 @@ namespace Graphics {
 
     struct WindowLayout
     {
-        WindowLayout(int width, int  height, int  xpos, int  ypos, float aspectRatio);
+        WindowLayout(int width, int  height, int  xPos, int  yPos, float aspectRatio);
 
         int Width;
         int Height;
-        int Xpos;
-        int Ypos;
+        int XPos;
+        int YPos;
         float WindowedAspectRatio;
     };
 

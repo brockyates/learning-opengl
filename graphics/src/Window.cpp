@@ -12,7 +12,7 @@ namespace Graphics {
 
     Window::Window(EventHandler<Event> eventCallback)
         : properties_(WindowDefaults::Properties)
-        , window_(CreateGLFWWindow(properties_))
+        , window_(CREATE_GLFW_WINDOW(properties_))
         , input_(window_.get())
         , eventCallback_(std::move(eventCallback))
     {
@@ -50,7 +50,7 @@ namespace Graphics {
             properties_.Mode = WindowMode::Windowed;
             glfwHideWindow(window_.get());
             glfwSetWindowMonitor(window_.get(), nullptr, 0, 0, properties_.Layout.Width, properties_.Layout.Height, GLFW_DONT_CARE);
-            glfwSetWindowPos(window_.get(), properties_.Layout.Xpos, properties_.Layout.Ypos);
+            glfwSetWindowPos(window_.get(), properties_.Layout.XPos, properties_.Layout.YPos);
             glfwShowWindow(window_.get());
 
             FireEvent(AspectRatioChangeEvent(properties_.Layout.WindowedAspectRatio));
@@ -63,7 +63,7 @@ namespace Graphics {
         {
             properties_.Mode = WindowMode::Fullscreen;
             glfwGetWindowSize(window_.get(), &properties_.Layout.Width, &properties_.Layout.Height);
-            glfwGetWindowPos(window_.get(), &properties_.Layout.Xpos, &properties_.Layout.Ypos);
+            glfwGetWindowPos(window_.get(), &properties_.Layout.XPos, &properties_.Layout.YPos);
             glfwSetWindowMonitor(window_.get(), glfwGetPrimaryMonitor(), 0, 0, properties_.Resolution.Width, properties_.Resolution.Height, GLFW_DONT_CARE);
             glfwShowWindow(window_.get());
             glfwFocusWindow(window_.get());

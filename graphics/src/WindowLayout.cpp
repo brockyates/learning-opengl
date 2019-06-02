@@ -3,11 +3,11 @@
 
 namespace Graphics {
 
-    WindowLayout::WindowLayout(int width, int  height, int  xpos, int  ypos, float aspectRatio)
+    WindowLayout::WindowLayout(const int width, const int  height, const int  xPos, const int  yPos, const float aspectRatio)
         : Width(width)
         , Height(height)
-        , Xpos(xpos)
-        , Ypos(ypos)
+        , XPos(xPos)
+        , YPos(yPos)
         , WindowedAspectRatio(aspectRatio)
     {}
 
