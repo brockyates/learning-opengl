@@ -9,8 +9,8 @@
 
 #include "models/Circle.h"
 
-#include "ShaderHelpers.h"
-#include "Timer.h"
+#include "helpers/ShaderHelpers.h"
+#include "types/Timer.h"
 #include "window/Window.h"
 
 #include <glad/glad.h>

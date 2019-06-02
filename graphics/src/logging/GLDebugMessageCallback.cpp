@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "GLDebugMessageCallback.h"
 
-#include "GlobalMacros.h"
+#include "helpers/GlobalMacros.h"
 #include "Log.h"
 
 #include <ctime>

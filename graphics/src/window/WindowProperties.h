@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ResolutionSetting.h"
+#include "window/ResolutionSetting.h"
 #include "WindowMode.h"
 #include "WindowLayout.h"
 

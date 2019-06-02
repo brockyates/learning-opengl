@@ -5,7 +5,7 @@
 
 #include "logging/Log.h"
 
-#include "ShaderHelpers.h"
+#include "helpers/ShaderHelpers.h"
 #include "window/Window.h"
 
 #include <glad/glad.h>

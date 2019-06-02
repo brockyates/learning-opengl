@@ -6,7 +6,7 @@
 #include "events/ResolutionChangeEvent.h"
 #include "events/WindowCloseEvent.h"
 
-#include "ResolutionSetting.h"
+#include "window/ResolutionSetting.h"
 #include "SmartGLFWWindow.h"
 #include "WindowInput.h"
 #include "WindowProperties.h"

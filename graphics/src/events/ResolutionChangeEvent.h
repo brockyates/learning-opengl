@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "ResolutionSetting.h"
+#include "window/ResolutionSetting.h"
 
 namespace Graphics {
 

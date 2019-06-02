@@ -6,7 +6,7 @@
 
 #include "logging/Log.h"
 
-#include "MathHelpers.h"
+#include "helpers/MathHelpers.h"
 #include "window/Window.h"
 
 #include <glad/glad.h>

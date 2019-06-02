@@ -39,24 +39,6 @@
     <ClInclude Include="src\Application.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\GlobalMacros.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathHelpers.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ModelGenerator.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResolutionSetting.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ShaderHelpers.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Timer.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\events\AspectRatioChangeEvent.h">
       <Filter>src\events</Filter>
     </ClInclude>
@@ -160,24 +142,30 @@
     <ClInclude Include="src\window\WindowDefaults.h">
       <Filter>src\config</Filter>
     </ClInclude>
+    <ClInclude Include="src\models\ModelGenerator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\ResolutionSetting.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\GlobalMacros.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\MathHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\ShaderHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\types\Timer.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MathHelpers.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ModelGenerator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderHelpers.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\events\AspectRatioChangeEvent.cpp">
@@ -267,6 +255,18 @@
     </ClCompile>
     <ClCompile Include="src\window\WindowDefaults.cpp">
       <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\models\ModelGenerator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helpers\MathHelpers.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helpers\ShaderHelpers.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\types\Timer.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

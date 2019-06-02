@@ -100,14 +100,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\GlobalMacros.h" />
+    <ClInclude Include="src\helpers\GlobalMacros.h" />
     <ClInclude Include="src\imgui\ImGuiHelpers.h" />
-    <ClInclude Include="src\MathHelpers.h" />
-    <ClInclude Include="src\ModelGenerator.h" />
-    <ClInclude Include="src\ResolutionSetting.h" />
-    <ClInclude Include="src\ShaderHelpers.h" />
+    <ClInclude Include="src\helpers\MathHelpers.h" />
+    <ClInclude Include="src\models\ModelGenerator.h" />
+    <ClInclude Include="src\window\ResolutionSetting.h" />
+    <ClInclude Include="src\helpers\ShaderHelpers.h" />
     <ClInclude Include="src\window\SmartGLFWWindow.h" />
-    <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\types\Timer.h" />
     <ClInclude Include="src\window\Window.h" />
     <ClInclude Include="src\window\WindowInput.h" />
     <ClInclude Include="src\window\WindowLayout.h" />
@@ -146,11 +146,11 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
-    <ClCompile Include="src\MathHelpers.cpp" />
-    <ClCompile Include="src\ModelGenerator.cpp" />
-    <ClCompile Include="src\ShaderHelpers.cpp" />
+    <ClCompile Include="src\helpers\MathHelpers.cpp" />
+    <ClCompile Include="src\models\ModelGenerator.cpp" />
+    <ClCompile Include="src\helpers\ShaderHelpers.cpp" />
     <ClCompile Include="src\window\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\types\Timer.cpp" />
     <ClCompile Include="src\window\Window.cpp" />
     <ClCompile Include="src\window\WindowInput.cpp" />
     <ClCompile Include="src\window\WindowLayout.cpp" />

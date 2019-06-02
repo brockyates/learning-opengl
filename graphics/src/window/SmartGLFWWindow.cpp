@@ -4,7 +4,7 @@
 #include "window/WindowDefaults.h"
 #include "logging/Log.h"
 
-#include "GlobalMacros.h"
+#include "helpers/GlobalMacros.h"
 #include "WindowProperties.h"
 
 #include <glad/glad.h>
