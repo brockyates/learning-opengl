@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "BaseLayer.h"
 
-#include "config/WindowDefaults.h"
+#include "window/WindowDefaults.h"
 
 #include "logging/Log.h"
 
-#include "Window.h"
+#include "window/Window.h"
 
 #include <imgui_internal.h> //Needed to create docking layout presets
 #include <utility>

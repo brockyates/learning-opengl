@@ -2,7 +2,7 @@
 #include "PassthroughLayer.h"
 #include <utility>
 
-#include "Window.h"
+#include "window/Window.h"
 
 namespace Graphics {
 

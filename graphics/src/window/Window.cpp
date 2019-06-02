@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Window.h"
+#include "window/Window.h"
 #include <utility>
 
-#include "config/WindowDefaults.h"
+#include "window/WindowDefaults.h"
 
 #include "events/EventDispatcher.h"
 

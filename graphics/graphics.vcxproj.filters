@@ -54,29 +54,8 @@
     <ClInclude Include="src\ShaderHelpers.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\SmartGLFWWindow.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Timer.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Window.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowInput.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowLayout.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowMode.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowProperties.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\config\WindowDefaults.h">
-      <Filter>src\config</Filter>
     </ClInclude>
     <ClInclude Include="src\events\AspectRatioChangeEvent.h">
       <Filter>src\events</Filter>
@@ -160,6 +139,27 @@
       <Filter>src\types</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiHelpers.h" />
+    <ClInclude Include="src\window\WindowProperties.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\Window.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\WindowInput.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\WindowLayout.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\WindowMode.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\SmartGLFWWindow.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\WindowDefaults.h">
+      <Filter>src\config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -177,26 +177,8 @@
     <ClCompile Include="src\ShaderHelpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\SmartGLFWWindow.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Timer.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Window.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindowInput.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindowLayout.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindowProperties.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\config\WindowDefaults.cpp">
-      <Filter>src\config</Filter>
     </ClCompile>
     <ClCompile Include="src\events\AspectRatioChangeEvent.cpp">
       <Filter>src\events</Filter>
@@ -268,6 +250,24 @@
       <Filter>src\types</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
+    <ClCompile Include="src\window\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\WindowInput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\WindowLayout.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\WindowProperties.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\SmartGLFWWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\WindowDefaults.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

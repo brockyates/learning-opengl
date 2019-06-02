@@ -8,7 +8,7 @@
 #include "ModelGenerator.h"
 #include "ShaderHelpers.h"
 #include "Timer.h"
-#include "Window.h"
+#include "window/Window.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>

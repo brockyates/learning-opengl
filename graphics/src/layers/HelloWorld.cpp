@@ -6,7 +6,7 @@
 #include "logging/Log.h"
 
 #include "ShaderHelpers.h"
-#include "Window.h"
+#include "window/Window.h"
 
 #include <glad/glad.h>
 #include <imgui.h>

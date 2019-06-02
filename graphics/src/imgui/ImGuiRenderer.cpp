@@ -6,7 +6,7 @@
 
 #include "logging/Log.h"
 
-#include "Window.h"
+#include "window/Window.h"
 
 #include <imgui.h>
 #include <GLFW/glfw3.h>

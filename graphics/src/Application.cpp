@@ -3,7 +3,7 @@
 
 #include "logging/Log.h"
 
-#include "Window.h"
+#include "window/Window.h"
 
 namespace Graphics {
 

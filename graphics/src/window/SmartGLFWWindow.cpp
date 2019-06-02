@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SmartGLFWWindow.h"
 
-#include "config/WindowDefaults.h"
+#include "window/WindowDefaults.h"
 #include "logging/Log.h"
 
 #include "GlobalMacros.h"

@@ -7,7 +7,7 @@
 #include "logging/Log.h"
 
 #include "MathHelpers.h"
-#include "Window.h"
+#include "window/Window.h"
 
 #include <glad/glad.h>
 #include <imgui.h>
