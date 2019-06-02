@@ -302,7 +302,7 @@ static void ImGui_ImplGlfw_UpdateMousePosAndButtons()
 static void ImGui_ImplGlfw_UpdateMouseCursor()
 {
     ImGuiIO& io = ImGui::GetIO();
-    if ((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) || glfwGetInputMode(g_Window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
+    if (io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange || glfwGetInputMode(g_Window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
         return;
 
     ImGuiMouseCursor imgui_cursor = ImGui::GetMouseCursor();
@@ -328,7 +328,7 @@ static void ImGui_ImplGlfw_UpdateMouseCursor()
 static void ImGui_ImplGlfw_UpdateGamepads()
 {
     ImGuiIO& io = ImGui::GetIO();
-    memset(io.NavInputs, 0, sizeof(io.NavInputs));
+    memset(io.NavInputs, 0, sizeof io.NavInputs);
     if ((io.ConfigFlags & ImGuiConfigFlags_NavEnableGamepad) == 0)
         return;
 
@@ -431,11 +431,11 @@ static void ImGui_ImplGlfw_CreateWindow(ImGuiViewport* viewport)
     // GLFW 3.2 unfortunately always set focus on glfwCreateWindow() if GLFW_VISIBLE is set, regardless of GLFW_FOCUSED
     glfwWindowHint(GLFW_VISIBLE, false);
     glfwWindowHint(GLFW_FOCUSED, false);
-    glfwWindowHint(GLFW_DECORATED, (viewport->Flags & ImGuiViewportFlags_NoDecoration) ? false : true);
+    glfwWindowHint(GLFW_DECORATED, viewport->Flags & ImGuiViewportFlags_NoDecoration ? false : true);
 #if GLFW_HAS_WINDOW_TOPMOST
-    glfwWindowHint(GLFW_FLOATING, (viewport->Flags & ImGuiViewportFlags_TopMost) ? true : false);
+    glfwWindowHint(GLFW_FLOATING, viewport->Flags & ImGuiViewportFlags_TopMost ? true : false);
 #endif
-    GLFWwindow* share_window = (g_ClientApi == GlfwClientApi_OpenGL) ? g_Window : NULL;
+    GLFWwindow* share_window = g_ClientApi == GlfwClientApi_OpenGL ? g_Window : NULL;
     data->Window = glfwCreateWindow((int)viewport->Size.x, (int)viewport->Size.y, "No Title Yet", NULL, share_window);
     data->WindowOwned = true;
     viewport->PlatformHandle = (void*)data->Window;
@@ -522,7 +522,7 @@ static void ImGui_ImplGlfw_ShowWindow(ImGuiViewport* viewport)
     // FIXME-VIEWPORT: Implement same work-around for Linux/OSX in the meanwhile.
     if (viewport->Flags & ImGuiViewportFlags_NoFocusOnAppearing)
     {
-        ::ShowWindow(hwnd, SW_SHOWNA);
+        ShowWindow(hwnd, SW_SHOWNA);
         return;
     }
 #endif
@@ -628,10 +628,10 @@ static void ImGui_ImplWin32_SetImeInputPos(ImGuiViewport* viewport, ImVec2 pos)
     COMPOSITIONFORM cf = { CFS_FORCE_POSITION, { (LONG)(pos.x - viewport->Pos.x), (LONG)(pos.y - viewport->Pos.y) }, { 0, 0, 0, 0 } };
     if (ImGuiViewportDataGlfw* data = (ImGuiViewportDataGlfw*)viewport->PlatformUserData)
         if (HWND hwnd = glfwGetWin32Window(data->Window))
-            if (HIMC himc = ::ImmGetContext(hwnd))
+            if (HIMC himc = ImmGetContext(hwnd))
             {
-                ::ImmSetCompositionWindow(himc, &cf);
-                ::ImmReleaseContext(hwnd, himc);
+                ImmSetCompositionWindow(himc, &cf);
+                ImmReleaseContext(hwnd, himc);
             }
 }
 #else

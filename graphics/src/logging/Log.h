@@ -33,74 +33,74 @@ namespace Graphics { namespace Utils {
     template <typename... Ts>
     constexpr void LOG_TRACE(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->trace(args...);
+        Graphics::Utils::Log::GetLogger()->trace(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_INFO(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->info(args...);
+        Graphics::Utils::Log::GetLogger()->info(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_WARN(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->warn(args...);
+        Graphics::Utils::Log::GetLogger()->warn(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_ERROR(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->error(args...);
+        Graphics::Utils::Log::GetLogger()->error(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_DEBUG(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->debug(args...);
+        Graphics::Utils::Log::GetLogger()->debug(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_CRITICAL(Ts... args)
     {
-        ::Graphics::Utils::Log::GetLogger()->critical(args...);
+        Graphics::Utils::Log::GetLogger()->critical(args...);
     }
 
     // OpenGL Log macros
     template <typename... Ts>
     constexpr void LOG_GL_TRACE(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->trace(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->trace(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_GL_INFO(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->info(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->info(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_GL_WARN(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->warn(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->warn(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_GL_ERROR(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->error(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->error(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_GL_DEBUG(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->debug(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->debug(args...);
     }
 
     template <typename... Ts>
     constexpr void LOG_GL_CRITICAL(Ts... args)
     {
-        ::Graphics::Utils::Log::GetOpenGlLogger()->critical(args...);
+        Graphics::Utils::Log::GetOpenGlLogger()->critical(args...);
     }
 
 #else

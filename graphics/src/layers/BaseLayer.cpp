@@ -40,13 +40,13 @@ namespace Graphics {
 
     void BaseLayer::HandleFullscreenInput()
     {
-        if (f11Ready_ && (window_.Input().IsKeyPressed(GLFW_KEY_F11)))
+        if (f11Ready_ && window_.Input().IsKeyPressed(GLFW_KEY_F11))
         {
             f11Ready_ = false;
             FireEvent(ChangeToWindowedEvent());
         }
 
-        if (escReady_ && (window_.Input().IsKeyPressed(GLFW_KEY_ESCAPE)))
+        if (escReady_ && window_.Input().IsKeyPressed(GLFW_KEY_ESCAPE))
         {
             escReady_ = false;
             FireEvent(ChangeToWindowedEvent());
@@ -55,7 +55,7 @@ namespace Graphics {
 
     void BaseLayer::HandleWindowedInput()
     {
-        if (f11Ready_ && (window_.Input().IsKeyPressed(GLFW_KEY_F11)))
+        if (f11Ready_ && window_.Input().IsKeyPressed(GLFW_KEY_F11))
         {
             f11Ready_ = false;
             FireEvent(ChangeToFullscreenEvent());
@@ -108,7 +108,7 @@ namespace Graphics {
                 {
                     for (const auto& resolution : WindowDefaults::SupportedResolutions)
                     {
-                        const auto isSelected = (window_.Resolution() == resolution);
+                        const auto isSelected = window_.Resolution() == resolution;
 
                         if (ImGui::Selectable(resolution.DisplayName.c_str(), isSelected))
                         {
@@ -209,7 +209,7 @@ namespace Graphics {
     {
         ImGui::Begin("Log", nullptr, ImGuiWindowFlags_HorizontalScrollbar);
             
-            const auto& logString = Graphics::Utils::Log::GetLogStream().rdbuf()->str();
+            const auto& logString = Utils::Log::GetLogStream().rdbuf()->str();
             ImGui::TextUnformatted(logString.c_str());
             ImGui::SetScrollHereY(1.0f);
 

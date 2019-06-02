@@ -5,7 +5,7 @@
 
 namespace Graphics {
 
-    bool AreSame(float a, float b, float epsilon)
+    bool ARE_SAME(const float a, const float b, const float epsilon)
     {
         return fabs(a - b) < epsilon;
     }

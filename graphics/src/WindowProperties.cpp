@@ -4,7 +4,7 @@
 
 namespace Graphics {
 
-    WindowProperties::WindowProperties(std::string title, const ResolutionSetting& resolution, WindowMode windowMode, WindowLayout layout)
+    WindowProperties::WindowProperties(std::string title, const ResolutionSetting& resolution, const WindowMode windowMode, const WindowLayout layout)
         : Title(std::move(title))
         , Resolution(resolution)
         , Mode(windowMode)

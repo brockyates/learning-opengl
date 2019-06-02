@@ -5,8 +5,7 @@
 
 namespace Graphics {
 
-    ChangeToWindowedEvent::ChangeToWindowedEvent()
-    = default;
+    ChangeToWindowedEvent::ChangeToWindowedEvent() = default;
 
     EventType ChangeToWindowedEvent::Type() const
     {
@@ -17,4 +16,5 @@ namespace Graphics {
     {
         return EventType::ChangeToWindowedEvent;
     }
-};
+
+}

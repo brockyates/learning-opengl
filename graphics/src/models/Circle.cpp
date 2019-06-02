@@ -27,7 +27,7 @@ namespace Graphics {
 
         for (auto i = 1u; i < numVertexes - 1; i++) //Note the loop index starts at 1.
         {
-            glm::mat4 transform = glm::rotate(glm::mat4(1.0f), i*angle, rotationAxis);
+            glm::mat4 transform = rotate(glm::mat4(1.0f), i*angle, rotationAxis);
             glm::vec4 nextPoint = transform * basePoint;
 
             vertexes.emplace_back(nextPoint, defaultColor);
@@ -41,12 +41,12 @@ namespace Graphics {
         std::vector<unsigned int> indexes;
         indexes.reserve(3 * (numVertexes - 1));
 
-        for (auto i = 0u; i < (numVertexes - 2); i++)
+        for (auto i = 0u; i < numVertexes - 2; i++)
         {
             indexes.emplace_back(i+2);
             indexes.emplace_back(0);
             indexes.emplace_back(i+1);
-        };
+        }
 
         indexes.emplace_back(1);
         indexes.emplace_back(0);

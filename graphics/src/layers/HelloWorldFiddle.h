@@ -41,12 +41,10 @@ namespace Graphics {
             std::string DisplayName;
         };
 
-    private:
         //Event handlers
         EventHandler<RenderTargetChangeEvent> OnRenderTargetChanged();
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
 
-    private:
         //Scene rendering
         void UpdateVertexes();
         void UpdateVertex(glm::vec4& vertex, glm::vec4& direction) const;
@@ -55,7 +53,6 @@ namespace Graphics {
         void ChangeDrawMode(const DrawMode& nextMode);
         [[nodiscard]] static glm::vec4 GetRandomVertexDirection();
 
-    private:
         //UI Rendering
         void DrawDescription() const;
         void DrawModeSelector();
@@ -64,7 +61,6 @@ namespace Graphics {
         void DrawLineControls();
         void DrawPointControls();
 
-    private:
         bool attached_ = false;
         double lastTime_;
         double deltaTime_ = 0;
@@ -92,9 +88,9 @@ namespace Graphics {
         bool animationEnabled_ = false;
         float vertexMoveSpeed_ = 0.5f;
 
-        glm::vec4 vertex1Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
-        glm::vec4 vertex2Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
-        glm::vec4 vertex3Direction_ = HelloWorldFiddle::GetRandomVertexDirection();
+        glm::vec4 vertex1Direction_ = GetRandomVertexDirection();
+        glm::vec4 vertex2Direction_ = GetRandomVertexDirection();
+        glm::vec4 vertex3Direction_ = GetRandomVertexDirection();
 
         glm::mat4 projectionMatrix_;
         unsigned int projMatrixUniformLocation_ = 0;

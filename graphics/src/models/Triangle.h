@@ -4,13 +4,12 @@
 
 namespace Graphics {
 
-    struct Triangle : public Model
+    struct Triangle final : Model
     {
-    public:
         Triangle();
 
     private:
-        static constexpr float yOffset = 0.866f; //To produce equilateral triangle centered in scene
+        static constexpr float Y_OFFSET = 0.866f; //To produce equilateral triangle centered in scene
     };
 
 }

@@ -6,7 +6,7 @@ namespace Graphics {
 
     struct Vertex1
     {
-        Vertex1(glm::vec4 position, glm::vec4 color)
+        Vertex1(const glm::vec4 position, const glm::vec4 color)
             : Position(position)
             , Color(color)
         {}
@@ -14,13 +14,13 @@ namespace Graphics {
         glm::vec4 Position;
         glm::vec4 Color;
 
-        static const unsigned int VertexByteSize;
+        static const unsigned int VERTEX_BYTE_SIZE;
 
-        static const unsigned int ElementsPerPosition;
-        static const unsigned int PositionType;
+        static const unsigned int ELEMENTS_PER_POSITION;
+        static const unsigned int POSITION_TYPE;
 
-        static const unsigned int ElementsPerColor;
-        static const unsigned int ColorType;
+        static const unsigned int ELEMENTS_PER_COLOR;
+        static const unsigned int COLOR_TYPE;
 
     };
 

@@ -26,7 +26,6 @@ namespace Graphics
         void ShowDemoSelector();
         void UpdateActiveLayer(Layer* nextActiveLayer);
 
-    private:
         std::vector<std::unique_ptr<Layer>> layers_;
         BaseLayer baseLayer_;
         RenderTargetLayer renderTarget_;

@@ -241,11 +241,11 @@ namespace Graphics {
 
         //Vertex Position
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, Vertex1::ElementsPerPosition, Vertex1::PositionType, GL_FALSE, Vertex1::VertexByteSize, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
+        glVertexAttribPointer(0, Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
 
         //Vertex Color
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, Vertex1::ElementsPerColor, Vertex1::ColorType, GL_FALSE, Vertex1::VertexByteSize, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
+        glVertexAttribPointer(1, Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
 
         //Release bindings
         glBindVertexArray(0);

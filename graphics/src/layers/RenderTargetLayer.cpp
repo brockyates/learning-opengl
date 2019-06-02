@@ -78,7 +78,7 @@ namespace Graphics {
 
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBufferId_);
 
-        const unsigned int frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
         {
             LOG_GL_ERROR([&]() {
@@ -115,7 +115,7 @@ namespace Graphics {
 
         const auto sceneDimensions = ImGui::GetWindowSize();
         const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
-        if (!AreSame(aspectRatio_, newAspectRatio, 0.001f))
+        if (!ARE_SAME(aspectRatio_, newAspectRatio, 0.001f))
         {
             aspectRatio_ = newAspectRatio;
             FireEvent(AspectRatioChangeEvent(newAspectRatio));

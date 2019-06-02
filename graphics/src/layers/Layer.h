@@ -23,10 +23,10 @@ namespace Graphics {
         virtual void RenderScene() {}
         virtual void RenderUi() {}
 
-        virtual void OnEvent(const Event&) {};
+        virtual void OnEvent(const Event&) {}
 
-        virtual void Attach() {};
-        virtual void Detach() {};
+        virtual void Attach() {}
+        virtual void Detach() {}
         [[nodiscard]] virtual bool IsAttached() const = 0;
 
         [[nodiscard]] virtual std::string PopupText() const { return ""; }

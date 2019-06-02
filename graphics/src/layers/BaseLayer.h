@@ -31,7 +31,6 @@ namespace Graphics {
         void ShowMainWindow();
         void ShowLogWindow() const;
 
-    private:
         //Input handling
         bool f11Ready_ = true;
         bool escReady_ = true;

@@ -34,13 +34,11 @@ namespace Graphics {
 
         void HandleAspectRatioChange();
 
-    private:
         //Event handlers
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
         EventHandler<ResolutionChangeEvent> OnResolutionChange();
 
-    private:
         //OpenGL state
         unsigned int windowedRenderTargetId_ = 0;
         unsigned int fullscreenRenderTargetId_ = 0;

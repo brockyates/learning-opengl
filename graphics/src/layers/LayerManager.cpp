@@ -78,7 +78,7 @@ namespace Graphics
         {
             for (auto& layer : layers_)
             {
-                const auto isSelected = (activeLayer_ == layer.get());
+                const auto isSelected = activeLayer_ == layer.get();
 
                 if (ImGui::Selectable(layer->Name().c_str(), isSelected))
                 {

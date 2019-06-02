@@ -55,7 +55,6 @@ namespace Graphics
         EventHandler<ChangeToFullscreenEvent> OnChangeToFullscreen();
         EventHandler<WindowCloseEvent> OnWindowClose();
 
-    private:
         WindowProperties properties_;
         SmartGlfwWindow window_;
         WindowInput input_;

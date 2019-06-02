@@ -5,7 +5,7 @@
 
 namespace Graphics {
 
-    RenderTargetChangeEvent::RenderTargetChangeEvent(unsigned int nextRenderTargetId)
+    RenderTargetChangeEvent::RenderTargetChangeEvent(const unsigned int nextRenderTargetId)
         : nextRenderTargetId_(nextRenderTargetId)
     {}
 

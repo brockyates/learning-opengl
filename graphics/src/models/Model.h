@@ -25,7 +25,7 @@ namespace Graphics {
 
         [[nodiscard]] unsigned int VertexDataByteSize() const
         {
-            return static_cast<unsigned int>(std::size(Vertexes)) * Vertex1::VertexByteSize;
+            return static_cast<unsigned int>(std::size(Vertexes)) * Vertex1::VERTEX_BYTE_SIZE;
         }
 
         [[nodiscard]] unsigned int IndexDataByteSize() const
