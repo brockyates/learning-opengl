@@ -12,12 +12,12 @@ namespace Graphics {
 
     namespace {
 
-        std::string PARSE(const std::string& filePath)
+        std::string Parse(const std::string& filePath)
         {
             const std::ifstream shaderFile(filePath);
 
             if (shaderFile.fail()) {
-                LOG_ERROR([&]()
+                LogError([&]()
                 {
                     std::stringstream ss;
                     ss << "Can't open shader file: " << filePath << ". Does the file exist?";
@@ -31,7 +31,7 @@ namespace Graphics {
             return ss.str();
         }
 
-        unsigned int COMPILE(unsigned int type, const std::string& shaderSource)
+        unsigned int Compile(unsigned int type, const std::string& shaderSource)
         {
             const auto shaderId = glCreateShader(type);
             const auto source = shaderSource.c_str();
@@ -47,7 +47,7 @@ namespace Graphics {
                 const auto msg = static_cast<char*>(alloca(msgLength * sizeof(char)));
                 glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg);
 
-                LOG_GL_ERROR([&]()
+                LogGlError([&]()
                 {
                     std::stringstream ss;
                     ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
@@ -62,9 +62,9 @@ namespace Graphics {
         }
     }
 
-    unsigned int CREATE_SHADER(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+    unsigned int CreateShader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
     {
-        LOG_GL_TRACE([&]()
+        LogGlTrace([&]()
         {
             std::stringstream ss;
             ss << "Creating shader: {VertexShader:\"" << vertexShaderPath << R"(", FragmentShader:")" << fragmentShaderPath << "\"}";
@@ -72,8 +72,8 @@ namespace Graphics {
         }());
 
         const auto program = glCreateProgram();
-        const auto vertexShader = COMPILE(GL_VERTEX_SHADER, PARSE(vertexShaderPath));
-        const auto fragmentShader = COMPILE(GL_FRAGMENT_SHADER, PARSE(fragmentShaderPath));
+        const auto vertexShader = Compile(GL_VERTEX_SHADER, Parse(vertexShaderPath));
+        const auto fragmentShader = Compile(GL_FRAGMENT_SHADER, Parse(fragmentShaderPath));
 
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);

@@ -57,7 +57,7 @@ namespace Graphics {
 
     void RenderTargetLayer::Attach()
     {
-        LOG_TRACE("Attaching RenderTargetLayer");
+        LogTrace("Attaching RenderTargetLayer");
 
         glGenFramebuffers(1, &windowedRenderTargetId_);
         glBindFramebuffer(GL_FRAMEBUFFER, windowedRenderTargetId_);
@@ -81,7 +81,7 @@ namespace Graphics {
         const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
         {
-            LOG_GL_ERROR([&]() {
+            LogGlError([&]() {
                 std::stringstream ss;
                 ss << "Frame buffer status error. Status: " << std::hex << frameBufferStatus;
                 return ss.str();
@@ -89,7 +89,7 @@ namespace Graphics {
         }
         else
         {
-            LOG_GL_TRACE("Frame buffer complete");
+            LogGlTrace("Frame buffer complete");
         }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -97,7 +97,7 @@ namespace Graphics {
 
     void RenderTargetLayer::Detach()
     {
-        LOG_TRACE("Detaching RenderTargetLayer");
+        LogTrace("Detaching RenderTargetLayer");
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -115,7 +115,7 @@ namespace Graphics {
 
         const auto sceneDimensions = ImGui::GetWindowSize();
         const auto newAspectRatio = sceneDimensions.x / sceneDimensions.y;
-        if (!ARE_SAME(aspectRatio_, newAspectRatio, 0.001f))
+        if (!AreSame(aspectRatio_, newAspectRatio, 0.001f))
         {
             aspectRatio_ = newAspectRatio;
             FireEvent(AspectRatioChangeEvent(newAspectRatio));

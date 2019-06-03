@@ -47,7 +47,7 @@ namespace Graphics {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-        LOG_TRACE("ImGuiRenderer::Shutdown");
+        LogTrace("ImGuiRenderer::Shutdown");
     }
 
     void ImGuiRenderer::BeginFrame()

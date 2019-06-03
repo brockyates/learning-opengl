@@ -5,7 +5,7 @@
 
 namespace Graphics
 {
-    void HELP_MARKER(const char* desc)
+    void HelpMarker(const char* desc)
     {
         ImGui::TextDisabled("(?)");
         if (ImGui::IsItemHovered())

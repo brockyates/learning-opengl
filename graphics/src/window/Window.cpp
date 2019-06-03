@@ -12,13 +12,13 @@ namespace Graphics {
 
     Window::Window(EventHandler<Event> eventCallback)
         : properties_(WindowDefaults::Properties)
-        , window_(CREATE_GLFW_WINDOW(properties_))
+        , window_(CreateGlfwWindow(properties_))
         , input_(window_.get())
         , eventCallback_(std::move(eventCallback))
     {
 #ifdef APP_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(GL_DEBUG_MESSAGE_CALLBACK, nullptr);
+        glDebugMessageCallback(GlDebugMessageCallback, nullptr);
 #endif
     }
 

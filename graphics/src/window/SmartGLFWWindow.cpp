@@ -11,10 +11,10 @@
 
 namespace Graphics {
 
-    void INITIALIZE_GLFW()
+    void InitializeGlfw()
     {
         const auto glfwInitStatus = glfwInit();
-        APP_ASSERT(glfwInitStatus, "Failed to initialize GLFW");
+        AppAssert(glfwInitStatus, "Failed to initialize GLFW");
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -22,12 +22,12 @@ namespace Graphics {
         glfwWindowHint(GLFW_MAXIMIZED, GL_FALSE);
     }
 
-    void SET_WINDOW_CONTEXT(GLFWwindow* window, WindowProperties& windowProperties)
+    void SetWindowContext(GLFWwindow* window, WindowProperties& windowProperties)
     {
         if (!window)
         {
             glfwTerminate();
-            APP_ASSERT(window, "Failed to create GLFW window");
+            AppAssert(window, "Failed to create GLFW window");
         }
 
         glfwMakeContextCurrent(window);
@@ -36,7 +36,7 @@ namespace Graphics {
         if (!gladLoadStatus)
         {
             glfwTerminate();
-            APP_ASSERT(gladLoadStatus, "Failed to initialize Glad");
+            AppAssert(gladLoadStatus, "Failed to initialize Glad");
         }
 
         glfwSetWindowUserPointer(window, &windowProperties);
@@ -54,13 +54,13 @@ namespace Graphics {
             windowProperties.Layout.Height = height;
         });
 
-        LOG_GL_INFO(glGetString(GL_RENDERER));
-        LOG_GL_INFO(glGetString(GL_VERSION));
+        LogGlInfo(glGetString(GL_RENDERER));
+        LogGlInfo(glGetString(GL_VERSION));
     } 
 
     namespace {
 
-        ResolutionSetting GET_DESKTOP_RESOLUTION_OR_DEFAULT()
+        ResolutionSetting GetDesktopResolutionOrDefault()
         {
             const auto videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
             const auto foundSupportedResolution = std::find_if(std::begin(WindowDefaults::SupportedResolutions), std::end(WindowDefaults::SupportedResolutions), [videoMode](const ResolutionSetting& setting)
@@ -79,10 +79,10 @@ namespace Graphics {
 
     // Create a windowed GLFW window, half the size of desktop resolution, centered on screen.
     // If the desktop resolution isn't supported, we'll choose 720p as the default window size.
-    SmartGlfwWindow CREATE_GLFW_WINDOW(WindowProperties& windowProperties)
+    SmartGlfwWindow CreateGlfwWindow(WindowProperties& windowProperties)
     {
-        INITIALIZE_GLFW();
-        windowProperties.Resolution = GET_DESKTOP_RESOLUTION_OR_DEFAULT();
+        InitializeGlfw();
+        windowProperties.Resolution = GetDesktopResolutionOrDefault();
 
         windowProperties.Layout = WindowLayout(
             windowProperties.Resolution.Width / 2,
@@ -97,7 +97,7 @@ namespace Graphics {
         glfwSetWindowPos(window.get(), windowProperties.Layout.XPos, windowProperties.Layout.YPos);
         glfwShowWindow(window.get());
 
-        SET_WINDOW_CONTEXT(window.get(), windowProperties);
+        SetWindowContext(window.get(), windowProperties);
         return window;
     }
 

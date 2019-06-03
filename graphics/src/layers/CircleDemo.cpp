@@ -93,7 +93,7 @@ namespace Graphics {
             nextVertexes_ = 4;
         }
 
-        ImGui::SameLine(); HELP_MARKER("CTRL + Click to enter value");
+        ImGui::SameLine(); HelpMarker("CTRL + Click to enter value");
         ImGui::SliderFloat("Interval", &animationInterval_, 0.0f, 1.0f);
 
         ImGui::End();
@@ -216,7 +216,7 @@ namespace Graphics {
     {
         if (attached_) return;
 
-        LOG_TRACE("Attaching CircleDemo");
+        LogTrace("Attaching CircleDemo");
 
         //Layer settings
         glEnable(GL_PROGRAM_POINT_SIZE);
@@ -254,10 +254,10 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        triangleShaderId_ = CREATE_SHADER("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        triangleShaderId_ = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
         triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_, "u_Proj");
 
-        lineShaderId_ = CREATE_SHADER("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        lineShaderId_ = CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
         lineColorUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_LineColor");
         lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShaderId_, "u_Proj");
 
@@ -268,7 +268,7 @@ namespace Graphics {
     {
         if (!attached_) return;
 
-        LOG_TRACE("Detaching CircleDemo");
+        LogTrace("Detaching CircleDemo");
 
         glDisable(GL_PROGRAM_POINT_SIZE);
 

@@ -23,6 +23,6 @@ namespace Graphics::Utils
         openGlLogger_->set_level(spdlog::level::trace);
         openGlLogger_->set_pattern(pattern);
 
-        LOG_INFO("spdlog initialized");
+        LogInfo("spdlog initialized");
     }
 }

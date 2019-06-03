@@ -9,15 +9,15 @@
 #ifdef APP_ENABLE_ASSERTS
     
     template <typename T, typename... Ts>
-    constexpr void APP_ASSERT(T x, Ts... args)
+    constexpr void AppAssert(T x, Ts... args)
     {
         if (!(x))
         {
-            LOG_ERROR("Assertion Failed: {0}", args...);
+            LogError("Assertion Failed: {0}", args...);
             __debugbreak();
         }
     }
 
 #else
-    #define APP_ASSERT(x, ...)
+    #define AppAssert(x, ...)
 #endif // APP_ENABLE_ASSERTS

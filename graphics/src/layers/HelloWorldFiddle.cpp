@@ -305,7 +305,7 @@ namespace Graphics {
     {
         if (attached_) return;
 
-        LOG_TRACE("Attaching HelloWorldFiddle");
+        LogTrace("Attaching HelloWorldFiddle");
 
         //Layer settings
         glEnable(GL_PROGRAM_POINT_SIZE);
@@ -340,7 +340,7 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        shaderId_ = CREATE_SHADER("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
+        shaderId_ = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
         pointSizeUniformLocation_ = glGetUniformLocation(shaderId_, "u_PointSize");
         projMatrixUniformLocation_ = glGetUniformLocation(shaderId_, "u_Proj");
 
@@ -351,7 +351,7 @@ namespace Graphics {
     {
         if (!attached_) return;
 
-        LOG_TRACE("Detaching HelloWorldFiddle");
+        LogTrace("Detaching HelloWorldFiddle");
 
         glDisable(GL_PROGRAM_POINT_SIZE);
         glLineWidth(1.0f);

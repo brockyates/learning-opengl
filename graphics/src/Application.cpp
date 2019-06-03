@@ -14,7 +14,7 @@ namespace Graphics {
 
     void Application::Start()
     {
-        LOG_INFO("Main application loop started");
+        LogInfo("Main application loop started");
 
         while (!window_->ShouldClose())
         {
@@ -28,7 +28,7 @@ namespace Graphics {
             window_->Update();
         }
 
-        LOG_INFO("Main application loop stopped");
+        LogInfo("Main application loop stopped");
     }
 
     // Top-level event handler

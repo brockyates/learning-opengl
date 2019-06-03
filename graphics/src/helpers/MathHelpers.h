@@ -2,6 +2,6 @@
 
 namespace Graphics {
 
-    bool ARE_SAME(float a, float b, float epsilon);
+    bool AreSame(float a, float b, float epsilon);
 
 }

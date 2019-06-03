@@ -75,7 +75,7 @@ namespace Graphics {
     {
         if (attached_) return;
 
-        LOG_TRACE("Attaching HelloWorld");
+        LogTrace("Attaching HelloWorld");
 
         glGenVertexArrays(1, &vertexArrayId_);
         glBindVertexArray(vertexArrayId_);
@@ -91,7 +91,7 @@ namespace Graphics {
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
 
-        shaderId_ = CREATE_SHADER("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        shaderId_ = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
         attached_ = true;
     }
@@ -100,7 +100,7 @@ namespace Graphics {
     {
         if (!attached_) return;
 
-        LOG_TRACE("Detaching HelloWorld");
+        LogTrace("Detaching HelloWorld");
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);

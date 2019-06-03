@@ -13,7 +13,7 @@ namespace Graphics {
 
     namespace {
 
-        void WRITE_LOG_TO_FILE()
+        void WriteLogToFile()
         {
             const auto t = std::time(nullptr);
             const auto utcTime = *std::gmtime(&t);
@@ -29,7 +29,7 @@ namespace Graphics {
     }
 
     void GLAPIENTRY
-        GL_DEBUG_MESSAGE_CALLBACK(GLenum /*source*/,
+        GlDebugMessageCallback(GLenum /*source*/,
                                   const GLenum type,
                                GLuint /*id*/,
                                   const GLenum severity,
@@ -43,10 +43,10 @@ namespace Graphics {
         if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
             return;
 
-        LOG_GL_ERROR(ss.str());
-        WRITE_LOG_TO_FILE(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
+        LogGlError(ss.str());
+        WriteLogToFile(); // If we're in this code, we may have crashed the UI so we'll write the log to a file for debugging.
 
-        APP_ASSERT(false, "Exiting due to OpenGL error");
+        AppAssert(false, "Exiting due to OpenGL error");
     }
 
 }
