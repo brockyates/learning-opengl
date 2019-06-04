@@ -100,20 +100,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\helpers\GlobalMacros.h" />
-    <ClInclude Include="src\imgui\ImGuiHelpers.h" />
-    <ClInclude Include="src\helpers\MathHelpers.h" />
-    <ClInclude Include="src\models\ModelGenerator.h" />
-    <ClInclude Include="src\window\ResolutionSetting.h" />
-    <ClInclude Include="src\helpers\ShaderHelpers.h" />
-    <ClInclude Include="src\window\SmartGLFWWindow.h" />
-    <ClInclude Include="src\types\Timer.h" />
-    <ClInclude Include="src\window\Window.h" />
-    <ClInclude Include="src\window\WindowInput.h" />
-    <ClInclude Include="src\window\WindowLayout.h" />
-    <ClInclude Include="src\window\WindowMode.h" />
-    <ClInclude Include="src\window\WindowProperties.h" />
-    <ClInclude Include="src\window\WindowDefaults.h" />
     <ClInclude Include="src\events\AspectRatioChangeEvent.h" />
     <ClInclude Include="src\events\ChangeToFullscreenEvent.h" />
     <ClInclude Include="src\events\ChangeToWindowedEvent.h" />
@@ -123,6 +109,10 @@
     <ClInclude Include="src\events\RenderTargetChangeEvent.h" />
     <ClInclude Include="src\events\ResolutionChangeEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\helpers\GlobalMacros.h" />
+    <ClInclude Include="src\helpers\MathHelpers.h" />
+    <ClInclude Include="src\helpers\ShaderHelpers.h" />
+    <ClInclude Include="src\imgui\ImGuiHelpers.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
@@ -138,30 +128,32 @@
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\models\Circle.h" />
     <ClInclude Include="src\models\Model.h" />
+    <ClInclude Include="src\models\ModelGenerator.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\types\Timer.h" />
     <ClInclude Include="src\types\Vertex1.h" />
+    <ClInclude Include="src\window\ResolutionSetting.h" />
+    <ClInclude Include="src\window\SmartGLFWWindow.h" />
+    <ClInclude Include="src\window\Window.h" />
+    <ClInclude Include="src\window\WindowDefaults.h" />
+    <ClInclude Include="src\window\WindowInput.h" />
+    <ClInclude Include="src\window\WindowLayout.h" />
+    <ClInclude Include="src\window\WindowMode.h" />
+    <ClInclude Include="src\window\WindowProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
-    <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
-    <ClCompile Include="src\helpers\MathHelpers.cpp" />
-    <ClCompile Include="src\models\ModelGenerator.cpp" />
-    <ClCompile Include="src\helpers\ShaderHelpers.cpp" />
-    <ClCompile Include="src\window\SmartGLFWWindow.cpp" />
-    <ClCompile Include="src\types\Timer.cpp" />
-    <ClCompile Include="src\window\Window.cpp" />
-    <ClCompile Include="src\window\WindowInput.cpp" />
-    <ClCompile Include="src\window\WindowLayout.cpp" />
-    <ClCompile Include="src\window\WindowProperties.cpp" />
-    <ClCompile Include="src\window\WindowDefaults.cpp" />
     <ClCompile Include="src\events\AspectRatioChangeEvent.cpp" />
     <ClCompile Include="src\events\ChangeToFullScreenEvent.cpp" />
     <ClCompile Include="src\events\ChangeToWindowedEvent.cpp" />
     <ClCompile Include="src\events\RenderTargetChangeEvent.cpp" />
     <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
     <ClCompile Include="src\events\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\helpers\MathHelpers.cpp" />
+    <ClCompile Include="src\helpers\ShaderHelpers.cpp" />
+    <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
@@ -176,11 +168,19 @@
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\models\Circle.cpp" />
+    <ClCompile Include="src\models\ModelGenerator.cpp" />
     <ClCompile Include="src\models\Triangle.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\types\Timer.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
+    <ClCompile Include="src\window\SmartGLFWWindow.cpp" />
+    <ClCompile Include="src\window\Window.cpp" />
+    <ClCompile Include="src\window\WindowDefaults.cpp" />
+    <ClCompile Include="src\window\WindowInput.cpp" />
+    <ClCompile Include="src\window\WindowLayout.cpp" />
+    <ClCompile Include="src\window\WindowProperties.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

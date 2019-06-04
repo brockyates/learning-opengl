@@ -337,8 +337,7 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
+		
 
         shaderId_ = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
         pointSizeUniformLocation_ = glGetUniformLocation(shaderId_, "u_PointSize");
@@ -359,8 +358,6 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
 
         glDeleteProgram(shaderId_);
         glDeleteBuffers(1, &vertexBufferId_);

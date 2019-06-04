@@ -13,11 +13,11 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\config">
-      <UniqueIdentifier>{B2454354-9EFD-84A1-0705-5EFDF3DB1F92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\events">
       <UniqueIdentifier>{91766759-7D2E-A9A6-E635-8202D20C4497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\helpers">
+      <UniqueIdentifier>{0FD11C46-7B86-953B-047B-8F12702F8C3F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\imgui">
       <UniqueIdentifier>{57A665B5-C310-1A2C-0C4F-CBD178F8F780}</UniqueIdentifier>
@@ -33,6 +33,9 @@
     </Filter>
     <Filter Include="src\types">
       <UniqueIdentifier>{B16C33B6-1DD7-E72C-6615-99D2D2BEC581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\window">
+      <UniqueIdentifier>{94D77D82-808F-BFCF-E996-982BD56D5AC0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +68,18 @@
     </ClInclude>
     <ClInclude Include="src\events\WindowCloseEvent.h">
       <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\GlobalMacros.h">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\MathHelpers.h">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\ShaderHelpers.h">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\ImGuiHelpers.h">
+      <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiRenderer.h">
       <Filter>src\imgui</Filter>
@@ -111,54 +126,44 @@
     <ClInclude Include="src\models\Model.h">
       <Filter>src\models</Filter>
     </ClInclude>
+    <ClInclude Include="src\models\ModelGenerator.h">
+      <Filter>src\models</Filter>
+    </ClInclude>
     <ClInclude Include="src\models\Triangle.h">
       <Filter>src\models</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\types\Timer.h">
+      <Filter>src\types</Filter>
+    </ClInclude>
     <ClInclude Include="src\types\Vertex1.h">
       <Filter>src\types</Filter>
     </ClInclude>
-    <ClInclude Include="src\imgui\ImGuiHelpers.h" />
-    <ClInclude Include="src\window\WindowProperties.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\window\Window.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\window\WindowInput.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\window\WindowLayout.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\window\WindowMode.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\window\ResolutionSetting.h">
+      <Filter>src\window</Filter>
     </ClInclude>
     <ClInclude Include="src\window\SmartGLFWWindow.h">
-      <Filter>src</Filter>
+      <Filter>src\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\Window.h">
+      <Filter>src\window</Filter>
     </ClInclude>
     <ClInclude Include="src\window\WindowDefaults.h">
-      <Filter>src\config</Filter>
+      <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\models\ModelGenerator.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\window\WindowInput.h">
+      <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\ResolutionSetting.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\window\WindowLayout.h">
+      <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\helpers\GlobalMacros.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\window\WindowMode.h">
+      <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\helpers\MathHelpers.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\helpers\ShaderHelpers.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\types\Timer.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\window\WindowProperties.h">
+      <Filter>src\window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +190,15 @@
     </ClCompile>
     <ClCompile Include="src\events\WindowCloseEvent.cpp">
       <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helpers\MathHelpers.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helpers\ShaderHelpers.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\ImGuiHelpers.cpp">
+      <Filter>src\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp">
       <Filter>src\imgui</Filter>
@@ -228,45 +242,38 @@
     <ClCompile Include="src\models\Circle.cpp">
       <Filter>src\models</Filter>
     </ClCompile>
+    <ClCompile Include="src\models\ModelGenerator.cpp">
+      <Filter>src\models</Filter>
+    </ClCompile>
     <ClCompile Include="src\models\Triangle.cpp">
       <Filter>src\models</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\types\Timer.cpp">
+      <Filter>src\types</Filter>
+    </ClCompile>
     <ClCompile Include="src\types\Vertex1.cpp">
       <Filter>src\types</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
-    <ClCompile Include="src\window\Window.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\window\WindowInput.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\window\WindowLayout.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\window\WindowProperties.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\window\SmartGLFWWindow.cpp">
-      <Filter>src</Filter>
+      <Filter>src\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\Window.cpp">
+      <Filter>src\window</Filter>
     </ClCompile>
     <ClCompile Include="src\window\WindowDefaults.cpp">
-      <Filter>src\config</Filter>
+      <Filter>src\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\ModelGenerator.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\window\WindowInput.cpp">
+      <Filter>src\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\helpers\MathHelpers.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\window\WindowLayout.cpp">
+      <Filter>src\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\helpers\ShaderHelpers.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\types\Timer.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\window\WindowProperties.cpp">
+      <Filter>src\window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

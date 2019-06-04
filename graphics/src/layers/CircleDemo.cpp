@@ -37,7 +37,7 @@ namespace Graphics {
         AnimateSides();
         UpdateSides();
 
-        glLineWidth(3.0f);
+        glLineWidth(1.0f);
 
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
@@ -251,8 +251,6 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
 
         triangleShaderId_ = CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
         triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_, "u_Proj");
@@ -275,8 +273,6 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
 
         glDeleteProgram(triangleShaderId_);
         glDeleteProgram(lineShaderId_);
