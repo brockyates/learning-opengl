@@ -8,6 +8,8 @@ Each demo is relatively self-contained so that it can be read and easily underst
 
 The UI is built with [Dear ImGui](https://github.com/ocornut/imgui.git).
 
+## Getting started
+
 ## Credits and Learning Resources
 
 ### Online
