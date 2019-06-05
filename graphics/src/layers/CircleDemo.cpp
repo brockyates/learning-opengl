@@ -199,7 +199,7 @@ namespace Graphics {
             }
             if (!sidesIncreasing_)
             {
-                if (vertexCount_ == 3)
+                if (vertexCount_ == 4)
                 {
                     sidesIncreasing_ = true;
                     ++nextVertexes_;
