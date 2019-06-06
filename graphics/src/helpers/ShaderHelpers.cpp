@@ -44,8 +44,8 @@ namespace Graphics {
             {
                 auto msgLength = 0;
                 glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &msgLength);
-                const auto msg = static_cast<char*>(alloca(msgLength * sizeof(char)));
-                glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg);
+                const auto msg = std::make_unique<char[]>(msgLength);
+                glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg.get());
 
                 LogGlError([&]()
                 {
