@@ -193,7 +193,6 @@
     <ClCompile Include="src\window\WindowProperties.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgui.ini" />
     <None Include="res\fonts\Consolas.ttf" />
     <None Include="res\shaders\CircleDemo_LineFragment.shader" />
     <None Include="res\shaders\CircleDemo_LineVertex.shader" />
