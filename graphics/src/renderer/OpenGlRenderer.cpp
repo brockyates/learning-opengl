@@ -49,6 +49,7 @@ namespace Graphics
         {
             glDeleteShader(shader.AsGlType());
         }
+
     }
 
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,

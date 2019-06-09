@@ -60,8 +60,8 @@ namespace Graphics {
 
         //OpenGL state
         unsigned int frameBufferId_ = 0;
-        ShaderProgram triangleShaderId_ = ShaderProgram{0};
-        ShaderProgram lineShaderId_ = ShaderProgram{ 0 };
+        ShaderProgram triangleShader_ = ShaderProgram{0};
+        ShaderProgram lineShader_ = ShaderProgram{ 0 };
         unsigned int vertexArrayId_ = 0;
         unsigned int vertexBufferId_ = 0;
         unsigned int triangleIndexBufferId_ = 0;

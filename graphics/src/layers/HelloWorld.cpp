@@ -27,7 +27,7 @@ namespace Graphics {
 
         // Bindings
         glBindVertexArray(vertexArrayId_);
-        glUseProgram(shaderId_.AsGlType());
+        glUseProgram(shader_.AsGlType());
 
         // Draw
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -89,7 +89,7 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        shaderId_ = Renderer::CreateShaderProgram("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        shader_ = Renderer::CreateShaderProgram("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
         attached_ = true;
     }
@@ -103,7 +103,7 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glDeleteProgram(shaderId_.AsGlType());
+        glDeleteProgram(shader_.AsGlType());
         glDeleteBuffers(1, &vertexBufferId_);
 
         attached_ = false;

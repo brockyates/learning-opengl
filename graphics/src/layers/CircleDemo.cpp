@@ -49,13 +49,13 @@ namespace Graphics {
 
         glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         
-        glUseProgram(triangleShaderId_.AsGlType());
+        glUseProgram(triangleShader_.AsGlType());
         glUniformMatrix4fv(triangleProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
         glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
 
-        glUseProgram(lineShaderId_.AsGlType());
+        glUseProgram(lineShader_.AsGlType());
         glUniformMatrix4fv(lineProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
         glUniform4fv(lineColorUniformLocation_, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
@@ -252,12 +252,12 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        triangleShaderId_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
-        triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_.AsGlType(), "u_Proj");
+        triangleShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShader_.AsGlType(), "u_Proj");
 
-        lineShaderId_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
-        lineColorUniformLocation_ = glGetUniformLocation(lineShaderId_.AsGlType(), "u_LineColor");
-        lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShaderId_.AsGlType(), "u_Proj");
+        lineShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        lineColorUniformLocation_ = glGetUniformLocation(lineShader_.AsGlType(), "u_LineColor");
+        lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShader_.AsGlType(), "u_Proj");
 
         attached_ = true;
     }
@@ -274,8 +274,8 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        glDeleteProgram(triangleShaderId_.AsGlType());
-        glDeleteProgram(lineShaderId_.AsGlType());
+        glDeleteProgram(triangleShader_.AsGlType());
+        glDeleteProgram(lineShader_.AsGlType());
         glDeleteBuffers(1, &vertexBufferId_);
 
         attached_ = false;
