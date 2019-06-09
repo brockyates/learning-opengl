@@ -307,6 +307,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="imgui.ini" />
     <None Include="res\fonts\Consolas.ttf">
       <Filter>res\fonts</Filter>
     </None>

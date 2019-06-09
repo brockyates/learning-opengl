@@ -117,7 +117,7 @@ project "Graphics.App"
         "%{prj.name}/src/**",
     }
 
-        includedirs
+    includedirs
     {
         "%{prj.name}/src",
         "%{IncludeDir.Graphics}",
@@ -174,6 +174,13 @@ project "Graphics.UnitTests"
     files
     {
         "%{prj.name}/src/**",
+    }
+
+    includedirs
+    {
+        "%{prj.name}/src",
+        "%{IncludeDir.Graphics}",
+        "%{IncludeDir.glm}",
     }
 
     links 
