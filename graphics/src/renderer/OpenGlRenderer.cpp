@@ -55,6 +55,36 @@ namespace Graphics
         {
             return ShaderProgram{ glCreateProgram() };
         }
+
+        void LinkProgram(const ShaderProgram& program)
+        {
+            glLinkProgram(program.AsGlType());
+        }
+
+        void ValidateProgram(const ShaderProgram& program)
+        {
+            glValidateProgram(program.AsGlType());
+        }
+
+        void AttachVertexShader(const ShaderProgram& program, const VertexShader& shader)
+        {
+            glAttachShader(program.AsGlType(), shader.AsGlType());
+        }
+
+        void AttachFragmentShader(const ShaderProgram& program, const FragmentShader& shader)
+        {
+            glAttachShader(program.AsGlType(), shader.AsGlType());
+        }
+
+        void DeleteVertexShader(const VertexShader& shader)
+        {
+            glDeleteShader(shader.AsGlType());
+        }
+
+        void DeleteFragmentShader(const FragmentShader& shader)
+        {
+            glDeleteShader(shader.AsGlType());
+        }
     }
 
     ShaderProgram OpenGlRenderer::CreateShader(const std::string& vertexShaderPath,
@@ -80,35 +110,5 @@ namespace Graphics
         DeleteFragmentShader(fragmentShader);
 
         return program;
-    }
-
-    void OpenGlRenderer::LinkProgram(const ShaderProgram& program)
-    {
-        glLinkProgram(program.AsGlType());
-    }
-
-    void OpenGlRenderer::ValidateProgram(const ShaderProgram& program)
-    {
-        glValidateProgram(program.AsGlType());
-    }
-
-    void OpenGlRenderer::AttachVertexShader(const ShaderProgram& program, const VertexShader& shader)
-    {
-        glAttachShader(program.AsGlType(), shader.AsGlType());
-    }
-
-    void OpenGlRenderer::AttachFragmentShader(const ShaderProgram& program, const FragmentShader& shader)
-    {
-        glAttachShader(program.AsGlType(), shader.AsGlType());
-    }
-
-    void OpenGlRenderer::DeleteVertexShader(const VertexShader& shader)
-    {
-        glDeleteShader(shader.AsGlType());
-    }
-
-    void OpenGlRenderer::DeleteFragmentShader(const FragmentShader& shader)
-    {
-        glDeleteShader(shader.AsGlType());
     }
 }
