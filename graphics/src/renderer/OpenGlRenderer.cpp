@@ -1,7 +1,11 @@
+/*
+ * OpenGlRenderer is a type-safe OpenGL wrapper.
+ */
+
 #include "pch.h"
 #include "OpenGlRenderer.h"
 
-#include "helpers/FileHelpers.h"
+#include "detail/OpenGlRendererDetail.h"
 
 #include "logging/Log.h"
 
@@ -10,46 +14,6 @@
 namespace Graphics
 {
     namespace {
-
-        unsigned int Compile(unsigned int type, const std::string& shaderSource)
-        {
-            const auto shaderId = glCreateShader(type);
-            const auto source = shaderSource.c_str();
-            glShaderSource(shaderId, 1, &source, nullptr);
-            glCompileShader(shaderId);
-
-            auto shaderCompileStatus = GL_FALSE;
-            glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus);
-            if (shaderCompileStatus == GL_FALSE)
-            {
-                auto msgLength = 0;
-                glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &msgLength);
-                const auto msg = std::make_unique<char[]>(msgLength);
-                glGetShaderInfoLog(shaderId, msgLength, &msgLength, msg.get());
-
-                LogGlError([&]()
-                {
-                    std::stringstream ss;
-                    ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
-                    return ss.str();
-                }());
-
-                glDeleteShader(shaderId);
-                return 0;
-            }
-
-            return shaderId;
-        }
-
-        VertexShader CompileVertexShader(const std::string& shaderPath)
-        {
-            return VertexShader{ Compile(GL_VERTEX_SHADER, ParseFile(shaderPath)) };
-        }
-
-        FragmentShader CompileFragmentShader(const std::string& shaderPath)
-        {
-            return FragmentShader{ Compile(GL_FRAGMENT_SHADER, ParseFile(shaderPath)) };
-        }
 
         ShaderProgram CreateProgram()
         {
@@ -87,7 +51,7 @@ namespace Graphics
         }
     }
 
-    ShaderProgram OpenGlRenderer::CreateShader(const std::string& vertexShaderPath,
+    ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
         const std::string& fragmentShaderPath)
     {
         LogGlTrace([&]()
@@ -98,8 +62,8 @@ namespace Graphics
         }());
 
         const auto program = CreateProgram();
-        const auto vertexShader = CompileVertexShader(vertexShaderPath);
-        const auto fragmentShader = CompileFragmentShader(fragmentShaderPath);
+        const auto vertexShader = Detail::Compile<VertexShader>(vertexShaderPath);
+        const auto fragmentShader = Detail::Compile<FragmentShader>(fragmentShaderPath);
 
         AttachVertexShader(program, vertexShader);
         AttachFragmentShader(program, fragmentShader);

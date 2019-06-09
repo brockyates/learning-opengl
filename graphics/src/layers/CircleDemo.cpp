@@ -252,10 +252,10 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        triangleShaderId_ = Renderer::CreateShader("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
+        triangleShaderId_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
         triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShaderId_.AsGlType(), "u_Proj");
 
-        lineShaderId_ = Renderer::CreateShader("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
+        lineShaderId_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
         lineColorUniformLocation_ = glGetUniformLocation(lineShaderId_.AsGlType(), "u_LineColor");
         lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShaderId_.AsGlType(), "u_Proj");
 
