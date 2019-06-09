@@ -34,6 +34,9 @@
     <Filter Include="src\renderer">
       <UniqueIdentifier>{936D1A48-7FD0-A9EC-2856-E2A21498756F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\renderer\detail">
+      <UniqueIdentifier>{F501E5AA-6163-C2B8-EAD0-086B5631F977}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\types">
       <UniqueIdentifier>{B16C33B6-1DD7-E72C-6615-99D2D2BEC581}</UniqueIdentifier>
     </Filter>
@@ -156,6 +159,9 @@
     <ClInclude Include="src\renderer\TestRenderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\detail\Uint32Id.h">
+      <Filter>src\renderer\detail</Filter>
+    </ClInclude>
     <ClInclude Include="src\types\Timer.h">
       <Filter>src\types</Filter>
     </ClInclude>
@@ -186,13 +192,9 @@
     <ClInclude Include="src\window\WindowProperties.h">
       <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\detail\Uint32Id.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EntryPoint.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\events\AspectRatioChangeEvent.cpp">
@@ -305,7 +307,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgui.ini" />
     <None Include="res\fonts\Consolas.ttf">
       <Filter>res\fonts</Filter>
     </None>

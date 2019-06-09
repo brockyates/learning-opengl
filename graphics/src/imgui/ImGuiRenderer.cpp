@@ -24,7 +24,7 @@ namespace Graphics {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 
-        io.Fonts->AddFontFromFileTTF("../graphics/res/fonts/Consolas.ttf", window_.DefaultFontSize());
+        io.Fonts->AddFontFromFileTTF("res/fonts/Consolas.ttf", window_.DefaultFontSize());
 
         // Setup Dear ImGui style
         ImGui::StyleColorsClassic();

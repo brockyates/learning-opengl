@@ -3,8 +3,7 @@
 
 #include "logging/Log.h"
 
-#include "renderer/RendererTypes.h"
-#include "renderer/Renderer.h"
+#include "Renderer.h"
 
 #include <glad/glad.h>
 

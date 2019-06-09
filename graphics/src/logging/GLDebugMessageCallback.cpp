@@ -19,9 +19,9 @@ namespace Graphics {
             const auto utcTime = *std::gmtime(&t);
 
             std::stringstream ss;
-            ss << "../bin/logs/GraphicsLog" << std::put_time(&utcTime, "%Y%m%d_%H%M%S") << ".txt";
+            ss << "logs/GraphicsLog" << std::put_time(&utcTime, "%Y%m%d_%H%M%S") << ".txt";
 
-            std::filesystem::create_directory("../bin/logs");
+            std::filesystem::create_directory("logs");
             std::ofstream file(ss.str(), std::ios::binary);
             file << Utils::Log::GetLogStream().str();
         }
