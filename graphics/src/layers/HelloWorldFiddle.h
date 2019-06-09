@@ -8,6 +8,8 @@
 
 #include "models/Model.h"
 
+#include "renderer/RendererTypes.h"
+
 #include <glm/glm.hpp>
 
 namespace Graphics {
@@ -67,7 +69,7 @@ namespace Graphics {
 
         //OpenGL state
         unsigned int frameBufferId_ = 0;
-        unsigned int shaderId_ = 0;
+        ShaderProgram shaderId_ = ShaderProgram{ 0 };
         unsigned int vertexArrayId_ = 0;
         unsigned int vertexBufferId_ = 0;
         unsigned int indexBufferId_ = 0;

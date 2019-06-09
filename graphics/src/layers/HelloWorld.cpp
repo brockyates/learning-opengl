@@ -5,7 +5,7 @@
 
 #include "logging/Log.h"
 
-#include "renderer/ShaderHelpers.h"
+#include "renderer/Renderer.h"
 #include "window/Window.h"
 
 #include <glad/glad.h>
@@ -27,7 +27,7 @@ namespace Graphics {
 
         // Bindings
         glBindVertexArray(vertexArrayId_);
-        glUseProgram(shaderId_);
+        glUseProgram(shaderId_.AsGlType());
 
         // Draw
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -89,7 +89,7 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        shaderId_ = CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
+        shaderId_ = Renderer::CreateShader("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
 
         attached_ = true;
     }
@@ -103,7 +103,7 @@ namespace Graphics {
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glDeleteProgram(shaderId_);
+        glDeleteProgram(shaderId_.AsGlType());
         glDeleteBuffers(1, &vertexBufferId_);
 
         attached_ = false;

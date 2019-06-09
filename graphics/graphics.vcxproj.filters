@@ -147,9 +147,6 @@
     <ClInclude Include="src\renderer\RendererTypes.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\ShaderHelpers.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\ShaderType.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -186,6 +183,7 @@
     <ClInclude Include="src\window\WindowProperties.h">
       <Filter>src\window</Filter>
     </ClInclude>
+    <ClInclude Include="src\helpers\FileHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -269,9 +267,6 @@
     <ClCompile Include="src\renderer\OpenGlRenderer.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\ShaderHelpers.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\types\Timer.cpp">
       <Filter>src\types</Filter>
     </ClCompile>
@@ -296,6 +291,7 @@
     <ClCompile Include="src\window\WindowProperties.cpp">
       <Filter>src\window</Filter>
     </ClCompile>
+    <ClCompile Include="src\helpers\FileHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\fonts\Consolas.ttf">

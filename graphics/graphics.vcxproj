@@ -111,6 +111,7 @@
     <ClInclude Include="src\events\RenderTargetChangeEvent.h" />
     <ClInclude Include="src\events\ResolutionChangeEvent.h" />
     <ClInclude Include="src\events\WindowCloseEvent.h" />
+    <ClInclude Include="src\helpers\FileHelpers.h" />
     <ClInclude Include="src\helpers\GlobalMacros.h" />
     <ClInclude Include="src\helpers\MathHelpers.h" />
     <ClInclude Include="src\imgui\ImGuiHelpers.h" />
@@ -135,7 +136,6 @@
     <ClInclude Include="src\renderer\OpenGlRenderer.h" />
     <ClInclude Include="src\renderer\Renderer.h" />
     <ClInclude Include="src\renderer\RendererTypes.h" />
-    <ClInclude Include="src\renderer\ShaderHelpers.h" />
     <ClInclude Include="src\renderer\ShaderType.h" />
     <ClInclude Include="src\renderer\detail\Uint32Id.h" />
     <ClInclude Include="src\types\Timer.h" />
@@ -157,6 +157,7 @@
     <ClCompile Include="src\events\RenderTargetChangeEvent.cpp" />
     <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
     <ClCompile Include="src\events\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\helpers\FileHelpers.cpp" />
     <ClCompile Include="src\helpers\MathHelpers.cpp" />
     <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
@@ -179,7 +180,6 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\renderer\OpenGlRenderer.cpp" />
-    <ClCompile Include="src\renderer\ShaderHelpers.cpp" />
     <ClCompile Include="src\types\Timer.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
     <ClCompile Include="src\window\SmartGLFWWindow.cpp" />

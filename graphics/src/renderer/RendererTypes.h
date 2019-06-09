@@ -4,6 +4,8 @@
 
 namespace Graphics {
 
-    using Program = Detail::Uint32Id<Detail::ProgramTag>;
+    using ShaderProgram = Detail::Uint32Id<Detail::ShaderProgramTag>;
+    using VertexShader = Detail::Uint32Id<Detail::VertexShaderTag>;
+    using FragmentShader = Detail::Uint32Id<Detail::FragmentShaderTag>;
 
 }

@@ -5,6 +5,8 @@
 
 #include "layers/Layer.h"
 
+#include "renderer/RendererTypes.h"
+
 namespace Graphics {
 
     class Window;
@@ -32,7 +34,7 @@ namespace Graphics {
 
         //OpenGL state
         unsigned int frameBufferId_ = 0;
-        unsigned int shaderId_ = 0;
+        ShaderProgram shaderId_ = ShaderProgram{ 0 };
         unsigned int vertexArrayId_ = 0;
         unsigned int vertexBufferId_ = 0;
 

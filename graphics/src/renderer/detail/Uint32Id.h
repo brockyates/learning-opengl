@@ -4,7 +4,9 @@
 
 namespace Graphics::Detail {
 
-    struct ProgramTag {};
+    struct ShaderProgramTag {};
+    struct VertexShaderTag {};
+    struct FragmentShaderTag {};
 
     template <typename Tag>
     class Uint32Id

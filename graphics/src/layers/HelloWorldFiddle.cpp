@@ -6,7 +6,7 @@
 #include "logging/Log.h"
 
 #include "models/ModelGenerator.h"
-#include "renderer/ShaderHelpers.h"
+#include "renderer/Renderer.h"
 #include "types/Timer.h"
 #include "window/Window.h"
 
@@ -45,7 +45,7 @@ namespace Graphics {
         // Bindings
         glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
         glBindVertexArray(vertexArrayId_);
-        glUseProgram(shaderId_);
+        glUseProgram(shaderId_.AsGlType());
         glUniform1f(pointSizeUniformLocation_, pointSize_);
         glUniformMatrix4fv(projMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
 
@@ -338,9 +338,9 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);		
 
-        shaderId_ = CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
-        pointSizeUniformLocation_ = glGetUniformLocation(shaderId_, "u_PointSize");
-        projMatrixUniformLocation_ = glGetUniformLocation(shaderId_, "u_Proj");
+        shaderId_ = Renderer::CreateShader("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
+        pointSizeUniformLocation_ = glGetUniformLocation(shaderId_.AsGlType(), "u_PointSize");
+        projMatrixUniformLocation_ = glGetUniformLocation(shaderId_.AsGlType(), "u_Proj");
 
         attached_ = true;
     }
@@ -358,7 +358,7 @@ namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        glDeleteProgram(shaderId_);
+        glDeleteProgram(shaderId_.AsGlType());
         glDeleteBuffers(1, &vertexBufferId_);
 
         attached_ = false;
