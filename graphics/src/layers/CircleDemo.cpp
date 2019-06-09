@@ -40,7 +40,7 @@ namespace Graphics {
         glLineWidth(1.0f);
 
         // Bindings
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
+        Renderer::BindFrameBuffer(frameBuffer_);
         glBindVertexArray(vertexArrayId_);
 
         // Draw
@@ -66,7 +66,7 @@ namespace Graphics {
         glUseProgram(0);
         glBindVertexArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        Renderer::UnbindFrameBuffer();
     }
 
     void CircleDemo::RenderUi()
@@ -110,7 +110,7 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            frameBufferId_ = event.NextRenderTargetId();
+            frameBuffer_ = FrameBuffer{ event.NextRenderTargetId() };
         };
     }
 

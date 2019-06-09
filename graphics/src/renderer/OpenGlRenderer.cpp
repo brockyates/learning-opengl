@@ -52,6 +52,16 @@ namespace Graphics
 
     }
 
+    void OpenGlRenderer::BindFrameBuffer(const FrameBuffer& buffer)
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, buffer.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindFrameBuffer()
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
         const std::string& fragmentShaderPath)
     {

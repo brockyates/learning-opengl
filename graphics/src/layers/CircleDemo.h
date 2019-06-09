@@ -59,7 +59,7 @@ namespace Graphics {
         double deltaTime_ = 0.0;
 
         //OpenGL state
-        unsigned int frameBufferId_ = 0;
+        FrameBuffer frameBuffer_ = FrameBuffer{ 0 };
         ShaderProgram triangleShader_ = ShaderProgram{0};
         ShaderProgram lineShader_ = ShaderProgram{ 0 };
         unsigned int vertexArrayId_ = 0;
