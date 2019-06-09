@@ -31,6 +31,9 @@
     <Filter Include="src\models">
       <UniqueIdentifier>{605C916B-4C14-D3B8-B51B-AC14A1F26DA9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\renderer">
+      <UniqueIdentifier>{936D1A48-7FD0-A9EC-2856-E2A21498756F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\types">
       <UniqueIdentifier>{B16C33B6-1DD7-E72C-6615-99D2D2BEC581}</UniqueIdentifier>
     </Filter>
@@ -73,9 +76,6 @@
       <Filter>src\helpers</Filter>
     </ClInclude>
     <ClInclude Include="src\helpers\MathHelpers.h">
-      <Filter>src\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\helpers\ShaderHelpers.h">
       <Filter>src\helpers</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\ImGuiHelpers.h">
@@ -134,6 +134,27 @@
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\IRenderer.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\OpenGlRenderer.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Renderer.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\RendererTypes.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\ShaderHelpers.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\ShaderType.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\TestRenderer.h">
+      <Filter>src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\types\Timer.h">
       <Filter>src\types</Filter>
@@ -194,9 +215,6 @@
     <ClCompile Include="src\helpers\MathHelpers.cpp">
       <Filter>src\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="src\helpers\ShaderHelpers.cpp">
-      <Filter>src\helpers</Filter>
-    </ClCompile>
     <ClCompile Include="src\imgui\ImGuiHelpers.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
@@ -250,6 +268,15 @@
     </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\OpenGlRenderer.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\ShaderHelpers.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\TestRenderer.cpp">
+      <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\types\Timer.cpp">
       <Filter>src\types</Filter>

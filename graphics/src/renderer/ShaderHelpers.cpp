@@ -3,6 +3,9 @@
 
 #include "logging/Log.h"
 
+#include "renderer/RendererTypes.h"
+#include "renderer/Renderer.h"
+
 #include <glad/glad.h>
 
 #include <fstream>
@@ -71,19 +74,21 @@ namespace Graphics {
             return ss.str();
         }());
 
-        const auto program = glCreateProgram();
+        Renderer renderer;
+
+        const auto program = renderer.CreateProgram();
         const auto vertexShader = Compile(GL_VERTEX_SHADER, Parse(vertexShaderPath));
         const auto fragmentShader = Compile(GL_FRAGMENT_SHADER, Parse(fragmentShaderPath));
 
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, fragmentShader);
-        glLinkProgram(program);
-        glValidateProgram(program);
+        glAttachShader(program.AsGlType(), vertexShader);
+        glAttachShader(program.AsGlType(), fragmentShader);
+        glLinkProgram(program.AsGlType());
+        glValidateProgram(program.AsGlType());
 
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        return program;
+        return program.AsGlType();
     }
 
 }

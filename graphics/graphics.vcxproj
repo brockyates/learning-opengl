@@ -60,7 +60,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;APP_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;OPENGL_RENDERER;GLFW_INCLUDE_NONE;APP_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;..\vendor\spdlog\include;..\vendor\GLFW\include;..\vendor\Glad\include;..\vendor\imgui;..\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;APP_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;OPENGL_RENDERER;GLFW_INCLUDE_NONE;APP_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;..\vendor\spdlog\include;..\vendor\GLFW\include;..\vendor\Glad\include;..\vendor\imgui;..\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -111,7 +111,6 @@
     <ClInclude Include="src\events\WindowCloseEvent.h" />
     <ClInclude Include="src\helpers\GlobalMacros.h" />
     <ClInclude Include="src\helpers\MathHelpers.h" />
-    <ClInclude Include="src\helpers\ShaderHelpers.h" />
     <ClInclude Include="src\imgui\ImGuiHelpers.h" />
     <ClInclude Include="src\imgui\ImGuiRenderer.h" />
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
@@ -131,6 +130,13 @@
     <ClInclude Include="src\models\ModelGenerator.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\renderer\IRenderer.h" />
+    <ClInclude Include="src\renderer\OpenGlRenderer.h" />
+    <ClInclude Include="src\renderer\Renderer.h" />
+    <ClInclude Include="src\renderer\RendererTypes.h" />
+    <ClInclude Include="src\renderer\ShaderHelpers.h" />
+    <ClInclude Include="src\renderer\ShaderType.h" />
+    <ClInclude Include="src\renderer\TestRenderer.h" />
     <ClInclude Include="src\types\Timer.h" />
     <ClInclude Include="src\types\Vertex1.h" />
     <ClInclude Include="src\window\ResolutionSetting.h" />
@@ -152,7 +158,6 @@
     <ClCompile Include="src\events\ResolutionChangeEvent.cpp" />
     <ClCompile Include="src\events\WindowCloseEvent.cpp" />
     <ClCompile Include="src\helpers\MathHelpers.cpp" />
-    <ClCompile Include="src\helpers\ShaderHelpers.cpp" />
     <ClCompile Include="src\imgui\ImGuiHelpers.cpp" />
     <ClCompile Include="src\imgui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
@@ -173,6 +178,9 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\renderer\OpenGlRenderer.cpp" />
+    <ClCompile Include="src\renderer\ShaderHelpers.cpp" />
+    <ClCompile Include="src\renderer\TestRenderer.cpp" />
     <ClCompile Include="src\types\Timer.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
     <ClCompile Include="src\window\SmartGLFWWindow.cpp" />

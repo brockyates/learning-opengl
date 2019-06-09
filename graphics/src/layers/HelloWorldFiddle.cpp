@@ -6,7 +6,7 @@
 #include "logging/Log.h"
 
 #include "models/ModelGenerator.h"
-#include "helpers/ShaderHelpers.h"
+#include "renderer/ShaderHelpers.h"
 #include "types/Timer.h"
 #include "window/Window.h"
 

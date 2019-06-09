@@ -69,7 +69,8 @@ project "Graphics"
 
     defines
     {
-        "_CRT_SECURE_NO_WARNINGS"
+        "_CRT_SECURE_NO_WARNINGS",
+        "OPENGL_RENDERER"
     }
 
     filter "system:windows"
