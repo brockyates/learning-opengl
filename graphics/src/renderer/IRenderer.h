@@ -15,7 +15,7 @@ namespace Graphics
         IRenderer& operator=(const IRenderer&) = default;
         IRenderer& operator=(IRenderer&&) = default;
 
-        virtual ProgramId CreateProgram() = 0;
+        virtual Program CreateProgram() = 0;
     };
 
 }

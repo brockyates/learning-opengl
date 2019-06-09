@@ -1,26 +1,6 @@
 #pragma once
 
-#include <glad/glad.h>
-
-namespace Graphics::Detail {
-
-    struct ProgramIdTag {};
-
-    template <typename Tag>
-    class Uint32Id
-    {
-    public:
-        explicit Uint32Id(const uint32_t id)
-            : value_(id)
-        {}
-
-        [[nodiscard]] GLuint AsGlType() const { return static_cast<GLuint>(value_); }
-
-    private:
-        uint32_t value_;
-    };
-
-}
+#include "detail/Uint32Id.h"
 
 namespace Graphics {
 
@@ -32,6 +12,6 @@ namespace Graphics {
     using Renderer = TestRenderer;
 #endif //OPENGL_RENDERER
 
-    using ProgramId = Detail::Uint32Id<Detail::ProgramIdTag>;
+    using Program = Detail::Uint32Id<Detail::ProgramTag>;
 
 }

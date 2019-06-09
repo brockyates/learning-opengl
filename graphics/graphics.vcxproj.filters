@@ -186,6 +186,7 @@
     <ClInclude Include="src\window\WindowProperties.h">
       <Filter>src\window</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\detail\Uint32Id.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

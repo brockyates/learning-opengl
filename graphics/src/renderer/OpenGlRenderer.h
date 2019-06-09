@@ -8,6 +8,6 @@ namespace Graphics
     class OpenGlRenderer final : public IRenderer
     {
     public:
-        ProgramId CreateProgram() override;
+        Program CreateProgram() override;
     };
 }

@@ -130,6 +130,7 @@
     <ClInclude Include="src\models\ModelGenerator.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\renderer\detail\Uint32Id.h" />
     <ClInclude Include="src\renderer\IRenderer.h" />
     <ClInclude Include="src\renderer\OpenGlRenderer.h" />
     <ClInclude Include="src\renderer\Renderer.h" />

@@ -4,8 +4,8 @@
 
 namespace Graphics
 {
-    ProgramId TestRenderer::CreateProgram()
+    Program TestRenderer::CreateProgram()
     {
-        return ProgramId{ 0 };
+        return Program{ 0 };
     }
 }

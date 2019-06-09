@@ -11,7 +11,7 @@ namespace Graphics
     public:
         TestRenderer() = default;
 
-        ProgramId CreateProgram() override;
+        Program CreateProgram() override;
     };
 
 }

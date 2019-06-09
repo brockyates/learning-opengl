@@ -5,9 +5,9 @@
 
 namespace Graphics
 {
-    ProgramId OpenGlRenderer::CreateProgram()
+    Program OpenGlRenderer::CreateProgram()
     {
-        return ProgramId{ glCreateProgram() };
+        return Program{ glCreateProgram() };
     }
 
 }
