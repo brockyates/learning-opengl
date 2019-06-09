@@ -138,9 +138,6 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\IRenderer.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\OpenGlRenderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -154,9 +151,6 @@
       <Filter>src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\renderer\ShaderType.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\TestRenderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\renderer\detail\Uint32Id.h">
@@ -276,9 +270,6 @@
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\ShaderHelpers.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\TestRenderer.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\types\Timer.cpp">

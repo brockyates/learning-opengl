@@ -132,13 +132,11 @@
     <ClInclude Include="src\models\ModelGenerator.h" />
     <ClInclude Include="src\models\Triangle.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\renderer\IRenderer.h" />
     <ClInclude Include="src\renderer\OpenGlRenderer.h" />
     <ClInclude Include="src\renderer\Renderer.h" />
     <ClInclude Include="src\renderer\RendererTypes.h" />
     <ClInclude Include="src\renderer\ShaderHelpers.h" />
     <ClInclude Include="src\renderer\ShaderType.h" />
-    <ClInclude Include="src\renderer\TestRenderer.h" />
     <ClInclude Include="src\renderer\detail\Uint32Id.h" />
     <ClInclude Include="src\types\Timer.h" />
     <ClInclude Include="src\types\Vertex1.h" />
@@ -182,7 +180,6 @@
     </ClCompile>
     <ClCompile Include="src\renderer\OpenGlRenderer.cpp" />
     <ClCompile Include="src\renderer\ShaderHelpers.cpp" />
-    <ClCompile Include="src\renderer\TestRenderer.cpp" />
     <ClCompile Include="src\types\Timer.cpp" />
     <ClCompile Include="src\types\Vertex1.cpp" />
     <ClCompile Include="src\window\SmartGLFWWindow.cpp" />

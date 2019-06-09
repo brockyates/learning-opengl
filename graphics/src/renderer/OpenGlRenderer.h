@@ -1,13 +1,12 @@
 #pragma once
 
-#include "IRenderer.h"
 #include "RendererTypes.h"
 
 namespace Graphics
 {
-    class OpenGlRenderer final : public IRenderer
+    class OpenGlRenderer
     {
     public:
-        Program CreateProgram() override;
+        Program CreateProgram();
     };
 }
