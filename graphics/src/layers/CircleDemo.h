@@ -63,8 +63,8 @@ namespace Graphics {
         ShaderProgram triangleShader_;
         ShaderProgram lineShader_;
         VertexArray vertexArray_;
-        unsigned int vertexBufferId_ = 0;
-        unsigned int triangleIndexBufferId_ = 0;
+        VertexBuffer vertexBuffer_;
+        IndexBuffer triangleIndexBuffer_;
         unsigned int lineIndexBufferId_ = 0;
         unsigned int triangleProjMatrixUniformLocation_ = 0;
         unsigned int lineProjMatrixUniformLocation_ = 0;

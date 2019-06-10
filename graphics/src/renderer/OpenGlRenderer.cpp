@@ -62,10 +62,10 @@ namespace Graphics
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    VertexArray OpenGlRenderer::GenVertexArrays(uint32_t count)
+    VertexArray OpenGlRenderer::GenVertexArray()
     {
         uint32_t id;
-        glGenVertexArrays(count, &id);
+        glGenVertexArrays(1, &id);
 
         return VertexArray{ id };
     }
@@ -78,6 +78,54 @@ namespace Graphics
     void OpenGlRenderer::UnbindVertexArray()
     {
         glBindVertexArray(0);
+    }
+
+    VertexBuffer OpenGlRenderer::GenVertexBuffer()
+    {
+        uint32_t id;
+        glGenBuffers(1, &id);
+
+        return VertexBuffer{ id };
+    }
+
+    void OpenGlRenderer::BindVertexBuffer(const VertexBuffer& buffer)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, buffer.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindVertexBuffer()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    void OpenGlRenderer::DeleteVertexBuffer(const VertexBuffer& buffer)
+    {
+        const auto id = buffer.AsGlType();
+        glDeleteBuffers(1, &id);
+    }
+
+    IndexBuffer OpenGlRenderer::GenIndexBuffer()
+    {
+        uint32_t id;
+        glGenBuffers(1, &id);
+
+        return IndexBuffer{ id };
+    }
+
+    void OpenGlRenderer::BindIndexBuffer(const IndexBuffer& buffer)
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindIndexBuffer()
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
+
+    void OpenGlRenderer::DeleteIndexBuffer(const IndexBuffer& buffer)
+    {
+        const auto id = buffer.AsGlType();
+        glDeleteBuffers(1, &id);
     }
 
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
@@ -103,5 +151,10 @@ namespace Graphics
         DeleteFragmentShader(fragmentShader);
 
         return program;
+    }
+
+    void OpenGlRenderer::UnbindProgram()
+    {
+        glUseProgram(0);
     }
 }

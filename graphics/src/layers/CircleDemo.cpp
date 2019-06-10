@@ -52,7 +52,7 @@ namespace Graphics {
         glUseProgram(triangleShader_.AsGlType());
         glUniformMatrix4fv(triangleProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
+        Renderer::BindIndexBuffer(triangleIndexBuffer_);
         glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
 
         glUseProgram(lineShader_.AsGlType());
@@ -63,9 +63,9 @@ namespace Graphics {
 
         // Release bindings
         glLineWidth(1.0f);
-        glUseProgram(0);
-        glBindVertexArray(0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindProgram();
+        Renderer::UnbindVertexArray();
+        Renderer::UnbindIndexBuffer();
         Renderer::UnbindFrameBuffer();
     }
 
@@ -153,15 +153,15 @@ namespace Graphics {
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
 
         //Update vertex buffer
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
+        Renderer::BindVertexBuffer(vertexBuffer_);
         glBufferSubData(GL_ARRAY_BUFFER,
             bufferOffset,
             circleModel_->VertexDataByteSize(),
             &circleModel_->Vertexes[0]);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        Renderer::UnbindVertexBuffer();
 
         //Update index buffers
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
+        Renderer::BindIndexBuffer(triangleIndexBuffer_);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
             bufferOffset,
             circleModel_->IndexDataByteSize(),
@@ -173,7 +173,7 @@ namespace Graphics {
             lineIndexByteSize,
             &lineIndexes[0]);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindIndexBuffer();
     }
 
     void CircleDemo::AnimateSides()
@@ -222,14 +222,14 @@ namespace Graphics {
         glEnable(GL_PROGRAM_POINT_SIZE);
 
         //Buffer setup
-        vertexArray_ = Renderer::GenVertexArrays(1);
+        vertexArray_ = Renderer::GenVertexArray();
         Renderer::BindVertexArray(vertexArray_);
-        glGenBuffers(1, &vertexBufferId_);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
+        vertexBuffer_ = Renderer::GenVertexBuffer();
+        Renderer::BindVertexBuffer(vertexBuffer_);
         glBufferData(GL_ARRAY_BUFFER, circleModel_->VertexDataByteSize(), &circleModel_->Vertexes[0], GL_STATIC_DRAW);
 
-        glGenBuffers(1, &triangleIndexBufferId_);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleIndexBufferId_);
+        triangleIndexBuffer_ = Renderer::GenIndexBuffer();
+        Renderer::BindIndexBuffer(triangleIndexBuffer_);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, circleModel_->IndexDataByteSize(), &circleModel_->Indexes[0], GL_STATIC_DRAW);
 
         const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
@@ -249,8 +249,8 @@ namespace Graphics {
 
         //Release bindings
         Renderer::UnbindVertexArray();
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindVertexBuffer();
+        Renderer::UnbindIndexBuffer();
 
         triangleShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
         triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShader_.AsGlType(), "u_Proj");
@@ -276,7 +276,8 @@ namespace Graphics {
 
         glDeleteProgram(triangleShader_.AsGlType());
         glDeleteProgram(lineShader_.AsGlType());
-        glDeleteBuffers(1, &vertexBufferId_);
+        Renderer::DeleteIndexBuffer(triangleIndexBuffer_);
+        Renderer::DeleteVertexBuffer(vertexBuffer_);
 
         attached_ = false;
     }

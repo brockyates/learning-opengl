@@ -4,11 +4,13 @@
 
 namespace Graphics::Detail {
 
-    struct ShaderProgramTag {};
-    struct VertexShaderTag {};
     struct FragmentShaderTag {};
     struct FrameBufferTag {};
+    struct IndexBufferTag {};
+    struct ShaderProgramTag {};
     struct VertexArrayTag {};
+    struct VertexBufferTag {};
+    struct VertexShaderTag {};
 
     template <typename Tag>
     class Uint32Id
