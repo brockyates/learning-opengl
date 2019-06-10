@@ -160,7 +160,9 @@ namespace Graphics
 
     void OpenGlRenderer::SetUniform(const Uniform& uniform, const glm::mat4& matrix)
     {
-        glUniformMatrix4fv(uniform.AsGlType(), 1, GL_FALSE, &matrix[0][0]);
+        const auto count = 1;
+        const auto transpose = GL_FALSE;
+        glUniformMatrix4fv(uniform.AsGlType(), count, transpose, &matrix[0][0]);
     }
 
     Uniform OpenGlRenderer::GetUniform(const ShaderProgram& shader, const std::string& uniformName)
