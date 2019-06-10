@@ -12,6 +12,8 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
+
 namespace Graphics {
 
     struct WindowProperties;
@@ -47,7 +49,7 @@ namespace Graphics {
         EventHandler<RenderTargetChangeEvent> OnRenderTargetChanged();
         EventHandler<AspectRatioChangeEvent> OnAspectRatioChange();
 
-        //Scene rendering
+        //Scene
         void UpdateVertexes();
         void UpdateVertex(glm::vec4& vertex, glm::vec4& direction) const;
         void UpdateTiming();
@@ -55,7 +57,7 @@ namespace Graphics {
         void ChangeDrawMode(const DrawMode& nextMode);
         [[nodiscard]] static glm::vec4 GetRandomVertexDirection();
 
-        //UI Rendering
+        //UI
         void DrawDescription() const;
         void DrawModeSelector();
         void DrawColorControls();

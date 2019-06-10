@@ -5,10 +5,10 @@
 
 #include "logging/Log.h"
 
+#include "models/ModelGenerator.h"
 #include "renderer/Renderer.h"
 #include "window/Window.h"
 
-#include <glad/glad.h>
 #include <imgui.h>
 #include <utility>
 
@@ -16,6 +16,7 @@ namespace Graphics {
 
     HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Hello World")
+        , triangle_(ModelGenerator::MakeTriangle())
     {}
 
     void HelloWorld::RenderScene()
@@ -23,23 +24,20 @@ namespace Graphics {
         if (!attached_)
             return;
 
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
-
         // Bindings
-        glBindVertexArray(vertexArrayId_);
-        glUseProgram(shader_.AsGlType());
+        Renderer::BindFrameBuffer(frameBuffer_);
+        Renderer::BindVertexArray(vertexArray_);
+        Renderer::UseShader(shader_);
 
         // Draw
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        Renderer::SetClearColor(backgroundColor_);
+        Renderer::ClearColorBuffer();
 
-        glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
+        Renderer::DrawTriangleIndexes(triangle_->NumIndexes());
 
         // Release bindings
-        glUseProgram(0);
-        glBindVertexArray(0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        Renderer::UnbindAll();
     }
 
     void HelloWorld::RenderUi()
@@ -67,7 +65,7 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            frameBufferId_ = event.NextRenderTargetId();
+            frameBuffer_ = FrameBuffer{ event.NextRenderTargetId() };
         };
     }
 
@@ -77,21 +75,23 @@ namespace Graphics {
 
         LogTrace("Attaching HelloWorld");
 
-        glGenVertexArrays(1, &vertexArrayId_);
-        glBindVertexArray(vertexArrayId_);
-        glGenBuffers(1, &vertexBufferId_);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
-        glBufferData(GL_ARRAY_BUFFER, std::size(vertexes_) * sizeof(float), &vertexes_[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+        vertexArray_ = Renderer::GenVertexArray();
+        Renderer::BindVertexArray(vertexArray_);
 
-        //Release bindings
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        vertexBuffer_ = Renderer::GenVertexBuffer();
+        Renderer::BindVertexBuffer(vertexBuffer_);
+        Renderer::SetVertexesForStaticDraw(triangle_->VertexDataByteSize(), triangle_->Vertexes);
+
+        indexBuffer_ = Renderer::GenIndexBuffer();
+        Renderer::BindIndexBuffer(indexBuffer_);
+        Renderer::SetIndexesForStaticDraw(triangle_->IndexDataByteSize(), triangle_->Indexes);
+
+        Renderer::SetVertexAttrib0(Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, false, Vertex1::VERTEX_BYTE_SIZE, offsetof(Vertex1, Position)); //Vertex Position
 
         shader_ = Renderer::CreateShaderProgram("res/shaders/Minimal_Vertex.shader", "res/shaders/Minimal_Fragment.shader");
-
         attached_ = true;
+
+        Renderer::UnbindAll();
     }
 
     void HelloWorld::Detach()
@@ -100,11 +100,10 @@ namespace Graphics {
 
         LogTrace("Detaching HelloWorld");
 
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        Renderer::UnbindAll();
 
-        glDeleteProgram(shader_.AsGlType());
-        glDeleteBuffers(1, &vertexBufferId_);
+        Renderer::DeleteShader(shader_);
+        Renderer::DeleteVertexBuffer(vertexBuffer_);
 
         attached_ = false;
     }

@@ -5,10 +5,16 @@
 
 #include "layers/Layer.h"
 
+#include "models/Model.h"
+
 #include "renderer/RendererTypes.h"
 
-namespace Graphics {
+#include <glm/glm.hpp>
 
+#include <memory>
+
+namespace Graphics
+{
     class Window;
 
     class HelloWorld final : public Layer
@@ -32,20 +38,16 @@ namespace Graphics {
         //Event handlers
         EventHandler<RenderTargetChangeEvent> OnRenderTargetChanged();
 
-        //OpenGL state
-        unsigned int frameBufferId_ = 0;
-        ShaderProgram shader_ = ShaderProgram{ 0 };
-        unsigned int vertexArrayId_ = 0;
-        unsigned int vertexBufferId_ = 0;
-
-        std::vector<float> vertexes_ =
-        {
-             0.0f,  1.0f,
-             1.0f, -1.0f,
-            -1.0f, -1.0f,
-        };
-
+        //Scene
+        glm::vec4 backgroundColor_ = { 0.5f, 0.5f, 0.5f, 1.0f };
+        std::unique_ptr<Model> triangle_;
         bool attached_ = false;
-    };
 
+        //OpenGL state
+        FrameBuffer frameBuffer_;
+        VertexArray vertexArray_;
+        VertexBuffer vertexBuffer_;
+        IndexBuffer indexBuffer_;
+        ShaderProgram shader_;
+    };
 }
