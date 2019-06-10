@@ -185,6 +185,7 @@
     </ClInclude>
     <ClInclude Include="src\helpers\FileHelpers.h" />
     <ClInclude Include="src\renderer\detail\OpenGlRendererDetail.h" />
+    <ClInclude Include="src\renderer\detail\Int32Id.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">

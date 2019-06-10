@@ -2,8 +2,8 @@
 
 #include <glad/glad.h>
 
-namespace Graphics::Detail {
-
+namespace Graphics::Detail
+{
     struct FragmentShaderTag {};
     struct FrameBufferTag {};
     struct IndexBufferTag {};
@@ -29,5 +29,4 @@ namespace Graphics::Detail {
     private:
         uint32_t value_;
     };
-
 }

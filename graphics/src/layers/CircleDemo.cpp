@@ -50,7 +50,7 @@ namespace Graphics {
         glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         
         glUseProgram(triangleShader_.AsGlType());
-        glUniformMatrix4fv(triangleProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
+        Renderer::SetUniform(triangleProjMatrixUniform_, projectionMatrix_);
 
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
         glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
@@ -58,7 +58,7 @@ namespace Graphics {
         glUseProgram(lineShader_.AsGlType());
         glUniformMatrix4fv(lineProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
         glUniform4fv(lineColorUniformLocation_, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
+        Renderer::BindIndexBuffer(lineIndexBuffer_);
         glDrawElements(GL_LINES, numLineIndexes_, GL_UNSIGNED_INT, nullptr);
 
         // Release bindings
@@ -167,7 +167,7 @@ namespace Graphics {
             circleModel_->IndexDataByteSize(),
             &circleModel_->Indexes[0]);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
+        Renderer::BindIndexBuffer(lineIndexBuffer_);
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
             bufferOffset,
             lineIndexByteSize,
@@ -235,8 +235,8 @@ namespace Graphics {
         const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
-        glGenBuffers(1, &lineIndexBufferId_);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lineIndexBufferId_);
+        lineIndexBuffer_ = Renderer::GenIndexBuffer();
+        Renderer::BindIndexBuffer(lineIndexBuffer_);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, lineIndexByteSize, &lineIndexes[0], GL_STATIC_DRAW);
 
         //Vertex Position
@@ -253,7 +253,7 @@ namespace Graphics {
         Renderer::UnbindIndexBuffer();
 
         triangleShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_TriangleVertex.shader", "res/shaders/CircleDemo_TriangleFragment.shader");
-        triangleProjMatrixUniformLocation_ = glGetUniformLocation(triangleShader_.AsGlType(), "u_Proj");
+        triangleProjMatrixUniform_ = Renderer::GetUniform(triangleShader_, "u_Proj");
 
         lineShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
         lineColorUniformLocation_ = glGetUniformLocation(lineShader_.AsGlType(), "u_LineColor");
@@ -277,6 +277,7 @@ namespace Graphics {
         glDeleteProgram(triangleShader_.AsGlType());
         glDeleteProgram(lineShader_.AsGlType());
         Renderer::DeleteIndexBuffer(triangleIndexBuffer_);
+        Renderer::DeleteIndexBuffer(lineIndexBuffer_);
         Renderer::DeleteVertexBuffer(vertexBuffer_);
 
         attached_ = false;

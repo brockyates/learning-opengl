@@ -32,5 +32,8 @@ namespace Graphics
 
         static ShaderProgram CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
         static void UnbindProgram();
+
+        static void SetUniform(const Uniform& uniform, const glm::mat4& matrix);
+        static Uniform GetUniform(const ShaderProgram& shader, const std::string& uniformName);
     };
 }
