@@ -104,6 +104,7 @@ namespace Graphics {
 
         Renderer::DeleteShader(shader_);
         Renderer::DeleteVertexBuffer(vertexBuffer_);
+        Renderer::DeleteIndexBuffer(indexBuffer_);
 
         attached_ = false;
     }

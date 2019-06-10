@@ -57,6 +57,16 @@ namespace Graphics {
         void ChangeDrawMode(const DrawMode& nextMode);
         [[nodiscard]] static glm::vec4 GetRandomVertexDirection();
 
+        bool attached_ = false;
+        double lastTime_;
+        double deltaTime_ = 0;
+        glm::vec4 backgroundColor_ = { 0.15f, 0.15f, 0.15f, 1.0f };
+        float lineWidth_ = 5.0f;
+        float pointSize_ = 30.0f;
+        std::unordered_map<int, DrawMode> drawModes_;
+        DrawMode drawMode_;
+        glm::mat4 projectionMatrix_;
+
         //UI
         void DrawDescription() const;
         void DrawModeSelector();
@@ -65,27 +75,8 @@ namespace Graphics {
         void DrawLineControls();
         void DrawPointControls();
 
-        bool attached_ = false;
-        double lastTime_;
-        double deltaTime_ = 0;
-
-        //OpenGL state
-        unsigned int frameBufferId_ = 0;
-        ShaderProgram shader_ = ShaderProgram{ 0 };
-        unsigned int vertexArrayId_ = 0;
-        unsigned int vertexBufferId_ = 0;
-        unsigned int indexBufferId_ = 0;
-        unsigned int pointSizeUniformLocation_ = 0;
-
-        glm::vec4 clearColor_ = { 0.15f, 0.15f, 0.15f, 1.0f };
-        float lineWidth_ = 5.0f;
-        float pointSize_ = 30.0f;
-
-        std::unordered_map<int, DrawMode> drawModes_;
-        DrawMode drawMode_;
-
         //Buffer data
-        std::unique_ptr<Model> triangleModel_;
+        std::unique_ptr<Model> triangle_;
         std::vector<unsigned int> lineIndexes_ = { 0, 1, 1, 2, 2, 0 };
 
         //Animation parameters
@@ -96,8 +87,14 @@ namespace Graphics {
         glm::vec4 vertex2Direction_ = GetRandomVertexDirection();
         glm::vec4 vertex3Direction_ = GetRandomVertexDirection();
 
-        glm::mat4 projectionMatrix_;
-        unsigned int projMatrixUniformLocation_ = 0;
+        //OpenGL state
+        FrameBuffer frameBuffer_;
+        VertexArray vertexArray_;
+        VertexBuffer vertexBuffer_;
+        IndexBuffer indexBuffer_;
+        ShaderProgram shader_;
+        Uniform projMatrixUniform_;
+        Uniform pointSizeUniform_;
     };
 
 }

@@ -50,8 +50,10 @@ namespace Graphics
         static void UseShader(const ShaderProgram& shader);
         static void DeleteShader(const ShaderProgram& shader);
 
+        static void SetUniform(const Uniform& uniform, float value);
         static void SetUniform(const Uniform& uniform, const glm::mat4& matrix);
         static void SetUniform(const Uniform& uniform, const glm::vec4& vec);
+
         static Uniform GetUniform(const ShaderProgram& shader, const std::string& uniformName);
 
         //Draw parameters and commands
@@ -66,7 +68,9 @@ namespace Graphics
         static void DisablePointSize();
 
         //Draw calls
+        static void DrawIndexes(uint32_t mode, uint32_t indexCount);
         static void DrawTriangleIndexes(uint32_t indexCount);
         static void DrawLineIndexes(uint32_t indexCount);
+        static void DrawPointIndexes(uint32_t indexCount);
     };
 }

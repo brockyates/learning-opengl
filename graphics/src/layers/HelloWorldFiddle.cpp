@@ -28,8 +28,8 @@ namespace Graphics {
             { GL_POINTS,    {GL_POINTS,    3, "Points"    }}
         })
         , drawMode_(drawModes_[GL_TRIANGLES])
-        , triangleModel_(ModelGenerator::MakeTriangle())
         , projectionMatrix_(glm::ortho(-1.0f * window_.AspectRatio(), 1.0f * window_.AspectRatio(), -1.0f, 1.0f))
+        , triangle_(ModelGenerator::MakeTriangle())
     {}
 
     void HelloWorldFiddle::RenderScene()
@@ -40,27 +40,24 @@ namespace Graphics {
         UpdateTiming();
         UpdateVertexes();
 
-        glLineWidth(lineWidth_);
+        Renderer::SetLineWidth(lineWidth_);
 
         // Bindings
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferId_);
-        glBindVertexArray(vertexArrayId_);
-        glUseProgram(shader_.AsGlType());
-        glUniform1f(pointSizeUniformLocation_, pointSize_);
-        glUniformMatrix4fv(projMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
+        Renderer::BindFrameBuffer(frameBuffer_);
+        Renderer::BindVertexArray(vertexArray_);
+
+        Renderer::UseShader(shader_);
+        Renderer::SetUniform(pointSizeUniform_, pointSize_);
+        Renderer::SetUniform(projMatrixUniform_, projectionMatrix_);
 
         // Draw
-        glClearColor(clearColor_[0], clearColor_[1], clearColor_[2], clearColor_[3]);
-        glClear(GL_COLOR_BUFFER_BIT);
+        Renderer::SetClearColor(backgroundColor_);
+        Renderer::ClearColorBuffer();
+        Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
+        Renderer::DrawIndexes(drawMode_.Mode, drawMode_.NumVertexes);
 
-        glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
-        glDrawElements(drawMode_.Mode, drawMode_.NumVertexes, GL_UNSIGNED_INT, nullptr);
-
-        // Release bindings
-        glLineWidth(1.0f);
-        glUseProgram(0);
-        glBindVertexArray(0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        Renderer::ResetLineWidth();
+        Renderer::UnbindAll();
     }
 
     void HelloWorldFiddle::UpdateVertexes()
@@ -70,15 +67,10 @@ namespace Graphics {
             SetNextVertexPositions();
         }
 
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
-
         const unsigned int bufferOffset = 0;
-        glBufferSubData(GL_ARRAY_BUFFER,
-            bufferOffset,
-            triangleModel_->VertexDataByteSize(),
-            &triangleModel_->Vertexes[0]);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        Renderer::BindVertexBuffer(vertexBuffer_);
+        Renderer::VertexBufferSubData(bufferOffset, triangle_->VertexDataByteSize(), triangle_->Vertexes);
+        Renderer::UnbindVertexBuffer();
     }
 
     void HelloWorldFiddle::UpdateVertex(glm::vec4& vertex, glm::vec4& direction) const
@@ -119,34 +111,28 @@ namespace Graphics {
 
     void HelloWorldFiddle::SetNextVertexPositions()
     {
-        UpdateVertex(triangleModel_->Vertexes[0].Position, vertex1Direction_);
-        UpdateVertex(triangleModel_->Vertexes[1].Position, vertex2Direction_);
-        UpdateVertex(triangleModel_->Vertexes[2].Position, vertex3Direction_);
+        UpdateVertex(triangle_->Vertexes[0].Position, vertex1Direction_);
+        UpdateVertex(triangle_->Vertexes[1].Position, vertex2Direction_);
+        UpdateVertex(triangle_->Vertexes[2].Position, vertex3Direction_);
     }
 
     void HelloWorldFiddle::ChangeDrawMode(const DrawMode& nextMode)
     {
         drawMode_ = nextMode;
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId_);
+        Renderer::BindIndexBuffer(indexBuffer_);
 
         const unsigned int bufferOffset = 0;
         if (nextMode.Mode == GL_LINES)
         {
-            glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
-                bufferOffset,
-                std::size(lineIndexes_) * sizeof(unsigned int),
-                &lineIndexes_[0]);
+            Renderer::IndexBufferSubData(bufferOffset, static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(unsigned int)),lineIndexes_);
         }
         else
         {
-            glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
-                bufferOffset,
-                triangleModel_->IndexDataByteSize(),
-                &triangleModel_->Indexes[0]);
+            Renderer::IndexBufferSubData(bufferOffset, triangle_->IndexDataByteSize(), triangle_->Indexes);
         }
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindIndexBuffer();
     }
 
     glm::vec4 HelloWorldFiddle::GetRandomVertexDirection()
@@ -196,10 +182,10 @@ namespace Graphics {
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Text("Color Controls");
         ImGui::Separator();
-        ImGui::ColorEdit4("glClearColor", &clearColor_[0]);
-        ImGui::ColorEdit4("Vertex 1", &triangleModel_->Vertexes[0].Color[0]);
-        ImGui::ColorEdit4("Vertex 2", &triangleModel_->Vertexes[1].Color[0]);
-        ImGui::ColorEdit4("Vertex 3", &triangleModel_->Vertexes[2].Color[0]);
+        ImGui::ColorEdit4("glClearColor", &backgroundColor_[0]);
+        ImGui::ColorEdit4("Vertex 1", &triangle_->Vertexes[0].Color[0]);
+        ImGui::ColorEdit4("Vertex 2", &triangle_->Vertexes[1].Color[0]);
+        ImGui::ColorEdit4("Vertex 3", &triangle_->Vertexes[2].Color[0]);
     }
 
     void HelloWorldFiddle::DrawPositionControls()
@@ -210,9 +196,9 @@ namespace Graphics {
         if (ImGui::Button("Reset"))
         {
             animationEnabled_ = false;
-            triangleModel_->Vertexes[0].Position = { 0.0f,  1.0f, 0.0f, 1.0f };
-            triangleModel_->Vertexes[1].Position = { 1.0f, -1.0f, 0.0f, 1.0f };
-            triangleModel_->Vertexes[2].Position = { -1.0f, -1.0f, 0.0f, 1.0f };
+            triangle_->Vertexes[0].Position = { 0.0f,  1.0f, 0.0f, 1.0f };
+            triangle_->Vertexes[1].Position = { 1.0f, -1.0f, 0.0f, 1.0f };
+            triangle_->Vertexes[2].Position = { -1.0f, -1.0f, 0.0f, 1.0f };
             vertex1Direction_ = GetRandomVertexDirection();
             vertex2Direction_ = GetRandomVertexDirection();
             vertex3Direction_ = GetRandomVertexDirection();
@@ -222,9 +208,9 @@ namespace Graphics {
         SliderFloat2 takes the address of an array of two floats as the second argument.
         Position is an array of 4 floats, but this works because SliderFloat2 only requires that it can index 2 elements in the array.
         */
-        ImGui::SliderFloat2("Vertex 1", &triangleModel_->Vertexes[0].Position[0], -1.0f, 1.0f);
-        ImGui::SliderFloat2("Vertex 2", &triangleModel_->Vertexes[1].Position[0], -1.0f, 1.0f);
-        ImGui::SliderFloat2("Vertex 3", &triangleModel_->Vertexes[2].Position[0], -1.0f, 1.0f);
+        ImGui::SliderFloat2("Vertex 1", &triangle_->Vertexes[0].Position[0], -1.0f, 1.0f);
+        ImGui::SliderFloat2("Vertex 2", &triangle_->Vertexes[1].Position[0], -1.0f, 1.0f);
+        ImGui::SliderFloat2("Vertex 3", &triangle_->Vertexes[2].Position[0], -1.0f, 1.0f);
         ImGui::Dummy(ImVec2(0.0f, 20.0f));
         ImGui::Checkbox("Animation", &animationEnabled_);
         ImGui::SliderFloat("Speed", &vertexMoveSpeed_, 0.0f, 5.0f);
@@ -281,7 +267,7 @@ namespace Graphics {
     {
         return [this](const RenderTargetChangeEvent& event)
         {
-            frameBufferId_ = event.NextRenderTargetId();
+            frameBuffer_ = FrameBuffer{ event.NextRenderTargetId() };
         };
     }
 
@@ -308,41 +294,36 @@ namespace Graphics {
         LogTrace("Attaching HelloWorldFiddle");
 
         //Layer settings
-        glEnable(GL_PROGRAM_POINT_SIZE);
-        glLineWidth(lineWidth_);
+        Renderer::EnablePointSize();
+        Renderer::SetLineWidth(lineWidth_);
 
         //Buffer setup
-        glGenVertexArrays(1, &vertexArrayId_);
-        glBindVertexArray(vertexArrayId_);
-        glGenBuffers(1, &vertexBufferId_);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
-        glBufferData(GL_ARRAY_BUFFER, triangleModel_->VertexDataByteSize(), &triangleModel_->Vertexes[0], GL_STATIC_DRAW);
+        vertexArray_ = Renderer::GenVertexArray();
+        Renderer::BindVertexArray(vertexArray_);
 
-        glGenBuffers(1, &indexBufferId_);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId_);
+        vertexBuffer_ = Renderer::GenVertexBuffer();
+        Renderer::BindVertexBuffer(vertexBuffer_);
+        Renderer::SetVertexesForStaticDraw(triangle_->VertexDataByteSize(), triangle_->Vertexes);
+
+        indexBuffer_ = Renderer::GenIndexBuffer();
+        Renderer::BindIndexBuffer(indexBuffer_);
 
         //Allocate a buffer that can hold the larger of the two index buffers, in this case the line indexes are larger than the triangle indexes.
-        const auto indexBufferByteSize = std::size(lineIndexes_) * sizeof(unsigned int);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferByteSize, &triangleModel_->Indexes[0], GL_STATIC_DRAW);
+        const auto indexBufferByteSize = static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(unsigned int));
+        Renderer::SetIndexesForStaticDraw(indexBufferByteSize, triangle_->Indexes);
 
         //Vertex Position
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
+        Renderer::SetVertexAttrib0(Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, false, Vertex1::VERTEX_BYTE_SIZE, offsetof(Vertex1, Position));
 
         //Vertex Color
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
-
-        //Release Bindings
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);		
+        Renderer::SetVertexAttrib1(Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, false, Vertex1::VERTEX_BYTE_SIZE, offsetof(Vertex1, Color));
 
         shader_ = Renderer::CreateShaderProgram("res/shaders/HelloWorldFiddle_Vertex.shader", "res/shaders/HelloWorldFiddle_Fragment.shader");
-        pointSizeUniformLocation_ = glGetUniformLocation(shader_.AsGlType(), "u_PointSize");
-        projMatrixUniformLocation_ = glGetUniformLocation(shader_.AsGlType(), "u_Proj");
+        pointSizeUniform_ = Renderer::GetUniform(shader_, "u_PointSize");
+        projMatrixUniform_ = Renderer ::GetUniform(shader_, "u_Proj");
 
         attached_ = true;
+        Renderer::UnbindAll();
     }
 
     void HelloWorldFiddle::Detach()
@@ -351,15 +332,14 @@ namespace Graphics {
 
         LogTrace("Detaching HelloWorldFiddle");
 
-        glDisable(GL_PROGRAM_POINT_SIZE);
-        glLineWidth(1.0f);
+        Renderer::DisablePointSize();
+        Renderer::ResetLineWidth();
 
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindAll();
 
-        glDeleteProgram(shader_.AsGlType());
-        glDeleteBuffers(1, &vertexBufferId_);
+        Renderer::DeleteShader(shader_);
+        Renderer::DeleteVertexBuffer(vertexBuffer_);
+        Renderer::DeleteIndexBuffer(indexBuffer_);
 
         attached_ = false;
     }

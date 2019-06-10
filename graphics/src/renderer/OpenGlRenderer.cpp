@@ -221,6 +221,11 @@ namespace Graphics
         glDeleteProgram(shader.AsGlType());
     }
 
+    void OpenGlRenderer::SetUniform(const Uniform& uniform, float value)
+    {
+        glUniform1f(uniform.AsGlType(), value);
+    }
+
     void OpenGlRenderer::SetUniform(const Uniform& uniform, const glm::mat4& matrix)
     {
         const auto count = 1;
@@ -274,19 +279,25 @@ namespace Graphics
         glDisable(GL_PROGRAM_POINT_SIZE);
     }
 
-    void OpenGlRenderer::DrawTriangleIndexes(const uint32_t indexCount)
+    void OpenGlRenderer::DrawIndexes(const uint32_t mode, const uint32_t indexCount)
     {
-        const auto mode = GL_TRIANGLES;
         const auto indexType = GL_UNSIGNED_INT;
         const auto offset = nullptr;
         glDrawElements(mode, indexCount, indexType, offset);
     }
 
+    void OpenGlRenderer::DrawTriangleIndexes(const uint32_t indexCount)
+    {
+        DrawIndexes(GL_TRIANGLES, indexCount);
+    }
+
     void OpenGlRenderer::DrawLineIndexes(const uint32_t indexCount)
     {
-        const auto mode = GL_LINES;
-        const auto indexType = GL_UNSIGNED_INT;
-        const auto offset = nullptr;
-        glDrawElements(mode, indexCount, indexType, offset);
+        DrawIndexes(GL_LINES, indexCount);
+    }
+
+    void OpenGlRenderer::DrawPointIndexes(const uint32_t indexCount)
+    {
+        DrawIndexes(GL_POINTS, indexCount);
     }
 }
