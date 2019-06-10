@@ -62,6 +62,24 @@ namespace Graphics
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
+    VertexArray OpenGlRenderer::GenVertexArrays(uint32_t count)
+    {
+        uint32_t id;
+        glGenVertexArrays(count, &id);
+
+        return VertexArray{ id };
+    }
+
+    void OpenGlRenderer::BindVertexArray(const VertexArray& vertexArray)
+    {
+        glBindVertexArray(vertexArray.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindVertexArray()
+    {
+        glBindVertexArray(0);
+    }
+
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
         const std::string& fragmentShaderPath)
     {

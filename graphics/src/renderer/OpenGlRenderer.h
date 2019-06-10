@@ -16,6 +16,10 @@ namespace Graphics
         static void BindFrameBuffer(const FrameBuffer& buffer);
         static void UnbindFrameBuffer();
 
+        static VertexArray GenVertexArrays(uint32_t count);
+        static void BindVertexArray(const VertexArray& vertexArray);
+        static void UnbindVertexArray();
+
         static ShaderProgram CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
     };
 }

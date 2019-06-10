@@ -41,7 +41,7 @@ namespace Graphics {
 
         // Bindings
         Renderer::BindFrameBuffer(frameBuffer_);
-        glBindVertexArray(vertexArrayId_);
+        Renderer::BindVertexArray(vertexArray_);
 
         // Draw
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
@@ -222,8 +222,8 @@ namespace Graphics {
         glEnable(GL_PROGRAM_POINT_SIZE);
 
         //Buffer setup
-        glGenVertexArrays(1, &vertexArrayId_);
-        glBindVertexArray(vertexArrayId_);
+        vertexArray_ = Renderer::GenVertexArrays(1);
+        Renderer::BindVertexArray(vertexArray_);
         glGenBuffers(1, &vertexBufferId_);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId_);
         glBufferData(GL_ARRAY_BUFFER, circleModel_->VertexDataByteSize(), &circleModel_->Vertexes[0], GL_STATIC_DRAW);
@@ -248,7 +248,7 @@ namespace Graphics {
         glVertexAttribPointer(1, Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
 
         //Release bindings
-        glBindVertexArray(0);
+        Renderer::UnbindVertexArray();
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
@@ -270,7 +270,7 @@ namespace Graphics {
 
         glDisable(GL_PROGRAM_POINT_SIZE);
 
-        glBindVertexArray(0);
+        Renderer::UnbindVertexArray();
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 

@@ -8,11 +8,16 @@ namespace Graphics::Detail {
     struct VertexShaderTag {};
     struct FragmentShaderTag {};
     struct FrameBufferTag {};
+    struct VertexArrayTag {};
 
     template <typename Tag>
     class Uint32Id
     {
     public:
+        Uint32Id()
+            : value_(0)
+        {}
+
         explicit Uint32Id(const uint32_t id)
             : value_(id)
         {}
