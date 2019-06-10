@@ -9,6 +9,8 @@
 
 #include "logging/Log.h"
 
+#include "types/Vertex1.h"
+
 #include <glad/glad.h>
 
 namespace Graphics
@@ -104,6 +106,17 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
+    void OpenGlRenderer::SetVertexesForStaticDraw(const uint32_t sizeInBytes, const std::vector<Vertex1>& vertexes)
+    {
+        glBufferData(GL_ARRAY_BUFFER, sizeInBytes, &vertexes[0], GL_STATIC_DRAW);
+    }
+
+    void OpenGlRenderer::VertexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes,
+        const std::vector<Vertex1>& vertexes)
+    {
+        glBufferSubData(GL_ARRAY_BUFFER, offset, sizeInBytes, &vertexes[0]);
+    }
+
     IndexBuffer OpenGlRenderer::GenIndexBuffer()
     {
         uint32_t id;
@@ -126,6 +139,46 @@ namespace Graphics
     {
         const auto id = buffer.AsGlType();
         glDeleteBuffers(1, &id);
+    }
+
+    void OpenGlRenderer::SetIndexesForStaticDraw(uint32_t sizeInBytes, const std::vector<unsigned>& indexes)
+    {
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
+    }
+
+    void OpenGlRenderer::IndexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes, const std::vector<unsigned int>& indexes)
+    {
+        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, sizeInBytes, &indexes[0]);
+    }
+
+    void OpenGlRenderer::UnbindAll()
+    {
+        UnbindShader();
+        UnbindVertexArray();
+        UnbindIndexBuffer();
+        UnbindFrameBuffer();
+    }
+
+    namespace
+    {
+        void SetVertexAttrib(const uint32_t index, const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+            const size_t offset)
+        {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, size, type, isNormalized, stride, reinterpret_cast<void*>(offset));
+        }
+    }
+
+    void OpenGlRenderer::SetVertexAttrib0(const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+        const size_t offset)
+    {
+        SetVertexAttrib(0, size, type, isNormalized, stride, offset);
+    }
+
+    void OpenGlRenderer::SetVertexAttrib1(const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+                                                 const size_t offset)
+    {
+        SetVertexAttrib(1, size, type, isNormalized, stride, offset);
     }
 
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
@@ -153,9 +206,19 @@ namespace Graphics
         return program;
     }
 
-    void OpenGlRenderer::UnbindProgram()
+    void OpenGlRenderer::UnbindShader()
     {
         glUseProgram(0);
+    }
+
+    void OpenGlRenderer::UseShader(const ShaderProgram& shader)
+    {
+        glUseProgram(shader.AsGlType());
+    }
+
+    void OpenGlRenderer::DeleteShader(const ShaderProgram& shader)
+    {
+        glDeleteProgram(shader.AsGlType());
     }
 
     void OpenGlRenderer::SetUniform(const Uniform& uniform, const glm::mat4& matrix)
@@ -174,5 +237,56 @@ namespace Graphics
     Uniform OpenGlRenderer::GetUniform(const ShaderProgram& shader, const std::string& uniformName)
     {
         return Uniform{ glGetUniformLocation(shader.AsGlType(), uniformName.c_str()) };
+    }
+
+    void OpenGlRenderer::ClearColorBuffer()
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    void OpenGlRenderer::SetClearColor(const glm::vec4& color)
+    {
+        glClearColor(color[0], color[1], color[2], color[3]);
+    }
+
+    void OpenGlRenderer::SetLineWidth(const float width)
+    {
+        glLineWidth(width);
+    }
+
+    void OpenGlRenderer::SetViewPort(const uint32_t xPos, const uint32_t yPos, const uint32_t width, const uint32_t height)
+    {
+        glViewport(xPos, yPos, width, height);
+    }
+
+    void OpenGlRenderer::ResetLineWidth()
+    {
+        glLineWidth(1.0f);
+    }
+
+    void OpenGlRenderer::EnablePointSize()
+    {
+        glEnable(GL_PROGRAM_POINT_SIZE);
+    }
+
+    void OpenGlRenderer::DisablePointSize()
+    {
+        glDisable(GL_PROGRAM_POINT_SIZE);
+    }
+
+    void OpenGlRenderer::DrawTriangleIndexes(const uint32_t indexCount)
+    {
+        const auto mode = GL_TRIANGLES;
+        const auto indexType = GL_UNSIGNED_INT;
+        const auto offset = nullptr;
+        glDrawElements(mode, indexCount, indexType, offset);
+    }
+
+    void OpenGlRenderer::DrawLineIndexes(const uint32_t indexCount)
+    {
+        const auto mode = GL_LINES;
+        const auto indexType = GL_UNSIGNED_INT;
+        const auto offset = nullptr;
+        glDrawElements(mode, indexCount, indexType, offset);
     }
 }

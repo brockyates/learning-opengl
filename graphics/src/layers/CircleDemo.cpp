@@ -37,36 +37,31 @@ namespace Graphics {
         AnimateSides();
         UpdateSides();
 
-        glLineWidth(3.0f);
+        Renderer::SetLineWidth(3.0f);
 
         // Bindings
         Renderer::BindFrameBuffer(frameBuffer_);
         Renderer::BindVertexArray(vertexArray_);
 
         // Draw
-        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glViewport(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
+        Renderer::SetClearColor(backgroundColor_);
+        Renderer::ClearColorBuffer();
+        Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         
-        glUseProgram(triangleShader_.AsGlType());
+        Renderer::UseShader(triangleShader_);
         Renderer::SetUniform(triangleProjMatrixUniform_, projectionMatrix_);
-
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
+        Renderer::DrawTriangleIndexes(circleModel_->NumIndexes());
 
-        glUseProgram(lineShader_.AsGlType());
+        Renderer::UseShader(lineShader_);
         Renderer::SetUniform(lineProjMatrixUniform_, projectionMatrix_);
         Renderer::SetUniform(lineColorUniform_, lineColor_);
         Renderer::BindIndexBuffer(lineIndexBuffer_);
-        glDrawElements(GL_LINES, numLineIndexes_, GL_UNSIGNED_INT, nullptr);
+        Renderer::DrawLineIndexes(numLineIndexes_);
 
         // Release bindings
-        glLineWidth(1.0f);
-        Renderer::UnbindProgram();
-        Renderer::UnbindVertexArray();
-        Renderer::UnbindIndexBuffer();
-        Renderer::UnbindFrameBuffer();
+        Renderer::ResetLineWidth();
+        Renderer::UnbindAll();
     }
 
     void CircleDemo::RenderUi()
@@ -141,45 +136,36 @@ namespace Graphics {
     void CircleDemo::UpdateSides()
     {
         if (nextVertexes_ == vertexCount_)
+        {
             return;
+        }
 
         vertexCount_ = nextVertexes_;
         circleModel_ = std::make_unique<Circle>(vertexCount_);
-
-        const unsigned int bufferOffset = 0;
-
+        const auto bufferOffset = 0u;
         const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
-        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
+        const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
 
         //Update vertex buffer
         Renderer::BindVertexBuffer(vertexBuffer_);
-        glBufferSubData(GL_ARRAY_BUFFER,
-            bufferOffset,
-            circleModel_->VertexDataByteSize(),
-            &circleModel_->Vertexes[0]);
+        Renderer::VertexBufferSubData(bufferOffset, circleModel_->VertexDataByteSize(), circleModel_->Vertexes);
         Renderer::UnbindVertexBuffer();
 
         //Update index buffers
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
-            bufferOffset,
-            circleModel_->IndexDataByteSize(),
-            &circleModel_->Indexes[0]);
-
+        Renderer::IndexBufferSubData(bufferOffset, circleModel_->IndexDataByteSize(), circleModel_->Indexes);
         Renderer::BindIndexBuffer(lineIndexBuffer_);
-        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,
-            bufferOffset,
-            lineIndexByteSize,
-            &lineIndexes[0]);
-
+        Renderer::IndexBufferSubData(bufferOffset, lineIndexByteSize, lineIndexes);
         Renderer::UnbindIndexBuffer();
     }
 
     void CircleDemo::AnimateSides()
     {
         if (!animationEnabled_)
+        {
             return;
+        }
 
         if (timeSinceLastChange_ > animationInterval_)
         {
@@ -219,33 +205,28 @@ namespace Graphics {
         LogTrace("Attaching CircleDemo");
 
         //Layer settings
-        glEnable(GL_PROGRAM_POINT_SIZE);
+        Renderer::EnablePointSize();
 
         //Buffer setup
         vertexArray_ = Renderer::GenVertexArray();
         Renderer::BindVertexArray(vertexArray_);
         vertexBuffer_ = Renderer::GenVertexBuffer();
         Renderer::BindVertexBuffer(vertexBuffer_);
-        glBufferData(GL_ARRAY_BUFFER, circleModel_->VertexDataByteSize(), &circleModel_->Vertexes[0], GL_STATIC_DRAW);
+        Renderer::SetVertexesForStaticDraw(circleModel_->VertexDataByteSize(), circleModel_->Vertexes);
 
         triangleIndexBuffer_ = Renderer::GenIndexBuffer();
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, circleModel_->IndexDataByteSize(), &circleModel_->Indexes[0], GL_STATIC_DRAW);
+        Renderer::SetIndexesForStaticDraw(circleModel_->IndexDataByteSize(), circleModel_->Indexes);
 
         const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
-        const auto lineIndexByteSize = static_cast<unsigned int>(std::size(lineIndexes)) * sizeof(unsigned int);
+        const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
         lineIndexBuffer_ = Renderer::GenIndexBuffer();
         Renderer::BindIndexBuffer(lineIndexBuffer_);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, lineIndexByteSize, &lineIndexes[0], GL_STATIC_DRAW);
+        Renderer::SetIndexesForStaticDraw(lineIndexByteSize, lineIndexes);
 
-        //Vertex Position
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Position)));
-
-        //Vertex Color
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, GL_FALSE, Vertex1::VERTEX_BYTE_SIZE, reinterpret_cast<void*>(offsetof(Vertex1, Color)));
+        Renderer::SetVertexAttrib0(Vertex1::ELEMENTS_PER_POSITION, Vertex1::POSITION_TYPE, false, Vertex1::VERTEX_BYTE_SIZE, offsetof(Vertex1, Position)); //Vertex Position
+        Renderer::SetVertexAttrib1(Vertex1::ELEMENTS_PER_COLOR, Vertex1::COLOR_TYPE, false, Vertex1::VERTEX_BYTE_SIZE, offsetof(Vertex1, Color));          //Vertex Color
 
         //Release bindings
         Renderer::UnbindVertexArray();
@@ -268,14 +249,12 @@ namespace Graphics {
 
         LogTrace("Detaching CircleDemo");
 
-        glDisable(GL_PROGRAM_POINT_SIZE);
+        Renderer::DisablePointSize();
 
-        Renderer::UnbindVertexArray();
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        Renderer::UnbindAll();
 
-        glDeleteProgram(triangleShader_.AsGlType());
-        glDeleteProgram(lineShader_.AsGlType());
+        Renderer::DeleteShader(triangleShader_);
+        Renderer::DeleteShader(lineShader_);
         Renderer::DeleteIndexBuffer(triangleIndexBuffer_);
         Renderer::DeleteIndexBuffer(lineIndexBuffer_);
         Renderer::DeleteVertexBuffer(vertexBuffer_);
