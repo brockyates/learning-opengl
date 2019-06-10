@@ -76,7 +76,7 @@ namespace Graphics {
         unsigned int pointSizeUniformLocation_ = 0;
 
         glm::vec4 clearColor_ = { 0.15f, 0.15f, 0.15f, 1.0f };
-        float lineWidth_ = 1.0f;
+        float lineWidth_ = 5.0f;
         float pointSize_ = 30.0f;
 
         std::unordered_map<int, DrawMode> drawModes_;

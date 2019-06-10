@@ -37,7 +37,7 @@ namespace Graphics {
         AnimateSides();
         UpdateSides();
 
-        glLineWidth(1.0f);
+        glLineWidth(3.0f);
 
         // Bindings
         Renderer::BindFrameBuffer(frameBuffer_);
