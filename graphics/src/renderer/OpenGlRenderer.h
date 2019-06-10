@@ -6,6 +6,8 @@
 
 #include "RendererTypes.h"
 
+#include <glm/glm.hpp>
+
 #include <string>
 
 namespace Graphics
@@ -34,6 +36,7 @@ namespace Graphics
         static void UnbindProgram();
 
         static void SetUniform(const Uniform& uniform, const glm::mat4& matrix);
+        static void SetUniform(const Uniform& uniform, const glm::vec4& vec);
         static Uniform GetUniform(const ShaderProgram& shader, const std::string& uniformName);
     };
 }

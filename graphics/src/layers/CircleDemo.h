@@ -52,6 +52,7 @@ namespace Graphics {
 
         std::unique_ptr<Circle> circleModel_;
         glm::mat4 projectionMatrix_;
+        glm::vec4 lineColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };
 
         //Layer state
         bool attached_ = false;
@@ -67,8 +68,8 @@ namespace Graphics {
         IndexBuffer triangleIndexBuffer_;
         IndexBuffer lineIndexBuffer_;
         Uniform triangleProjMatrixUniform_;
-        unsigned int lineProjMatrixUniformLocation_ = 0;
-        unsigned int lineColorUniformLocation_ = 0;
+        Uniform lineProjMatrixUniform_;
+        Uniform lineColorUniform_;
     };
 
 }

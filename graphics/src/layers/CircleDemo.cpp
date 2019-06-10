@@ -56,8 +56,8 @@ namespace Graphics {
         glDrawElements(GL_TRIANGLES, circleModel_->NumIndexes(), GL_UNSIGNED_INT, nullptr);
 
         glUseProgram(lineShader_.AsGlType());
-        glUniformMatrix4fv(lineProjMatrixUniformLocation_, 1, GL_FALSE, &projectionMatrix_[0][0]);
-        glUniform4fv(lineColorUniformLocation_, 1, &glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)[0]);
+        Renderer::SetUniform(lineProjMatrixUniform_, projectionMatrix_);
+        Renderer::SetUniform(lineColorUniform_, lineColor_);
         Renderer::BindIndexBuffer(lineIndexBuffer_);
         glDrawElements(GL_LINES, numLineIndexes_, GL_UNSIGNED_INT, nullptr);
 
@@ -256,8 +256,8 @@ namespace Graphics {
         triangleProjMatrixUniform_ = Renderer::GetUniform(triangleShader_, "u_Proj");
 
         lineShader_ = Renderer::CreateShaderProgram("res/shaders/CircleDemo_LineVertex.shader", "res/shaders/CircleDemo_LineFragment.shader");
-        lineColorUniformLocation_ = glGetUniformLocation(lineShader_.AsGlType(), "u_LineColor");
-        lineProjMatrixUniformLocation_ = glGetUniformLocation(lineShader_.AsGlType(), "u_Proj");
+        lineColorUniform_ = Renderer::GetUniform(lineShader_, "u_LineColor");
+        lineProjMatrixUniform_ = Renderer::GetUniform(lineShader_, "u_Proj");
 
         attached_ = true;
     }
