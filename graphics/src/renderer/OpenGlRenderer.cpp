@@ -141,7 +141,7 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetIndexesForStaticDraw(uint32_t sizeInBytes, const std::vector<unsigned>& indexes)
+    void OpenGlRenderer::SetIndexesForStaticDraw(const uint32_t sizeInBytes, const std::vector<unsigned>& indexes)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
     }
@@ -161,7 +161,7 @@ namespace Graphics
 
     namespace
     {
-        void SetVertexAttrib(const uint32_t index, const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+        void SetVertexAttrib(const uint32_t index, const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
             const size_t offset)
         {
             glEnableVertexAttribArray(index);
@@ -169,13 +169,13 @@ namespace Graphics
         }
     }
 
-    void OpenGlRenderer::SetVertexAttrib0(const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+    void OpenGlRenderer::SetVertexAttrib0(const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
         const size_t offset)
     {
         SetVertexAttrib(0, size, type, isNormalized, stride, offset);
     }
 
-    void OpenGlRenderer::SetVertexAttrib1(const uint32_t size, const uint32_t type, const bool isNormalized, uint32_t stride,
+    void OpenGlRenderer::SetVertexAttrib1(const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
                                                  const size_t offset)
     {
         SetVertexAttrib(1, size, type, isNormalized, stride, offset);
@@ -221,7 +221,7 @@ namespace Graphics
         glDeleteProgram(shader.AsGlType());
     }
 
-    void OpenGlRenderer::SetUniform(const Uniform& uniform, float value)
+    void OpenGlRenderer::SetUniform(const Uniform& uniform, const float value)
     {
         glUniform1f(uniform.AsGlType(), value);
     }

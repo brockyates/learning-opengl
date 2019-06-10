@@ -13,7 +13,6 @@
 #include "types/Timer.h"
 #include "window/Window.h"
 
-#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <utility>
 #include <imgui.h>

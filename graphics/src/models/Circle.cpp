@@ -27,8 +27,8 @@ namespace Graphics {
 
         for (auto i = 1u; i < numVertexes - 1; i++) //Note the loop index starts at 1.
         {
-            glm::mat4 transform = rotate(glm::mat4(1.0f), i*angle, rotationAxis);
-            glm::vec4 nextPoint = transform * basePoint;
+            const auto transform = rotate(glm::mat4(1.0f), i*angle, rotationAxis);
+            const auto nextPoint = transform * basePoint;
 
             vertexes.emplace_back(nextPoint, defaultColor);
         }

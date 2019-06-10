@@ -42,20 +42,20 @@ namespace Graphics {
 
         Renderer::SetLineWidth(lineWidth_);
 
-        // Bindings
+        //Bindings
         Renderer::BindFrameBuffer(frameBuffer_);
         Renderer::BindVertexArray(vertexArray_);
-
         Renderer::UseShader(shader_);
         Renderer::SetUniform(pointSizeUniform_, pointSize_);
         Renderer::SetUniform(projMatrixUniform_, projectionMatrix_);
 
-        // Draw
+        //Draw
         Renderer::SetClearColor(backgroundColor_);
         Renderer::ClearColorBuffer();
         Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
         Renderer::DrawIndexes(drawMode_.Mode, drawMode_.NumVertexes);
 
+        //Cleanup
         Renderer::ResetLineWidth();
         Renderer::UnbindAll();
     }
