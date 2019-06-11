@@ -30,6 +30,8 @@ namespace Graphics {
 
     RenderTargetLayer::~RenderTargetLayer()
     {
+        //Todo: delete texture
+        Renderer::DeleteRenderBuffer(renderBuffer_);
         Detach();
     }
 
@@ -74,12 +76,12 @@ namespace Graphics {
 
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTextureId_, 0);
 
-        glGenRenderbuffers(1, &renderBufferId_);
-        glBindRenderbuffer(GL_RENDERBUFFER, renderBufferId_);
+        renderBuffer_ = Renderer::GenRenderBuffer();
+        Renderer::BindRenderBuffer(renderBuffer_);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_.ResolutionWidth(), window_.ResolutionHeight());
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        Renderer::UnbindRenderBuffer();
 
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBufferId_);
+        Renderer::SetFrameBufferRenderBuffer(renderBuffer_);
 
         const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
@@ -95,19 +97,15 @@ namespace Graphics {
             LogGlTrace("Frame buffer complete");
         }
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        Renderer::UnbindFrameBuffer();
     }
 
     void RenderTargetLayer::Detach()
     {
         LogTrace("Detaching RenderTargetLayer");
 
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
         glBindTexture(GL_TEXTURE_2D, 0);
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        Renderer::UnbindAll();
 
         Renderer::DeleteFrameBuffer(windowedRenderTarget_);
     }

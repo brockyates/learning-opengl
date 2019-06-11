@@ -22,6 +22,12 @@ namespace Graphics
         static void BindFrameBuffer(const FrameBuffer& buffer);
         static void UnbindFrameBuffer();
         static void DeleteFrameBuffer(const FrameBuffer& buffer);
+        static void SetFrameBufferRenderBuffer(const RenderBuffer& buffer);
+
+        static RenderBuffer GenRenderBuffer();
+        static void BindRenderBuffer(const RenderBuffer& buffer);
+        static void UnbindRenderBuffer();
+        static void DeleteRenderBuffer(const RenderBuffer& buffer);
 
         static VertexArray GenVertexArray();
         static void BindVertexArray(const VertexArray& vertexArray);

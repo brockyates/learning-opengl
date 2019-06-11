@@ -7,6 +7,7 @@ namespace Graphics::Detail
     struct FragmentShaderTag {};
     struct FrameBufferTag {};
     struct IndexBufferTag {};
+    struct RenderBufferTag {};
     struct ShaderProgramTag {};
     struct VertexArrayTag {};
     struct VertexBufferTag {};

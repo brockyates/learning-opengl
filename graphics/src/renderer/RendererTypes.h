@@ -9,6 +9,7 @@ namespace Graphics {
     using FragmentShader = Detail::Uint32Id<Detail::FragmentShaderTag>;
     using FrameBuffer = Detail::Uint32Id<Detail::FrameBufferTag>;
     using IndexBuffer = Detail::Uint32Id<Detail::IndexBufferTag>;
+    using RenderBuffer = Detail::Uint32Id<Detail::RenderBufferTag>;
     using ShaderProgram = Detail::Uint32Id<Detail::ShaderProgramTag>;
     using VertexArray = Detail::Uint32Id<Detail::VertexArrayTag>;
     using VertexBuffer = Detail::Uint32Id<Detail::VertexBufferTag>;

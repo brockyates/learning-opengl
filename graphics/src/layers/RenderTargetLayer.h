@@ -26,7 +26,6 @@ namespace Graphics {
         RenderTargetLayer& operator=(RenderTargetLayer&&) = delete;
 
         void RenderUi() override;
-
         void OnEvent(const Event& event) override;
 
     private:
@@ -41,14 +40,14 @@ namespace Graphics {
         EventHandler<ChangeToWindowedEvent> OnChangeToWindowed();
         EventHandler<ResolutionChangeEvent> OnResolutionChange();
 
+        float aspectRatio_ = 0.0f;
+
         //OpenGL state
         FrameBuffer windowedRenderTarget_;
         FrameBuffer fullscreenRenderTarget_ = FrameBuffer{ 0 };
 
         unsigned int renderedTextureId_ = 0;
-        unsigned int renderBufferId_ = 0;
-
-        float aspectRatio_ = 0.0f;
+        RenderBuffer renderBuffer_;
     };
 
 }

@@ -77,6 +77,34 @@ namespace Graphics
         glDeleteFramebuffers(1, &id);
     }
 
+    void OpenGlRenderer::SetFrameBufferRenderBuffer(const RenderBuffer& buffer)
+    {
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, buffer.AsGlType());
+    }
+
+    RenderBuffer OpenGlRenderer::GenRenderBuffer()
+    {
+        uint32_t id;
+        glGenRenderbuffers(1, &id);
+        return RenderBuffer{ id };
+    }
+
+    void OpenGlRenderer::BindRenderBuffer(const RenderBuffer& buffer)
+    {
+        glBindRenderbuffer(GL_RENDERBUFFER, buffer.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindRenderBuffer()
+    {
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    }
+
+    void OpenGlRenderer::DeleteRenderBuffer(const RenderBuffer& buffer)
+    {
+        const auto id = buffer.AsGlType();
+        glDeleteBuffers(1, &id);
+    }
+
     VertexArray OpenGlRenderer::GenVertexArray()
     {
         uint32_t id;
@@ -167,6 +195,7 @@ namespace Graphics
         UnbindVertexArray();
         UnbindIndexBuffer();
         UnbindFrameBuffer();
+        UnbindRenderBuffer();
     }
 
     namespace
