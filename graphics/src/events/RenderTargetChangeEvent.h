@@ -2,20 +2,21 @@
 
 #include "Event.h"
 
-namespace Graphics {
+#include "renderer/RendererTypes.h"
 
+namespace Graphics
+{
     class RenderTargetChangeEvent final : public Event
     {
     public:
-        explicit RenderTargetChangeEvent(unsigned int nextRenderTargetId);
+        explicit RenderTargetChangeEvent(FrameBuffer nextRenderTarget);
 
         [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
 
-        [[nodiscard]] unsigned int NextRenderTargetId() const;
+        [[nodiscard]] FrameBuffer NextRenderTarget() const;
 
     private:
-        unsigned int nextRenderTargetId_;
+        FrameBuffer nextRenderTarget_;
     };
-
 }

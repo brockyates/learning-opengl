@@ -54,6 +54,13 @@ namespace Graphics
 
     }
 
+    FrameBuffer OpenGlRenderer::GenFrameBuffer()
+    {
+        uint32_t id;
+        glGenFramebuffers(1, &id);
+        return FrameBuffer{ id };
+    }
+
     void OpenGlRenderer::BindFrameBuffer(const FrameBuffer& buffer)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, buffer.AsGlType());
@@ -64,11 +71,16 @@ namespace Graphics
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
+    void OpenGlRenderer::DeleteFrameBuffer(const FrameBuffer& buffer)
+    {
+        const auto id = buffer.AsGlType();
+        glDeleteFramebuffers(1, &id);
+    }
+
     VertexArray OpenGlRenderer::GenVertexArray()
     {
         uint32_t id;
         glGenVertexArrays(1, &id);
-
         return VertexArray{ id };
     }
 
@@ -86,7 +98,6 @@ namespace Graphics
     {
         uint32_t id;
         glGenBuffers(1, &id);
-
         return VertexBuffer{ id };
     }
 
@@ -121,7 +132,6 @@ namespace Graphics
     {
         uint32_t id;
         glGenBuffers(1, &id);
-
         return IndexBuffer{ id };
     }
 

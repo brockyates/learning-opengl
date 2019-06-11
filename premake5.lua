@@ -123,6 +123,7 @@ project "Graphics.App"
         "%{IncludeDir.spdlog}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
     }
 
     links 

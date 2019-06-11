@@ -7,6 +7,8 @@
 
 #include "layers/Layer.h"
 
+#include "renderer/RendererTypes.h"
+
 namespace Graphics {
 
     class Window;
@@ -40,8 +42,8 @@ namespace Graphics {
         EventHandler<ResolutionChangeEvent> OnResolutionChange();
 
         //OpenGL state
-        unsigned int windowedRenderTargetId_ = 0;
-        unsigned int fullscreenRenderTargetId_ = 0;
+        FrameBuffer windowedRenderTarget_;
+        FrameBuffer fullscreenRenderTarget_ = FrameBuffer{ 0 };
 
         unsigned int renderedTextureId_ = 0;
         unsigned int renderBufferId_ = 0;

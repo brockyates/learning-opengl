@@ -7,6 +7,9 @@
 #include "logging/Log.h"
 
 #include "helpers/MathHelpers.h"
+
+#include "renderer/Renderer.h"
+
 #include "window/Window.h"
 
 #include <glad/glad.h>
@@ -22,7 +25,7 @@ namespace Graphics {
         , aspectRatio_(window.AspectRatio())
     {
         Attach();
-        Layer::FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
+        Layer::FireEvent(RenderTargetChangeEvent(windowedRenderTarget_));
     }
 
     RenderTargetLayer::~RenderTargetLayer()
@@ -59,8 +62,8 @@ namespace Graphics {
     {
         LogTrace("Attaching RenderTargetLayer");
 
-        glGenFramebuffers(1, &windowedRenderTargetId_);
-        glBindFramebuffer(GL_FRAMEBUFFER, windowedRenderTargetId_);
+        windowedRenderTarget_ = Renderer::GenFrameBuffer();
+        Renderer::BindFrameBuffer(windowedRenderTarget_);
 
         glGenTextures(1, &renderedTextureId_);
         glBindTexture(GL_TEXTURE_2D, renderedTextureId_);
@@ -106,7 +109,7 @@ namespace Graphics {
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        glDeleteFramebuffers(1, &windowedRenderTargetId_);
+        Renderer::DeleteFrameBuffer(windowedRenderTarget_);
     }
 
     void RenderTargetLayer::HandleAspectRatioChange()
@@ -128,7 +131,7 @@ namespace Graphics {
     {
         return [this](const ChangeToFullscreenEvent&)
         {
-            FireEvent(RenderTargetChangeEvent(fullscreenRenderTargetId_));
+            FireEvent(RenderTargetChangeEvent(fullscreenRenderTarget_));
         };
     }
 
@@ -136,7 +139,7 @@ namespace Graphics {
     {
         return [this](const ChangeToWindowedEvent&)
         {
-            FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
+            FireEvent(RenderTargetChangeEvent(windowedRenderTarget_));
         };
     }
 
@@ -146,7 +149,7 @@ namespace Graphics {
         {
             Detach();
             Attach();
-            FireEvent(RenderTargetChangeEvent(windowedRenderTargetId_));
+            FireEvent(RenderTargetChangeEvent(windowedRenderTarget_));
         };
     }
 

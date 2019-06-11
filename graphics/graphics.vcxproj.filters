@@ -75,6 +75,9 @@
     <ClInclude Include="src\events\WindowCloseEvent.h">
       <Filter>src\events</Filter>
     </ClInclude>
+    <ClInclude Include="src\helpers\FileHelpers.h">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
     <ClInclude Include="src\helpers\GlobalMacros.h">
       <Filter>src\helpers</Filter>
     </ClInclude>
@@ -150,6 +153,12 @@
     <ClInclude Include="src\renderer\ShaderType.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\detail\Int32Id.h">
+      <Filter>src\renderer\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\detail\OpenGlRendererDetail.h">
+      <Filter>src\renderer\detail</Filter>
+    </ClInclude>
     <ClInclude Include="src\renderer\detail\Uint32Id.h">
       <Filter>src\renderer\detail</Filter>
     </ClInclude>
@@ -183,9 +192,6 @@
     <ClInclude Include="src\window\WindowProperties.h">
       <Filter>src\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\helpers\FileHelpers.h" />
-    <ClInclude Include="src\renderer\detail\OpenGlRendererDetail.h" />
-    <ClInclude Include="src\renderer\detail\Int32Id.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -208,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="src\events\WindowCloseEvent.cpp">
       <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\helpers\FileHelpers.cpp">
+      <Filter>src\helpers</Filter>
     </ClCompile>
     <ClCompile Include="src\helpers\MathHelpers.cpp">
       <Filter>src\helpers</Filter>
@@ -293,7 +302,6 @@
     <ClCompile Include="src\window\WindowProperties.cpp">
       <Filter>src\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\helpers\FileHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\fonts\Consolas.ttf">

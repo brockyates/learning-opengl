@@ -18,8 +18,10 @@ namespace Graphics
     {
     public:
         //Buffer management
+        static FrameBuffer GenFrameBuffer();
         static void BindFrameBuffer(const FrameBuffer& buffer);
         static void UnbindFrameBuffer();
+        static void DeleteFrameBuffer(const FrameBuffer& buffer);
 
         static VertexArray GenVertexArray();
         static void BindVertexArray(const VertexArray& vertexArray);
