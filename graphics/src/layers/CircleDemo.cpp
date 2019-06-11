@@ -141,7 +141,7 @@ namespace Graphics {
         vertexCount_ = nextVertexes_;
         circle_ = Circle(vertexCount_);
         const auto bufferOffset = 0u;
-        const auto lineIndexes = circle_.MakeIndexesForLineDrawMode(vertexCount_);
+        const auto lineIndexes = Circle::MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
 
@@ -216,7 +216,7 @@ namespace Graphics {
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
         Renderer::SetIndexesForStaticDraw(circle_.IndexDataByteSize(), circle_.Indexes);
 
-        const auto lineIndexes = circle_.MakeIndexesForLineDrawMode(vertexCount_);
+        const auto lineIndexes = Circle::MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
         lineIndexBuffer_ = Renderer::GenIndexBuffer();
