@@ -2,8 +2,7 @@
 
 #include "renderer/OpenGlRenderer.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     using Renderer = OpenGlRenderer;
-
 }
