@@ -3,11 +3,8 @@
 
 #include "EventType.h"
 
-namespace Graphics {
-
-    ChangeToFullscreenEvent::ChangeToFullscreenEvent()
-    = default;
-
+namespace Graphics
+{
     EventType ChangeToFullscreenEvent::Type() const
     {
         return GetStaticType();
@@ -17,5 +14,4 @@ namespace Graphics {
     {
         return EventType::ChangeToFullscreenEvent;
     }
-
 }

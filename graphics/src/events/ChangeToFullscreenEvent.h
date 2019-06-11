@@ -2,15 +2,14 @@
 
 #include "Event.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class ChangeToFullscreenEvent final : public Event
     {
     public:
-        ChangeToFullscreenEvent();
+        ChangeToFullscreenEvent() = default;
 
         [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
     };
-
 }
