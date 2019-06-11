@@ -82,6 +82,12 @@ namespace Graphics
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, buffer.AsGlType());
     }
 
+    void OpenGlRenderer::SetFrameBufferTexture2d(const Texture2d& texture)
+    {
+        const auto level = 0;
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture.AsGlType(), level);
+    }
+
     RenderBuffer OpenGlRenderer::GenRenderBuffer()
     {
         uint32_t id;
@@ -191,6 +197,7 @@ namespace Graphics
 
     void OpenGlRenderer::UnbindAll()
     {
+        UnbindTexture2d();
         UnbindShader();
         UnbindVertexArray();
         UnbindIndexBuffer();
@@ -218,6 +225,29 @@ namespace Graphics
                                                  const size_t offset)
     {
         SetVertexAttrib(1, size, type, isNormalized, stride, offset);
+    }
+
+    Texture2d OpenGlRenderer::GenTexture2d()
+    {
+        uint32_t id;
+        glGenTextures(1, &id);
+        return Texture2d{ id };
+    }
+
+    void OpenGlRenderer::BindTexture2d(const Texture2d& texture)
+    {
+        glBindTexture(GL_TEXTURE_2D, texture.AsGlType());
+    }
+
+    void OpenGlRenderer::UnbindTexture2d()
+    {
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    void OpenGlRenderer::DeleteTexture(const Texture2d& texture)
+    {
+        const auto id = texture.AsGlType();
+        glDeleteTextures(1, &id);
     }
 
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,

@@ -30,8 +30,6 @@ namespace Graphics {
 
     RenderTargetLayer::~RenderTargetLayer()
     {
-        //Todo: delete texture
-        Renderer::DeleteRenderBuffer(renderBuffer_);
         Detach();
     }
 
@@ -44,7 +42,7 @@ namespace Graphics {
         const auto sceneSize = ImGui::GetContentRegionAvail();
 
         ImGui::GetWindowDrawList()->AddImage(
-            reinterpret_cast<void *>(static_cast<intptr_t>(renderedTextureId_)),
+            reinterpret_cast<void *>(static_cast<intptr_t>(renderedTexture_.AsGlType())),
             ImVec2(scenePosition),
             ImVec2(scenePosition.x + sceneSize.x, scenePosition.y + sceneSize.y),
             ImVec2(0, 1),
@@ -67,14 +65,13 @@ namespace Graphics {
         windowedRenderTarget_ = Renderer::GenFrameBuffer();
         Renderer::BindFrameBuffer(windowedRenderTarget_);
 
-        glGenTextures(1, &renderedTextureId_);
-        glBindTexture(GL_TEXTURE_2D, renderedTextureId_);
+        renderedTexture_ = Renderer::GenTexture2d();
+        Renderer::BindTexture2d(renderedTexture_);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window_.ResolutionWidth(), window_.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTextureId_, 0);
+        Renderer::UnbindTexture2d();
+        Renderer::SetFrameBufferTexture2d(renderedTexture_);
 
         renderBuffer_ = Renderer::GenRenderBuffer();
         Renderer::BindRenderBuffer(renderBuffer_);
@@ -104,9 +101,8 @@ namespace Graphics {
     {
         LogTrace("Detaching RenderTargetLayer");
 
-        glBindTexture(GL_TEXTURE_2D, 0);
         Renderer::UnbindAll();
-
+        Renderer::DeleteTexture(renderedTexture_);
         Renderer::DeleteFrameBuffer(windowedRenderTarget_);
     }
 

@@ -11,6 +11,7 @@ namespace Graphics {
     using IndexBuffer = Detail::Uint32Id<Detail::IndexBufferTag>;
     using RenderBuffer = Detail::Uint32Id<Detail::RenderBufferTag>;
     using ShaderProgram = Detail::Uint32Id<Detail::ShaderProgramTag>;
+    using Texture2d = Detail::Uint32Id<Detail::Texture2dTag>;
     using VertexArray = Detail::Uint32Id<Detail::VertexArrayTag>;
     using VertexBuffer = Detail::Uint32Id<Detail::VertexBufferTag>;
     using VertexShader = Detail::Uint32Id<Detail::VertexShaderTag>;

@@ -46,7 +46,7 @@ namespace Graphics {
         FrameBuffer windowedRenderTarget_;
         FrameBuffer fullscreenRenderTarget_ = FrameBuffer{ 0 };
 
-        unsigned int renderedTextureId_ = 0;
+        Texture2d renderedTexture_;
         RenderBuffer renderBuffer_;
     };
 
