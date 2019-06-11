@@ -24,22 +24,52 @@ namespace Graphics { namespace Utils {
 
 }}
 
+template <typename... Ts>
+constexpr void LogInfo(Ts... args)
+{
+    Graphics::Utils::Log::GetLogger()->info(args...);
+}
+
+template <typename... Ts>
+constexpr void LogError(Ts... args)
+{
+    Graphics::Utils::Log::GetLogger()->error(args...);
+}
+
+template <typename... Ts>
+constexpr void LogCritical(Ts... args)
+{
+    Graphics::Utils::Log::GetLogger()->critical(args...);
+}
+
+template <typename... Ts>
+constexpr void LogGlInfo(Ts... args)
+{
+    Graphics::Utils::Log::GetOpenGlLogger()->info(args...);
+}
+
+template <typename... Ts>
+constexpr void LogGlError(Ts... args)
+{
+    Graphics::Utils::Log::GetOpenGlLogger()->error(args...);
+}
+
+template <typename... Ts>
+constexpr void LogGlCritical(Ts... args)
+{
+    Graphics::Utils::Log::GetOpenGlLogger()->critical(args...);
+}
+
 #ifdef APP_DEBUG
-    #define APP_ENABLE_LOGGING
+    #define APP_ENABLE_DEBUG_LOGGING
 #endif // APP_DEBUG
 
-#ifdef APP_ENABLE_LOGGING
+#ifdef APP_ENABLE_DEBUG_LOGGING
     // Application Log macros
     template <typename... Ts>
     constexpr void LogTrace(Ts... args)
     {
         Graphics::Utils::Log::GetLogger()->trace(args...);
-    }
-
-    template <typename... Ts>
-    constexpr void LogInfo(Ts... args)
-    {
-        Graphics::Utils::Log::GetLogger()->info(args...);
     }
 
     template <typename... Ts>
@@ -49,21 +79,9 @@ namespace Graphics { namespace Utils {
     }
 
     template <typename... Ts>
-    constexpr void LogError(Ts... args)
-    {
-        Graphics::Utils::Log::GetLogger()->error(args...);
-    }
-
-    template <typename... Ts>
     constexpr void LogDebug(Ts... args)
     {
         Graphics::Utils::Log::GetLogger()->debug(args...);
-    }
-
-    template <typename... Ts>
-    constexpr void LogCritical(Ts... args)
-    {
-        Graphics::Utils::Log::GetLogger()->critical(args...);
     }
 
     // OpenGL Log macros
@@ -74,21 +92,9 @@ namespace Graphics { namespace Utils {
     }
 
     template <typename... Ts>
-    constexpr void LogGlInfo(Ts... args)
-    {
-        Graphics::Utils::Log::GetOpenGlLogger()->info(args...);
-    }
-
-    template <typename... Ts>
     constexpr void LogGlWarn(Ts... args)
     {
         Graphics::Utils::Log::GetOpenGlLogger()->warn(args...);
-    }
-
-    template <typename... Ts>
-    constexpr void LogGlError(Ts... args)
-    {
-        Graphics::Utils::Log::GetOpenGlLogger()->error(args...);
     }
 
     template <typename... Ts>
@@ -97,26 +103,14 @@ namespace Graphics { namespace Utils {
         Graphics::Utils::Log::GetOpenGlLogger()->debug(args...);
     }
 
-    template <typename... Ts>
-    constexpr void LogGlCritical(Ts... args)
-    {
-        Graphics::Utils::Log::GetOpenGlLogger()->critical(args...);
-    }
-
 #else
     // Application Log macros
     #define LogTrace(...)
-    #define LogInfo(...)
     #define LogWarn(...)
-    #define LogError(...)
     #define LogDebug(...)
-    #define LogCritical(...)
 
     // OpenGL Log macros
     #define LogGlTrace(...)
-    #define LogGlInfo(...)
     #define LogGlWarn(...)
-    #define LogGlError(...)
     #define LogGlDebug(...)
-    #define LogGlCritical(...)
-#endif // APP_ENABLE_LOGGING
+#endif // APP_ENABLE_DEBUG_LOGGING
