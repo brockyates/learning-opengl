@@ -21,7 +21,7 @@ namespace Graphics {
 
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Circle Demo")
-        , circleModel_(std::make_unique<Circle>(vertexCount_))
+        , circle_(vertexCount_)
         , projectionMatrix_(glm::ortho(-1.0f * window_.AspectRatio(), 1.0f * window_.AspectRatio(), -1.0f, 1.0f))
         , lastTime_(Timer::Get())
     {}
@@ -49,7 +49,7 @@ namespace Graphics {
         Renderer::UseShader(triangleShader_);
         Renderer::SetUniform(triangleProjMatrixUniform_, projectionMatrix_);
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        Renderer::DrawTriangleIndexes(circleModel_->NumIndexes());
+        Renderer::DrawTriangleIndexes(circle_.NumIndexes());
 
         Renderer::UseShader(lineShader_);
         Renderer::SetUniform(lineProjMatrixUniform_, projectionMatrix_);
@@ -139,20 +139,20 @@ namespace Graphics {
         }
 
         vertexCount_ = nextVertexes_;
-        circleModel_ = std::make_unique<Circle>(vertexCount_);
+        circle_ = Circle(vertexCount_);
         const auto bufferOffset = 0u;
-        const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
+        const auto lineIndexes = circle_.MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
 
         //Update vertex buffer
         Renderer::BindVertexBuffer(vertexBuffer_);
-        Renderer::VertexBufferSubData(bufferOffset, circleModel_->VertexDataByteSize(), circleModel_->Vertexes);
+        Renderer::VertexBufferSubData(bufferOffset, circle_.VertexDataByteSize(), circle_.Vertexes);
         Renderer::UnbindVertexBuffer();
 
         //Update index buffers
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        Renderer::IndexBufferSubData(bufferOffset, circleModel_->IndexDataByteSize(), circleModel_->Indexes);
+        Renderer::IndexBufferSubData(bufferOffset, circle_.IndexDataByteSize(), circle_.Indexes);
         Renderer::BindIndexBuffer(lineIndexBuffer_);
         Renderer::IndexBufferSubData(bufferOffset, lineIndexByteSize, lineIndexes);
         Renderer::UnbindIndexBuffer();
@@ -210,13 +210,13 @@ namespace Graphics {
         Renderer::BindVertexArray(vertexArray_);
         vertexBuffer_ = Renderer::GenVertexBuffer();
         Renderer::BindVertexBuffer(vertexBuffer_);
-        Renderer::SetVertexesForStaticDraw(circleModel_->VertexDataByteSize(), circleModel_->Vertexes);
+        Renderer::SetVertexesForStaticDraw(circle_.VertexDataByteSize(), circle_.Vertexes);
 
         triangleIndexBuffer_ = Renderer::GenIndexBuffer();
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        Renderer::SetIndexesForStaticDraw(circleModel_->IndexDataByteSize(), circleModel_->Indexes);
+        Renderer::SetIndexesForStaticDraw(circle_.IndexDataByteSize(), circle_.Indexes);
 
-        const auto lineIndexes = circleModel_->MakeIndexesForLineDrawMode(vertexCount_);
+        const auto lineIndexes = circle_.MakeIndexesForLineDrawMode(vertexCount_);
         const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(unsigned int));
         numLineIndexes_ = static_cast<unsigned int>(std::size(lineIndexes));
         lineIndexBuffer_ = Renderer::GenIndexBuffer();
