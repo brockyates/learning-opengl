@@ -12,10 +12,8 @@
 
 #include "window/Window.h"
 
-#include <glad/glad.h>
 #include <imgui.h>
 
-#include <sstream>
 #include <utility>
 
 namespace Graphics {
@@ -67,33 +65,18 @@ namespace Graphics {
 
         renderedTexture_ = Renderer::GenTexture2d();
         Renderer::BindTexture2d(renderedTexture_);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window_.ResolutionWidth(), window_.ResolutionHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        Renderer::TexImage2d(window_.ResolutionWidth(), window_.ResolutionHeight());
+        Renderer::SetTexture2dParameters();
         Renderer::UnbindTexture2d();
         Renderer::SetFrameBufferTexture2d(renderedTexture_);
 
         renderBuffer_ = Renderer::GenRenderBuffer();
         Renderer::BindRenderBuffer(renderBuffer_);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_.ResolutionWidth(), window_.ResolutionHeight());
+        Renderer::SetRenderBufferStorage(window_.ResolutionWidth(), window_.ResolutionHeight());
         Renderer::UnbindRenderBuffer();
 
         Renderer::SetFrameBufferRenderBuffer(renderBuffer_);
-
-        const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-        if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
-        {
-            LogGlError([&]() {
-                std::stringstream ss;
-                ss << "Frame buffer status error. Status: " << std::hex << frameBufferStatus;
-                return ss.str();
-            }());
-        }
-        else
-        {
-            LogGlTrace("Frame buffer complete");
-        }
-
+        Renderer::AssertFrameBufferComplete();
         Renderer::UnbindFrameBuffer();
     }
 

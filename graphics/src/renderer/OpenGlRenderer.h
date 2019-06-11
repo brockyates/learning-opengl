@@ -24,11 +24,13 @@ namespace Graphics
         static void DeleteFrameBuffer(const FrameBuffer& buffer);
         static void SetFrameBufferRenderBuffer(const RenderBuffer& buffer);
         static void SetFrameBufferTexture2d(const Texture2d& texture);
+        static void AssertFrameBufferComplete();
 
         static RenderBuffer GenRenderBuffer();
         static void BindRenderBuffer(const RenderBuffer& buffer);
         static void UnbindRenderBuffer();
         static void DeleteRenderBuffer(const RenderBuffer& buffer);
+        static void SetRenderBufferStorage(uint32_t width, uint32_t height);
 
         static VertexArray GenVertexArray();
         static void BindVertexArray(const VertexArray& vertexArray);
@@ -58,6 +60,8 @@ namespace Graphics
         static void BindTexture2d(const Texture2d& texture);
         static void UnbindTexture2d();
         static void DeleteTexture(const Texture2d& texture);
+        static void TexImage2d(uint32_t width, uint32_t height);
+        static void SetTexture2dParameters();
 
         //Shader management
         static ShaderProgram CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);

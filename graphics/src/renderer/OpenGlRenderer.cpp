@@ -88,6 +88,25 @@ namespace Graphics
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture.AsGlType(), level);
     }
 
+    void OpenGlRenderer::AssertFrameBufferComplete()
+    {
+        const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
+        {
+            LogGlError([&]() {
+                std::stringstream ss;
+                ss << "Frame buffer status error. Status: " << std::hex << frameBufferStatus;
+                return ss.str();
+            }());
+
+            AppAssert(false, "Frame buffer is not complete. Exiting.");
+        }
+        else
+        {
+            LogGlTrace("Frame buffer complete");
+        }
+    }
+
     RenderBuffer OpenGlRenderer::GenRenderBuffer()
     {
         uint32_t id;
@@ -109,6 +128,11 @@ namespace Graphics
     {
         const auto id = buffer.AsGlType();
         glDeleteBuffers(1, &id);
+    }
+
+    void OpenGlRenderer::SetRenderBufferStorage(const uint32_t width, const uint32_t height)
+    {
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     }
 
     VertexArray OpenGlRenderer::GenVertexArray()
@@ -248,6 +272,20 @@ namespace Graphics
     {
         const auto id = texture.AsGlType();
         glDeleteTextures(1, &id);
+    }
+
+    void OpenGlRenderer::TexImage2d(const uint32_t width, const uint32_t height)
+    {
+        const auto level = 0;
+        const auto border = 0;
+        const auto pixels = nullptr;
+        glTexImage2D(GL_TEXTURE_2D, level, GL_RGB, width, height, border, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    }
+
+    void OpenGlRenderer::SetTexture2dParameters()
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
 
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
