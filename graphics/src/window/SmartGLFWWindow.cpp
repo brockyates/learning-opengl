@@ -42,7 +42,7 @@ namespace Graphics
         glfwSetWindowUserPointer(window, &windowProperties);
 
         // Set GLFW callbacks
-        glfwSetWindowSizeCallback(window, [](GLFWwindow* window, const int32_t width, const int32_t height)
+        glfwSetWindowSizeCallback(window, [](GLFWwindow* window, const int width, const int height)
         {
             auto& windowProperties = *static_cast<WindowProperties*>(glfwGetWindowUserPointer(window));
 

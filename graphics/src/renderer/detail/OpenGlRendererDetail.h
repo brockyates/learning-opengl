@@ -28,7 +28,7 @@ namespace Graphics::Detail
         return 0;
     }
 
-    inline void ValidateShader(const GLuint id, const int32_t type)
+    inline void ValidateShader(const GLuint id, const int type)
     {
         auto status = GL_FALSE;
         glGetShaderiv(id, GL_COMPILE_STATUS, &status);

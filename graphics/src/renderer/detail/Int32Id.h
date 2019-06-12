@@ -14,13 +14,13 @@ namespace Graphics::Detail
             : value_(0)
         {}
 
-        explicit Int32Id(const int32_t id)
+        explicit Int32Id(const int id)
             : value_(id)
         {}
 
         [[nodiscard]] GLint AsGlType() const { return static_cast<GLint>(value_); }
 
     private:
-        int32_t value_;
+        int value_;
     };
 }

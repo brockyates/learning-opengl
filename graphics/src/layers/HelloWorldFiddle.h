@@ -40,7 +40,7 @@ namespace Graphics
         //This struct is only meaningful in the context of this demo, I don't want it to exist outside of HelloWorldFiddle.
         struct DrawMode
         {
-            int32_t Mode{};
+            int Mode{};
             uint32_t NumVertexes{};
             std::string DisplayName;
         };
@@ -63,7 +63,7 @@ namespace Graphics
         glm::vec4 backgroundColor_ = { 0.15f, 0.15f, 0.15f, 1.0f };
         float lineWidth_ = 5.0f;
         float pointSize_ = 30.0f;
-        std::unordered_map<int32_t, DrawMode> drawModes_;
+        std::unordered_map<int, DrawMode> drawModes_;
         DrawMode drawMode_;
         glm::mat4 projectionMatrix_;
 

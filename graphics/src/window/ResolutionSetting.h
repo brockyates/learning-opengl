@@ -7,7 +7,7 @@ namespace Graphics
 {
     struct ResolutionSetting
     {
-        ResolutionSetting(const int32_t width, const int32_t height, const float defaultFontSize, std::string displayName)
+        ResolutionSetting(const int width, const int height, const float defaultFontSize, std::string displayName)
             : Width(width)
             , Height(height)
             , DefaultFontSize(defaultFontSize)
@@ -20,8 +20,8 @@ namespace Graphics
                 && Height == other.Height;
         }
 
-        int32_t Width;
-        int32_t Height;
+        int Width;
+        int Height;
 
         float DefaultFontSize; // I haven't implemented font-scaling in the GUI, so I try to pick an appropriate default size for each resolution.
         std::string DisplayName;
