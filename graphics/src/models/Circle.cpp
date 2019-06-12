@@ -7,11 +7,11 @@
 
 namespace Graphics
 {
-    Circle::Circle(const unsigned int numVertexes)
+    Circle::Circle(const uint32_t numVertexes)
         : Model(MakeVertexes(numVertexes), MakeIndexesForTriangleDrawMode(numVertexes))
     {}
 
-    std::vector<Vertex1> Circle::MakeVertexes(const unsigned int numVertexes) const
+    std::vector<Vertex1> Circle::MakeVertexes(const uint32_t numVertexes) const
     {
         const auto defaultColor = glm::vec4{ 1.0f, 1.0f, 1.0f, 1.0f };
         const auto origin = glm::vec4{ 0.0f, 0.0f, 0.0f, 1.0f };
@@ -36,9 +36,9 @@ namespace Graphics
         return vertexes;
     }
 
-    std::vector<unsigned int> Circle::MakeIndexesForTriangleDrawMode(const unsigned int numVertexes)
+    std::vector<uint32_t> Circle::MakeIndexesForTriangleDrawMode(const uint32_t numVertexes)
     {
-        std::vector<unsigned int> indexes;
+        std::vector<uint32_t> indexes;
         indexes.reserve(3 * (numVertexes - 1));
 
         for (auto i = 0u; i < numVertexes - 2; i++)
@@ -55,9 +55,9 @@ namespace Graphics
         return indexes;
     }
 
-    std::vector<unsigned int> Circle::MakeIndexesForLineDrawMode(const unsigned int numVertexes)
+    std::vector<uint32_t> Circle::MakeIndexesForLineDrawMode(const uint32_t numVertexes)
     {
-        std::vector<unsigned int> indexes;
+        std::vector<uint32_t> indexes;
         indexes.reserve((numVertexes - 1) * 4);
 
         for (auto i = 0u; i < numVertexes - 2; i++)

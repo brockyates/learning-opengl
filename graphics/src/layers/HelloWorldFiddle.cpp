@@ -67,7 +67,7 @@ namespace Graphics
             SetNextVertexPositions();
         }
 
-        const unsigned int bufferOffset = 0;
+        const auto bufferOffset = 0u;
         Renderer::BindVertexBuffer(vertexBuffer_);
         Renderer::VertexBufferSubData(bufferOffset, triangle_->VertexDataByteSize(), triangle_->Vertexes);
         Renderer::UnbindVertexBuffer();
@@ -122,10 +122,10 @@ namespace Graphics
 
         Renderer::BindIndexBuffer(indexBuffer_);
 
-        const unsigned int bufferOffset = 0;
+        const auto bufferOffset = 0u;
         if (nextMode.Mode == GL_LINES)
         {
-            Renderer::IndexBufferSubData(bufferOffset, static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(unsigned int)),lineIndexes_);
+            Renderer::IndexBufferSubData(bufferOffset, static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(uint32_t)),lineIndexes_);
         }
         else
         {
@@ -309,7 +309,7 @@ namespace Graphics
         Renderer::BindIndexBuffer(indexBuffer_);
 
         //Allocate a buffer that can hold the larger of the two index buffers, in this case the line indexes are larger than the triangle indexes.
-        const auto indexBufferByteSize = static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(unsigned int));
+        const auto indexBufferByteSize = static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(uint32_t));
         Renderer::SetIndexesForStaticDraw(indexBufferByteSize, triangle_->Indexes);
 
         //Vertex Position

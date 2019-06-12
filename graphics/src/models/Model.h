@@ -10,7 +10,7 @@ namespace Graphics
     class Model
     {
     public:
-        Model(std::vector<Vertex1> vertexes, std::vector<unsigned int> indexes)
+        Model(std::vector<Vertex1> vertexes, std::vector<uint32_t> indexes)
             : Vertexes(std::move(vertexes))
             , Indexes(std::move(indexes))
         {}
@@ -23,22 +23,22 @@ namespace Graphics
         Model& operator=(const Model&) = default;
         Model& operator=(Model&&) = default;
 
-        [[nodiscard]] unsigned int VertexDataByteSize() const
+        [[nodiscard]] uint32_t VertexDataByteSize() const
         {
-            return static_cast<unsigned int>(std::size(Vertexes)) * Vertex1::VERTEX_BYTE_SIZE;
+            return static_cast<uint32_t>(std::size(Vertexes)) * Vertex1::VERTEX_BYTE_SIZE;
         }
 
-        [[nodiscard]] unsigned int IndexDataByteSize() const
+        [[nodiscard]] uint32_t IndexDataByteSize() const
         {
-            return static_cast<unsigned int>(std::size(Indexes)) * sizeof(unsigned int);
+            return static_cast<uint32_t>(std::size(Indexes)) * sizeof(uint32_t);
         }
 
-        [[nodiscard]] unsigned int NumIndexes() const
+        [[nodiscard]] uint32_t NumIndexes() const
         {
-            return static_cast<unsigned int>(std::size(Indexes));
+            return static_cast<uint32_t>(std::size(Indexes));
         }
 
         std::vector<Vertex1> Vertexes;
-        std::vector<unsigned int> Indexes;
+        std::vector<uint32_t> Indexes;
     };
 }

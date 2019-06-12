@@ -41,10 +41,10 @@ namespace Graphics
         void UpdateSides();
         void AnimateSides();
 
-        constexpr static int MAX_VERTEXES = 50;
-        int vertexCount_ = MAX_VERTEXES;
-        int nextVertexes_ = MAX_VERTEXES;
-        unsigned int numLineIndexes_ = 0;
+        constexpr static int32_t MAX_VERTEXES = 50;
+        int32_t vertexCount_ = MAX_VERTEXES;
+        int32_t nextVertexes_ = MAX_VERTEXES;
+        uint32_t numLineIndexes_ = 0;
         double timeSinceLastChange_ = 0.0;
         float animationInterval_ = 0.5;
         bool sidesIncreasing_ = false;

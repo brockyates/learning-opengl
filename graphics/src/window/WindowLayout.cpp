@@ -3,7 +3,7 @@
 
 namespace Graphics
 {
-    WindowLayout::WindowLayout(const int width, const int  height, const int  xPos, const int  yPos, const float aspectRatio)
+    WindowLayout::WindowLayout(const int32_t width, const int32_t  height, const int32_t  xPos, const int32_t  yPos, const float aspectRatio)
         : Width(width)
         , Height(height)
         , XPos(xPos)

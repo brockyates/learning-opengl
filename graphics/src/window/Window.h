@@ -30,8 +30,8 @@ namespace Graphics
         [[nodiscard]] bool ShouldClose() const;
         [[nodiscard]] bool IsFullscreen() const;
 
-        [[nodiscard]] int ResolutionWidth() const { return properties_.Resolution.Width; }
-        [[nodiscard]] int ResolutionHeight() const { return properties_.Resolution.Height; }
+        [[nodiscard]] int32_t ResolutionWidth() const { return properties_.Resolution.Width; }
+        [[nodiscard]] int32_t ResolutionHeight() const { return properties_.Resolution.Height; }
         [[nodiscard]] float AspectRatio() const { return properties_.AspectRatio; }
 
         //Used in ImGui initialization

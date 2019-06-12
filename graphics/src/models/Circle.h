@@ -8,12 +8,12 @@ namespace Graphics
 {
     struct Circle final : Model
     {
-        explicit Circle(unsigned int numVertexes = 4);
+        explicit Circle(uint32_t numVertexes = 4);
 
-        [[nodiscard]] static std::vector<unsigned int> MakeIndexesForLineDrawMode(unsigned int numVertexes);
+        [[nodiscard]] static std::vector<uint32_t> MakeIndexesForLineDrawMode(uint32_t numVertexes);
 
     private:
-        [[nodiscard]] std::vector<Vertex1> MakeVertexes(unsigned int numVertexes) const;
-        [[nodiscard]] static std::vector<unsigned int> MakeIndexesForTriangleDrawMode(unsigned int numVertexes);
+        [[nodiscard]] std::vector<Vertex1> MakeVertexes(uint32_t numVertexes) const;
+        [[nodiscard]] static std::vector<uint32_t> MakeIndexesForTriangleDrawMode(uint32_t numVertexes);
     };
 }

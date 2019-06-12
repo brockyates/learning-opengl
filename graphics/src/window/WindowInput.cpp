@@ -7,19 +7,19 @@ namespace Graphics
         : window_(window)
     {}
 
-    bool WindowInput::IsKeyPressed(const int keycode) const
+    bool WindowInput::IsKeyPressed(const int32_t keycode) const
     {
         const auto keyboardState = glfwGetKey(window_, keycode);
         return keyboardState == GLFW_PRESS || keyboardState == GLFW_REPEAT;
     }
 
-    bool WindowInput::IsKeyReleased(const int keycode) const
+    bool WindowInput::IsKeyReleased(const int32_t keycode) const
     {
         const auto keyboardState = glfwGetKey(window_, keycode);
         return keyboardState == GLFW_RELEASE;
     }
 
-    bool WindowInput::IsMouseButtonPressed(const int button) const
+    bool WindowInput::IsMouseButtonPressed(const int32_t button) const
     {
         const auto mouseState = glfwGetMouseButton(window_, button);
         return mouseState == GLFW_PRESS;

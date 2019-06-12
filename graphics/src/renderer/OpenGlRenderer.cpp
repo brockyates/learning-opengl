@@ -213,7 +213,7 @@ namespace Graphics
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
     }
 
-    void OpenGlRenderer::IndexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes, const std::vector<unsigned int>& indexes)
+    void OpenGlRenderer::IndexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes, const std::vector<uint32_t>& indexes)
     {
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, sizeInBytes, &indexes[0]);
     }
