@@ -5,12 +5,12 @@ namespace Graphics {
     enum class EventType
     {
         Unknown = 0,
-        ResolutionChangeEvent,
-        ChangeToWindowedEvent,
-        ChangeToFullscreenEvent,
+        ResolutionEvent,
+        WindowedEvent,
+        FullscreenEvent,
         WindowCloseEvent,
-        RenderTargetChanged,
-        AspectRatioChange
+        RenderTargetEvent,
+        AspectRatioEvent
     };
 
 }

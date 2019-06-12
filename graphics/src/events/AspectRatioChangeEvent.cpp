@@ -16,7 +16,7 @@ namespace Graphics {
 
     EventType AspectRatioChangeEvent::GetStaticType()
     {
-        return EventType::AspectRatioChange;
+        return EventType::AspectRatioEvent;
     }
 
     float AspectRatioChangeEvent::NewAspectRatio() const

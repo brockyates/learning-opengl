@@ -12,6 +12,6 @@ namespace Graphics
 
     EventType ChangeToFullscreenEvent::GetStaticType()
     {
-        return EventType::ChangeToFullscreenEvent;
+        return EventType::FullscreenEvent;
     }
 }

@@ -17,7 +17,7 @@ namespace Graphics {
 
     EventType ResolutionChangeEvent::GetStaticType()
     {
-        return EventType::ResolutionChangeEvent;
+        return EventType::ResolutionEvent;
     }
 
     ResolutionSetting ResolutionChangeEvent::NewResolution() const

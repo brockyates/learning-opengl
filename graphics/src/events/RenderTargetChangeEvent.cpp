@@ -16,7 +16,7 @@ namespace Graphics {
 
     EventType RenderTargetChangeEvent::GetStaticType()
     {
-        return EventType::RenderTargetChanged;
+        return EventType::RenderTargetEvent;
     }
 
     FrameBuffer RenderTargetChangeEvent::NextRenderTarget() const

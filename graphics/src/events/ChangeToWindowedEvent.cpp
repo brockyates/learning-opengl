@@ -14,7 +14,7 @@ namespace Graphics {
 
     EventType ChangeToWindowedEvent::GetStaticType()
     {
-        return EventType::ChangeToWindowedEvent;
+        return EventType::WindowedEvent;
     }
 
 }
