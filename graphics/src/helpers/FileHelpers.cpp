@@ -10,7 +10,7 @@ namespace Graphics
         const std::ifstream file(path);
 
         if (file.fail()) {
-            LogError([&]()
+            LogError([path]()
             {
                 std::stringstream ss;
                 ss << "Can't open file: " << path << ". Does the file exist?";

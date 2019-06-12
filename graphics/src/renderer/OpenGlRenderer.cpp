@@ -93,7 +93,7 @@ namespace Graphics
         const auto frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (!(frameBufferStatus == GL_FRAMEBUFFER_COMPLETE))
         {
-            LogGlError([&]() {
+            LogGlError([frameBufferStatus]() {
                 std::stringstream ss;
                 ss << "Frame buffer status error. Status: " << std::hex << frameBufferStatus;
                 return ss.str();
@@ -291,7 +291,7 @@ namespace Graphics
     ShaderProgram OpenGlRenderer::CreateShaderProgram(const std::string& vertexShaderPath,
         const std::string& fragmentShaderPath)
     {
-        LogGlTrace([&]()
+        LogGlTrace([vertexShaderPath, fragmentShaderPath]()
         {
             std::stringstream ss;
             ss << "Creating shader: {VertexShader:\"" << vertexShaderPath << R"(", FragmentShader:")" << fragmentShaderPath << "\"}";

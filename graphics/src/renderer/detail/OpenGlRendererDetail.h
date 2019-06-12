@@ -39,7 +39,7 @@ namespace Graphics::Detail
             const auto msg = std::make_unique<char[]>(msgLength);
             glGetShaderInfoLog(id, msgLength, &msgLength, msg.get());
 
-            LogGlError([&]()
+            LogGlError([type]()
             {
                 std::stringstream ss;
                 ss << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader";
