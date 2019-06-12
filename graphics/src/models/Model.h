@@ -5,8 +5,8 @@
 #include <utility>
 #include <vector>
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Model
     {
     public:
@@ -41,5 +41,4 @@ namespace Graphics {
         std::vector<Vertex1> Vertexes;
         std::vector<unsigned int> Indexes;
     };
-
 }

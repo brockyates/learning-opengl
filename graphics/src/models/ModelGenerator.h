@@ -4,13 +4,12 @@
 
 #include <memory>
 
-namespace Graphics {
-
+namespace Graphics
+{
     class ModelGenerator
     {
     public:
         static std::unique_ptr<Model> MakeTriangle();
         static std::unique_ptr<Model> MakeCircle(unsigned int numVertexes);
     };
-
 }

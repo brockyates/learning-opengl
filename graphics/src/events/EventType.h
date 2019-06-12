@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Graphics {
-
+namespace Graphics
+{
     enum class EventType
     {
         Unknown = 0,
@@ -12,5 +12,4 @@ namespace Graphics {
         RenderTargetEvent,
         AspectRatioEvent
     };
-
 }

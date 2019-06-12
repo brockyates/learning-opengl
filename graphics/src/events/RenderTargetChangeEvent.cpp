@@ -3,8 +3,8 @@
 
 #include "EventType.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     RenderTargetChangeEvent::RenderTargetChangeEvent(const FrameBuffer nextRenderTarget)
         : nextRenderTarget_(nextRenderTarget)
     {}
@@ -23,5 +23,4 @@ namespace Graphics {
     {
         return nextRenderTarget_;
     }
-
 }

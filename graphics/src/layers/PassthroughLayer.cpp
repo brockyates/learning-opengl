@@ -4,8 +4,8 @@
 
 #include "window/Window.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     PassthroughLayer::PassthroughLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Passthrough")
     {}
@@ -14,5 +14,4 @@ namespace Graphics {
     {
         return true;
     }
-
 }

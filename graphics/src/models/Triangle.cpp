@@ -3,8 +3,8 @@
 
 #include <glm/glm.hpp>
 
-namespace Graphics {
-
+namespace Graphics
+{
     Triangle::Triangle()
         : Model(
             {
@@ -24,5 +24,4 @@ namespace Graphics {
             { 0, 1, 2 } //Index data
         )
         {}
-
 }

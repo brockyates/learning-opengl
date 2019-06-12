@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct WindowLayout
     {
         WindowLayout(int width, int  height, int  xPos, int  yPos, float aspectRatio);
@@ -12,5 +12,4 @@ namespace Graphics {
         int YPos;
         float WindowedAspectRatio;
     };
-
 }

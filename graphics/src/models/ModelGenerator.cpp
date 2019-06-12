@@ -5,8 +5,8 @@
 
 #include "ModelGenerator.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     std::unique_ptr<Model> ModelGenerator::MakeTriangle()
     {
         return std::make_unique<Triangle>();
@@ -16,5 +16,4 @@ namespace Graphics {
     {
         return std::make_unique<Circle>(numVertexes);
     }
-
 }

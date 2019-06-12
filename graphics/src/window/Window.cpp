@@ -8,8 +8,8 @@
 
 #include "logging/GLDebugMessageCallback.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     Window::Window(EventHandler<Event> eventCallback)
         : properties_(WindowDefaults::Properties)
         , window_(CreateGlfwWindow(properties_))
@@ -108,5 +108,4 @@ namespace Graphics {
         dispatcher.Dispatch<WindowCloseEvent>(OnWindowClose());
         dispatcher.Dispatch<AspectRatioChangeEvent>(OnAspectRatioChange());
     }
-
 }

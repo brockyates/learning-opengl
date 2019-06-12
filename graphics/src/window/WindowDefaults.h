@@ -5,12 +5,11 @@
 
 #include <vector>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct WindowDefaults
     {
         static std::vector<ResolutionSetting> SupportedResolutions;
         static WindowProperties Properties;
     };
-
 }

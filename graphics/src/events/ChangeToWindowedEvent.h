@@ -2,8 +2,8 @@
 
 #include "Event.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class ChangeToWindowedEvent final : public Event
     {
     public:
@@ -12,5 +12,4 @@ namespace Graphics {
         [[nodiscard]] EventType Type() const override;
         static EventType GetStaticType();
     };
-
 }

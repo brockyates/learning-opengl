@@ -2,8 +2,8 @@
 
 #include "events/Event.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window;
 
     class Layer
@@ -42,5 +42,4 @@ namespace Graphics {
     private:
         EventHandler<Event> eventCallback_; //Private because we want the subclass to interface with FireEvent
     };
-
 }

@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "WindowInput.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     WindowInput::WindowInput(GLFWwindow* window)
         : window_(window)
     {}
@@ -33,5 +33,4 @@ namespace Graphics {
         glfwGetCursorPos(window_, &mousePositionX, &mousePositionY);
         return { static_cast<float>(mousePositionX), static_cast<float>(mousePositionY) };
     }
-
 }

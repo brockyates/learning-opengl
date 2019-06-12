@@ -2,8 +2,8 @@
 
 #include <glm/glm.hpp>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct Vertex1
     {
         Vertex1(const glm::vec4 position, const glm::vec4 color)
@@ -23,5 +23,4 @@ namespace Graphics {
         static const unsigned int COLOR_TYPE;
 
     };
-
 }

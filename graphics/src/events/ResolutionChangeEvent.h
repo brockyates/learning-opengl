@@ -3,8 +3,8 @@
 #include "Event.h"
 #include "window/ResolutionSetting.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class ResolutionChangeEvent final : public Event
     {
     public:
@@ -18,5 +18,4 @@ namespace Graphics {
     private:
         ResolutionSetting resolution_;
     };
-
 }

@@ -12,8 +12,8 @@
 
 #include <glm/glm.hpp>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct Circle;
     class Window;
 
@@ -72,5 +72,4 @@ namespace Graphics {
         Uniform lineProjMatrixUniform_;
         Uniform lineColorUniform_;
     };
-
 }

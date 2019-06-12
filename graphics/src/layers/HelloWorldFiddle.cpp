@@ -17,8 +17,8 @@
 #include <random>
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     HelloWorldFiddle::HelloWorldFiddle(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Hello World Fiddle")
         , lastTime_(Timer::Get())
@@ -353,5 +353,4 @@ namespace Graphics {
     {
         return "Very basic demo that allows you to fiddle with color, vertex position, and draw mode.";
     }
-
 }

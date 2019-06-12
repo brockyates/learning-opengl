@@ -4,8 +4,8 @@
 #include <memory>
 #include <sstream>
 
-namespace Graphics { namespace Utils {
-
+namespace Graphics::Utils
+{
     class Log
     {
     public:
@@ -21,8 +21,7 @@ namespace Graphics { namespace Utils {
         static std::shared_ptr<spdlog::logger> openGlLogger_;
         static std::ostringstream logStream_;
     };
-
-}}
+}
 
 template <typename... Ts>
 constexpr void LogInfo(Ts... args)

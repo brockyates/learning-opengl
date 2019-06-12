@@ -2,8 +2,8 @@
 
 #include "window/Window.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class ImGuiRenderer
     {
     public:
@@ -22,5 +22,4 @@ namespace Graphics {
     private:
         const Window& window_;
     };
-
 }

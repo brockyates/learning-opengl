@@ -5,8 +5,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Graphics {
-
+namespace Graphics
+{
     Circle::Circle(const unsigned int numVertexes)
         : Model(MakeVertexes(numVertexes), MakeIndexesForTriangleDrawMode(numVertexes))
     {}
@@ -75,5 +75,4 @@ namespace Graphics {
 
         return indexes;
     }
-
 }

@@ -6,7 +6,6 @@
 
 namespace Graphics
 {
-
     class Application
     {
     public:
@@ -19,5 +18,4 @@ namespace Graphics
         std::unique_ptr<Window> window_;
         LayerManager layerManager_;
     };
-
 }

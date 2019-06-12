@@ -1,11 +1,10 @@
 #pragma once
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Timer
     {
     public:
         static double Get();
     };
-
 }

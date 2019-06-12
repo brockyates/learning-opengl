@@ -10,8 +10,8 @@
 #include <imgui_internal.h> //Needed to create docking layout presets
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     BaseLayer::BaseLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "BaseLayer")
     {}
@@ -215,5 +215,4 @@ namespace Graphics {
 
         ImGui::End();
     }
-
 }

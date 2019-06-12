@@ -2,8 +2,8 @@
 
 #include "Event.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class EventDispatcher
     {
     public:
@@ -23,5 +23,4 @@ namespace Graphics {
     private:
         const Event& event_;
     };
-
 }

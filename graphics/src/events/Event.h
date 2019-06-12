@@ -2,8 +2,8 @@
 
 #include <functional>
 
-namespace Graphics {
-
+namespace Graphics
+{
     enum class EventType;
 
     template <typename T>
@@ -23,5 +23,4 @@ namespace Graphics {
 
         [[nodiscard]] virtual EventType Type() const = 0;
     };
-
 }

@@ -5,7 +5,6 @@
 
 namespace Graphics::Utils
 {
-
     std::shared_ptr<spdlog::logger> Log::logger_;
     std::shared_ptr<spdlog::logger> Log::openGlLogger_;
     std::ostringstream Log::logStream_;

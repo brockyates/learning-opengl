@@ -11,8 +11,8 @@
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 
-namespace Graphics {
-
+namespace Graphics
+{
     ImGuiRenderer::ImGuiRenderer(const Window& window)
         : window_(window)
     {
@@ -73,5 +73,4 @@ namespace Graphics {
             glfwMakeContextCurrent(backupCurrentContext);
         }
     }
-
 }

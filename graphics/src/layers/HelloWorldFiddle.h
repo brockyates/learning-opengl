@@ -14,8 +14,8 @@
 
 #include <memory>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct WindowProperties;
     class Window;
 
@@ -96,5 +96,4 @@ namespace Graphics {
         Uniform projMatrixUniform_;
         Uniform pointSizeUniform_;
     };
-
 }

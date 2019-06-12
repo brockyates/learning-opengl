@@ -17,8 +17,8 @@
 #include <utility>
 #include <imgui.h>
 
-namespace Graphics {
-
+namespace Graphics
+{
     CircleDemo::CircleDemo(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Circle Demo")
         , circle_(vertexCount_)
@@ -269,5 +269,4 @@ namespace Graphics {
     {
         return "Draw circles. Exposes controls to specify the number of vertices.";
     }
-
 }

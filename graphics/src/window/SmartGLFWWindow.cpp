@@ -9,8 +9,8 @@
 
 #include <glad/glad.h>
 
-namespace Graphics {
-
+namespace Graphics
+{
     void InitializeGlfw()
     {
         const auto glfwInitStatus = glfwInit();
@@ -100,5 +100,4 @@ namespace Graphics {
         SetWindowContext(window.get(), windowProperties);
         return window;
     }
-
 }

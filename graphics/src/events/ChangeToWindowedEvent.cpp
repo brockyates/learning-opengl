@@ -3,8 +3,8 @@
 
 #include "EventType.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     ChangeToWindowedEvent::ChangeToWindowedEvent() = default;
 
     EventType ChangeToWindowedEvent::Type() const
@@ -16,5 +16,4 @@ namespace Graphics {
     {
         return EventType::WindowedEvent;
     }
-
 }

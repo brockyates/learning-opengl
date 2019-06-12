@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "WindowDefaults.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     std::vector<ResolutionSetting> WindowDefaults::SupportedResolutions =
     {
         {800,  600,  10.0f,   "800 x 600"},              // 0
@@ -25,5 +25,4 @@ namespace Graphics {
         WindowMode::Windowed,
         WindowLayout(1280, 720, 0, 0, 1280.0f / 720.0f)
     };
-
 }

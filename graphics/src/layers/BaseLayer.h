@@ -6,8 +6,8 @@
 
 #include <imgui.h>
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window;
 
     class BaseLayer final : public Layer
@@ -35,5 +35,4 @@ namespace Graphics {
         bool f11Ready_ = true;
         bool escReady_ = true;
     };
-
 }

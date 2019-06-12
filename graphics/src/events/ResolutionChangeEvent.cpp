@@ -4,8 +4,8 @@
 
 #include "EventType.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     ResolutionChangeEvent::ResolutionChangeEvent(ResolutionSetting resolution)
         : resolution_(std::move(resolution))
     {}
@@ -24,5 +24,4 @@ namespace Graphics {
     {
         return resolution_;
     }
-
 }

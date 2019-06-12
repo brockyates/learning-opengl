@@ -1,12 +1,11 @@
 #pragma once
 
-namespace Graphics {
-
+namespace Graphics
+{
     enum class ShaderType
     {
         Unknown = 0,
         Vertex,
         Fragment
     };
-
 }

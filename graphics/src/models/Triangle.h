@@ -2,8 +2,8 @@
 
 #include "Model.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct Triangle final : Model
     {
         Triangle();
@@ -11,5 +11,4 @@ namespace Graphics {
     private:
         static constexpr float Y_OFFSET = 0.866f; //To produce equilateral triangle centered in scene
     };
-
 }

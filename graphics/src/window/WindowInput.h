@@ -4,8 +4,8 @@
 
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     class WindowInput
     {
     public:
@@ -20,5 +20,4 @@ namespace Graphics {
     private:
         GLFWwindow* window_;
     };
-
 }

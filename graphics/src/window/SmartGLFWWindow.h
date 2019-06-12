@@ -4,8 +4,8 @@
 
 #include <memory>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct WindowProperties;
 
     struct DestroyGlfwWin {
@@ -19,5 +19,4 @@ namespace Graphics {
     using SmartGlfwWindow = std::unique_ptr<GLFWwindow, DestroyGlfwWin>;
 
     SmartGlfwWindow CreateGlfwWindow(WindowProperties& windowProperties);
-
 }

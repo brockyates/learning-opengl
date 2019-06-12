@@ -4,8 +4,8 @@
 
 #include "Layer.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window;
 
     //Used for testing and development if you need a no-op layer
@@ -16,5 +16,4 @@ namespace Graphics {
 
         [[nodiscard]] bool IsAttached() const override;
     };
-
 }

@@ -2,8 +2,8 @@
 #include "Layer.h"
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     Layer::Layer(const Window& window, EventHandler<Event> eventCallback, std::string name)
         : window_(window)
         , name_(std::move(name))

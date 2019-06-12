@@ -5,8 +5,8 @@
 
 #include "window/Window.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     Application::Application()
         : window_(std::make_unique<Window>([this](const Event& e) { return OnEvent(e); }))
         , layerManager_(*window_, [this](const Event& e) { return OnEvent(e); })
@@ -37,5 +37,4 @@ namespace Graphics {
         window_->OnEvent(event);
         layerManager_.OnEvent(event);
     }
-
 }

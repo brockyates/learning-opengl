@@ -12,8 +12,8 @@
 #include <imgui.h>
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     HelloWorld::HelloWorld(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Hello World")
         , triangle_(ModelGenerator::MakeTriangle())
@@ -118,5 +118,4 @@ namespace Graphics {
     {
         return "Hello World is a minimal demo. Draws a triangle on the window, and exposes no UI controls.";
     }
-
 }

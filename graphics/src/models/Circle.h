@@ -4,8 +4,8 @@
 
 #include <vector>
 
-namespace Graphics {
-
+namespace Graphics
+{
     struct Circle final : Model
     {
         explicit Circle(unsigned int numVertexes = 4);
@@ -16,5 +16,4 @@ namespace Graphics {
         [[nodiscard]] std::vector<Vertex1> MakeVertexes(unsigned int numVertexes) const;
         [[nodiscard]] static std::vector<unsigned int> MakeIndexesForTriangleDrawMode(unsigned int numVertexes);
     };
-
 }

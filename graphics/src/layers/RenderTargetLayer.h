@@ -9,8 +9,8 @@
 
 #include "renderer/RendererTypes.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class Window;
 
     class RenderTargetLayer final : public Layer
@@ -49,5 +49,4 @@ namespace Graphics {
         Texture2d renderedTexture_;
         RenderBuffer renderBuffer_;
     };
-
 }

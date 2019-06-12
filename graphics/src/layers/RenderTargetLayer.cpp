@@ -16,8 +16,8 @@
 
 #include <utility>
 
-namespace Graphics {
-
+namespace Graphics
+{
     RenderTargetLayer::RenderTargetLayer(const Window& window, EventHandler<Event> eventCallback)
         : Layer(window, std::move(eventCallback), "Render to Texture")
         , aspectRatio_(window.AspectRatio())
@@ -129,5 +129,4 @@ namespace Graphics {
             FireEvent(RenderTargetChangeEvent(windowedRenderTarget_));
         };
     }
-
 }

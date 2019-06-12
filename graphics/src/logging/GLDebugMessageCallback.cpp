@@ -9,10 +9,10 @@
 #include <fstream>
 #include <sstream>
 
-namespace Graphics {
-
-    namespace {
-
+namespace Graphics
+{
+    namespace
+    {
         void WriteLogToFile()
         {
             const auto t = std::time(nullptr);
@@ -25,7 +25,6 @@ namespace Graphics {
             std::ofstream file(ss.str(), std::ios::binary);
             file << Utils::Log::GetLogStream().str();
         }
-
     }
 
     void GLAPIENTRY
@@ -48,5 +47,4 @@ namespace Graphics {
 
         AppAssert(false, "Exiting due to OpenGL error");
     }
-
 }

@@ -8,7 +8,6 @@
 
 namespace Graphics
 {
-
     struct WindowProperties
     {
         WindowProperties(std::string title, const ResolutionSetting& resolution, WindowMode windowMode, WindowLayout layout);
@@ -19,5 +18,4 @@ namespace Graphics
         WindowLayout Layout;
         float AspectRatio;
     };
-
 }

@@ -15,8 +15,8 @@
 
 namespace Graphics
 {
-    namespace {
-
+    namespace
+    {
         ShaderProgram CreateProgram()
         {
             return ShaderProgram{ glCreateProgram() };
@@ -51,7 +51,6 @@ namespace Graphics
         {
             glDeleteShader(shader.AsGlType());
         }
-
     }
 
     FrameBuffer OpenGlRenderer::GenFrameBuffer()

@@ -2,8 +2,8 @@
 
 #include "Event.h"
 
-namespace Graphics {
-
+namespace Graphics
+{
     class AspectRatioChangeEvent final : public Event
     {
     public:
@@ -17,5 +17,4 @@ namespace Graphics {
     private:
         float aspectRatio_;
     };
-
 }

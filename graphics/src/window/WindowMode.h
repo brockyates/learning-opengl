@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Graphics {
-
+namespace Graphics
+{
     enum class WindowMode
     {
         Unknown = 0,
@@ -9,5 +9,4 @@ namespace Graphics {
         Fullscreen,
         SameAsPrevious
     };
-
 }
