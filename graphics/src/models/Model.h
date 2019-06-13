@@ -10,7 +10,7 @@ namespace Graphics
     class Model
     {
     public:
-        Model(std::vector<Vertex1> vertexes, std::vector<uint32_t> indexes)
+        Model(std::vector<Vertex1> vertexes, std::vector<int> indexes)
             : Vertexes(std::move(vertexes))
             , Indexes(std::move(indexes))
         {}
@@ -39,6 +39,6 @@ namespace Graphics
         }
 
         std::vector<Vertex1> Vertexes;
-        std::vector<uint32_t> Indexes;
+        std::vector<int> Indexes;
     };
 }

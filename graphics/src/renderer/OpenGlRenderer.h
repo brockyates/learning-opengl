@@ -47,8 +47,8 @@ namespace Graphics
         static void BindIndexBuffer(const IndexBuffer& buffer);
         static void UnbindIndexBuffer();
         static void DeleteIndexBuffer(const IndexBuffer& buffer);
-        static void SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<uint32_t>& indexes);
-        static void IndexBufferSubData(uint32_t offset, uint32_t sizeInBytes, const std::vector<uint32_t>& indexes);
+        static void SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<int>& indexes);
+        static void IndexBufferSubData(ptrdiff_t offset, size_t sizeInBytes, const std::vector<int>& indexes);
 
         static void UnbindAll();
 

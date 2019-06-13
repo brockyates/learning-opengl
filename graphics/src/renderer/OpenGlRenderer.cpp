@@ -208,12 +208,12 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<uint32_t>& indexes)
+    void OpenGlRenderer::SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<int>& indexes)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
     }
 
-    void OpenGlRenderer::IndexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes, const std::vector<uint32_t>& indexes)
+    void OpenGlRenderer::IndexBufferSubData(ptrdiff_t offset, size_t sizeInBytes, const std::vector<int>& indexes)
     {
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, sizeInBytes, &indexes[0]);
     }

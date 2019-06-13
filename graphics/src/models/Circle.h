@@ -10,10 +10,10 @@ namespace Graphics
     {
         explicit Circle(uint32_t numVertexes = 4);
 
-        [[nodiscard]] static std::vector<uint32_t> MakeIndexesForLineDrawMode(uint32_t numVertexes);
+        [[nodiscard]] static std::vector<int> MakeIndexesForLineDrawMode(uint32_t numVertexes);
 
     private:
         [[nodiscard]] std::vector<Vertex1> MakeVertexes(uint32_t numVertexes) const;
-        [[nodiscard]] static std::vector<uint32_t> MakeIndexesForTriangleDrawMode(uint32_t numVertexes);
+        [[nodiscard]] static std::vector<int> MakeIndexesForTriangleDrawMode(uint32_t numVertexes);
     };
 }

@@ -36,9 +36,9 @@ namespace Graphics
         return vertexes;
     }
 
-    std::vector<uint32_t> Circle::MakeIndexesForTriangleDrawMode(const uint32_t numVertexes)
+    std::vector<int> Circle::MakeIndexesForTriangleDrawMode(const uint32_t numVertexes)
     {
-        std::vector<uint32_t> indexes;
+        std::vector<int> indexes;
         indexes.reserve(3 * (numVertexes - 1));
 
         for (auto i = 0u; i < numVertexes - 2; i++)
@@ -55,9 +55,9 @@ namespace Graphics
         return indexes;
     }
 
-    std::vector<uint32_t> Circle::MakeIndexesForLineDrawMode(const uint32_t numVertexes)
+    std::vector<int> Circle::MakeIndexesForLineDrawMode(const uint32_t numVertexes)
     {
-        std::vector<uint32_t> indexes;
+        std::vector<int> indexes;
         indexes.reserve((numVertexes - 1) * 4);
 
         for (auto i = 0u; i < numVertexes - 2; i++)

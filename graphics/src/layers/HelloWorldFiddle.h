@@ -77,7 +77,7 @@ namespace Graphics
 
         //Buffer data
         std::unique_ptr<Model> triangle_;
-        std::vector<uint32_t> lineIndexes_ = { 0, 1, 1, 2, 2, 0 };
+        std::vector<int> lineIndexes_ = { 0, 1, 1, 2, 2, 0 };
 
         //Animation parameters
         bool animationEnabled_ = false;
