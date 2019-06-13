@@ -137,9 +137,9 @@
     <ClInclude Include="src\renderer\Renderer.h" />
     <ClInclude Include="src\renderer\RendererTypes.h" />
     <ClInclude Include="src\renderer\ShaderType.h" />
-    <ClInclude Include="src\renderer\detail\Int32Id.h" />
+    <ClInclude Include="src\renderer\detail\IntId.h" />
     <ClInclude Include="src\renderer\detail\OpenGlRendererDetail.h" />
-    <ClInclude Include="src\renderer\detail\Uint32Id.h" />
+    <ClInclude Include="src\renderer\detail\UintId.h" />
     <ClInclude Include="src\types\Timer.h" />
     <ClInclude Include="src\types\Vertex1.h" />
     <ClInclude Include="src\window\ResolutionSetting.h" />

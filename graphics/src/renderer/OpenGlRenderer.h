@@ -30,7 +30,7 @@ namespace Graphics
         static void BindRenderBuffer(const RenderBuffer& buffer);
         static void UnbindRenderBuffer();
         static void DeleteRenderBuffer(const RenderBuffer& buffer);
-        static void SetRenderBufferStorage(uint32_t width, uint32_t height);
+        static void SetRenderBufferStorage(int width, int height);
 
         static VertexArray GenVertexArray();
         static void BindVertexArray(const VertexArray& vertexArray);
@@ -40,14 +40,14 @@ namespace Graphics
         static void BindVertexBuffer(const VertexBuffer& buffer);
         static void UnbindVertexBuffer();
         static void DeleteVertexBuffer(const VertexBuffer& buffer);
-        static void SetVertexesForStaticDraw(uint32_t sizeInBytes, const std::vector<Vertex1>& vertexes);
-        static void VertexBufferSubData(uint32_t offset, uint32_t sizeInBytes, const std::vector<Vertex1>& vertexes);
+        static void SetVertexesForStaticDraw(size_t sizeInBytes, const std::vector<Vertex1>& vertexes);
+        static void VertexBufferSubData(ptrdiff_t offset, size_t sizeInBytes, const std::vector<Vertex1>& vertexes);
 
         static IndexBuffer GenIndexBuffer();
         static void BindIndexBuffer(const IndexBuffer& buffer);
         static void UnbindIndexBuffer();
         static void DeleteIndexBuffer(const IndexBuffer& buffer);
-        static void SetIndexesForStaticDraw(uint32_t sizeInBytes, const std::vector<uint32_t>& indexes);
+        static void SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<uint32_t>& indexes);
         static void IndexBufferSubData(uint32_t offset, uint32_t sizeInBytes, const std::vector<uint32_t>& indexes);
 
         static void UnbindAll();

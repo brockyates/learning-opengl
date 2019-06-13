@@ -15,20 +15,20 @@ namespace Graphics::Detail
     struct VertexShaderTag {};
 
     template <typename Tag>
-    class Uint32Id
+    class UintId
     {
     public:
-        Uint32Id()
+        UintId()
             : value_(0)
         {}
 
-        explicit Uint32Id(const uint32_t id)
+        explicit UintId(const unsigned int id)
             : value_(id)
         {}
 
         [[nodiscard]] GLuint AsGlType() const { return static_cast<GLuint>(value_); }
 
     private:
-        uint32_t value_;
+        unsigned int value_;
     };
 }

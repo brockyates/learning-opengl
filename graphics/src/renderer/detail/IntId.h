@@ -7,14 +7,14 @@ namespace Graphics::Detail
     struct UniformTag {};
 
     template <typename Tag>
-    class Int32Id
+    class IntId
     {
     public:
-        Int32Id()
+        IntId()
             : value_(0)
         {}
 
-        explicit Int32Id(const int id)
+        explicit IntId(const int id)
             : value_(id)
         {}
 

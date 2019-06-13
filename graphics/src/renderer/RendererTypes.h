@@ -1,21 +1,21 @@
 #pragma once
 
-#include "detail/Int32Id.h"
-#include "detail/Uint32Id.h"
+#include "detail/IntId.h"
+#include "detail/UintId.h"
 
 namespace Graphics
 {
     //32-bit unsigned integer IDs
-    using FragmentShader = Detail::Uint32Id<Detail::FragmentShaderTag>;
-    using FrameBuffer = Detail::Uint32Id<Detail::FrameBufferTag>;
-    using IndexBuffer = Detail::Uint32Id<Detail::IndexBufferTag>;
-    using RenderBuffer = Detail::Uint32Id<Detail::RenderBufferTag>;
-    using ShaderProgram = Detail::Uint32Id<Detail::ShaderProgramTag>;
-    using Texture2d = Detail::Uint32Id<Detail::Texture2dTag>;
-    using VertexArray = Detail::Uint32Id<Detail::VertexArrayTag>;
-    using VertexBuffer = Detail::Uint32Id<Detail::VertexBufferTag>;
-    using VertexShader = Detail::Uint32Id<Detail::VertexShaderTag>;
+    using FragmentShader = Detail::UintId<Detail::FragmentShaderTag>;
+    using FrameBuffer = Detail::UintId<Detail::FrameBufferTag>;
+    using IndexBuffer = Detail::UintId<Detail::IndexBufferTag>;
+    using RenderBuffer = Detail::UintId<Detail::RenderBufferTag>;
+    using ShaderProgram = Detail::UintId<Detail::ShaderProgramTag>;
+    using Texture2d = Detail::UintId<Detail::Texture2dTag>;
+    using VertexArray = Detail::UintId<Detail::VertexArrayTag>;
+    using VertexBuffer = Detail::UintId<Detail::VertexBufferTag>;
+    using VertexShader = Detail::UintId<Detail::VertexShaderTag>;
 
     //32-bit integer IDs
-    using Uniform = Detail::Int32Id<Detail::UniformTag>;
+    using Uniform = Detail::IntId<Detail::UniformTag>;
 }

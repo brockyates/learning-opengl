@@ -129,7 +129,7 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetRenderBufferStorage(const uint32_t width, const uint32_t height)
+    void OpenGlRenderer::SetRenderBufferStorage(int width, int height)
     {
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     }
@@ -174,13 +174,13 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetVertexesForStaticDraw(const uint32_t sizeInBytes, const std::vector<Vertex1>& vertexes)
+    void OpenGlRenderer::SetVertexesForStaticDraw(size_t sizeInBytes, const std::vector<Vertex1>& vertexes)
     {
         glBufferData(GL_ARRAY_BUFFER, sizeInBytes, &vertexes[0], GL_STATIC_DRAW);
     }
 
-    void OpenGlRenderer::VertexBufferSubData(const uint32_t offset, const uint32_t sizeInBytes,
-        const std::vector<Vertex1>& vertexes)
+    void OpenGlRenderer::VertexBufferSubData(ptrdiff_t offset, size_t sizeInBytes,
+                                             const std::vector<Vertex1>& vertexes)
     {
         glBufferSubData(GL_ARRAY_BUFFER, offset, sizeInBytes, &vertexes[0]);
     }
@@ -208,7 +208,7 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetIndexesForStaticDraw(const uint32_t sizeInBytes, const std::vector<unsigned>& indexes)
+    void OpenGlRenderer::SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<uint32_t>& indexes)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
     }
