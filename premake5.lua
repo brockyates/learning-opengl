@@ -143,6 +143,11 @@ project "Graphics.App"
         systemversion "latest"
         kind "WindowedApp"
 
+        postbuildcommands {
+            "robocopy /MIR %{wks.location}graphics/res %{cfg.buildtarget.directory}res",
+            "if %errorlevel% leq 1 exit 0 else exit %errorlevel%"
+        }
+
     filter "configurations:Debug"
         defines "APP_DEBUG"
         runtime "Debug"
@@ -197,6 +202,11 @@ project "Graphics.UnitTests"
         cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
+
+        postbuildcommands {
+            "robocopy /MIR %{wks.location}graphics/res %{cfg.buildtarget.directory}res",
+            "if %errorlevel% leq 1 exit 0 else exit %errorlevel%"
+        }
 
     filter "configurations:Debug"
         defines "APP_DEBUG"
