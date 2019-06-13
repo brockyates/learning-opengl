@@ -53,7 +53,7 @@ namespace Graphics
         Renderer::SetClearColor(backgroundColor_);
         Renderer::ClearColorBuffer();
         Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
-        Renderer::DrawIndexes(drawMode_.Mode, drawMode_.NumVertexes);
+        Renderer::DrawIndexes(drawMode_.Mode, drawMode_.VertexCount);
 
         //Cleanup
         Renderer::ResetLineWidth();
@@ -67,7 +67,7 @@ namespace Graphics
             SetNextVertexPositions();
         }
 
-        const auto bufferOffset = 0u;
+        const ptrdiff_t bufferOffset = 0;
         Renderer::BindVertexBuffer(vertexBuffer_);
         Renderer::VertexBufferSubData(bufferOffset, triangle_->VertexDataByteSize(), triangle_->Vertexes);
         Renderer::UnbindVertexBuffer();
@@ -122,10 +122,10 @@ namespace Graphics
 
         Renderer::BindIndexBuffer(indexBuffer_);
 
-        const auto bufferOffset = 0u;
+        const ptrdiff_t bufferOffset = 0;
         if (nextMode.Mode == GL_LINES)
         {
-            Renderer::IndexBufferSubData(bufferOffset, static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(uint32_t)),lineIndexes_);
+            Renderer::IndexBufferSubData(bufferOffset, std::size(lineIndexes_) * sizeof(int),lineIndexes_);
         }
         else
         {
@@ -309,7 +309,7 @@ namespace Graphics
         Renderer::BindIndexBuffer(indexBuffer_);
 
         //Allocate a buffer that can hold the larger of the two index buffers, in this case the line indexes are larger than the triangle indexes.
-        const auto indexBufferByteSize = static_cast<uint32_t>(std::size(lineIndexes_) * sizeof(uint32_t));
+        const auto indexBufferByteSize = std::size(lineIndexes_) * sizeof(int);
         Renderer::SetIndexesForStaticDraw(indexBufferByteSize, triangle_->Indexes);
 
         //Vertex Position

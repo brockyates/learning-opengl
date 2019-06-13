@@ -55,7 +55,7 @@ namespace Graphics
         Renderer::SetUniform(lineProjMatrixUniform_, projectionMatrix_);
         Renderer::SetUniform(lineColorUniform_, lineColor_);
         Renderer::BindIndexBuffer(lineIndexBuffer_);
-        Renderer::DrawLineIndexes(numLineIndexes_);
+        Renderer::DrawLineIndexes(lineIndexCount_);
 
         // Release bindings
         Renderer::ResetLineWidth();
@@ -140,10 +140,10 @@ namespace Graphics
 
         vertexCount_ = nextVertexes_;
         circle_ = Circle(vertexCount_);
-        const auto bufferOffset = 0u;
+        const ptrdiff_t bufferOffset = 0;
         const auto lineIndexes = Circle::MakeIndexesForLineDrawMode(vertexCount_);
-        const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(uint32_t));
-        numLineIndexes_ = static_cast<uint32_t>(std::size(lineIndexes));
+        const auto lineIndexByteSize = std::size(lineIndexes) * sizeof(int);
+        lineIndexCount_ = static_cast<int>(std::size(lineIndexes));
 
         //Update vertex buffer
         Renderer::BindVertexBuffer(vertexBuffer_);
@@ -217,8 +217,8 @@ namespace Graphics
         Renderer::SetIndexesForStaticDraw(circle_.IndexDataByteSize(), circle_.Indexes);
 
         const auto lineIndexes = Circle::MakeIndexesForLineDrawMode(vertexCount_);
-        const auto lineIndexByteSize = static_cast<uint32_t>(std::size(lineIndexes) * sizeof(uint32_t));
-        numLineIndexes_ = static_cast<uint32_t>(std::size(lineIndexes));
+        const auto lineIndexByteSize = std::size(lineIndexes) * sizeof(int);
+        lineIndexCount_ = static_cast<int>(std::size(lineIndexes));
         lineIndexBuffer_ = Renderer::GenIndexBuffer();
         Renderer::BindIndexBuffer(lineIndexBuffer_);
         Renderer::SetIndexesForStaticDraw(lineIndexByteSize, lineIndexes);

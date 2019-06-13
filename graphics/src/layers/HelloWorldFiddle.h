@@ -41,7 +41,7 @@ namespace Graphics
         struct DrawMode
         {
             int Mode{};
-            uint32_t NumVertexes{};
+            int VertexCount{};
             std::string DisplayName;
         };
 

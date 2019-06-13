@@ -55,7 +55,7 @@ namespace Graphics
 
     FrameBuffer OpenGlRenderer::GenFrameBuffer()
     {
-        uint32_t id;
+        unsigned int id;
         glGenFramebuffers(1, &id);
         return FrameBuffer{ id };
     }
@@ -108,7 +108,7 @@ namespace Graphics
 
     RenderBuffer OpenGlRenderer::GenRenderBuffer()
     {
-        uint32_t id;
+        unsigned int id;
         glGenRenderbuffers(1, &id);
         return RenderBuffer{ id };
     }
@@ -136,7 +136,7 @@ namespace Graphics
 
     VertexArray OpenGlRenderer::GenVertexArray()
     {
-        uint32_t id;
+        unsigned int id;
         glGenVertexArrays(1, &id);
         return VertexArray{ id };
     }
@@ -153,7 +153,7 @@ namespace Graphics
 
     VertexBuffer OpenGlRenderer::GenVertexBuffer()
     {
-        uint32_t id;
+        unsigned int id;
         glGenBuffers(1, &id);
         return VertexBuffer{ id };
     }
@@ -187,7 +187,7 @@ namespace Graphics
 
     IndexBuffer OpenGlRenderer::GenIndexBuffer()
     {
-        uint32_t id;
+        unsigned int id;
         glGenBuffers(1, &id);
         return IndexBuffer{ id };
     }
@@ -252,7 +252,7 @@ namespace Graphics
 
     Texture2d OpenGlRenderer::GenTexture2d()
     {
-        uint32_t id;
+        unsigned int id;
         glGenTextures(1, &id);
         return Texture2d{ id };
     }

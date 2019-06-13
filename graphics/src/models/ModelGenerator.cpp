@@ -12,8 +12,8 @@ namespace Graphics
         return std::make_unique<Triangle>();
     }
 
-    std::unique_ptr<Model> ModelGenerator::MakeCircle(uint32_t numVertexes)
+    std::unique_ptr<Model> ModelGenerator::MakeCircle(int vertexCount)
     {
-        return std::make_unique<Circle>(numVertexes);
+        return std::make_unique<Circle>(vertexCount);
     }
 }
