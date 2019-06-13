@@ -52,8 +52,8 @@ namespace Graphics
 
         static void UnbindAll();
 
-        static void SetVertexAttrib0(uint32_t size, uint32_t type, bool isNormalized, uint32_t stride, size_t offset);
-        static void SetVertexAttrib1(uint32_t size, uint32_t type, bool isNormalized, uint32_t stride, size_t offset);
+        static void SetVertexAttrib0(int size, unsigned int type, bool isNormalized, ptrdiff_t stride, ptrdiff_t offset);
+        static void SetVertexAttrib1(int size, unsigned int type, bool isNormalized, ptrdiff_t stride, ptrdiff_t offset);
 
         //Texture management
         static Texture2d GenTexture2d();

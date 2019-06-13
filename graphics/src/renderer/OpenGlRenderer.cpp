@@ -230,22 +230,22 @@ namespace Graphics
 
     namespace
     {
-        void SetVertexAttrib(const uint32_t index, const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
-            const size_t offset)
+        void SetVertexAttrib(const int index, const int size, const unsigned int type, const bool isNormalized, const ptrdiff_t stride,
+            const ptrdiff_t offset)
         {
             glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, size, type, isNormalized, stride, reinterpret_cast<void*>(offset));
+            glVertexAttribPointer(index, size, type, isNormalized, static_cast<int>(stride), reinterpret_cast<void*>(offset));
         }
     }
 
-    void OpenGlRenderer::SetVertexAttrib0(const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
-        const size_t offset)
+    void OpenGlRenderer::SetVertexAttrib0(const int size, const unsigned int type, const bool isNormalized, const ptrdiff_t stride,
+        const ptrdiff_t offset)
     {
         SetVertexAttrib(0, size, type, isNormalized, stride, offset);
     }
 
-    void OpenGlRenderer::SetVertexAttrib1(const uint32_t size, const uint32_t type, const bool isNormalized, const uint32_t stride,
-                                                 const size_t offset)
+    void OpenGlRenderer::SetVertexAttrib1(const int size, const unsigned int type, const bool isNormalized, const ptrdiff_t stride,
+        const ptrdiff_t offset)
     {
         SetVertexAttrib(1, size, type, isNormalized, stride, offset);
     }
