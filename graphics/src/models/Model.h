@@ -25,17 +25,17 @@ namespace Graphics
 
         [[nodiscard]] size_t VertexDataByteSize() const
         {
-            return static_cast<uint32_t>(std::size(Vertexes)) * Vertex1::VERTEX_BYTE_SIZE;
+            return std::size(Vertexes) * Vertex1::VERTEX_BYTE_SIZE;
         }
 
-        [[nodiscard]] uint32_t IndexDataByteSize() const
+        [[nodiscard]] size_t IndexDataByteSize() const
         {
-            return static_cast<uint32_t>(std::size(Indexes)) * sizeof(uint32_t);
+            return std::size(Indexes) * sizeof(int);
         }
 
-        [[nodiscard]] uint32_t IndexCount() const
+        [[nodiscard]] int IndexCount() const
         {
-            return static_cast<uint32_t>(std::size(Indexes));
+            return static_cast<int>(std::size(Indexes));
         }
 
         std::vector<Vertex1> Vertexes;

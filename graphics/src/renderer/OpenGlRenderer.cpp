@@ -385,24 +385,24 @@ namespace Graphics
         glDisable(GL_PROGRAM_POINT_SIZE);
     }
 
-    void OpenGlRenderer::DrawIndexes(unsigned mode, int indexCount)
+    void OpenGlRenderer::DrawIndexes(const unsigned mode, const int indexCount)
     {
         const auto indexType = GL_UNSIGNED_INT;
         const auto offset = nullptr;
-        glDrawElements(mode, indexCount, indexType, offset);
+        glDrawElements(mode, static_cast<int>(indexCount), indexType, offset);
     }
 
-    void OpenGlRenderer::DrawTriangleIndexes(int indexCount)
+    void OpenGlRenderer::DrawTriangleIndexes(const int indexCount)
     {
         DrawIndexes(GL_TRIANGLES, indexCount);
     }
 
-    void OpenGlRenderer::DrawLineIndexes(int indexCount)
+    void OpenGlRenderer::DrawLineIndexes(const int indexCount)
     {
         DrawIndexes(GL_LINES, indexCount);
     }
 
-    void OpenGlRenderer::DrawPointIndexes(int indexCount)
+    void OpenGlRenderer::DrawPointIndexes(const int indexCount)
     {
         DrawIndexes(GL_POINTS, indexCount);
     }
