@@ -14,13 +14,13 @@ namespace Graphics
         glm::vec4 Position;
         glm::vec4 Color;
 
-        static const uint32_t VERTEX_BYTE_SIZE;
+        static const size_t VERTEX_BYTE_SIZE;
 
-        static const uint32_t ELEMENTS_PER_POSITION;
-        static const uint32_t POSITION_TYPE;
+        static const int ELEMENTS_PER_POSITION;
+        static const unsigned int POSITION_TYPE;
 
-        static const uint32_t ELEMENTS_PER_COLOR;
-        static const uint32_t COLOR_TYPE;
+        static const int ELEMENTS_PER_COLOR;
+        static const unsigned int COLOR_TYPE;
 
     };
 }

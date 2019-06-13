@@ -23,7 +23,7 @@ namespace Graphics
         Model& operator=(const Model&) = default;
         Model& operator=(Model&&) = default;
 
-        [[nodiscard]] uint32_t VertexDataByteSize() const
+        [[nodiscard]] size_t VertexDataByteSize() const
         {
             return static_cast<uint32_t>(std::size(Vertexes)) * Vertex1::VERTEX_BYTE_SIZE;
         }
