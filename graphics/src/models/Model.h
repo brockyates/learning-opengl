@@ -33,7 +33,7 @@ namespace Graphics
             return static_cast<uint32_t>(std::size(Indexes)) * sizeof(uint32_t);
         }
 
-        [[nodiscard]] uint32_t NumIndexes() const
+        [[nodiscard]] uint32_t IndexCount() const
         {
             return static_cast<uint32_t>(std::size(Indexes));
         }

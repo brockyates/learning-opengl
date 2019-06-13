@@ -34,7 +34,7 @@ namespace Graphics
         Renderer::ClearColorBuffer();
 
         Renderer::SetViewPort(0, 0, window_.ResolutionWidth(), window_.ResolutionHeight());
-        Renderer::DrawTriangleIndexes(triangle_->NumIndexes());
+        Renderer::DrawTriangleIndexes(triangle_->IndexCount());
 
         // Release bindings
         Renderer::UnbindAll();

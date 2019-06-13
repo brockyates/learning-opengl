@@ -49,7 +49,7 @@ namespace Graphics
         Renderer::UseShader(triangleShader_);
         Renderer::SetUniform(triangleProjMatrixUniform_, projectionMatrix_);
         Renderer::BindIndexBuffer(triangleIndexBuffer_);
-        Renderer::DrawTriangleIndexes(circle_.NumIndexes());
+        Renderer::DrawTriangleIndexes(circle_.IndexCount());
 
         Renderer::UseShader(lineShader_);
         Renderer::SetUniform(lineProjMatrixUniform_, projectionMatrix_);

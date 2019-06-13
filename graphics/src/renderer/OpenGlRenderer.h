@@ -60,7 +60,7 @@ namespace Graphics
         static void BindTexture2d(const Texture2d& texture);
         static void UnbindTexture2d();
         static void DeleteTexture(const Texture2d& texture);
-        static void TexImage2d(uint32_t width, uint32_t height);
+        static void TexImage2d(int width, int height);
         static void SetTexture2dParameters();
 
         //Shader management
@@ -80,16 +80,16 @@ namespace Graphics
 
         static void SetClearColor(const glm::vec4& color);
         static void SetLineWidth(float width);
-        static void SetViewPort(uint32_t xPos, uint32_t yPos, uint32_t width, uint32_t height);
+        static void SetViewPort(int xPos, int yPos, int width, int height);
 
         static void ResetLineWidth();
         static void EnablePointSize();
         static void DisablePointSize();
 
         //Draw calls
-        static void DrawIndexes(uint32_t mode, uint32_t indexCount);
-        static void DrawTriangleIndexes(uint32_t indexCount);
-        static void DrawLineIndexes(uint32_t indexCount);
-        static void DrawPointIndexes(uint32_t indexCount);
+        static void DrawIndexes(unsigned mode, int indexCount);
+        static void DrawTriangleIndexes(int indexCount);
+        static void DrawLineIndexes(int indexCount);
+        static void DrawPointIndexes(int indexCount);
     };
 }

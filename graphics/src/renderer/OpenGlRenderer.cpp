@@ -273,7 +273,7 @@ namespace Graphics
         glDeleteTextures(1, &id);
     }
 
-    void OpenGlRenderer::TexImage2d(const uint32_t width, const uint32_t height)
+    void OpenGlRenderer::TexImage2d(int width, int height)
     {
         const auto level = 0;
         const auto border = 0;
@@ -365,7 +365,7 @@ namespace Graphics
         glLineWidth(width);
     }
 
-    void OpenGlRenderer::SetViewPort(const uint32_t xPos, const uint32_t yPos, const uint32_t width, const uint32_t height)
+    void OpenGlRenderer::SetViewPort(int xPos, int yPos, int width, int height)
     {
         glViewport(xPos, yPos, width, height);
     }
@@ -385,24 +385,24 @@ namespace Graphics
         glDisable(GL_PROGRAM_POINT_SIZE);
     }
 
-    void OpenGlRenderer::DrawIndexes(const uint32_t mode, const uint32_t indexCount)
+    void OpenGlRenderer::DrawIndexes(unsigned mode, int indexCount)
     {
         const auto indexType = GL_UNSIGNED_INT;
         const auto offset = nullptr;
         glDrawElements(mode, indexCount, indexType, offset);
     }
 
-    void OpenGlRenderer::DrawTriangleIndexes(const uint32_t indexCount)
+    void OpenGlRenderer::DrawTriangleIndexes(int indexCount)
     {
         DrawIndexes(GL_TRIANGLES, indexCount);
     }
 
-    void OpenGlRenderer::DrawLineIndexes(const uint32_t indexCount)
+    void OpenGlRenderer::DrawLineIndexes(int indexCount)
     {
         DrawIndexes(GL_LINES, indexCount);
     }
 
-    void OpenGlRenderer::DrawPointIndexes(const uint32_t indexCount)
+    void OpenGlRenderer::DrawPointIndexes(int indexCount)
     {
         DrawIndexes(GL_POINTS, indexCount);
     }
