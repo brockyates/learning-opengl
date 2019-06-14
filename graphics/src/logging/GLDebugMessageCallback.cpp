@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "GLDebugMessageCallback.h"
 
+#include "helpers/FileHelpers.h"
 #include "helpers/GlobalMacros.h"
+
 #include "Log.h"
 
 #include <ctime>
 #include <filesystem>
-#include <fstream>
 #include <sstream>
 
 namespace Graphics
@@ -20,10 +21,9 @@ namespace Graphics
 
             std::stringstream ss;
             ss << "logs/GraphicsLog" << std::put_time(&utcTime, "%Y%m%d_%H%M%S") << ".txt";
-
             std::filesystem::create_directory("logs");
-            std::ofstream file(ss.str(), std::ios::binary);
-            file << Utils::Log::GetLogStream().str();
+
+            WriteToFile(ss.str(), Utils::Log::GetLogStream().str());
         }
     }
 

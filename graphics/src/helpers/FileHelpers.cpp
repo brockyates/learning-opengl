@@ -5,15 +5,15 @@
 
 namespace Graphics
 {
-    std::string ParseFile(const std::string& path)
+    std::string ParseFile(const std::string& filepath)
     {
-        const std::ifstream file(path);
+        const std::ifstream file(filepath);
 
         if (file.fail()) {
-            LogError([path]()
+            LogError([filepath]()
             {
                 std::stringstream ss;
-                ss << "Can't open file: " << path << ". Does the file exist?";
+                ss << "Can't open file: " << filepath << ". Does the file exist?";
                 return ss.str();
             }());
         }
@@ -22,5 +22,11 @@ namespace Graphics
         ss << file.rdbuf();
 
         return ss.str();
+    }
+
+    void WriteToFile(const std::string& filepath, const std::string& content)
+    {
+        std::ofstream file(filepath, std::ios::binary);
+        file << content;
     }
 }
