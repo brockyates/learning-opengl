@@ -10,6 +10,8 @@ The UI is built with [Dear ImGui](https://github.com/ocornut/imgui.git).
 
 ## Getting started
 
+To be completed.
+
 ## Credits and Learning Resources
 
 ### Online
