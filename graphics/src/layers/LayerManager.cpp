@@ -2,6 +2,7 @@
 #include "LayerManager.h"
 
 #include "layers/BaseLayer.h"
+#include "layers/BlendDemo.h"
 #include "layers/CircleDemo.h"
 #include "layers/HelloWorld.h"
 #include "layers/HelloWorldFiddle.h"
@@ -24,6 +25,7 @@ namespace Graphics
         layers.emplace_back(std::make_unique<HelloWorld>(window, eventCallback));
         layers.emplace_back(std::make_unique<CircleDemo>(window, eventCallback));
         layers.emplace_back(std::make_unique<HelloWorldFiddle>(window, eventCallback));
+        layers.emplace_back(std::make_unique<BlendDemo>(window, eventCallback));
 
         return layers;
     }

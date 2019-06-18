@@ -119,6 +119,7 @@
     <ClInclude Include="src\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\layers\BaseLayer.h" />
+    <ClInclude Include="src\layers\BlendDemo.h" />
     <ClInclude Include="src\layers\CircleDemo.h" />
     <ClInclude Include="src\layers\HelloWorld.h" />
     <ClInclude Include="src\layers\HelloWorldFiddle.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="src\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\layers\BaseLayer.cpp" />
+    <ClCompile Include="src\layers\BlendDemo.cpp" />
     <ClCompile Include="src\layers\CircleDemo.cpp" />
     <ClCompile Include="src\layers\HelloWorld.cpp" />
     <ClCompile Include="src\layers\HelloWorldFiddle.cpp" />

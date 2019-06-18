@@ -192,6 +192,7 @@
     <ClInclude Include="src\window\WindowProperties.h">
       <Filter>src\window</Filter>
     </ClInclude>
+    <ClInclude Include="src\layers\BlendDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -302,6 +303,7 @@
     <ClCompile Include="src\window\WindowProperties.cpp">
       <Filter>src\window</Filter>
     </ClCompile>
+    <ClCompile Include="src\layers\BlendDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\fonts\Consolas.ttf">
