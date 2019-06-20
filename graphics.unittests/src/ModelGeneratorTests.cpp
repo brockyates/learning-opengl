@@ -43,8 +43,7 @@ TEST_CASE("ModelGenerator triangle index data byte size ", "[ModelGenerator]")
 {
     const auto model = ModelGenerator::MakeTriangle();
 
-    // 1 index = 1 float = 4 bytes
-    // 3 indexes = 3 * 4 bytes = 12 bytes
+    // 3 indexes * 4 bytes per index = 12 bytes
     const auto expectedIndexDataByteSize = 12;
 
     REQUIRE(model->IndexDataByteSize() == expectedIndexDataByteSize);
