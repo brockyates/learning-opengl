@@ -26,7 +26,26 @@ TEST_CASE("ModelGenerator triangle vertex data byte size ", "[ModelGenerator]")
 
     // 1 vertex = 4 position floats, 4 color floats = 8 floats * 4 bytes / float = 32 bytes / vertex
     // 32 bytes / vertex * 3 vertexes = 96 bytes
-    const auto expectedVertexByteSize = 96;
+    const auto expectedVertexDataByteSize = 96;
 
-    REQUIRE(model->VertexDataByteSize() == expectedVertexByteSize);
+    REQUIRE(model->VertexDataByteSize() == expectedVertexDataByteSize);
+}
+
+TEST_CASE("ModelGenerator triangle index count", "[ModelGenerator]")
+{
+    const auto model = ModelGenerator::MakeTriangle();
+    const auto expectedIndexCount = 3;
+
+    REQUIRE(model->IndexCount() == expectedIndexCount);
+}
+
+TEST_CASE("ModelGenerator triangle index data byte size ", "[ModelGenerator]")
+{
+    const auto model = ModelGenerator::MakeTriangle();
+
+    // 1 index = 1 float = 4 bytes
+    // 3 indexes = 3 * 4 bytes = 12 bytes
+    const auto expectedIndexDataByteSize = 12;
+
+    REQUIRE(model->IndexDataByteSize() == expectedIndexDataByteSize);
 }
