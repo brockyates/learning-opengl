@@ -49,7 +49,7 @@ TEST_CASE("ModelGenerator triangle index data byte size ", "[ModelGenerator]")
     REQUIRE(model->IndexDataByteSize() == expectedIndexDataByteSize);
 }
 
-TEST_CASE("ModelGenerator circle test", "[ModelGenerator]")
+TEST_CASE("ModelGenerator circle vertex count", "[ModelGenerator]")
 {
     const auto someVertexCount = 10;
     const auto expectedVertexCount = 10;
@@ -57,4 +57,14 @@ TEST_CASE("ModelGenerator circle test", "[ModelGenerator]")
     const auto model = ModelGenerator::MakeCircle(someVertexCount);
 
     REQUIRE(std::size(model->Vertexes) == expectedVertexCount);
+}
+
+TEST_CASE("ModelGenerator circle index count", "[ModelGenerator]")
+{
+    const auto vertexCount = 4;
+    const auto expectedIndexCount = 9;
+
+    const auto model = ModelGenerator::MakeCircle(vertexCount);
+
+    REQUIRE(model->IndexCount() == expectedIndexCount);
 }
