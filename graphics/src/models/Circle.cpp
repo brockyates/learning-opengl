@@ -17,7 +17,7 @@ namespace
         {
             std::stringstream ss;
             ss << "Attempted to generate circle model with " << vertexCount << " vertexes. Minimum number of vertexes for this model is 4.";
-            AppAssert(vertexCount < 4, ss.str());
+            AppAssert(vertexCount > 3, ss.str());
         }
 
         return vertexCount;
