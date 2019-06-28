@@ -81,6 +81,7 @@ namespace Graphics
         static void SetClearColor(const glm::vec4& color);
         static void SetLineWidth(float width);
         static void SetViewPort(int xPos, int yPos, int width, int height);
+        static void SetPolygonMode(int mode);
 
         static void ResetLineWidth();
         static void EnablePointSize();

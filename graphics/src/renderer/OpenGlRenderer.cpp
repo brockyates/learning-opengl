@@ -365,9 +365,14 @@ namespace Graphics
         glLineWidth(width);
     }
 
-    void OpenGlRenderer::SetViewPort(int xPos, int yPos, int width, int height)
+    void OpenGlRenderer::SetViewPort(const int xPos, const int yPos, const int width, const int height)
     {
         glViewport(xPos, yPos, width, height);
+    }
+
+    void OpenGlRenderer::SetPolygonMode(const int mode)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, mode);
     }
 
     void OpenGlRenderer::ResetLineWidth()

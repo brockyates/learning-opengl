@@ -8,6 +8,7 @@
 #include "layers/HelloWorldFiddle.h"
 #include "layers/Layer.h"
 #include "layers/RenderTargetLayer.h"
+#include "layers/GlPolygonModeDemo.h"
 
 #include "window/Window.h"
 
@@ -26,6 +27,7 @@ namespace Graphics
         layers.emplace_back(std::make_unique<CircleDemo>(window, eventCallback));
         layers.emplace_back(std::make_unique<HelloWorldFiddle>(window, eventCallback));
         layers.emplace_back(std::make_unique<BlendDemo>(window, eventCallback));
+        layers.emplace_back(std::make_unique<GlPolygonModeDemo>(window, eventCallback));
 
         return layers;
     }

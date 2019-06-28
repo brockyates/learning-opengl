@@ -127,6 +127,7 @@
     <ClInclude Include="src\layers\LayerManager.h" />
     <ClInclude Include="src\layers\PassthroughLayer.h" />
     <ClInclude Include="src\layers\RenderTargetLayer.h" />
+    <ClInclude Include="src\layers\GlPolygonModeDemo.h" />
     <ClInclude Include="src\logging\GLDebugMessageCallback.h" />
     <ClInclude Include="src\logging\Log.h" />
     <ClInclude Include="src\models\Circle.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="src\layers\LayerManager.cpp" />
     <ClCompile Include="src\layers\PassthroughLayer.cpp" />
     <ClCompile Include="src\layers\RenderTargetLayer.cpp" />
+    <ClCompile Include="src\layers\GlPolygonModeDemo.cpp" />
     <ClCompile Include="src\logging\GLDebugMessageCallback.cpp" />
     <ClCompile Include="src\logging\Log.cpp" />
     <ClCompile Include="src\models\Circle.cpp" />
