@@ -21,9 +21,9 @@ This demo is only supported on Windows and must be built with Visual Studio 2017
 1. Clone repository with **--recurse-submodules**
 1. Run build script from **Developer Command Prompt for VS2017**
 
-Example:
-```
-git clone https://github.com/brockyates/graphics.git --recurse-submodules
+Example: clone with SSH and build
+```git
+git clone git@github.com:brockyates/learning-opengl.git --recurse-submodules
 cd graphics
 BuildVS2017.bat
 ```
