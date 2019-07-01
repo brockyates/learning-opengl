@@ -1,6 +1,6 @@
 # Learning about graphics with OpenGL 
 
-This project is a small OpenGL demo application that I built to learn graphics programming. Rather than a properly designed and abstracted rendering engine, it is a simple learning tool to help me work may way through the basics of rendering and graphics.
+This project is a small OpenGL demo application that I built to learn graphics programming. Rather than a properly designed and abstracted rendering engine, it is a simple learning tool to help me work my way through the basics of rendering and graphics.
 
 This is my first graphics project, so my emphasis is on understanding the rendering pipeline, organizing my classes around the API, and thinking about how the application should handle the management of windows, scenes, events, and other relatively low-level concerns.
 
