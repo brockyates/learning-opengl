@@ -10,7 +10,23 @@ The UI is built with [Dear ImGui](https://github.com/ocornut/imgui.git).
 
 ## Getting started
 
-To be completed.
+This demo is only supported on Windows and must be built with Visual Studio 2017 Platform Toolset v141.
+
+### Pre-requisites
+
+- Visual Studio 2017 with Platform Toolset: Visual Studio 2017 v141
+
+### Build steps
+
+1. Clone repository with **--recurse-submodules**
+1. Run build script from **Developer Command Prompt for VS2017**
+
+Example:
+```
+git clone https://github.com/brockyates/graphics.git --recurse-submodules
+cd graphics
+BuildVS2017.bat
+```
 
 ## Credits and Learning Resources
 
