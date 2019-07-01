@@ -129,7 +129,7 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetRenderBufferStorage(int width, int height)
+    void OpenGlRenderer::SetRenderBufferStorage(const int width, const int height)
     {
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     }
@@ -174,12 +174,12 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetVertexesForStaticDraw(size_t sizeInBytes, const std::vector<Vertex1>& vertexes)
+    void OpenGlRenderer::SetVertexesForStaticDraw(const size_t sizeInBytes, const std::vector<Vertex1>& vertexes)
     {
         glBufferData(GL_ARRAY_BUFFER, sizeInBytes, &vertexes[0], GL_STATIC_DRAW);
     }
 
-    void OpenGlRenderer::VertexBufferSubData(ptrdiff_t offset, size_t sizeInBytes,
+    void OpenGlRenderer::VertexBufferSubData(const ptrdiff_t offset, const size_t sizeInBytes,
                                              const std::vector<Vertex1>& vertexes)
     {
         glBufferSubData(GL_ARRAY_BUFFER, offset, sizeInBytes, &vertexes[0]);
@@ -208,12 +208,12 @@ namespace Graphics
         glDeleteBuffers(1, &id);
     }
 
-    void OpenGlRenderer::SetIndexesForStaticDraw(size_t sizeInBytes, const std::vector<int>& indexes)
+    void OpenGlRenderer::SetIndexesForStaticDraw(const size_t sizeInBytes, const std::vector<int>& indexes)
     {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, &indexes[0], GL_STATIC_DRAW);
     }
 
-    void OpenGlRenderer::IndexBufferSubData(ptrdiff_t offset, size_t sizeInBytes, const std::vector<int>& indexes)
+    void OpenGlRenderer::IndexBufferSubData(const ptrdiff_t offset, const size_t sizeInBytes, const std::vector<int>& indexes)
     {
         glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, sizeInBytes, &indexes[0]);
     }
@@ -273,7 +273,7 @@ namespace Graphics
         glDeleteTextures(1, &id);
     }
 
-    void OpenGlRenderer::TexImage2d(int width, int height)
+    void OpenGlRenderer::TexImage2d(const int width, const int height)
     {
         const auto level = 0;
         const auto border = 0;
